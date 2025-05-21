@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 100px;
+}
+.header::after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  content: '';
+  width: 0;
+  height: 1px;
+  background-color: rgb(218, 191, 38);
+  opacity: 0;
+  transition: width 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.animateLine::after {
+  width: 90%;
+  opacity: 1;
+}
+.logo {
+width:100%;        /* širina 100% roditeljskog elementa */
+  height: auto;      /* visina se automatski računa */
+  aspect-ratio: 16 / 9;  /* ili prave proporcije tvoje slike */
+  object-fit: contain; 
+}
