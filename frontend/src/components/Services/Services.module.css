@@ -1,0 +1,22 @@
+.services ul li {
+   border: 1px solid var(--logoColor);
+   border-radius: 20px;
+   margin-bottom: 20px;
+   padding: 20px 15px;
+   opacity: 0;
+   animation: slideInLeft .3s ease forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.services ul li:hover {
+   cursor: pointer;
+}

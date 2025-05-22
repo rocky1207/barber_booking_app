@@ -3,6 +3,7 @@
     justify-content: center;
     position: relative;
     margin-bottom: 100px;
+    
 }
 .header::after {
   position: absolute;
@@ -14,12 +15,13 @@
   height: 1px;
   background-color: rgb(218, 191, 38);
   opacity: 0;
-  transition: width 0.3s ease-out, opacity 0.3s ease-out;
+  transition: width .3s ease-out, opacity 0.3s ease-out;
 }
 
 .animateLine::after {
   width: 90%;
   opacity: 1;
+  max-width: 1023px;
 }
 .logo {
 width:100%;        /* širina 100% roditeljskog elementa */

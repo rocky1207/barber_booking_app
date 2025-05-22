@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './Header.module.css';
-import logo from '@/assets/images/logo.webp';
+import logo from '@/assets/images/logo.png';
 
 const Header:React.FC = () => {
   const [animate, setAnimate] = useState(false);

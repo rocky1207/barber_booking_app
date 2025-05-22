@@ -1,8 +1,13 @@
-const Services:React.FC = () => {
+import Header from "@/components/Header/Header";
+import Services from "@/components/Services/Services";
+const ServicesPage:React.FC = () => {
     return (
-        <section>
-            <h1>USLUGE</h1>
-        </section>
+        <>
+        <Header />
+        <main className="wrapp">
+            <Services />
+        </main>
+        </>
     );
 };
-export default Services;
+export default ServicesPage;
