@@ -1,5 +1,6 @@
 import Header from "@/components/Header/Header";
 import Barbers from "@/components/Barbers/Barbers";
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   return (
@@ -8,9 +9,7 @@ export default function Home() {
       <main className="wrapp">
         <Barbers />
       </main>
-      <footer className="wrapp">
-        <p>Klik</p>
-      </footer>
+      <Footer />
     </>
   );
 }
