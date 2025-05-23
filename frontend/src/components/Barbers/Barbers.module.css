@@ -1,13 +1,15 @@
-.barbers ul li {
+.barberItem {
    border: 1px solid var(--logoColor);
    border-radius: 20px;
    margin-bottom: 20px;
    padding: 20px 15px;
    opacity: 0;
-   animation: slideInLeft .3s ease forwards;
+   animation: slideInLeft 0.3s ease forwards;
+  
 }
 
 @keyframes slideInLeft {
+  
   from {
     opacity: 0;
     transform: translateX(-100%);
@@ -16,7 +18,13 @@
     opacity: 1;
     transform: translateX(0);
   }
+  
 }
-.barbers ul li:hover {
-   cursor: pointer;
+.barberItem:hover,
+.barberItem:active {
+  cursor: pointer;
+  /*margin-top: -10px;*/
+ 
+ border-color: rgb(203, 188, 151);
+  background-color: rgba(34, 32, 32, 1);
 }
