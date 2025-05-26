@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Ako zahtevana putanja ne postoji kao fajl ili folder
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Preusmeri sve na index.php
+RewriteRule ^ index.php [QSA,L]
+
+#RewriteEngine On — uključuje rewrite mehanizam.
+
+#RewriteCond %{REQUEST_FILENAME} !-f — ako nije fajl, nastavi.
+
+#RewriteCond %{REQUEST_FILENAME} !-d — ako nije folder, nastavi.
+
+#RewriteRule ^ index.php [QSA,L] — preusmeri sve na index.php u istom folderu.
