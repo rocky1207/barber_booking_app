@@ -1,17 +1,58 @@
-import { LoginInputType } from "@/types/Form/InputType";
+import { useState } from "react";
+import { LoginInputType } from "@/types/Form/LoginInputType";
+import { ValidationSchemaType } from "@/types/Form/ValidationSchemaType";
 
 
-const Input:React.FC<{inputs:LoginInputType[]}> = ({inputs}) => {
-    return (
-        <>
-        {inputs.map((input: LoginInputType) => {
-            return (
-                <div key={input.name}>
-                    <input type={input.type} name={input.name} placeholder={input.placeholder} />
-                </div>
-            );
-        })}
-        </>
-    );
+const Input:React.FC<{inputs:LoginInputType[]; schema: ValidationSchemaType}> = ({inputs, schema}) => {
+    // Dinamičko kreiranje početnog stanja
+  const initialState = inputs.reduce((acc, input) => {
+    acc[input.name] = input.type === "file" ? null : input.value || "";
+    return acc;
+  }, {} as { [key: string]: string | File | null });
+
+  const [inputFields, setInputFields] = useState<{
+    [key: string]: string | File | null;
+  }>(initialState);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value} = e.target;
+    setInputFields((prevState) => ({...prevState, [name]: value}));
+  };
+  /*
+  let bla: string | undefined;
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, type, value, files } = e.target;
+
+    const newValue = type === "file" ? files?.[0] ?? null : value;
+    const updatedState = {
+      ...inputFields,
+      [name]: newValue,
+    };
+    const input = inputs.find((input) => input.name === name);
+    bla = input?.onAction(name, newValue, schema);
+    setErrorMessage(bla);
+    console.log(bla);
+  }
+*/
+  return (
+    <>
+      {inputs.map((input) => {
+        const { onAction, value, ...rest } = input;
+        return (
+          <div key={input.name}>
+            <input
+              {...rest}
+              value={input.type !== "file" ? inputFields[input.name] as string : undefined}
+              onChange={handleChange}
+              /*onBlur={handleBlur}*/
+            />
+            
+          </div>
+        );
+      })}
+      {errorMessage && <p>{errorMessage}</p>}
+    </>
+  );
 };
 export default Input;

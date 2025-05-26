@@ -2,12 +2,11 @@
 require_once (__DIR__ . '/AppController.php');
 class LoginController {
     
-    public function login() {
+    public function login($data) {
 
-        $input = json_decode(file_get_contents("php://input"), true);
         $inputs = [
-            "username" => $input["username"],
-            "password" => $input["password"]
+            "username" => $data["username"],
+            "password" => $data["password"]
         ];
         $regex = [
             "username" => AppController::USERNAME_REGEX,
@@ -17,7 +16,8 @@ class LoginController {
             "username" => AppController::WRONG_USERNAME_MESSAGE,
             "password" => AppController::WRONG_PASSWORD_MESSAGE
         ];
-        $data = AppController::validateInputs($inputs, $regex, $messages);
+        $response = AppController::validateInputs($inputs, $regex, $messages, 401);
+        return $response;
     }
 }
 ?>

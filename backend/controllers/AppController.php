@@ -24,8 +24,13 @@ class AppController {
     public const IMAGE_ERROR_MESSAGE =  'Slika mora na kraju imati ekstenziju, npr. .jpg ili .png...';
     public const NUMBER_ERROR_MESSAGE =  'Cena i količina mogu biti popunjene samo brojevima.';
     
-    public function createMessage($message) {
-        
+    public static function createMessage($message, $code) {
+        //http_response_code($code);
+        //echo json_encode(["message" => $message]);
+        return [
+            "statusCode" => $code,
+            "message" => $message
+        ];
         exit();
     }
 
@@ -33,7 +38,7 @@ class AppController {
         $data = [];
         foreach($inputs as $key => $input) {
             ${$key} = isset($input) ? trim($input) : '';
-            !preg_match($regex[$key], ${$key}) ?? self::createMessage($messages[$key]);
+            !preg_match($regex[$key], ${$key}) ?? self::createMessage($message, $code);
             $data[$key] = ${$key};
         }
         return $data;
