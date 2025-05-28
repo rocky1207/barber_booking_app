@@ -14,7 +14,7 @@ class Database {
     }
     public function dbConnection() {
         try {
-            $this->pdo = new PDO("mysqli:host={$this->dbHost};dbname={$this->dbName}", 
+            $this->pdo = new PDO("mysql:host={$this->dbHost};dbname={$this->dbName}", 
             $this->dbUsername, 
             $this->dbPassword, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, 
@@ -23,7 +23,8 @@ class Database {
             ]);
             return $this->pdo;
         } catch(PDOException $e) {
-            throw new Exception("Greška prilikom povezivanja sa bazom: {$e->getMessage()}");
+           throw new Exception("Greška prilikom povezivanja sa bazom.", 500);
+          // throw new Exception($e->getMessage());
         }
     }
 }

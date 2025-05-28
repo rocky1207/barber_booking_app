@@ -1,18 +1,14 @@
 import axios, { AxiosError } from "axios";
+import { CustomAxiosErrorType } from "@/types/Api/CustomAxiosErrorType";
 
-interface CustomAxiosError {
-  message: string;
-  status?: number;
-  original?: AxiosError;
-};
 
 const URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 // Kreiraj instancu
 const api = axios.create({
   baseURL: URL, // izmeni po potrebi
- // headers: {
-  //  "Content-Type": "application/json",
- // },
+ headers: {
+  "Content-Type": "application/json",
+ },
   withCredentials: false, // true ako koristiš cookie-session autentikaciju
 });
 
@@ -32,12 +28,14 @@ api.interceptors.request.use(
 
 // Globalna obrada grešaka
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {console.log(response); return response},
   (error: AxiosError) => {
+    console.log(error);
     let message = "Došlo je do neočekivane greške. Pokušajte ponovo.";
-
+    let statusCode;
     if (error.response) {
       message = (error.response.data as any)?.message || message;
+      statusCode = (error.response.data as any)?.status;
     } else if (error.request) {
       message = "Nema odgovora sa servera. Proverite internet vezu.";
     } else {
@@ -47,9 +45,9 @@ api.interceptors.response.use(
     // Prikaz poruke korisniku (zameni sa toast/alert/modal po želji)
     alert(message);
 
-    const customError: CustomAxiosError = {
+    const customError: CustomAxiosErrorType = {
         message,
-        status: error.response?.status,
+        status: statusCode ? statusCode : error.response?.status,
         original: error
     };
 return Promise.reject(customError);

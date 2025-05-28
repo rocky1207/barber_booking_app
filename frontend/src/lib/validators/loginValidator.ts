@@ -8,15 +8,17 @@ export const loginValidator = (data: { [key: string]: string | File }, schema:Va
         //const value = newValue;
         if (value instanceof File) {
     // Validacija fajla (tip, veličina, itd.)
+    
         } else if (typeof value === 'string') {
 
             if (rules.pattern && !rules.pattern.test(value)) {
                 return rules.errorMessage;
             }
             
+           
         }
     }
-    
+     
 }
 
 
