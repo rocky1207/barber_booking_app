@@ -8,12 +8,12 @@ class DatabaseModel {
     const DB_USERNAME = "root";
     const DB_PASSWORD = "";
 
-    public function connect() {
+    public static function connect() {
         try {
             $db = new Database(self::DB_HOST, self::DB_NAME, self::DB_USERNAME, self::DB_PASSWORD);
             self::$pdo = $db->dbConnection();
         } catch(Exception $e) {
-            throw new Exception($e->getMessage());
+           throw new Exception($e->getMessage(), $e->getCode());
         }
     }
 }

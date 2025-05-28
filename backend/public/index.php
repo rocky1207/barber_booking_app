@@ -16,7 +16,7 @@ $apiPrefix = 'api/';
 
 if(str_starts_with($uri, $apiPrefix)) {
     $relativePath = substr($uri, strlen($apiPrefix));
-    $routeFile = realpath(__DIR__ . "/../routes/api/{$relativePath}php");
+    $routeFile = realpath(__DIR__ . "/../routes/api/{$relativePath}.php");
     if($routeFile && file_exists($routeFile)) {
         require $routeFile;
         exit();
@@ -31,4 +31,15 @@ if(str_starts_with($uri, $apiPrefix)) {
     //echo "Stranica nije pronađena.";
     AppController::createMessage("Stranica nije pronađena", 404);
 }
+/*
+Kod	Značenje
+200	OK (sve prošlo)
+400	Bad Request (loš input)
+401	Unauthorized (nema pristup)
+403	Forbidden (nema dozvolu)
+404	Not Found
+409	Conflict (npr. duplikat unosa)
+422	Unprocessable Entity (nevalidni podaci)
+500	Internal Server Error
+*/
 ?>
