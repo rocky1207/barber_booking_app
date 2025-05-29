@@ -17,16 +17,16 @@ class LoginController {
             "username" => AppController::WRONG_USERNAME_MESSAGE,
             "password" => AppController::WRONG_PASSWORD_MESSAGE
         ];
-        $response = AppController::validateInputs($inputs, $regex, $messages, 401);
+        $validateData = AppController::validateInputs($inputs, $regex, $messages, 401);
         
-        if(!empty($response)) {
+        if(!empty($validateData)) {
             try {
                 AppController::databaseConnect();
                 /*ovde će ići kod koji šalje upit ka bazi*/
                 $userLoginModel = new UserLoginModel();
-                $bla = $userLoginModel->userLogin($response);
+                $user = $userLoginModel->userLogin($validateData);
                 //var_dump($bla);
-                return $bla;
+                return $user;
             } catch(Exception $e) {
                 AppController::createMessage($e->getMessage(), $e->getCode() ?: 500);
             }
