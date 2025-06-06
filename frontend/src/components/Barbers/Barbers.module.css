@@ -1,13 +1,31 @@
 .barberItem {
-   border: 1px solid var(--logoColor);
-   border-radius: 20px;
-   margin-bottom: 20px;
-   padding: 20px 15px;
-   opacity: 0;
-   animation: slideInLeft 0.3s ease forwards;
+  border: 1px solid var(--logoColor);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 20px 15px;
+  opacity: 0;
+  animation: slideInLeft 0.3s ease forwards;
   
 }
-
+.customerVew {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+}
+.barberInfoDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 450px;
+  gap: 20px;
+}
+.itemButtonsDiv {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  
+}
 @keyframes slideInLeft {
   
   from {

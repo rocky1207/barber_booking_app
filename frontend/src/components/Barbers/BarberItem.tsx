@@ -1,29 +1,49 @@
 'use client';
 
+import { ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
+import Button from '../Button/Button';
+import { itemBtns } from '@/datas/ButttonObjects';
+import { bookBtn } from '@/datas/ButttonObjects';
 import styles from './Barbers.module.css';
 
-const barbers = [{id: '1', name: 'Đole'}, {id: '2', name: 'Antoaneta'},{id: '3', name: 'Miša'},{id: '4', name: 'Mali Đole'}];
-const BarberItem:React.FC = () => {
+
+
+
+interface BarberItemPropsType {
+  id: string;
+  name: string;
+  index: number;
+  children?: ReactNode;
+}
+
+
+const BarberItem:React.FC<BarberItemPropsType> = ({id, name, index, children}) => {
     const router = useRouter();
     const handleClick = ():void => {
             router.push('/services');
         }
-    return (
-        
-        <>
-        {barbers.map((barber, index) => {
+    
             return (
-                <li key={barber.id} className={styles.barberItem} onClick={handleClick}
-                style={{ animationDelay: `${index * 0.2}s` }} // dinamičko kašnjenje
-        >
-                <p>{barber.name}</p>
+                <li key={id} className={styles.barberItem} onClick={handleClick}
+                style={{ animationDelay: `${index * 0.2}s` }} /*dinamičko kašnjenje*/>
+                    <div className={styles.customerVew}>
+                        <div className='profileImageDiv'>
+                            <img src="http://barber_booking_app.local/images/ja.jpg" alt="Barber image" />
+                        </div>
+                        <div className={styles.barberInfoDiv}>
+            <p>{name}</p>
+            <div><Button {...bookBtn} /></div>
+        </div>
+                        
+                    </div>
+                    {children}
             </li>
             )
-        })}
+        
             
             
-        </>
-    );
+       
+    
 };
 export default BarberItem;

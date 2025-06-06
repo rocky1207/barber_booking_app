@@ -18,7 +18,8 @@ function authenticateUser() {
         $decoded = JWT::decode($jwt, new Key($_ENV["JWT_SECRET"], "HS256"));
         return (array) $decoded;
     } catch (Exception $e) {
-        return null;
+        //AppController::createMessage("Invalid token", 401);
+        return false;
     }
 }
 ?>

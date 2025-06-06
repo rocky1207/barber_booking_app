@@ -29,7 +29,7 @@ api.interceptors.request.use(
 
 // Globalna obrada grešaka
 api.interceptors.response.use(
-  (response) => {console.log(response); return response},
+  (response) => response,
   (error: AxiosError) => {
     console.log(error);
     let message = "Došlo je do neočekivane greške. Pokušajte ponovo.";
@@ -44,7 +44,7 @@ api.interceptors.response.use(
     }
 
     // Prikaz poruke korisniku (zameni sa toast/alert/modal po želji)
-    alert(message);
+    //alert(message);
 
     const customError: CustomAxiosErrorType = {
         message,

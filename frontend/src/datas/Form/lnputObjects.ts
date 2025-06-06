@@ -1,14 +1,12 @@
 import { LoginInputType } from "@/types/Form/LoginInputType";
-import { loginValidator } from "@/lib/validators/loginValidator";
+import { formValidator } from "@/lib/validators/formValidator";
 export const loginInputs: LoginInputType[] = [
-    {type: 'text', name: 'username', value: '', placeholder: "Korisničko ime", onAction: loginValidator },
-    {type: 'text', name: 'password', value: '', placeholder: "Šifra", onAction: loginValidator },
+    {type: 'text', name: 'username', value: '', placeholder: "Korisničko ime", onAction: formValidator },
+    {type: 'text', name: 'password', value: '', placeholder: "Šifra", onAction: formValidator },
 ];
-/*
+
 export const registerInputs: LoginInputType[] = [
-    {type: 'text', name: 'username', value: '', placeholder: "Korisničko ime", onAction: () => {} },
-    {type: 'text', name: 'password', value: '', placeholder: "Šifra", onAction: () => {} },
-    {type: 'text', name: 'role', value: '', placeholder: "Uloga", onAction: () => {} },
-    {type: 'file', name: 'image', value: '', placeholder: 'Slika', onAction: () => {}}
+    {type: 'text', name: 'username', value: '', placeholder: "Korisničko ime", onAction: formValidator },
+    {type: 'text', name: 'password', value: '', placeholder: "Šifra", onAction: formValidator },
+    {type: 'text', name: 'role', value: '', placeholder: "Uloga", onAction: formValidator },
 ];
-*/

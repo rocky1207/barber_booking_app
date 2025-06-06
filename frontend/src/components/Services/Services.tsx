@@ -4,9 +4,11 @@ const Services:React.FC = () => {
     return (
         <section className={styles.services}>
             <h1>USLUGE</h1>
-            <ul>
-                <ServiceItem />
-            </ul>
+            <nav aria-label="Choose service navigation">
+                <ul>
+                    <ServiceItem />
+                </ul>
+            </nav>
         </section>
     );
 };
