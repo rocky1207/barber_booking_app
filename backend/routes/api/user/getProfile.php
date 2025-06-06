@@ -1,4 +1,6 @@
 <?php
+
+
 require_once (__DIR__ . "/../../../helpers/auth.php");
 require_once (__DIR__ . "/../../../controllers/AppController.php");
 
@@ -16,6 +18,10 @@ if (!$user) {
     exit();
 }
 
+if (!isset($user["userId"]) || !isset($user["role"])) {
+    AppController::createMessage("Neispravni token podaci.", 401);
+    exit();
+}
 // Možeš ovde i dodatno proveriti u bazi ako ti treba
 
 echo json_encode([

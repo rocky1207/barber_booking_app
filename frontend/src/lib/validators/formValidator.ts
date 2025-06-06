@@ -1,16 +1,21 @@
 import { ValidationSchemaType } from "@/types/Form/ValidationSchemaType";
-export const loginValidator = (data: { [key: string]: string | File }, schema:ValidationSchemaType):string | undefined => {
-    
+export const formValidator = (data: { [key: string]: string | File }, schema:ValidationSchemaType):string | undefined => {
     for (const key in data) {
         const rules = schema[key];
+        
       // const rules = schema[name];
         const value = data[key];
         //const value = newValue;
         if (value instanceof File) {
+          
     // Validacija fajla (tip, veličina, itd.)
-    
-        } else if (typeof value === 'string') {
+          const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
+          const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
 
+          if (!allowedTypes.includes(value.type) || value.size > maxSizeInBytes) {
+              return rules.errorMessage;
+          }
+        } else if (typeof value === 'string') {
             if (rules.pattern && !rules.pattern.test(value)) {
                 return rules.errorMessage;
             }

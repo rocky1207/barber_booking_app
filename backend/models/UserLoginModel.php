@@ -1,6 +1,16 @@
 <?php
+
+/*
+echo password_hash('Rocky1207!', PASSWORD_DEFAULT);
+$unos = 'Rocky1207!';
+$hash = '$2y$10$9FyK5y4fDLldu9AqQ9RLnOV13b66v2E6B7Sb6Yg5xGSHQ6yn3JAIe';
+
+var_dump(password_verify($unos, $hash));
+exit();
+*/
 require_once (__DIR__ . "/../vendor/autoload.php");
 require_once (__DIR__ . "/DatabaseModel.php");
+require_once (__DIR__ . "/../controllers/AppController.php");
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -8,7 +18,7 @@ use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
-
+//$2y$10$9FyK5y4fDLldu9AqQ9RLnOV13b66v2E6B7Sb6Yg5xGSHQ6yn3JAIe
 class UserLoginModel {
     private $secret_key;
 
@@ -17,38 +27,49 @@ class UserLoginModel {
     }
 
     public function userLogin($user) {
+        
         $query = "SELECT id, password, role FROM user WHERE username = :username";
-        $stmt = DatabaseModel::$pdo->prepare($query);
-        $stmt->execute([
+        
+        try {
+            $stmt = DatabaseModel::$pdo->prepare($query);
+            $stmt->execute([
             "username" => $user["username"],
         ]);
         $data = $stmt->fetch();
+        
+        } catch(PDOException $e) {
+            throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
+        };
+        
 
         if (!empty($data) && password_verify($user["password"], $data["password"])) {
             $payload = [
                 "userId" => $data["id"],
                 "role" => $data["role"],
                 "iat" => time(),
-                "exp" => time() + 3600 * 24 * 7
+                "exp" => time() + 3600 * 2
             ];
 
             $jwt = JWT::encode($payload, $this->secret_key, 'HS256');
 
             setcookie("token", $jwt, [
-                "expires" => time() + 3600 * 24 * 7,
+                "expires" => time() + 3600 * 2,
                 "httponly" => true,
                 "secure" => false, // promeni na true u produkciji
-                "samesite" => "Strict",
+                "samesite" => "Lax",
                 "path" => "/"
             ]);
 
             return [
                 "success" => true,
+                "status" => 200,
                 "message" => "Uspešna prijava"
             ];
         } else {
+            
             return [
                 "success" => false,
+                "status" => 422,
                 "message" => "Neispravno korisničko ime ili lozinka"
             ];
         }

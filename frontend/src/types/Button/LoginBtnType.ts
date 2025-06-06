@@ -1,5 +1,5 @@
 export interface LoginBtnType {
-    type: 'submit';
+    type: 'submit' | 'button';
     className: string;
     text: string;
     divClass: string;

@@ -1,4 +1,5 @@
 <?php
+
 require_once (__DIR__ . "/../../controllers/AppController.php");
 if($_SERVER['REQUEST_METHOD'] !== 'POST') {
     AppController::createMessage("Samo POST metod je dozvoljen.", 405);
@@ -11,7 +12,11 @@ if($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require_once (__DIR__ . "/../../controllers/LoginController.php");
 
+
+
+
 $data = json_decode(file_get_contents('php://input'), true);
+
 $loginController = new LoginController();
 $response = $loginController->login($data);
 echo json_encode($response);

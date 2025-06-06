@@ -1,0 +1,27 @@
+.form {
+    width: 100%;
+    max-width: 500px;
+}
+.form div {
+    margin-bottom: 20px;    
+}
+.form input {
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.1); /* vrlo svetla providna boja */
+    border: 1px solid var(--logoColor);
+    padding: 20px 15px;
+    width: 100%;
+    color: white;
+}
+.form input[type="file"] {
+    display: none;
+    width: 100%;
+}
+.fileBtn {
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.1); /* vrlo svetla providna boja */
+    border: 1px solid var(--logoColor);
+    padding: 20px 15px;
+    width: 150px;
+    color: white;
+}
