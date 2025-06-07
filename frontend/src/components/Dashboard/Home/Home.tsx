@@ -2,13 +2,14 @@
 import {useState, useEffect } from "react";
 import api from "@/lib/axios";
 import { useRouter } from 'next/navigation';
+import UserNavigation from "../UserNavigation/UserNavigation";
 import BarberItem from "@/components/Barbers/BarberItem";
 import BarberButtons from "@/components/Barbers/BarberButtons";
 
 
 const barbers = [{id: '1', name: 'Đole'}, {id: '2', name: 'Antoaneta'},{id: '3', name: 'Miša'},{id: '4', name: 'Mali Đole'}];
 const Home: React.FC = () => {
-  const [resData, setResData] = useState('')
+  const [resData, setResData] = useState(false)
   const router = useRouter();
   useEffect(() => {
       const checkAuth = async ():Promise<void> => {
@@ -16,10 +17,12 @@ const Home: React.FC = () => {
           const res = await api.get('user/getProfile.php');
           console.log(res.data);
           
-          if(!res.data) {
+          if(res.data.status !== 200) {
             router.push('/login');
           } else {
-            setResData(res.data.data);
+            setResData(true);
+            console.log(res);
+            //if(res.data.status === 200) router.push('/login/dashboard');
           }
         } catch(err: any) {
           if(err.status === 401) {
@@ -37,28 +40,26 @@ const Home: React.FC = () => {
   } else {
     bla = 
     <>
+    
     <h1>MENADŽERSKA TABLA</h1>
-        <nav aria-label="Manage barber navigation">
-            <ul>
-              {barbers.map((barberItem, index) => {
-                const barber = {...barberItem, index: index};
-                return (
-                  <BarberItem  key={barber.id} {...barber}>
-                    
-                    <BarberButtons />
-                  </BarberItem>
-                )
-              })}
-                
-              
-            </ul>
-        </nav>
-        </>
+    <nav aria-label="Manage barber navigation">
+      <UserNavigation />
+      <ul>
+        {barbers.map((barberItem, index) => {
+          const barber = {...barberItem, index: index};
+          return (
+            <BarberItem  key={barber.id} {...barber}>
+              <BarberButtons />
+            </BarberItem>
+          )
+        })}
+      </ul>
+    </nav>
+    </>
   }
     return (
         <section>
         {bla}
-
         </section>
         
     );
