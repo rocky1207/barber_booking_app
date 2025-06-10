@@ -30,6 +30,9 @@ body {
     align-items: center;
     height: 100vh; 
 }
+.textCenter {
+    text-align: center; 
+}
 a {
   color: inherit;
   text-decoration: none;

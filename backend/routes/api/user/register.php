@@ -1,5 +1,6 @@
 <?php
 require_once (__DIR__ . "/../../../controllers/AppController.php");
+
 if($_SERVER['REQUEST_METHOD'] !== 'POST') {
     AppController::createMessage("Samo POST metod je dozvoljen.", 405);
     exit();

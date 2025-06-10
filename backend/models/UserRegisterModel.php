@@ -4,7 +4,7 @@ require_once (__DIR__ . "/DatabaseModel.php");
 class UserRegisterModel {
     public function userRegister($data) {
         DatabaseModel::$pdo->beginTransaction();
-        $query = "INSERT INTO users (username, password, role, file) VALUES (:username, :password, :role, :file)";
+        $query = "INSERT INTO user (username, password, role, file) VALUES (:username, :password, :role, :file)";
         try {
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute([
@@ -15,7 +15,7 @@ class UserRegisterModel {
             ]);
             if($stmt->rowCount() === 0) {
                 DatabaseModel::$pdo->rollBack();
-                throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
+                throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             }
             $lastId = DatabaseModel::$pdo->lastInsertId();
             DatabaseModel::$pdo->commit();

@@ -39,7 +39,10 @@ $fileTmp = $_FILES['file']['tmp_name'];
 if (move_uploaded_file($fileTmp, $targetPath)) {
     // Vrati relativni URL slike koji frontend može koristiti
     $url = '/images/' . $uniqueName;
-    echo json_encode(['url' => $url]);
+    echo json_encode([
+        'fileName' => $uniqueName,    
+        'url' => $url
+    ]);
 } else {
     AppController::createMessage('Greška prilikom čuvanja fajla.', 500);
 }

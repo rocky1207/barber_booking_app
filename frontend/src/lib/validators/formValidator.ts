@@ -5,17 +5,19 @@ export const formValidator = (data: { [key: string]: string | File }, schema:Val
         
       // const rules = schema[name];
         const value = data[key];
+        if(rules.required && !value) return 'Tekstualna polja moraju biti popunjena';
         //const value = newValue;
         if (value instanceof File) {
-          
+          if (!value.name) continue;
     // Validacija fajla (tip, veličina, itd.)
           const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
           const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
 
           if (!allowedTypes.includes(value.type) || value.size > maxSizeInBytes) {
-              return rules.errorMessage;
+              return rules.fileErrorMessage;
           }
         } else if (typeof value === 'string') {
+          console.log(value);
             if (rules.pattern && !rules.pattern.test(value)) {
                 return rules.errorMessage;
             }

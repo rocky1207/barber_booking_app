@@ -10,7 +10,7 @@ const RegisterPage: React.FC = () => {
             </ul>
         </nav>
         <main className="wrapp center">
-            <h1>Register</h1>
+            <h1>UNESITE KORISNIKA</h1>
             <Register/>
         </main>
         </>
