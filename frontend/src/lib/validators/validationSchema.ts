@@ -35,6 +35,8 @@ export const registerValidationSchema: ValidationSchemaType = {
     },
     file: {
         required: false,
-        errorMessage: 'Dozvoljeni su samo JPEG, PNG ili WEBP formati slika, maksimalne veličine do 5MB.'
+        pattern: /^$|^.+\.(jpg|jpeg|png|webp)$/i,
+        fileErrorMessage: 'Dozvoljeni su samo JPEG, PNG ili WEBP formati slika, maksimalne veličine do 5MB.',
+        errorMessage: 'Naziv slike mora imati .jpg, .jpeg, .png ili .webp ekstenziju.'
     }
 };

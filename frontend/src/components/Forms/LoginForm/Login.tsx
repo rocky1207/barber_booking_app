@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 import Input from "../Input/Input";
 import Button from "@/components/Button/Button";
 import { loginInputs } from "@/datas/Form/lnputObjects";
@@ -12,6 +13,7 @@ import { CustomAxiosErrorType } from "@/types/Api/CustomAxiosErrorType";
 import styles from '../Form.module.css';
 const LogIn:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+    const router = useRouter();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -30,7 +32,10 @@ const LogIn:React.FC = () => {
         try {
             const result = await login(data);
             console.log(result);
-           if(!result) setErrorMessage(result.message);
+           if(!result) {
+            setErrorMessage(result.message);
+           }
+           router.push('/login/dashboard');
         } catch(error) {
             console.log(error);
             const err = error as CustomAxiosErrorType;

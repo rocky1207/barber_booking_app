@@ -3,6 +3,14 @@ require_once (__DIR__ . "/AppController.php");
 require_once (__DIR__ . "/../models/UserRegisterModel.php");
 class RegisterController {
     public function register($data) {
+        /*
+        foreach($data as $key => $value) {
+            
+            if($data[$key] === '') {
+                
+            }
+        }
+            */
         $inputs = [
             "username" => $data["username"],
             "password" => $data["password"],
@@ -16,8 +24,8 @@ class RegisterController {
             "file" => AppController::FILE_REGEX,
         ];
         $messages = [
-            "username" => AppController::WRONG_USERNAME_MESSAGE,
-            "password" => AppController::WRONG_PASSWORD_MESSAGE,
+            "username" => AppController::USERNAME_ERROR_MESSAGE,
+            "password" => AppController::PASSWORD_ERROR_MESSAGE,
             "role" => AppController::ROLE_ERROR_MESSAGE,
             "file" => AppController::FILE_ERROR_MESSAAGE
         ];
@@ -28,7 +36,8 @@ class RegisterController {
             try {
                 $userRegisterModel = new UserRegisterModel();
                 $userId = $userRegisterModel->userRegister($validateData);
-                return $userId;
+                if(!empty($userId)) return $userId;
+                AppController::createMessage(AppController::QUERY_ERROR_MESSAGE, 500);
             } catch(Exception $e) {
                 AppController::createMessage($e->getMessage(), $e->getCode() ?: 500);
             }

@@ -35,6 +35,7 @@ api.interceptors.response.use(
     let message = "Došlo je do neočekivane greške. Pokušajte ponovo.";
     let statusCode;
     if (error.response) {
+      console.log('da');
       message = (error.response.data as any)?.message || message;
       statusCode = (error.response.data as any)?.status;
     } else if (error.request) {
@@ -47,7 +48,7 @@ api.interceptors.response.use(
     //alert(message);
 
     const customError: CustomAxiosErrorType = {
-        message,
+        message, 
         status: statusCode ? statusCode : error.response?.status,
         original: error
     };

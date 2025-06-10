@@ -3,6 +3,6 @@ export interface ValidationRuleType {
   minLength?: number;
   maxLength?: number;
   pattern?: RegExp;
-  validate?: (value: string) => boolean;
   errorMessage?: string;
+  fileErrorMessage?: string;
 };

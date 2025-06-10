@@ -11,38 +11,42 @@ interface FileProps {
   fileName: string;
 };
 const FileInput: React.FC<FileProps> = ({ /*onFileSelect*/ setFileName, fileName}) => {
+    const [choosenImageName, setChoosenImageName] = useState<string>('Slika nije izbrana');
     const inputRef = useRef<HTMLInputElement>(null);
-    
+    console.log(inputRef.current);
     const handleButtonClick = () => {
         inputRef.current?.click();
         console.log(inputRef);
-       // setFileName();
     };
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if(!file)  return;
-        setFileName(file.name);
+        setChoosenImageName(file.name);
         const formData = new FormData();
         formData.append('file', file);
         const fileData = {file: file};
         const validationResult = formValidator(fileData, registerValidationSchema);
         console.log(validationResult);
         if(validationResult) {
-            console.log(validationResult);
+            setChoosenImageName(validationResult);
+            return;
         }
         try {
-            const res = await api.post('api/user/uploadImage.php', formData);
+            const res = await api.post('user/uploadImage.php', formData);
             console.log(res);
-        } catch(error) {
+            if(res.status === 200) {
+                setFileName(res.data.fileName);
+            } 
+        } catch(error: any) {
             console.log(error);
+            setChoosenImageName(error.message);
         }
     };
-    console.log(fileName);
     return (
         <div>
             <input type="file" name="file" ref={inputRef} onChange={handleFileChange}/>
             <button type="button" className={styles.fileBtn} onClick={handleButtonClick}>Izaberi sliku</button>
-            <p>{fileName}</p>
+            <p>{choosenImageName}</p>
         </div>
     );
 };
