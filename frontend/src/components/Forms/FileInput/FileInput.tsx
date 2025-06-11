@@ -1,23 +1,24 @@
 "use client";
 
-import { useRef, useState } from "react";
-import api from "@/lib/axios";
+import { useRef, useState, useEffect } from "react";
+import { uploadImage } from "@/lib/api/uploadImage";
 import { formValidator } from "@/lib/validators/formValidator";
 import { registerValidationSchema } from "@/lib/validators/validationSchema";
 import styles from "../Form.module.css";
 interface FileProps {
-  //onFileSelect: (file: File | null) => void;
   setFileName:React.Dispatch<React.SetStateAction<string>>;
   fileName: string;
 };
-const FileInput: React.FC<FileProps> = ({ /*onFileSelect*/ setFileName, fileName}) => {
+const FileInput: React.FC<FileProps> = ({setFileName, fileName}) => {
     const [choosenImageName, setChoosenImageName] = useState<string>('Slika nije izbrana');
     const inputRef = useRef<HTMLInputElement>(null);
-    console.log(inputRef.current);
+    
     const handleButtonClick = () => {
         inputRef.current?.click();
-        console.log(inputRef);
     };
+    useEffect(() => {
+        if(fileName === '') setChoosenImageName('Slika nije izbrana');
+    }, [fileName])
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if(!file)  return;
@@ -26,21 +27,19 @@ const FileInput: React.FC<FileProps> = ({ /*onFileSelect*/ setFileName, fileName
         formData.append('file', file);
         const fileData = {file: file};
         const validationResult = formValidator(fileData, registerValidationSchema);
-        console.log(validationResult);
-        if(validationResult) {
-            setChoosenImageName(validationResult);
+        if(!validationResult.status) {
+            setChoosenImageName(validationResult.message);
             return;
         }
-        try {
-            const res = await api.post('user/uploadImage.php', formData);
-            console.log(res);
-            if(res.status === 200) {
-                setFileName(res.data.fileName);
-            } 
-        } catch(error: any) {
-            console.log(error);
-            setChoosenImageName(error.message);
-        }
+
+        const result = await uploadImage('user/uploadImage.php', formData);
+        if(!result.success) {
+            setChoosenImageName(result.message);
+            return;
+        } 
+        
+        setFileName(result.fileName);
+        
     };
     return (
         <div>

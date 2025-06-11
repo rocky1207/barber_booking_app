@@ -1,10 +1,11 @@
 import api from "../axios";
-export const login = async (data: {username: string; password: string;}): Promise<any> => {
+import { LoginReturnType } from "@/types/Api/LoginReturnType";
+export const login = async (url: string, data: Record<string, string>): Promise<LoginReturnType> => {
     try {
-        const response = await api.post("/login.php", data);
-        return response.data;
-      } catch(error) {
-          console.log(error);
-          throw error;
+        const response = await api.post(url, data);
+        return {success: true, data: response.data};
+      } catch(error: any) {
+        console.log(error);
+        return {success: false, message: error.message};
     }
 };

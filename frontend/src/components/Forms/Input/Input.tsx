@@ -5,6 +5,7 @@ import { ValidationSchemaType } from "@/types/Form/ValidationSchemaType";
 
 const Input:React.FC<{inputs:LoginInputType[]; schema: ValidationSchemaType}> = ({inputs, schema}) => {
     // Dinamičko kreiranje početnog stanja
+    /*
   const initialState = inputs.reduce((acc, input) => {
     acc[input.name] = input.type === "file" ? null : input.value || "";
     return acc;
@@ -13,12 +14,14 @@ const Input:React.FC<{inputs:LoginInputType[]; schema: ValidationSchemaType}> = 
   const [inputFields, setInputFields] = useState<{
     [key: string]: string | File | null;
   }>(initialState);
+  */
   const [errorMessage, setErrorMessage] = useState<string | undefined>('');
-
+/*
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value} = e.target;
     setInputFields((prevState) => ({...prevState, [name]: value}));
   };
+  */
   /*
   let bla: string | undefined;
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -38,13 +41,12 @@ const Input:React.FC<{inputs:LoginInputType[]; schema: ValidationSchemaType}> = 
   return (
     <>
       {inputs.map((input) => {
-        const { onAction, value, ...rest } = input;
+        
         return (
           <div key={input.name}>
             <input
-              {...rest}
-              value={input.type !== "file" ? inputFields[input.name] as string : undefined}
-              onChange={handleChange}
+              {...input}
+              defaultValue={input.defaultValue || ''}
               /*onBlur={handleBlur}*/
             />
             
