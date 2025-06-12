@@ -3,13 +3,18 @@ import { useState, useEffect } from "react";
 import api from "@/lib/axios";
 import BarberItem from "./BarberItem";
 import { BarberItemPropsType } from "@/types/Barbers/BarberItemPropsType";
+import { useAppDispatch } from "@/store/hooks/typizedHooks";
+import { uiActions } from "@/store/slices/UiSlice";
 import styles from './Barbers.module.css';
 
 
 const Barbers:React.FC = () => {
   const [barbers, setBarbers] = useState<BarberItemPropsType[]>([]);
+  
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const getUser = async () => {
+      dispatch(uiActions.setIsLoading(true));
       try {
         const res = await api.get('user/getUser.php');
         console.log(res);
@@ -20,6 +25,8 @@ const Barbers:React.FC = () => {
       } catch(error: any) {
         console.log(error);
 
+      } finally {
+        dispatch(uiActions.setIsLoading(false));
       }
     }
     getUser();

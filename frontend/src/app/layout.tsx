@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Providers from "@/providers/Providers";
+import LoadingOverlay from "@/components/UI/LoadingOverlay/LoadingOverlay";
 import './globals.css';
 export const metadata: Metadata = {
   title: "Booking app",
@@ -13,7 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <Providers>
+          <LoadingOverlay />
+          {children}
+        </Providers>
       </body>
     </html>
   );

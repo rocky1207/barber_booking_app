@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Button from '../Button/Button';
+import Button from '@/components/Button/Button';
 import { itemBtns } from '@/datas/ButttonObjects';
 import { BarberItemPropsType } from '@/types/Barbers/BarberItemPropsType';
 import { bookBtn } from '@/datas/ButttonObjects';

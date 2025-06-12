@@ -1,5 +1,5 @@
-import Header from "@/components/Header/Header";
-import Services from "@/components/Services/Services";
+import Header from "@/components/UI/Header/Header";
+import Services from "@/components/UI/Services/Services";
 const ServicesPage:React.FC = () => {
     return (
         <>

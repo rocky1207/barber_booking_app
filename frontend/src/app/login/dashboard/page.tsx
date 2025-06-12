@@ -1,5 +1,5 @@
-import Home from "@/components/Dashboard/Home/Home";
-import Header from "@/components/Header/Header";
+import Home from "@/components/UI/Dashboard/Home/Home";
+import Header from "@/components/UI/Header/Header";
 const DashboardPage: React.FC = () => {
     return (
         <>

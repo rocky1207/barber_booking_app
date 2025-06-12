@@ -1,5 +1,5 @@
 import { itemBtns } from "@/datas/ButttonObjects";
-import Button from "../Button/Button";
+import Button from "@/components/Button/Button";
 import styles from './Barbers.module.css';
 
 const BarberButtons: React.FC = () => {

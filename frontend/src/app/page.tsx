@@ -1,6 +1,6 @@
-import Header from "@/components/Header/Header";
-import Barbers from "@/components/Barbers/Barbers";
-import Footer from "@/components/Footer/Footer";
+import Header from "@/components/UI/Header/Header";
+import Barbers from "@/components/UI/Barbers/Barbers";
+import Footer from "@/components/UI/Footer/Footer";
 
 export default function Home() {
   return (
