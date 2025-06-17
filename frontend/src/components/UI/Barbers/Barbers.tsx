@@ -5,32 +5,20 @@ import BarberItem from "./BarberItem";
 import { BarberItemPropsType } from "@/types/Barbers/BarberItemPropsType";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { uiActions } from "@/store/slices/UiSlice";
+import { barberActions } from "@/store/slices/barberSlice";
+import { useAppSelector } from "@/store/hooks/typizedHooks";
 import styles from './Barbers.module.css';
+import { RootState } from "@/store/store";
+import { useDispatch } from "react-redux";
 
 
-const Barbers:React.FC = () => {
-  const [barbers, setBarbers] = useState<BarberItemPropsType[]>([]);
-  
+
+const Barbers:React.FC<{barbers:BarberItemPropsType[]}> = ({barbers}) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const getUser = async () => {
-      dispatch(uiActions.setIsLoading(true));
-      try {
-        const res = await api.get('user/getUser.php');
-        console.log(res);
-        if(res.status === 200) {
-          setBarbers(res.data)
-        }
-        
-      } catch(error: any) {
-        console.log(error);
-
-      } finally {
-        dispatch(uiActions.setIsLoading(false));
-      }
-    }
-    getUser();
-  }, []);
+    dispatch(barberActions.setBarbers(barbers));
+  }, [barbers]);
+  
     return (
         <section className={styles.barbers}>
           <h1>IZABERI SVOG FRIZERA</h1>
@@ -40,11 +28,8 @@ const Barbers:React.FC = () => {
                 const barber = {...barberItem, index: index};
                 return (
                   <BarberItem  key={barber.id} {...barber} />
-                    
                 )
               })}
-                
-              
             </ul>
           </nav>
         </section>

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Input from "../Input/Input";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/NavigateButton";
 import { registerInputs } from "@/datas/Form/lnputObjects";
 import { formValidator } from "@/lib/validators/formValidator";
 import { registerValidationSchema } from "@/lib/validators/validationSchema";

@@ -67,9 +67,6 @@ button {
   border-radius: 50%;
 }
 
-.bookBtn {
-
-}
 .terminBtn,
 .updateBtn,
 .deleteBtn {
@@ -79,9 +76,7 @@ button {
   text-align: center;
   padding: 3px 6px;
 }
-.bookBtn {
-  
-  }
+
 .updateBtn {
   color: green;
 }
@@ -99,7 +94,7 @@ button {
       justify-content: center;
       align-items: center;
       z-index: 9999
-    }
+}
 .spinner {
   border: 6px solid #f3f3f3;
   border-top: 6px solid gold;
@@ -109,6 +104,9 @@ button {
   animation: spin 1s linear infinite;
 }
 
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.85);
+}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

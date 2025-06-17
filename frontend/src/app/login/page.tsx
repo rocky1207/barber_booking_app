@@ -1,3 +1,4 @@
+"use client";
 import LogIn from "@/components/Forms/LoginForm/Login";
 import Link from "next/link";
 const LogInPage:React.FC = () => {
