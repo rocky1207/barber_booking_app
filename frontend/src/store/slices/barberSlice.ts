@@ -1,17 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BarberItemPropsType } from "@/types/Barbers/BarberItemPropsType";
+import { BarberSliceType } from "@/types/Barbers/BarbersType";
+import { BarberType } from "@/types/Barbers/BarbersType";
 
-const initialState: {barbers: BarberItemPropsType[]} = {
-    barbers: []
+const initialState: BarberSliceType = {
+    barbers: [],
+    currentBarberId: ''
 };
 
 const barberSlice = createSlice({
     name: 'barber',
     initialState,
     reducers: {
-        setBarbers: (state, action: PayloadAction<BarberItemPropsType[]>) => {
+        setBarbers: (state, action: PayloadAction<BarberType[]>) => {
             console.log(action.payload);
             state.barbers = action.payload;
+        },
+        setCurrentBarberId: (state, action: PayloadAction<string>) => {
+            state.currentBarberId = action.payload;
         }
     }
 });

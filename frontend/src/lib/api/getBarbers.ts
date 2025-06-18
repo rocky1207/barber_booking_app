@@ -1,5 +1,5 @@
 import api from "../axios";
-import { BarberItemPropsType } from "@/types/Barbers/BarberItemPropsType";
+import { BarberItemPropsType } from "@/types/Barbers/BarbersType";
 export const getBarbers = async (url: string): Promise<{success: boolean; data?: BarberItemPropsType[]; message?: string }> => {
     let data:{success: boolean; data?: BarberItemPropsType[]; message?: string };
     try {

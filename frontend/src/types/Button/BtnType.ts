@@ -26,7 +26,11 @@ export interface NavigateBtnType extends BasicBtnType {
 
 export interface ApiBtnType extends BasicBtnType {
   id?: string;
-  onAction?: (url: string, id: string) => Promise<void>;
+  head?: string;
+  onAction?: (url: string, id: string) => Promise<ReturnType>;
+};
+export interface ApiBtnRefType extends ApiBtnType {
+  dialogRef?: React.RefObject<HTMLDialogElement | null>;
 };
 
 //export type AnyBtnType = NavigateBtnType | ApiBtnType;

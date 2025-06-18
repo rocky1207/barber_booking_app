@@ -10,7 +10,9 @@ import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import ConfirmModal from "../../ConfirmModal/ConfirmModal";
-import { text } from "stream/consumers";
+import { deleteBarberBtn } from '@/datas/ButttonObjects';
+import { manageBarber } from "@/lib/api/manageBarber";
+
 
 interface BarberType {
   
@@ -30,7 +32,8 @@ const Home: React.FC = () => {
   const dialog = useRef<HTMLDialogElement | null>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const barbers = useAppSelector((state: RootState) => state.barber?.barbers);
+  const {barbers, currentBarberId} = useAppSelector((state: RootState) => state?.barber);
+  console.log(currentBarberId);
   /*
   useEffect(() => {
     
@@ -54,11 +57,17 @@ const Home: React.FC = () => {
   }, []);
   */
   console.log(errMsg);
-  const text = 'Da li ste sigurni?';
+  const updatedDeleteBarberBtn = {
+    ...deleteBarberBtn,
+    id: currentBarberId,
+    head: 'Da li ste sigurni?',
+    onAction: manageBarber
+  }
+  
     return (
       <>
       
-      <ConfirmModal ref={dialog} text={text}  />
+      <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}  />
       
       <section>
       <h1>MENADŽERSKA TABLA</h1>

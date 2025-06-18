@@ -1,7 +1,8 @@
-import { ApiBtnType } from "@/types/Button/BtnType";
+import { ApiBtnRefType } from "@/types/Button/BtnType";
 import { ReturnType } from "@/types/Api/ReturnType";
 
-const ApiButton:React.FC<ApiBtnType> = ({...btnData}) => {
+const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
+    console.log(btnData);
     const {divClass, className, text, type, validate, onAction, ...buttonProps} = btnData;
     const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -9,9 +10,10 @@ const ApiButton:React.FC<ApiBtnType> = ({...btnData}) => {
         let url: string = '';
         if(text === 'TERMINI') url = '/getClients.php';
         if(text === 'AŽURIRAJ') url = 'user/updateUser.php';
-        if(text === 'OBRIŠI') url = 'user/deleteUser.php';
+        if(text === 'DA') url = 'user/deleteUser.php';
         console.log(url, btnData.id);
-            onAction(url, btnData.id);
+        onAction(url, btnData.id);
+        dialogRef?.current?.close();
     }
     return (
         <div>

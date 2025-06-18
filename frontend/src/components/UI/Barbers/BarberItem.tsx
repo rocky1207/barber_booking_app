@@ -3,14 +3,14 @@
 //import { useRouter } from 'next/navigation';
 import NavigateButton from '@/components/Button/NavigateButton';
 //import { itemBtns } from '@/datas/ButttonObjects';
-import { BarberItemPropsType } from '@/types/Barbers/BarberItemPropsType';
+import { BarberType } from '@/types/Barbers/BarbersType';
 import { bookBtn } from '@/datas/ButttonObjects';
 import { useRouter } from "next/navigation";
 import styles from './Barbers.module.css';
 
 
 
-const BarberItem:React.FC<BarberItemPropsType> = ({id, username, file, role, password, index, children}) => {
+const BarberItem:React.FC<BarberType> = ({id, username, file, role, password, index, children}) => {
    const router = useRouter();
     const imageUrl = 'http://barber_booking_app.local/images/';
     const handleClick = ():void => {

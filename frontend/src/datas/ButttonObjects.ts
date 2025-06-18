@@ -55,6 +55,14 @@ export const itemBtns: NavigateBtnType[] = [
         className: 'deleteBtn',
         text: 'OBRIŠI',
         divClass: '',
-       onAction: () => {}
+        onAction: () => {}
     }
 ];
+
+export const deleteBarberBtn: ApiBtnType = {
+        validate: 'api',
+        type: 'button',
+        className: 'terminBtn',
+        text: 'DA',
+        divClass: '',
+    };

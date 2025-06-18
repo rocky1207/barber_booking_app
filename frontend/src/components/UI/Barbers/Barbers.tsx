@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import api from "@/lib/axios";
 import BarberItem from "./BarberItem";
-import { BarberItemPropsType } from "@/types/Barbers/BarberItemPropsType";
+import { BarberItemPropsType } from "@/types/Barbers/BarbersType";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { uiActions } from "@/store/slices/UiSlice";
 import { barberActions } from "@/store/slices/barberSlice";

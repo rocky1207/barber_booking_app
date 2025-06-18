@@ -13,3 +13,34 @@
   width: 90%;
   max-width: 400px;
 }
+.dialog h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.buttonsDiv {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.buttonsDiv button {
+  
+  padding: 8px 15px;
+  color: black;
+}
+.buttonsDiv div:first-child  {
+  background-color: red;
+  
+}
+.buttonsDiv div:last-child  {
+  background-color: green;
+  
+}
+.buttonsDiv div:first-child:hover,
+.buttonsDiv div:first-child:active {
+  background-color: rgb(255, 96, 96);
+}
+.buttonsDiv div:last-child:hover,
+.buttonsDiv div:last-child:active {
+  background-color: rgb(45, 147, 45);
+  
+}
