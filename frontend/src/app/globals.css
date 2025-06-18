@@ -67,9 +67,6 @@ button {
   border-radius: 50%;
 }
 
-.bookBtn {
-
-}
 .terminBtn,
 .updateBtn,
 .deleteBtn {
@@ -79,14 +76,40 @@ button {
   text-align: center;
   padding: 3px 6px;
 }
-.bookBtn {
-  
-  }
+
 .updateBtn {
   color: green;
 }
 .deleteBtn {
   color: red;
+}
+.loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999
+}
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid gold;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 @media screen and (min-width: 766px) {
   h1 {

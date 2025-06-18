@@ -1,49 +1,68 @@
-import { LoginBtnType } from "@/types/Button/LoginBtnType";
-import { login } from "@/lib/api/login";
-export const loginBtn: LoginBtnType = {
+import { BasicBtnType } from "@/types/Button/BtnType";
+
+
+import { ApiBtnType } from "@/types/Button/BtnType";
+import { NavigateBtnType  } from "@/types/Button/BtnType";
+
+
+export const loginBtn: NavigateBtnType = {
+    validate: 'api',
     type: 'submit',
     className: '',
     text: 'POŠALJI',
     divClass: '',
-    onAction: login
+    onAction: () => {}
 };
 
-export const registerBtn: LoginBtnType = {
+export const registerBtn: BasicBtnType = {
+    validate: 'api',
     type: 'submit',
     className: '',
     text: 'POŠALJI',
     divClass: '',
-    onAction: login
+   // onAction: login
 }
 
-export const bookBtn: LoginBtnType = {
+export const bookBtn: NavigateBtnType  = {
+    validate: 'navigacija',
     type: 'button',
     className: 'bookBtn',
     text: 'ZAKAŽI',
     divClass: '',
-    onAction: login
+    onAction: () => {}
 };
 
-export const itemBtns: LoginBtnType[] = [
-    {
+export const terminsBtn: ApiBtnType = {
+        validate: 'api',
         type: 'button',
         className: 'terminBtn',
         text: 'TERMINI',
         divClass: '',
-        onAction: login
-    },
+    };
+
+export const itemBtns: NavigateBtnType[] = [
     {
+        validate: 'navigacija',
         type: 'button',
         className: 'updateBtn',
         text: 'AŽURIRAJ',
         divClass: '',
-        onAction: login
+        onAction: () => {}
     },
     {
+        validate: 'navigacija',
         type: 'button',
         className: 'deleteBtn',
         text: 'OBRIŠI',
         divClass: '',
-        onAction: login
+        onAction: () => {}
     }
 ];
+
+export const deleteBarberBtn: ApiBtnType = {
+        validate: 'api',
+        type: 'button',
+        className: 'terminBtn',
+        text: 'DA',
+        divClass: '',
+    };
