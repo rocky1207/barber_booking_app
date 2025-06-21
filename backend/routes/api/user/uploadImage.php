@@ -1,5 +1,6 @@
 <?php
 require_once (__DIR__ . "/../../../controllers/AppController.php");
+AppController::verifyRequestMethod('POST');
 header('Content-Type: application/json');
 $uploadDir = __DIR__ . '/../../../public/images/';
 /*if (!is_dir($uploadDir)) {

@@ -2,7 +2,7 @@ import { NavigateBtnType } from "@/types/Button/BtnType";
 import { ReturnType } from "@/types/Api/ReturnType";
 
 const NavigateButton:React.FC<NavigateBtnType> = ({...btnData}) => {
-    const {divClass, className, text, type, validate, onAction, ...buttonProps} = btnData;
+    const {className, text, type, validate, onAction, ...buttonProps} = btnData;
     const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
        // if (!onAction) return; // 🔒 zaštita od undefined

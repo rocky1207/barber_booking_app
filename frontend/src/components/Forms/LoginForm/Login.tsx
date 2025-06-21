@@ -8,7 +8,7 @@ import { loginBtn } from "@/datas/ButttonObjects";
 import { formValidationSchema } from "@/lib/validators/validationSchema";
 import { formValidator } from "@/lib/validators/formValidator";
 import { createFormData } from "@/lib/utils/createFormData";
-import NavigateButton from "@/components/Button/NavigateButton";
+import SubmitButton from "@/components/Button/SubmitButton";
 import { login } from "@/lib/api/login";
 
 import styles from '../Form.module.css';
@@ -33,12 +33,15 @@ const LogIn:React.FC = () => {
         } 
         router.push('/login/dashboard');
     };
-
+const newLoginBtn = {
+    ...loginBtn,
+    onAction: handleSubmit
+}
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={loginInputs} schema={formValidationSchema}/>
              {typeof errorMessage === 'string' && <p>{errorMessage}</p>}
-            <NavigateButton {...loginBtn} />
+            <SubmitButton {...loginBtn} />
         </form>
     );
 };

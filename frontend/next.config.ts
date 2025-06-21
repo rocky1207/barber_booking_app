@@ -2,9 +2,11 @@ import type { NextConfig } from "next";
 import type { Rewrite } from "next/dist/lib/load-custom-routes";
 
 const nextConfig: NextConfig = {
+  pageExtensions: ['ts', 'tsx', 'map'],
    async rewrites(): Promise<Rewrite[]> {
     return [
       {
+
         source: "/api/:path*", // kad zoveš /api/neki-fajl.php
         destination: "http://barber_booking_app.local/api/:path*", // pravi PHP backend URL
       },

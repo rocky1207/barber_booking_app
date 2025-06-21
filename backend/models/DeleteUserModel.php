@@ -1,29 +1,26 @@
 <?php
 require_once (__DIR__ . "/../controllers/AppController.php");
 require_once (__DIR__ . "/DatabaseModel.php");
-class UserRegisterModel {
-    public function userRegister($data) {
+class DeleteUserModel {
+    public function deleteUser($id) {
+        $query = "DELETE FROM user WHERE id = :id";
         DatabaseModel::$pdo->beginTransaction();
-        $query = "INSERT INTO user (username, password, role, file) VALUES (:username, :password, :role, :file)";
         try {
             $stmt = DatabaseModel::$pdo->prepare($query);
-            $stmt->execute([
-                "username" => $data["username"],
-                "password" => password_hash($data["password"], PASSWORD_DEFAULT),
-                "role" => $data["role"],
-                "file" => $data["file"]
-            ]);
+            $stmt->execute(["id" => $id]);
             if($stmt->rowCount() === 0) {
                 DatabaseModel::$pdo->rollBack();
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             }
-            $lastId = DatabaseModel::$pdo->lastInsertId();
             DatabaseModel::$pdo->commit();
-            return ["lastInsertId" => $lastId];
+            return [
+                "success" => true, 
+                "message" => "Korisnik sa ID {$id} je obrisan."
+            ];
         } catch(PDOException $e) {
+            DatabaseModel::$pdo->rollBack();
             throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
         }
-        
     }
 }
 ?>

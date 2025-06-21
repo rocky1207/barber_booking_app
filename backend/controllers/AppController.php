@@ -5,6 +5,7 @@ class AppController {
     public const PASSWORD_REGEX = "/^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{4,}$/u";
     public const ROLE_REGEX = "/^(admin|user)$/";
     public const FILE_REGEX = "/^$|^.+\.(jpg|jpeg|png|webp)$/i";
+    public const INT_REGEX = "/^[1-9][0-9]*$/";
 
     public const USERNAME_ERROR_MESSAGE = 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.';
     public const PASSWORD_ERROR_MESSAGE = 'Lozinka počinje velikim slovom, sadrži najmanje jednu cifru, dozvoljava slova i znak !, i ima minimalnu dužinu od 4 karaktera.';
@@ -70,6 +71,12 @@ class AppController {
             $data[$key] = ${$key};
         }
         return $data;
+    }
+    public static function verifyRequestMethod($expectedMethod) {
+       $method = strtoupper($expectedMethod);
+       if($_SERVER['REQUEST_METHOD'] !== $method) {
+        self::createMessage("Samo {$method} metod je dozvoljen.", 405);
+       } 
     }
 }
 ?>

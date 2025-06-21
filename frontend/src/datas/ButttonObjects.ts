@@ -1,26 +1,25 @@
 import { BasicBtnType } from "@/types/Button/BtnType";
-
-
+import { SubmitBtnType } from "@/types/Button/BtnType";
+import { login } from "@/lib/api/login";
 import { ApiBtnType } from "@/types/Button/BtnType";
 import { NavigateBtnType  } from "@/types/Button/BtnType";
 
 
-export const loginBtn: NavigateBtnType = {
-    validate: 'api',
+export const loginBtn: BasicBtnType = {
+    validate: 'submit',
     type: 'submit',
     className: '',
     text: 'POŠALJI',
-    divClass: '',
-    onAction: () => {}
+    //divClass: '',
 };
 
-export const registerBtn: BasicBtnType = {
+export const registerBtn: NavigateBtnType = {
     validate: 'api',
     type: 'submit',
     className: '',
     text: 'POŠALJI',
-    divClass: '',
-   // onAction: login
+    //divClass: '',
+    onAction: () => {}
 }
 
 export const bookBtn: NavigateBtnType  = {
@@ -28,17 +27,9 @@ export const bookBtn: NavigateBtnType  = {
     type: 'button',
     className: 'bookBtn',
     text: 'ZAKAŽI',
-    divClass: '',
+    //divClass: '',
     onAction: () => {}
 };
-
-export const terminsBtn: ApiBtnType = {
-        validate: 'api',
-        type: 'button',
-        className: 'terminBtn',
-        text: 'TERMINI',
-        divClass: '',
-    };
 
 export const itemBtns: NavigateBtnType[] = [
     {
@@ -46,7 +37,7 @@ export const itemBtns: NavigateBtnType[] = [
         type: 'button',
         className: 'updateBtn',
         text: 'AŽURIRAJ',
-        divClass: '',
+        //divClass: '',
         onAction: () => {}
     },
     {
@@ -54,15 +45,32 @@ export const itemBtns: NavigateBtnType[] = [
         type: 'button',
         className: 'deleteBtn',
         text: 'OBRIŠI',
-        divClass: '',
+        //divClass: '',
         onAction: () => {}
     }
 ];
 
+export const terminsBtn: ApiBtnType = {
+        validate: 'api',
+        type: 'button',
+        className: 'terminBtn',
+        text: 'TERMINI',
+        action: 'GET_TERMINS',
+        //divClass: '',
+    };
 export const deleteBarberBtn: ApiBtnType = {
         validate: 'api',
         type: 'button',
         className: 'terminBtn',
         text: 'DA',
-        divClass: '',
+        action: 'DELETE',
+        //divClass: '',
+    };
+export const updateBarberBtn: ApiBtnType = {
+        validate: 'api',
+        type: 'button',
+        className: 'terminBtn',
+        text: 'DA',
+        action: 'UPDATE',
+        //divClass: '',
     };

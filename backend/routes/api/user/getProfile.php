@@ -1,15 +1,8 @@
 <?php
-
-
-require_once (__DIR__ . "/../../../helpers/auth.php");
 require_once (__DIR__ . "/../../../controllers/AppController.php");
-
+AppController::verifyRequestMethod('GET');
+require_once (__DIR__ . "/../../../helpers/auth.php");
 header("Content-Type: application/json");
-
-if ($_SERVER["REQUEST_METHOD"] !== "GET") {
-    AppController::createMessage("Samo GET metoda je dozvoljena.", 405);
-    exit();
-}
 
 $user = authenticateUser();
 
