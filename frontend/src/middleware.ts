@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 
-/*
+
 export function middleware(req: NextRequest) {
     // throw new Error("Middleware je pokrenut!"); // Test
   const token = req.cookies.get('token')?.value;
@@ -18,7 +18,7 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/login/dashboard/:path*', '/login/dashboard'],
 };
-*/
+
 /*
 
 console.log("✅ middleware.ts LOADED");
@@ -51,6 +51,7 @@ export const config = {
   matcher: ['/login/:path*', '/login'], // matcher koji pokreće middleware
 };
 */
+/*
 throw new Error("Middleware test error");
 
 
@@ -59,7 +60,4 @@ export function middleware(req: NextRequest) {
   // Za test, umesto console.log, vraćamo JSON odgovor
   return NextResponse.json({ message: "Middleware radi!", pathname: req.nextUrl.pathname });
 }
-
-export const config = {
-  matcher: ["/login/dashboard/:path*", "/login/dashboard"],
-};
+*/

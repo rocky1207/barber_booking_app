@@ -4,7 +4,7 @@ export interface BasicBtnType {
     type: 'submit' | 'button';
     className: string;
     text: string;
-    divClass: string;
+    //divClass: string;
 //    onAction: (data: {username: string; password: string;}) => any;
 };
 /*
@@ -18,6 +18,9 @@ export interface RegisterBtnType extends BasicBtnType {
   onAction: (data: { username: string; password: string; role: string }) => Promise<ReturnType>;
 };
 */
+export interface SubmitBtnType extends BasicBtnType {
+  onAction?: () => void;
+};
 export interface NavigateBtnType extends BasicBtnType {
   onAction: () => void;
 };
@@ -27,6 +30,7 @@ export interface NavigateBtnType extends BasicBtnType {
 export interface ApiBtnType extends BasicBtnType {
   id?: string;
   head?: string;
+  action: string;
   onAction?: (url: string, id: string) => Promise<ReturnType>;
 };
 export interface ApiBtnRefType extends ApiBtnType {

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Input from "../Input/Input";
-import Button from "@/components/Button/NavigateButton";
+import NavigateButton from "@/components/Button/NavigateButton";
 import { registerInputs } from "@/datas/Form/lnputObjects";
 import { formValidator } from "@/lib/validators/formValidator";
 import { registerValidationSchema } from "@/lib/validators/validationSchema";
@@ -43,7 +43,7 @@ return (
             <Input inputs={registerInputs} schema={registerValidationSchema}/>
             <FileInput setFileName={setFileName} fileName={fileName} />
              <p>{errorMessage}</p>
-            <Button {...registerBtn} />
+            <NavigateButton {...registerBtn} />
         </form>
         </>
     );

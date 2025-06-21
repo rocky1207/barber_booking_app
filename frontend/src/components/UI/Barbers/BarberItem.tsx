@@ -31,7 +31,7 @@ const BarberItem:React.FC<BarberType> = ({id, username, file, role, password, in
                 </div>
                 <div className={styles.barberInfoDiv}>
                     <p>{username}</p>
-                    {id === 1000000 &&<div><NavigateButton {...newBookBtn} /></div>}
+                    <div><NavigateButton {...newBookBtn} /></div>
                 </div>
             </div>
             {children}

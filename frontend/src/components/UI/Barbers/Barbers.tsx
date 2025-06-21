@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import api from "@/lib/axios";
 import BarberItem from "./BarberItem";
-import { BarberItemPropsType } from "@/types/Barbers/BarbersType";
+import { BarberType } from "@/types/Barbers/BarbersType";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { uiActions } from "@/store/slices/UiSlice";
 import { barberActions } from "@/store/slices/barberSlice";
@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 
 
 
-const Barbers:React.FC<{barbers:BarberItemPropsType[]}> = ({barbers}) => {
+const Barbers:React.FC<{barbers:BarberType[]}> = ({barbers}) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(barberActions.setBarbers(barbers));

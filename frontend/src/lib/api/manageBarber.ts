@@ -4,18 +4,27 @@ import { ReturnType } from '@/types/Api/ReturnType';
 export const manageBarber = async (url: string, id: string): Promise<ReturnType> => {
     const parsedId = parseInt(id);
     let answer: ReturnType;
+    let actionDone: string = '';
     try {
         let response;
         if(url==='/getClients.php') {
-        response = await api.get(url, {params: {id: parsedId}});
+            response = await api.get(url, {params: {id: parsedId}});
+            actionDone = 'get_client';
         }else if(url==='user/updateUser.php'){
             response = await api.patch(url, {id: parsedId});
+            actionDone = 'update';
         }else if(url==='user/deleteUser.php') {
             response = await api.delete(url, {data: {id:parsedId}});
+            actionDone = 'delete';
         }
         
         console.log(response);
-        answer = {success: true, data: response?.data};
+        if(response?.data?.success) {
+            answer = {success: true, data: response?.data?.data || response?.data?.message, actionDone};
+        } else {
+            answer = {success: false, message: response?.data?.message || 'Greška na serveru.'};
+        }
+        
     } catch(error: any) {
         answer = {success: false, message: error?.message};
     }

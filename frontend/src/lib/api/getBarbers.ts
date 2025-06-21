@@ -1,7 +1,7 @@
 import api from "../axios";
-import { BarberItemPropsType } from "@/types/Barbers/BarbersType";
-export const getBarbers = async (url: string): Promise<{success: boolean; data?: BarberItemPropsType[]; message?: string }> => {
-    let data:{success: boolean; data?: BarberItemPropsType[]; message?: string };
+import { BarberType } from "@/types/Barbers/BarbersType";
+export const getBarbers = async (url: string): Promise<{success: boolean; data?: BarberType[]; message?: string }> => {
+    let data:{success: boolean; data?: BarberType[]; message?: string };
     try {
         const response = await api.get(url);
         if(response.data.length === 0) data = {success: true, message: 'Trenutno nema raspoloživih frizera.'};
