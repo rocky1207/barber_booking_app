@@ -27,7 +27,7 @@ class RegisterController {
             "username" => AppController::USERNAME_ERROR_MESSAGE,
             "password" => AppController::PASSWORD_ERROR_MESSAGE,
             "role" => AppController::ROLE_ERROR_MESSAGE,
-            "file" => AppController::FILE_ERROR_MESSAAGE
+            "file" => AppController::FILE_NAME_ERROR_MESSAGE
         ];
 
         $validateData = AppController::validateInputs($inputs, $regex, $messages, 422);

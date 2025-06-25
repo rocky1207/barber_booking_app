@@ -24,8 +24,6 @@ class DeleteUserController {
                 AppController::createMessage($e->getMessage(), $e->getCode());
             }
         }
-        var_dump($validateInputs);
-        exit();
     }
 }
 

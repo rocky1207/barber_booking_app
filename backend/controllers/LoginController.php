@@ -26,7 +26,7 @@ class LoginController {
                 $user = $userLoginModel->userLogin($validateData);
                 //var_dump($bla);
                 $user["success"] ? false : AppController::createMessage($user["message"], $user["status"]);
-                return $user;
+                return $user["data"];
             } catch(Exception $e) {
                 AppController::createMessage($e->getMessage(), $e->getCode() ?: 500);
             }

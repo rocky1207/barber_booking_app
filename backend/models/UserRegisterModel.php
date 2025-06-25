@@ -1,6 +1,7 @@
 <?php
 require_once (__DIR__ . "/../controllers/AppController.php");
 require_once (__DIR__ . "/DatabaseModel.php");
+require_once (__DIR__ . "/GetUserModel.php");
 class UserRegisterModel {
     public function userRegister($data) {
         DatabaseModel::$pdo->beginTransaction();
@@ -18,8 +19,19 @@ class UserRegisterModel {
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             }
             $lastId = DatabaseModel::$pdo->lastInsertId();
+            if($lastId) {
+                $id = (int)$lastId;
+                $getUserModel = new GetUserModel();
+                $user = $getUserModel->getUserById($id);
+                if(empty($user)) {
+                    DatabaseModel::$pdo->rollBack();
+                    throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
+                }
+                DatabaseModel::$pdo->commit(); 
+                return $user;
+            }
             DatabaseModel::$pdo->commit();
-            return ["lastInsertId" => $lastId];
+           // return ["lastInsertId" => $lastId];
         } catch(PDOException $e) {
             throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
         }

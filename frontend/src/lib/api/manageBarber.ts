@@ -1,20 +1,19 @@
 import api from '@/lib/axios';
-import { ReturnType } from '@/types/Api/ReturnType';
+import { ManageBarberReturnType } from '@/types/Api/ReturnType';
 
-export const manageBarber = async (url: string, id: string): Promise<ReturnType> => {
-    const parsedId = parseInt(id);
-    let answer: ReturnType;
+export const manageBarber = async (url: string, id: number): Promise<ManageBarberReturnType> => {
+    let answer: ManageBarberReturnType;
     let actionDone: string = '';
     try {
         let response;
         if(url==='/getClients.php') {
-            response = await api.get(url, {params: {id: parsedId}});
+            response = await api.get(url, {params: {id}});
             actionDone = 'get_client';
         }else if(url==='user/updateUser.php'){
-            response = await api.patch(url, {id: parsedId});
+            response = await api.patch(url, {id});
             actionDone = 'update';
         }else if(url==='user/deleteUser.php') {
-            response = await api.delete(url, {data: {id:parsedId}});
+            response = await api.delete(url, {data: {id}});
             actionDone = 'delete';
         }
         

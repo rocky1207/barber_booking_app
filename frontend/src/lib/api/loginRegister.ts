@@ -1,6 +1,6 @@
 import api from "../axios";
-import { ReturnType } from "@/types/Api/ReturnType";
-export const login = async (url: string, data: Record<string, string>): Promise<ReturnType> => {
+import { ManageBarberReturnType } from "@/types/Api/ReturnType";
+export const loginRegister = async (url: string, data: Record<string, string>): Promise<ManageBarberReturnType> => {
   let answer;  
   try {
         const response = await api.post(url, data);

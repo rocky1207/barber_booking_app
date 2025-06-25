@@ -2,18 +2,17 @@
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import Input from "../Input/Input";
-import Button from "@/components/Button/NavigateButton";
 import { loginInputs } from "@/datas/Form/lnputObjects";
-import { loginBtn } from "@/datas/ButttonObjects";
 import { formValidationSchema } from "@/lib/validators/validationSchema";
 import { formValidator } from "@/lib/validators/formValidator";
 import { createFormData } from "@/lib/utils/createFormData";
-import SubmitButton from "@/components/Button/SubmitButton";
-import { login } from "@/lib/api/login";
-
+import { loginRegister } from "@/lib/api/loginRegister";
+import { useAppDispatch } from "@/store/hooks/typizedHooks";
+import { barberActions } from "@/store/slices/barberSlice";
 import styles from '../Form.module.css';
 const LogIn:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+    const dispatch = useAppDispatch();
     const router = useRouter();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -25,23 +24,22 @@ const LogIn:React.FC = () => {
             return;
         } 
     
-        const result = await login("/login.php", data);
-        console.log(result);
+        const result = await loginRegister("/login.php", data);
+        
         if(!result.success) {
         setErrorMessage(result.message);
         return;
         } 
+        result?.data && dispatch(barberActions.setLoggedBarber(result.data));
         router.push('/login/dashboard');
     };
-const newLoginBtn = {
-    ...loginBtn,
-    onAction: handleSubmit
-}
+
+    
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={loginInputs} schema={formValidationSchema}/>
              {typeof errorMessage === 'string' && <p>{errorMessage}</p>}
-            <SubmitButton {...loginBtn} />
+             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
     );
 };

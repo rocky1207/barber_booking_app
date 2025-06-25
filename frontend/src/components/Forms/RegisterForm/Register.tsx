@@ -1,19 +1,34 @@
 "use client";
 import { useState } from "react";
+import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import Input from "../Input/Input";
-import NavigateButton from "@/components/Button/NavigateButton";
+import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import { registerInputs } from "@/datas/Form/lnputObjects";
 import { formValidator } from "@/lib/validators/formValidator";
 import { registerValidationSchema } from "@/lib/validators/validationSchema";
-import { registerBtn } from "@/datas/ButttonObjects";
 import FileInput from "../FileInput/FileInput";
 import { createFormData } from "@/lib/utils/createFormData";
-import { login } from "@/lib/api/login";
+import { loginRegister } from "@/lib/api/loginRegister";
+import { useAppSelector } from "@/store/hooks/typizedHooks";
+import { RootState } from "@/store/store";
+import { useSearchParams } from "next/navigation";
 import styles from '../Form.module.css';
 
 const Register:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
     const [fileName, setFileName] = useState<string>('');
+    const {barbers} = useAppSelector((state: RootState) => state?.barber);
+    const dispatch = useAppDispatch();
+    const params = useSearchParams();
+    const userId = params.get('id');
+    const paramId = userId !== null ? parseInt(userId, 10) : undefined;
+    if(paramId !== undefined && !isNaN(paramId)) {
+        const barber = barbers.find(barberItem => barberItem.id === paramId);
+        console.log(`hello ${userId}`);
+        console.log(barber);
+    } else {
+        console.log(`hello top`);
+    }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
@@ -25,12 +40,16 @@ const Register:React.FC = () => {
             setErrorMessage(validateData.message);
             return;
         }
-        const result = await login('user/register.php', data);
-        if(!result.success) {
-            setErrorMessage(result.message);
+        const result = await loginRegister('user/register.php', data);
+        console.log(result);
+        if(!result.success || !result.data) {
+            setErrorMessage(result.message || "Greška prilikom registracije");
             return;
-        }
+        };
         
+        const user = result.data;
+            
+        barberActionDispatcher(user, 'INSERT', dispatch);
         console.log(registerInputs);
         form.reset();
         setFileName('');
@@ -43,7 +62,7 @@ return (
             <Input inputs={registerInputs} schema={registerValidationSchema}/>
             <FileInput setFileName={setFileName} fileName={fileName} />
              <p>{errorMessage}</p>
-            <NavigateButton {...registerBtn} />
+            <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
         </>
     );

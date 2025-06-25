@@ -1,6 +1,7 @@
-export interface ReturnType {
+import { BasicBarberType } from "../Barbers/BarbersType";
+export interface ManageBarberReturnType {
     success: boolean; 
     message?: string; 
-    data?: string;
+    data?: BasicBarberType;
     actionDone?: string;
 }

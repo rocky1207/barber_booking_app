@@ -1,5 +1,6 @@
 
-//onsole.log("=== Middleware loaded ==="); // Dodaj ovo
+//console.log("=== Middleware loaded ==="); // Dodaj ovo
+
 import { NextRequest, NextResponse } from 'next/server';
 
 

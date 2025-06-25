@@ -1,4 +1,4 @@
-import { ReturnType } from "../Api/ReturnType";
+import { ManageBarberReturnType } from "../Api/ReturnType";
 export interface BasicBtnType {
     validate: string;
     type: 'submit' | 'button';
@@ -18,9 +18,7 @@ export interface RegisterBtnType extends BasicBtnType {
   onAction: (data: { username: string; password: string; role: string }) => Promise<ReturnType>;
 };
 */
-export interface SubmitBtnType extends BasicBtnType {
-  onAction?: () => void;
-};
+
 export interface NavigateBtnType extends BasicBtnType {
   onAction: () => void;
 };
@@ -28,10 +26,10 @@ export interface NavigateBtnType extends BasicBtnType {
 // Dugme za brisanje frizera
 
 export interface ApiBtnType extends BasicBtnType {
-  id?: string;
+  id?: number;
   head?: string;
   action: string;
-  onAction?: (url: string, id: string) => Promise<ReturnType>;
+  onAction?: (url: string, id: number) => Promise<ManageBarberReturnType>;
 };
 export interface ApiBtnRefType extends ApiBtnType {
   dialogRef?: React.RefObject<HTMLDialogElement | null>;
