@@ -16,7 +16,7 @@ class UserRegisterModel {
             ]);
             if($stmt->rowCount() === 0) {
                 DatabaseModel::$pdo->rollBack();
-                throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
+                throw new Exception("Registracija nije uspela", 404);
             }
             $lastId = DatabaseModel::$pdo->lastInsertId();
             if($lastId) {
@@ -33,6 +33,7 @@ class UserRegisterModel {
             DatabaseModel::$pdo->commit();
            // return ["lastInsertId" => $lastId];
         } catch(PDOException $e) {
+            DatabaseModel::$pdo->rollBack();
             throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
         }
         

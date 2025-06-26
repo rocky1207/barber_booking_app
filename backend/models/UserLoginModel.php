@@ -62,7 +62,13 @@ class UserLoginModel {
                 "samesite" => "Lax",
                 "path" => "/"
             ]);
-
+            return [
+                    "id" => $data["id"],
+                    "username" => $data["username"],
+                    "file" => $data["file"],
+                    "role" => $data["role"],
+            ];
+            /*
             return [
                 "success" => true,
                 "status" => 200,
@@ -74,7 +80,8 @@ class UserLoginModel {
                     "role" => $data["role"],
                ]
             ];
-        } else {
+            */
+        }/* else {
             
             return [
                 "success" => false,
@@ -82,6 +89,7 @@ class UserLoginModel {
                 "message" => "Neispravno korisničko ime ili lozinka"
             ];
         }
+            */
     }
 }
 

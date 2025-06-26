@@ -22,13 +22,24 @@ const Register:React.FC = () => {
     const params = useSearchParams();
     const userId = params.get('id');
     const paramId = userId !== null ? parseInt(userId, 10) : undefined;
+    let updateInputs;
     if(paramId !== undefined && !isNaN(paramId)) {
+      
         const barber = barbers.find(barberItem => barberItem.id === paramId);
         console.log(`hello ${userId}`);
         console.log(barber);
+       
+        updateInputs = (paramId !== undefined && !isNaN(paramId) && barber)
+        ? registerInputs.map((input) => ({
+            ...input,
+            defaultValue: barber[input.name as keyof typeof barber] || ''
+        }))
+        : registerInputs;
     } else {
         console.log(`hello top`);
     }
+    
+   
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
@@ -40,7 +51,7 @@ const Register:React.FC = () => {
             setErrorMessage(validateData.message);
             return;
         }
-        const result = await loginRegister('user/register.php', data);
+        const result = await loginRegister('user/register.php', data, 'POST');
         console.log(result);
         if(!result.success || !result.data) {
             setErrorMessage(result.message || "Greška prilikom registracije");

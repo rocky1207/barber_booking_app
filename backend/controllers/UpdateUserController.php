@@ -6,7 +6,7 @@ class UpdateUserController {
     public function updateUser($data) {
         
         $inputs = [
-            "id" => $data["id"],
+            "id" => (int)$data["id"],
             "username" => $data["username"],
             "role" => $data["role"],
             "file" => $data["file"]

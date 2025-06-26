@@ -17,7 +17,7 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, inde
         ...bookBtn,
         onAction: handleClick
     }
-    const ha = pathName === '/' ? true : false;
+    const showButton = pathName === '/' ? true : false;
     const showItem = role !== 'owner' ? false : true;
     return (
         <li key={id} className={styles.barberItem}
@@ -28,7 +28,7 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, inde
                 </div>
                 <div className={styles.barberInfoDiv}>
                     <p>{username}</p>
-                    {ha && <div><NavigateButton {...newBookBtn} /></div>}
+                    {showButton && <div><NavigateButton {...newBookBtn} /></div>}
                 </div>
             </div>
             {children}

@@ -24,12 +24,13 @@ const LogIn:React.FC = () => {
             return;
         } 
     
-        const result = await loginRegister("/login.php", data);
+        const result = await loginRegister("/login.php", data, 'POST');
         
         if(!result.success) {
         setErrorMessage(result.message);
         return;
         } 
+        console.log(result);
         result?.data && dispatch(barberActions.setLoggedBarber(result.data));
         router.push('/login/dashboard');
     };

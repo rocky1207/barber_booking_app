@@ -25,8 +25,17 @@ class LoginController {
                 $userLoginModel = new UserLoginModel();
                 $user = $userLoginModel->userLogin($validateData);
                 //var_dump($bla);
-                $user["success"] ? false : AppController::createMessage($user["message"], $user["status"]);
-                return $user["data"];
+                if(empty($user)) {
+                    AppController::createMessage("Neispravno korisničko ime ili lozinka", 422);
+                }
+               // $user["success"] ? false : AppController::createMessage($user["message"], $user["status"]);
+               // return $user["data"];
+                return [
+                "success" => true,
+                "status" => 200,
+                "message" => "Uspešna prijava",
+                "data" => $user
+            ];
             } catch(Exception $e) {
                 AppController::createMessage($e->getMessage(), $e->getCode() ?: 500);
             }
