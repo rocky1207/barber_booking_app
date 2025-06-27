@@ -28,12 +28,7 @@ class UpdateUserModel {
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             }
             DatabaseModel::$pdo->commit();
-            return [
-                "success" => true,
-                "status" => 200,
-                "message" => "Uspešno ažuriranje",
-                "data" => $user
-            ];
+            return $user;
         } catch(PDOException $e) {
             DatabaseModel::$pdo->rollBack();
             throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);

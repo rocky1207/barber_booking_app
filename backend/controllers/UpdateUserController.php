@@ -28,8 +28,13 @@ class UpdateUserController {
             AppController::databaseConnect();
             try {
                 $updateUserModel = new UpdateUserModel();
-                $result = $updateUserModel->updateUser($validateInputs);
-                return $result;
+                $user = $updateUserModel->updateUser($validateInputs);
+                return [
+                "success" => true,
+                "status" => 200,
+                "message" => "Uspešno ažuriranje korisnika.",
+                "data" => $user
+            ];
             } catch(Exception $e) {
                 AppController::createMessage($e->getMessage(), $e->getCode());
             }

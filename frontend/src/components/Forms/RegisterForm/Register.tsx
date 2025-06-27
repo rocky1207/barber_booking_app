@@ -58,7 +58,7 @@ const Register:React.FC = () => {
             return;
         };
         
-        const user = result.data;
+        const user = result.data.data;
             
         barberActionDispatcher(user, 'INSERT', dispatch);
         console.log(registerInputs);

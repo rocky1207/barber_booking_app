@@ -31,7 +31,7 @@ const LogIn:React.FC = () => {
         return;
         } 
         console.log(result);
-        result?.data && dispatch(barberActions.setLoggedBarber(result.data));
+        result?.data && dispatch(barberActions.setLoggedBarber(result?.data?.data));
         router.push('/login/dashboard');
     };
 

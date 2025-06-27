@@ -80,5 +80,12 @@ class AppController {
         self::createMessage("Samo {$method} metod je dozvoljen.", 405);
        } 
     }
+
+    public static function deleteUserImage($fileName) {
+        $uploadDir = (__DIR__ . "/../public/images");
+        $filePath = $uploadDir . '/' . basename($fileName);
+        if(file_exists($filePath)) unlink($filePath);
+        
+    }
 }
 ?>

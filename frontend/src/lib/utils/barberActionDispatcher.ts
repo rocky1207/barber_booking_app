@@ -3,10 +3,7 @@ import { AppDispatch } from "@/store/store";
 import store, { RootState }  from "@/store/store";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
 
-//import { RootState } from "@/store/store";
 export const barberActionDispatcher = (data: {id: number} | BasicBarberType, actionDone: string, dispatch: AppDispatch): void => {
-    console.log(actionDone);
-    console.log(data);
     const state: RootState = store.getState();
     const barbers = state.barber.barbers;
     if(actionDone === 'DELETE') {
@@ -17,6 +14,13 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
         if('username' in data && 'file' in data && 'role' in data) {
             const newBarbersState = [...barbers, data];
             console.log(newBarbersState);
+            dispatch(barberActions.setBarbers(newBarbersState));
+        }
+    }
+    if(actionDone === 'UPDATE') {
+        if('username' in data && 'file' in data && 'role' in data) {
+            const removedItemBarbers = barbers.filter(barberItem => barberItem.id !== data.id);
+            const newBarbersState = [...removedItemBarbers, data];
             dispatch(barberActions.setBarbers(newBarbersState));
         }
     }

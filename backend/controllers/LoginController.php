@@ -30,6 +30,7 @@ class LoginController {
                 }
                // $user["success"] ? false : AppController::createMessage($user["message"], $user["status"]);
                // return $user["data"];
+                //return $user;
                 return [
                 "success" => true,
                 "status" => 200,

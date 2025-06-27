@@ -8,6 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { RootState } from "@/store/store";
 import { LoginInputType } from "@/types/Form/LoginInputType";
 import { loginRegister } from "@/lib/api/loginRegister";
+import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import styles from '../Form.module.css';
 import { createFormData } from "@/lib/utils/createFormData";
 
@@ -45,8 +46,10 @@ const Update: React.FC = () => {
             setErrorMessage(result.message);
             return;
         }
-        setErrorMessage(result.message);
+        setErrorMessage(result?.data?.message);
         console.log(result);
+        const user = result?.data?.data;
+        user && barberActionDispatcher(user, 'UPDATE', dispatch);
     };
     return (
         <>

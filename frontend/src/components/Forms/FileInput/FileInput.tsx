@@ -27,6 +27,7 @@ const FileInput: React.FC<FileProps> = ({setFileName, fileName}) => {
         setChoosenImageName(file.name);
         const formData = new FormData();
         formData.append('file', file);
+        if(fileName !== 'Slika nije izbrana') formData.append('oldFile', fileName);
         const fileData = {file: file};
         const validationResult = formValidator(fileData, registerValidationSchema);
         if(!validationResult.status) {
