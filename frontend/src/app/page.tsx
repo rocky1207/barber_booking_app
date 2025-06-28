@@ -12,7 +12,7 @@ export default async function Home() {
       <main className="wrapp">
         {!success ? <p className="textCenter">{message}</p> : 
         success && message ? <p className="textCenter">{message}</p> : 
-        <Barbers allBarbers={data ?? []} />}
+        <Barbers allBarbers={data?.data ?? []} />}
       </main>
       <Footer />
     </>

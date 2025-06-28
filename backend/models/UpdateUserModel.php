@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ . "/../controllers/AppController.php");
 require_once (__DIR__ . "/DatabaseModel.php");
-require_once (__DIR__ ."/GetUserModel.php");
+require_once (__DIR__ ."/../controllers/GetUserController.php");
 class UpdateUserModel {
     public function updateUser($data) {
         $query = "UPDATE user
@@ -21,8 +21,8 @@ class UpdateUserModel {
                 DatabaseModel::$pdo->rollBack();
                 throw new Exception("Ažuriranje nije uspelo", 404);
             } 
-            $getUserModel = new GetUserModel();
-            $user = $getUserModel->getUserById($data["id"]);
+            $getUserController = new GetUserController();
+            $user = $getUserController->getUserById($data["id"]);
             if(empty($user)) {
                 DatabaseModel::$pdo->rollBack();
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);

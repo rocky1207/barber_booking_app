@@ -22,7 +22,8 @@ class DeleteUserController {
                 $result = $deleteUserModel->deleteUser($validateInputs["id"]);
                 // return $result;
                 return [
-                    "success" => true, 
+                    "success" => true,
+                    "status" => 200, 
                     "message" => "Korisnik sa ID {$validateInputs["id"]} je obrisan.",
                     "data" => $result
                 ];

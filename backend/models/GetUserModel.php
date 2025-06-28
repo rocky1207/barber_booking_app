@@ -17,8 +17,8 @@ class GetUserModel {
         try {
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute(["id" => $id]);
-            $users = $stmt->fetch();
-            return $users;
+            $user = $stmt->fetch();
+            return $user;
         } catch (PDOException $e) {
             throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
         }
