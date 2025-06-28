@@ -1,16 +1,19 @@
 import { ReactNode } from 'react';
 
-export interface BarberType {
-  file: string;
+export interface BasicBarberType {
   id: number;
-  password: string;
-  role: string;
   username: string;
+  file: string;
+  role: string;
+}
+
+export interface ExtendedBarberType extends BasicBarberType {
   index: number;
   children?: ReactNode;
 }
 
 export interface BarberSliceType {
-  barbers: BarberType[];
-  currentBarberId: string;
+  barbers: BasicBarberType[];
+  loggedBarber: BasicBarberType;
+  currentBarberId: number | undefined;
 }

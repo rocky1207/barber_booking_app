@@ -9,15 +9,17 @@ interface FileProps {
   setFileName:React.Dispatch<React.SetStateAction<string>>;
   fileName: string;
 };
+
 const FileInput: React.FC<FileProps> = ({setFileName, fileName}) => {
     const [choosenImageName, setChoosenImageName] = useState<string>('Slika nije izbrana');
     const inputRef = useRef<HTMLInputElement>(null);
-    
+    console.log(fileName);
     const handleButtonClick = () => {
         inputRef.current?.click();
     };
     useEffect(() => {
         if(fileName === '') setChoosenImageName('Slika nije izbrana');
+        if(fileName !== '') setChoosenImageName(fileName);
     }, [fileName])
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -25,6 +27,7 @@ const FileInput: React.FC<FileProps> = ({setFileName, fileName}) => {
         setChoosenImageName(file.name);
         const formData = new FormData();
         formData.append('file', file);
+        if(fileName !== 'Slika nije izbrana') formData.append('oldFile', fileName);
         const fileData = {file: file};
         const validationResult = formValidator(fileData, registerValidationSchema);
         if(!validationResult.status) {
@@ -37,9 +40,7 @@ const FileInput: React.FC<FileProps> = ({setFileName, fileName}) => {
             setChoosenImageName(result.message);
             return;
         } 
-        
         setFileName(result.fileName);
-        
     };
     return (
         <div>

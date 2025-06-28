@@ -1,6 +1,4 @@
 import { BasicBtnType } from "@/types/Button/BtnType";
-import { SubmitBtnType } from "@/types/Button/BtnType";
-import { login } from "@/lib/api/login";
 import { ApiBtnType } from "@/types/Button/BtnType";
 import { NavigateBtnType  } from "@/types/Button/BtnType";
 
@@ -13,14 +11,6 @@ export const loginBtn: BasicBtnType = {
     //divClass: '',
 };
 
-export const registerBtn: NavigateBtnType = {
-    validate: 'api',
-    type: 'submit',
-    className: '',
-    text: 'POŠALJI',
-    //divClass: '',
-    onAction: () => {}
-}
 
 export const bookBtn: NavigateBtnType  = {
     validate: 'navigacija',
@@ -31,16 +21,8 @@ export const bookBtn: NavigateBtnType  = {
     onAction: () => {}
 };
 
-export const itemBtns: NavigateBtnType[] = [
-    {
-        validate: 'navigacija',
-        type: 'button',
-        className: 'updateBtn',
-        text: 'AŽURIRAJ',
-        //divClass: '',
-        onAction: () => {}
-    },
-    {
+export const modalActionBtn: NavigateBtnType =
+{
         validate: 'navigacija',
         type: 'button',
         className: 'deleteBtn',
@@ -48,7 +30,17 @@ export const itemBtns: NavigateBtnType[] = [
         //divClass: '',
         onAction: () => {}
     }
-];
+export const updateActionBtn: NavigateBtnType = {
+        validate: 'navigacija',
+        type: 'button',
+        className: 'updateBtn',
+        text: 'AŽURIRAJ',
+        //divClass: '',
+        onAction: () => {}
+    };
+    
+ 
+
 
 export const terminsBtn: ApiBtnType = {
         validate: 'api',
@@ -61,7 +53,7 @@ export const terminsBtn: ApiBtnType = {
 export const deleteBarberBtn: ApiBtnType = {
         validate: 'api',
         type: 'button',
-        className: 'terminBtn',
+        className: 'deleteBtn',
         text: 'DA',
         action: 'DELETE',
         //divClass: '',
@@ -69,8 +61,8 @@ export const deleteBarberBtn: ApiBtnType = {
 export const updateBarberBtn: ApiBtnType = {
         validate: 'api',
         type: 'button',
-        className: 'terminBtn',
-        text: 'DA',
+        className: 'updateBtn',
+        text: 'AŽURIRAJ',
         action: 'UPDATE',
         //divClass: '',
     };

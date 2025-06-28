@@ -1,20 +1,16 @@
 "use client";
-import { useState, useEffect } from "react";
-import api from "@/lib/axios";
+import { useEffect } from "react";
 import BarberItem from "./BarberItem";
-import { BarberType } from "@/types/Barbers/BarbersType";
+import { BasicBarberType } from "@/types/Barbers/BarbersType";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
-import { uiActions } from "@/store/slices/UiSlice";
 import { barberActions } from "@/store/slices/barberSlice";
-import { useAppSelector } from "@/store/hooks/typizedHooks";
 import styles from './Barbers.module.css';
-import { RootState } from "@/store/store";
-import { useDispatch } from "react-redux";
 
-
-
-const Barbers:React.FC<{barbers:BarberType[]}> = ({barbers}) => {
+//const barbers = [{id: 1, username: "Rocky", role: "owner", file: ''}];
+const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
   const dispatch = useAppDispatch();
+  const barbers = allBarbers.filter(barberItem => barberItem.role !== 'owner');
+ 
   useEffect(() => {
     dispatch(barberActions.setBarbers(barbers));
   }, [barbers]);

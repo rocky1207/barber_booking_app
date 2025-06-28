@@ -1,5 +1,5 @@
-import { BarberItemPropsType } from "../Barbers/BarbersType";
+import { BasicBarberType } from "../Barbers/BarbersType";
 export interface HomePropsType {
-  barbers: BarberItemPropsType[];
+  barbers: BasicBarberType[];
   message?: string;
 }

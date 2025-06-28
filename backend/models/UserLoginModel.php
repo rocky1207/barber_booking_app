@@ -28,7 +28,7 @@ class UserLoginModel {
 
     public function userLogin($user) {
         
-        $query = "SELECT id, password, role FROM user WHERE username = :username";
+        $query = "SELECT * FROM user WHERE username = :username";
         
         try {
             $stmt = DatabaseModel::$pdo->prepare($query);
@@ -41,6 +41,9 @@ class UserLoginModel {
             throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
         };
         
+        //var_dump($data);
+       // var_dump($user["password"]);
+       // exit();
 
         if (!empty($data) && password_verify($user["password"], $data["password"])) {
             $payload = [
@@ -59,13 +62,26 @@ class UserLoginModel {
                 "samesite" => "Lax",
                 "path" => "/"
             ]);
-
+            return [
+                    "id" => $data["id"],
+                    "username" => $data["username"],
+                    "file" => $data["file"],
+                    "role" => $data["role"],
+            ];
+            /*
             return [
                 "success" => true,
                 "status" => 200,
-                "message" => "Uspešna prijava"
+                "message" => "Uspešna prijava",
+                "data" => [
+                    "id" => $data["id"],
+                    "username" => $data["username"],
+                    "file" => $data["file"],
+                    "role" => $data["role"],
+               ]
             ];
-        } else {
+            */
+        }/* else {
             
             return [
                 "success" => false,
@@ -73,6 +89,7 @@ class UserLoginModel {
                 "message" => "Neispravno korisničko ime ili lozinka"
             ];
         }
+            */
     }
 }
 

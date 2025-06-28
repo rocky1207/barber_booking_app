@@ -17,12 +17,9 @@ export const formValidator = (data: { [key: string]: string | File }, schema:Val
               return {status: false, message: rules.fileErrorMessage || "Fajl nije validan." };
           }
         } else if (typeof value === 'string') {
-          console.log(value);
             if (rules.pattern && !rules.pattern.test(value)) {
                 return {status: false, message: rules.errorMessage || "Neispravan unos."}; 
             }
-            
-           
         }
     }
      return {status: true, message: 'Uspešna validacija'};

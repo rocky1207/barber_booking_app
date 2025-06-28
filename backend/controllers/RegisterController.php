@@ -27,7 +27,7 @@ class RegisterController {
             "username" => AppController::USERNAME_ERROR_MESSAGE,
             "password" => AppController::PASSWORD_ERROR_MESSAGE,
             "role" => AppController::ROLE_ERROR_MESSAGE,
-            "file" => AppController::FILE_ERROR_MESSAAGE
+            "file" => AppController::FILE_NAME_ERROR_MESSAGE
         ];
 
         $validateData = AppController::validateInputs($inputs, $regex, $messages, 422);
@@ -35,8 +35,13 @@ class RegisterController {
             AppController::databaseConnect();
             try {
                 $userRegisterModel = new UserRegisterModel();
-                $userId = $userRegisterModel->userRegister($validateData);
-                if(!empty($userId)) return $userId;
+                $user = $userRegisterModel->userRegister($validateData);
+                if(!empty($user)) return [
+                    "success" => true,
+                    "status" => 200,
+                    "message" => "Uspešna registracija",
+                    "data" => $user
+            ];
                 AppController::createMessage(AppController::QUERY_ERROR_MESSAGE, 500);
             } catch(Exception $e) {
                 AppController::createMessage($e->getMessage(), $e->getCode() ?: 500);

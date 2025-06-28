@@ -3,7 +3,7 @@ import { ValidationSchemaType } from "@/types/Form/ValidationSchemaType";
 export const formValidationSchema: ValidationSchemaType = {
     username: {
         required: true,
-        pattern: /^[A-Za-z0-9]{3,20}$/,
+        pattern: /^[\p{L}0-9._]{3,20}$/u, // /^[A-Za-z0-9]{3,20}$/,
         errorMessage: 'Pogrešan username'
     },
     password: {
@@ -16,7 +16,7 @@ export const formValidationSchema: ValidationSchemaType = {
 export const registerValidationSchema: ValidationSchemaType = {
     username: {
         required: true,
-        pattern: /^[A-Za-z0-9]{3,20}$/,
+        pattern: /^[\p{L}0-9._]{3,20}$/u, // /^[A-Za-z0-9]{3,20}$/,
         errorMessage: 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.'
     },
     password: {
@@ -30,7 +30,7 @@ export const registerValidationSchema: ValidationSchemaType = {
     },*/
     role: {
         required: true,
-        pattern: /^(admin|user)$/,
+        pattern: /^(admin|user|student)$/,
         errorMessage: 'Unesite "admin" ili "user".'
     },
     file: {

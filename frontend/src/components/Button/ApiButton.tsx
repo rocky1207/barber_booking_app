@@ -5,24 +5,26 @@ import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 
 
 const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
-    const {className, text, type, validate, action, onAction, ...buttonProps} = btnData;
+    console.log(btnData);
+    const {className, text, type, validate, action, onAction, id, ...buttonProps} = btnData;
     const dispatch = useAppDispatch();
     const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        if(!onAction || !btnData.id) return;
+        if (!onAction || !btnData.id || !action) return;
         let url: string = '';
         if(action === 'GET_TERMINS') url = apiRoutes.GET_CLIENTS;
         if(action === 'UPDATE') url = apiRoutes.UPDATE_USER;
         if(action === 'DELETE') url = apiRoutes.DELETE_USER;
-       
+        
         const {actionDone} = await onAction(url, btnData.id);
-        console.log(actionDone);
-        actionDone && barberActionDispatcher(btnData.id, dispatch);
+
+        const data = {id: btnData.id};
+        actionDone && barberActionDispatcher(data, actionDone.toUpperCase(), dispatch);
         dialogRef?.current?.close();
     }
     return (
         <div>
-            <button type={type} onClick={clickHandler} className={className} {...buttonProps}>{text}</button>
+            <button id={id?.toString()} type={type} onClick={clickHandler} className={className} {...buttonProps}>{text}</button>
         </div>
     );
 };

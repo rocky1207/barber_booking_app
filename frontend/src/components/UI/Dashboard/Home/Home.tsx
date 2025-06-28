@@ -14,21 +14,8 @@ import { deleteBarberBtn } from '@/datas/ButttonObjects';
 import { manageBarber } from "@/lib/api/manageBarber";
 
 
-interface BarberType {
-  
-file: string;
-id: number;
-password: string;
-role: string;
-username: string;
-index?: number;
-}
-
-
-//const barbers = [{id: '1', name: 'Đole'}, {id: '2', name: 'Antoaneta'},{id: '3', name: 'Miša'},{id: '4', name: 'Mali Đole'}];
 const Home: React.FC = () => {
   const [errMsg, setErrMsg] = useState<string>('');
-  //const [barbers, setBarbers] = useState<BarberType[]>([]);
   const dialog = useRef<HTMLDialogElement | null>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -66,9 +53,7 @@ const Home: React.FC = () => {
   
     return (
       <>
-      
       <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}  />
-      
       <section>
       <h1>MENADŽERSKA TABLA</h1>
       {!errMsg ? <nav aria-label="Manage barber navigation">
@@ -78,7 +63,7 @@ const Home: React.FC = () => {
             //const barber: BarberType = {barberItem, index: index};
             return (
               <BarberItem  key={barber.id} {...barber} index={index}>
-                <BarberButtons ref={dialog} barberId={barber.id?.toString()} />
+                <BarberButtons ref={dialog} barberId={barber.id} />
               </BarberItem>
             )
           })}
