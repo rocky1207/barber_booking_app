@@ -5,8 +5,9 @@ require_once (__DIR__ . "/GetUserModel.php");
 class DeleteUserModel {
     public function deleteUser($id) {
         $query = "DELETE FROM user WHERE id = :id";
-        DatabaseModel::$pdo->beginTransaction();
+        
         try {
+            DatabaseModel::$pdo->beginTransaction();
             $getUserModel = new GetUserModel();
             $user = $getUserModel->getUserById($id);
 

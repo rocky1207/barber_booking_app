@@ -40,3 +40,20 @@ export const registerValidationSchema: ValidationSchemaType = {
         errorMessage: 'Naziv slike mora imati .jpg, .jpeg, .png ili .webp ekstenziju.'
     }
 };
+export const changePasswordValidationSchema: ValidationSchemaType = {
+    oldPassword: {
+        required: true,
+        pattern: /^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{8,}$/u,
+        errorMessage: 'Trenutno važeća lozinka nije ispravna.'
+    },
+    newPassword: {
+        required: true,
+        pattern: /^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{8,}$/u,
+        errorMessage: 'Lozinka počinje velikim slovom, obavezan je najmanje 1 broj, dozvoljava slova i znak "!", mora imati minimalnu dužinu od 8 karaktera.'
+    },
+    confirmPassword: {
+        required: true,
+        pattern: /^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{8,}$/u,
+        errorMessage: 'Lozinka počinje velikim slovom, obavezan je najmanje 1 broj, dozvoljava slova i znak "!", mora imati minimalnu dužinu od 8 karaktera.'
+    }
+};

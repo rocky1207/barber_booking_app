@@ -69,19 +69,26 @@ button {
 
 .terminBtn,
 .updateBtn,
-.deleteBtn {
+.deleteBtn,
+.navigateBtn,
+.changePasswordBtn {
   background: none;
   border-bottom: 1px solid white;
-  color: white;
   text-align: center;
   padding: 3px 6px;
 }
-
+.terminBtn {
+  color: white;
+}
 .updateBtn {
   color: green;
 }
 .deleteBtn {
   color: red;
+}
+.changePasswordBtn {
+  color: red;
+  text-align: left;
 }
 .loading {
       position: fixed;

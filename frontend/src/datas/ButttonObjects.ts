@@ -39,8 +39,22 @@ export const updateActionBtn: NavigateBtnType = {
         onAction: () => {}
     };
     
- 
-
+export const dashboardBtn: NavigateBtnType = {
+        validate: 'navigacija',
+        type: 'button',
+        className: 'terminBtn',
+        text: 'copyright@rocky2025',
+        //divClass: '',
+        onAction: () => {}
+    };
+export const changePasswordBtn: NavigateBtnType = {
+        validate: 'navigacija',
+        type: 'button',
+        className: 'changePasswordBtn',
+        text: 'Promeni lozinku',
+        //divClass: '',
+        onAction: () => {}
+    };
 
 export const terminsBtn: ApiBtnType = {
         validate: 'api',

@@ -21,6 +21,17 @@ export const formValidator = (data: { [key: string]: string | File }, schema:Val
                 return {status: false, message: rules.errorMessage || "Neispravan unos."}; 
             }
         }
+        if (
+          typeof data["newPassword"] === "string" &&
+          typeof data["confirmPassword"] === "string"
+        ) {
+          if (data["newPassword"] !== data["confirmPassword"]) {
+            return {
+              status: false,
+              message: "Unos nove lozinke mora biti identičan u oba polja!",
+            };
+          }
+        }
     }
      return {status: true, message: 'Uspešna validacija'};
 }
