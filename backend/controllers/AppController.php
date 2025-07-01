@@ -51,6 +51,9 @@ class AppController {
         }
     }
     public static function createMessage($message, $code=200) {
+        if (!is_int($code) || $code < 100 || $code > 599) {
+            $code = 500;
+        }
         http_response_code($code);
         header('Content-Type: application/json');
         echo json_encode([
@@ -70,9 +73,20 @@ class AppController {
             }
             
             !preg_match($regex[$key], ${$key}) && self::createMessage($messages[$key], $code);
-            $data[$key] = ${$key};
+            if($key === 'id') {
+                $data[$key] = (int)${$key};
+            } else {
+                $data[$key] = ${$key};
+            }
+            
         }
         return $data;
+    }
+    public static function comparePasswords($password, $confirmedPassword) {
+        if($password !== $confirmedPassword) {
+            self::createMessage('Novouneta lozinka mora biti identična u oba polja!');
+        } 
+        return true;
     }
     public static function verifyRequestMethod($expectedMethod) {
        $method = strtoupper($expectedMethod);

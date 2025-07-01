@@ -42,8 +42,8 @@ class GetUserController {
                         "message" => "Korisnik uspešno dobavljen.",
                         "data" => $user
                     ];
-            } catch (PDOException $e) {
-                throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
+            } catch (Exception $e) {
+                AppController::createMessage($e->getMessage(), $e->getCode());
             }
         }
     }
