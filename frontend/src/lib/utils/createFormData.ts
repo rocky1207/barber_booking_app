@@ -2,6 +2,7 @@ export const createFormData = (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget;
     const data: Record<string, string> = {};
     const elements = Array.from(form.elements);
+    console.log(elements);
     elements.forEach((element) => {
         if(!(element instanceof HTMLInputElement)) return;
         const name = element.name;

@@ -30,11 +30,13 @@ class UserRegisterModel {
                 DatabaseModel::$pdo->commit(); 
                 return $user;
             }
-            DatabaseModel::$pdo->commit();
+           // DatabaseModel::$pdo->commit();
            // return ["lastInsertId" => $lastId];
-        } catch(PDOException $e) {
-            DatabaseModel::$pdo->rollBack();
-            throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
+        } catch(Exception $e) {
+            if (DatabaseModel::$pdo->inTransaction()) {
+                DatabaseModel::$pdo->rollBack();
+            }
+            throw $e;
         }
         
     }

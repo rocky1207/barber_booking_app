@@ -1,14 +1,12 @@
 "use client";
 import {useState, useEffect, useRef } from "react";
-import api from "@/lib/axios";
-import { useRouter } from 'next/navigation';
+import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
+import { RootState } from "@/store/store";
 import UserNavigation from "../UserNavigation/UserNavigation";
 import BarberItem from "@/components/UI/Barbers/BarberItem";
 import BarberButtons from "@/components/UI/Barbers/BarberButtons";
-import { uiActions } from "@/store/slices/UiSlice";
-import { useAppDispatch } from "@/store/hooks/typizedHooks";
-import { useAppSelector } from "@/store/hooks/typizedHooks";
-import { RootState } from "@/store/store";
+import { isLoadingState } from "@/lib/utils/setIsLoadingState";
+
 import ConfirmModal from "../../ConfirmModal/ConfirmModal";
 import { deleteBarberBtn } from '@/datas/ButttonObjects';
 import { manageBarber } from "@/lib/api/manageBarber";
@@ -17,10 +15,13 @@ import { manageBarber } from "@/lib/api/manageBarber";
 const Home: React.FC = () => {
   const [errMsg, setErrMsg] = useState<string>('');
   const dialog = useRef<HTMLDialogElement | null>(null);
-  const router = useRouter();
-  const dispatch = useAppDispatch();
   const {barbers, currentBarberId} = useAppSelector((state: RootState) => state?.barber);
+  const dispatch = useAppDispatch();
   console.log(currentBarberId);
+  useEffect(() => {
+    console.log('ušlo');
+    isLoadingState(false, dispatch);
+  }, []);
   /*
   useEffect(() => {
     

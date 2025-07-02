@@ -30,10 +30,10 @@ class UpdateUserController {
                 $updateUserModel = new UpdateUserModel();
                 $user = $updateUserModel->updateUser($validateInputs);
                 return [
-                "success" => true,
-                "status" => 200,
-                "message" => "Uspešno ažuriranje korisnika.",
-                "data" => $user
+                    "success" => true,
+                    "status" => 200,
+                    "message" => "Uspešno ažuriranje korisnika.",
+                    "data" => $user
             ];
             } catch(Exception $e) {
                 AppController::createMessage($e->getMessage(), $e->getCode());

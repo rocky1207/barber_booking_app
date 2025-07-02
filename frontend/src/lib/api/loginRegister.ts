@@ -7,10 +7,8 @@ export const loginRegister = async (url: string, data: Record<string, string>, a
   let answer;  
   try {
         const response = await apiRequest;
-        console.log(response);
         answer = {success: true, data: response?.data};
       } catch(error: any) {
-        console.log(error);
         answer = {success: false, message: error.message};
     }
     return answer;

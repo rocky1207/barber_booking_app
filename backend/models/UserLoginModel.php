@@ -36,9 +36,9 @@ class UserLoginModel {
             "username" => $user["username"],
         ]);
         $data = $stmt->fetch();
-        
-        } catch(PDOException $e) {
-            throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
+        if(empty($data)) throw new Exception(AppController::NO_RESULT_MESSAGE, 404);
+        } catch(Exception $e) {
+            throw $e;
         };
         
         //var_dump($data);
@@ -81,15 +81,17 @@ class UserLoginModel {
                ]
             ];
             */
-        }/* else {
-            
+        } else {
+            throw new Exception("Neispravno korisničko ime ili lozinka", 422);
+            /*
             return [
                 "success" => false,
                 "status" => 422,
                 "message" => "Neispravno korisničko ime ili lozinka"
             ];
-        }
             */
+        }
+            
     }
 }
 
