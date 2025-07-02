@@ -14,23 +14,27 @@ const ChangePasswordForm: React.FC = () => {
     const [message, setMessage] = useState<string>('');
     const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(e.currentTarget.elements);
         const form = e.currentTarget as HTMLFormElement;
         const formData = createFormData(e);
+    
         const validateInputs = formValidator(formData, changePasswordValidationSchema);
         if(!validateInputs.status) {
             setMessage(validateInputs.message);
             return;
         }
+        
         const data = {
             oldPassword: formData.oldPassword,
             newPassword: formData.newPassword,
             confirmPassword: formData.confirmPassword,
             id: id
         }
-        console.log(data);
-        const respone = await changePassword(data); 
-        setMessage('');
+        
+        const response = await changePassword(data); 
+        console.log(response);
+        if(response) {
+            setMessage(response.message);
+        }
         form.reset();
     }
     return (

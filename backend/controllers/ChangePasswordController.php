@@ -4,8 +4,7 @@ require_once (__DIR__ . "/GetUserController.php");
 require_once (__DIR__ . "/../models/ChangePasswordModel.php");
 class ChangePasswordController {
     public function changePassword($data) {
-        
-         $inputs = [
+        $inputs = [
             "id" => $data["id"],
             "oldPassword" => $data["oldPassword"],
             "newPassword" => $data["newPassword"],
@@ -29,13 +28,16 @@ class ChangePasswordController {
            $changePasswordModel = new ChangePasswordModel();
            try {
             AppController::databaseConnect();
-            $isChanged = $changePasswordModel->changePassword($validateInputs);
+            $changePasswordModel->changePassword($validateInputs);
             return [
-                "success" => $isChanged,
+                "success" => true,
                 "status" => 200,
-                "message" => 'Promena lozinke je uspešno izvršena.'
+                "data" => [
+                    "message" => 'Promena lozinke je uspešno izvršena.'
+                ]
             ];
            } catch(Exception $e) {
+            var_dump($e->getMessage());
             AppController::createMessage($e->getMessage(), $e->getCode());
            }
            

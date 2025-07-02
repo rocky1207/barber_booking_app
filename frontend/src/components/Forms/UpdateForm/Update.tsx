@@ -18,11 +18,11 @@ import extraStyles from './Update.module.css';
 
 
 const Update: React.FC = () => {
-    const {barbers} = useAppSelector((state: RootState) => state?.barber);
+    const barberState = useAppSelector((state: RootState) => state?.barber);
     const params = useSearchParams();
     const userId = params.get('id');
     const paramId = userId !== null ? parseInt(userId, 10) : undefined;
-    const barber = barbers.find(barberItem => paramId === barberItem.id);
+    const barber = barberState?.barbers.find(barberItem => paramId === barberItem.id);
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
     const [fileName, setFileName] = useState<string>(barber?.file ?? '');
 
@@ -32,7 +32,8 @@ const Update: React.FC = () => {
         {type: 'text', name: 'username', defaultValue: barber?.username, placeholder: "Korisničko ime"},
         {type: 'text', name: 'role', defaultValue: barber?.role, placeholder: "Uloga"},
     ];
-    console.log(updateInputs);
+    console.log(barberState?.loggedBarber);
+    console.log(paramId);
         
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,6 +47,7 @@ const Update: React.FC = () => {
            id: userId!,
            file: fileName
         }
+        console.log(data);
         const result = await loginRegister('user/updateUser.php', data, 'PATCH');
         if(!result.success) {
             setErrorMessage(result.message);
@@ -73,7 +75,7 @@ const Update: React.FC = () => {
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
         <div className={extraStyles.changePasswordDiv}>
-            <NavigateButton {...newChangePasswordBtn} />
+            {barberState?.loggedBarber?.id === paramId &&<NavigateButton {...newChangePasswordBtn} />}
         </div>
         </>
     );

@@ -7,9 +7,10 @@ class GetUserModel {
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute();
             $users = $stmt->fetchAll();
+            if(empty($users)) throw new Exception(AppController::NO_RESULT_MESSAGE, 404);
             return $users;
-        } catch (PDOException $e) {
-            throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
+        } catch (Exception $e) {
+            throw $e;
         }
     }
     public function getUserById($id) {
@@ -18,9 +19,10 @@ class GetUserModel {
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute(["id" => $id]);
             $user = $stmt->fetch();
+            if(empty($user)) throw new Exception(AppController::NO_RESULT_MESSAGE, 404);
             return $user;
-        } catch (PDOException $e) {
-            throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
+        } catch (Exception $e) {
+            throw $e;
         }
     }
 };

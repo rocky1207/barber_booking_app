@@ -36,12 +36,12 @@ class RegisterController {
             try {
                 $userRegisterModel = new UserRegisterModel();
                 $user = $userRegisterModel->userRegister($validateData);
-                if(!empty($user)) return [
+                return [
                     "success" => true,
                     "status" => 200,
                     "message" => "Uspešna registracija",
                     "data" => $user
-            ];
+                ];
                 AppController::createMessage(AppController::QUERY_ERROR_MESSAGE, 500);
             } catch(Exception $e) {
                 AppController::createMessage($e->getMessage(), $e->getCode() ?: 500);

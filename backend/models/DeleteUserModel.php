@@ -18,8 +18,6 @@ class DeleteUserModel {
                     DatabaseModel::$pdo->rollBack();
                     throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
                 }
-
-            
                 if($user["file"]) {
                     AppController::deleteUserImage($user["file"]);
                 }
@@ -34,9 +32,9 @@ class DeleteUserModel {
                 "message" => "Korisnik sa ID {$id} je obrisan."
             ];*/
             return $result;
-        } catch(PDOException $e) {
-            DatabaseModel::$pdo->rollBack();
-            throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
+        } catch(Exception $e) {
+            if(DatabaseModel::$pdo->inTransaction()) DatabaseModel::$pdo->rollBack();
+            throw $e;
         }
     }
 }
