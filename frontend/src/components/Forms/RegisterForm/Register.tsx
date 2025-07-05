@@ -39,7 +39,6 @@ const Register:React.FC = () => {
         console.log(`hello top`);
     }
     
-   
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
@@ -70,7 +69,7 @@ const Register:React.FC = () => {
 return (
         <>
         <form className={styles.form} onSubmit={handleSubmit}>
-            <Input inputs={registerInputs} schema={registerValidationSchema}/>
+            <Input inputs={registerInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
              <p>{errorMessage}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>

@@ -15,11 +15,12 @@ import { manageBarber } from "@/lib/api/manageBarber";
 const Home: React.FC = () => {
   const [errMsg, setErrMsg] = useState<string>('');
   const dialog = useRef<HTMLDialogElement | null>(null);
-  const {barbers, currentBarberId} = useAppSelector((state: RootState) => state?.barber);
+  const {barbers, currentBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
+  console.log(barbers);
+  console.log(loggedBarber);
   const dispatch = useAppDispatch();
   console.log(currentBarberId);
   useEffect(() => {
-    console.log('ušlo');
     isLoadingState(false, dispatch);
   }, []);
   /*

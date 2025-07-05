@@ -20,11 +20,11 @@
   max-width: 450px;
   gap: 20px;
 }
-.itemButtonsDiv {
+.itemButtonsNav {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
-  
+  margin-bottom: 20px;
 }
 @keyframes slideInLeft {
   

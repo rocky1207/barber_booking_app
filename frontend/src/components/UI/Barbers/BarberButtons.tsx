@@ -1,4 +1,4 @@
-import { terminsBtn, modalActionBtn, updateActionBtn, updateBarberBtn } from "@/datas/ButttonObjects";
+import { terminsBtn, modalActionBtn, updateActionBtn, servicesActionBtn } from "@/datas/ButttonObjects";
 import ApiButton from "@/components/Button/ApiButton";
 import NavigateButton from "@/components/Button/NavigateButton";
 import { manageBarber } from "@/lib/api/manageBarber";
@@ -20,10 +20,12 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number}>(({barber
         if(ref && typeof ref !== "function" && ref.current) ref.current.showModal();
     }
     const updatePage = () => {router.push(`/login/dashboard/update?id=${barberId}`)};
+    const appointmentsPage = () => {router.push(`/login/dashboard/appointments?id=${barberId}`)};
+    const servicesPage = () => {router.push(`/login/dashboard/service?id=${barberId}`)};
     const newTerminsBtn = {
         ...terminsBtn,
         id: barberId,
-        onAction: manageBarber
+        onAction: appointmentsPage
     }
     const newUpdateActionBtn = {
         ...updateActionBtn,
@@ -35,6 +37,11 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number}>(({barber
         id: barberId,
         onAction: openModal
     }
+    const newServicesActionBtn = {
+        ...servicesActionBtn,
+        id: barberId,
+        onAction: servicesPage
+    }
     let showButton: boolean;
     if(loggedBarber.role === 'owner' || loggedBarber.role === 'admin') {
         showButton = true;
@@ -45,11 +52,14 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number}>(({barber
     }
      
     return (
-        <div className={styles.itemButtonsDiv}>
-            <ApiButton {...newTerminsBtn}/>
+        <>
+        <nav className={styles.itemButtonsNav}>
+            <NavigateButton {...newTerminsBtn}/>
             {showButton && <NavigateButton {...newUpdateActionBtn}/>}
-            {showButton && <NavigateButton {...newModalActionBtn}/>}       
-        </div>
+            {showButton && <NavigateButton {...newServicesActionBtn}/>} 
+        </nav>
+        {showButton && <NavigateButton {...newModalActionBtn}/>} 
+        </>
     );
 });
 export default BarberButtons;

@@ -21,8 +21,7 @@ export const bookBtn: NavigateBtnType  = {
     onAction: () => {}
 };
 
-export const modalActionBtn: NavigateBtnType =
-{
+export const modalActionBtn: NavigateBtnType = {
         validate: 'navigacija',
         type: 'button',
         className: 'deleteBtn',
@@ -38,6 +37,14 @@ export const updateActionBtn: NavigateBtnType = {
         //divClass: '',
         onAction: () => {}
     };
+export const servicesActionBtn: NavigateBtnType = {
+        validate: 'navigacija',
+        type: 'button',
+        className: 'servicesBtn',
+        text: 'USLUGE',
+        //divClass: '',
+        onAction: () => {}
+    }
     
 export const dashboardBtn: NavigateBtnType = {
         validate: 'navigacija',
@@ -56,13 +63,14 @@ export const changePasswordBtn: NavigateBtnType = {
         onAction: () => {}
     };
 
-export const terminsBtn: ApiBtnType = {
-        validate: 'api',
+export const terminsBtn: NavigateBtnType = {
+        validate: 'navigacija',
         type: 'button',
         className: 'terminBtn',
         text: 'TERMINI',
-        action: 'GET_TERMINS',
+       // action: 'GET_TERMINS',
         //divClass: '',
+        onAction: () => {}
     };
 export const deleteBarberBtn: ApiBtnType = {
         validate: 'api',
@@ -78,5 +86,13 @@ export const updateBarberBtn: ApiBtnType = {
         className: 'updateBtn',
         text: 'AŽURIRAJ',
         action: 'UPDATE',
+        //divClass: '',
+    };
+export const barberServiceBtn: ApiBtnType = {
+        validate: 'api',
+        type: 'submit',
+        className: 'updateBtn',
+        text: 'POŠALJI',
+        action: 'INSERT_SERVICE',
         //divClass: '',
     };
