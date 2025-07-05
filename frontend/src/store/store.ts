@@ -1,14 +1,27 @@
-import { configureStore } from "@reduxjs/toolkit";
-import uiReducer from "./slices/UiSlice";
-import barberReducer from "./slices/barberSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { reducers } from './reducers/persistedReducers';
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
 const store = configureStore({
-    reducer: {
-        ui: uiReducer,
-        barber: barberReducer
-    }
+  reducer: reducers,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
+export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export default store;
+

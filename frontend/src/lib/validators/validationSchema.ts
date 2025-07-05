@@ -57,3 +57,21 @@ export const changePasswordValidationSchema: ValidationSchemaType = {
         errorMessage: 'Lozinka počinje velikim slovom, obavezan je najmanje 1 broj, dozvoljava slova i znak "!", mora imati minimalnu dužinu od 8 karaktera.'
     }
 };
+
+export const serviceValidationSchema: ValidationSchemaType = {
+    service: {
+        required: true,
+        pattern: /^[\p{L}0-9 .,!?()\-:;'"\/\\@+%&]{1,255}$/u, // /^[A-Za-z0-9]{3,20}$/,
+        errorMessage: 'U polje "Usluga" uneli ste nedozvoljene karaktere, poput <, > i slično.'
+    },
+    price: {
+        required: true,
+        pattern: /^[0-9]{1,6}$/,
+        errorMessage: 'U polje "Cena" dozvoljeno je uneti samo cele brojeve.'
+    },
+    description: {
+        required: true,
+        pattern: /^[\p{L}0-9.,!?'"@+%&()\/\\\- \n]{3,1000}$/u,
+        errorMessage: 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.'
+    }
+};

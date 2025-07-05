@@ -71,7 +71,8 @@ button {
 .updateBtn,
 .deleteBtn,
 .navigateBtn,
-.changePasswordBtn {
+.changePasswordBtn,
+.servicesBtn {
   background: none;
   border-bottom: 1px solid white;
   text-align: center;
@@ -79,6 +80,9 @@ button {
 }
 .terminBtn {
   color: white;
+}
+.servicesBtn {
+  color: var(--logoColor);
 }
 .updateBtn {
   color: green;

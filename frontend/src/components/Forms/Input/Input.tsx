@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { LoginInputType } from "@/types/Form/LoginInputType";
-import { ValidationSchemaType } from "@/types/Form/ValidationSchemaType";
 
-
-const Input:React.FC<{inputs:LoginInputType[]; schema: ValidationSchemaType}> = ({inputs, schema}) => {
+const Input:React.FC<{inputs:LoginInputType[]}> = ({inputs}) => {
     // Dinamičko kreiranje početnog stanja
     /*
   const initialState = inputs.reduce((acc, input) => {

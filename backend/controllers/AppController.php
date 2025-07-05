@@ -6,6 +6,9 @@ class AppController {
     public const ROLE_REGEX = "/^(admin|user|student)$/";
     public const FILE_REGEX = "/^$|^.+\.(jpg|jpeg|png|webp)$/i";
     public const INT_REGEX = "/^[1-9][0-9]*$/";
+    public const SERVICE_REGEX = '/^[\p{L}0-9 .,!?()\-:;\'"\/\\\\@+%&]{3,255}$/u';
+    public const PRICE_REGEX = "/^[0-9]{1,6}$/";
+    public const DESCRIPTION_REGEX = "/^[\p{L}0-9.,!?\"'@+%&()-:;\/\\\\\- \n]{3,1000}$/u";
 
     public const INT_ERROR_MESSAGE = 'Prosleđeni parametar mora biti broj.';
     public const USERNAME_ERROR_MESSAGE = 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.';

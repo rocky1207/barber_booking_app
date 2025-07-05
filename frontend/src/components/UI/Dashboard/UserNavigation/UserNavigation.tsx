@@ -15,12 +15,13 @@ const UserNavigation: React.FC = () => {
         }
         router.push('/');
     };
+    let showLink = false;
+    if(loggedBarber.role === 'admin' ||  loggedBarber.role === 'owner') showLink = true;
     return (
     <ul className={styles.userNavigation}>
       <li><button onClick={logOutHandler}>LOG OUT</button></li>
-      {loggedBarber.role !== 'student' && <li><Link href="/login/dashboard/register">NOVI KORISNIK</Link></li>}
+      {showLink && <li><Link href="/login/dashboard/register">NOVI KORISNIK</Link></li>}
     </ul>
-    
     );
 };
 export default UserNavigation;
