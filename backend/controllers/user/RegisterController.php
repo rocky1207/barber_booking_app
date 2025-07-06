@@ -1,6 +1,6 @@
 <?php
-require_once (__DIR__ . "/AppController.php");
-require_once (__DIR__ . "/../models/UserRegisterModel.php");
+require_once (__DIR__ . "/../AppController.php");
+require_once (__DIR__ . "/../../models/user/UserRegisterModel.php");
 class RegisterController {
     public function register($data) {
         /*

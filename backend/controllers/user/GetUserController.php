@@ -1,6 +1,6 @@
 <?php
-require_once (__DIR__ . "/../models/GetUserModel.php");
-require_once (__DIR__ . "/../models/DatabaseModel.php");
+require_once (__DIR__ . "/../../models/user/GetUserModel.php");
+require_once (__DIR__ . "/../../models/DatabaseModel.php");
 class GetUserController {
     private $getUserModel;
     public function __construct() {

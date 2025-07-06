@@ -1,7 +1,7 @@
 <?php
-require_once (__DIR__ . "/AppController.php");
+require_once (__DIR__ . "/../AppController.php");
 require_once (__DIR__ . "/GetUserController.php");
-require_once (__DIR__ . "/../models/ChangePasswordModel.php");
+require_once (__DIR__ . "/../../models/user/ChangePasswordModel.php");
 class ChangePasswordController {
     public function changePassword($data) {
         $inputs = [

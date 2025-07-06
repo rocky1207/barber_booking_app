@@ -1,6 +1,6 @@
 <?php
-require_once (__DIR__ . "/AppController.php");
-require_once (__DIR__ . "/../models/UpdateUserModel.php");
+require_once (__DIR__ . "/../AppController.php");
+require_once (__DIR__ . "/../../models/user/UpdateUserModel.php");
 class UpdateUserController {
     
     public function updateUser($data) {
