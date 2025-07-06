@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/store/store";
 import { LoginInputType } from "@/types/Form/LoginInputType";
-import { loginRegister } from "@/lib/api/loginRegister";
+import { loginRegister } from "@/lib/api/user/loginRegister";
 import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import NavigateButton from "@/components/Button/NavigateButton";
 import { changePasswordBtn } from "@/datas/ButttonObjects";
@@ -63,7 +63,6 @@ const Update: React.FC = () => {
            id: userId!,
            file: fileName
         }
-        console.log(data);
         const validateInputs = formValidator(data, registerValidationSchema);
         if(!validateInputs.status) {
             setErrorMessage(validateInputs.message);
@@ -74,10 +73,8 @@ const Update: React.FC = () => {
             setErrorMessage(result.message);
             return;
         }
-        setErrorMessage(result?.data?.message);
-        console.log(result);
+        setErrorMessage(result?.data?.message)
         const user = result?.data?.data;
-        console.log(user);
         user && barberActionDispatcher(user, 'UPDATE', dispatch);
     };
     

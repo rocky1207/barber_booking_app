@@ -1,4 +1,4 @@
-import api from "../axios";
+import api from "../../axios";
 type UploadImageResponse =
   | { success: true; fileName: string }
   | { success: false; message: string }

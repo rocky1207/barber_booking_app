@@ -1,7 +1,7 @@
 import { terminsBtn, modalActionBtn, updateActionBtn, servicesActionBtn } from "@/datas/ButttonObjects";
 import ApiButton from "@/components/Button/ApiButton";
 import NavigateButton from "@/components/Button/NavigateButton";
-import { manageBarber } from "@/lib/api/manageBarber";
+import { manageBarber } from "@/lib/api/user/manageBarber";
 import { forwardRef } from "react";
 import { barberActions } from "@/store/slices/barberSlice";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";

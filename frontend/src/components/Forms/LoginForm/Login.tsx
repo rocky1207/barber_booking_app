@@ -6,7 +6,7 @@ import { loginInputs } from "@/datas/Form/lnputObjects";
 import { formValidationSchema } from "@/lib/validators/validationSchema";
 import { formValidator } from "@/lib/validators/formValidator";
 import { createFormData } from "@/lib/utils/createFormData";
-import { loginRegister } from "@/lib/api/loginRegister";
+import { loginRegister } from "@/lib/api/user/loginRegister";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { barberActions } from "@/store/slices/barberSlice";
 import { isLoadingState } from "@/lib/utils/setIsLoadingState";

@@ -8,7 +8,7 @@ import { formValidator } from "@/lib/validators/formValidator";
 import { registerValidationSchema } from "@/lib/validators/validationSchema";
 import FileInput from "../FileInput/FileInput";
 import { createFormData } from "@/lib/utils/createFormData";
-import { loginRegister } from "@/lib/api/loginRegister";
+import { loginRegister } from "@/lib/api/user/loginRegister";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { useSearchParams } from "next/navigation";

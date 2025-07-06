@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
-import { logOut } from "@/lib/api/logOut";
+import { logOut } from "@/lib/api/user/logOut";
 import styles from './UserNavigation.module.css';
 const UserNavigation: React.FC = () => {
     const router = useRouter();

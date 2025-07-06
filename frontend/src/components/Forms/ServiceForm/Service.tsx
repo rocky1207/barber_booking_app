@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Input from "../Input/Input";
 import { serviceInputs } from "@/datas/Form/lnputObjects";
 import { serviceValidationSchema } from "@/lib/validators/validationSchema";
@@ -5,8 +6,9 @@ import { barberServiceBtn } from "@/datas/ButttonObjects";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { useSearchParams } from "next/navigation";
+import { addService } from "@/lib/api/service/addService";
 import styles from '../Form.module.css';
-import { useState } from "react";
+
 
 
 
@@ -26,19 +28,18 @@ const Service: React.FC = () => {
         return;
     }
     const data = {
-        ...formData,
-        id: id
+        service: formData.service,
+        description: formData.description,
+        price: parseInt(formData.price, 10),
+        userId: id!
     }
     console.log(data);
+    addService('service/addService.php', data)
+    
 }
 
 console.log(message);
-const newBarberServiceBtn = {
-    ...barberServiceBtn,
-    id: 5,
-    head: 'bla',
-    onAction: handleSubmit
-}
+
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />

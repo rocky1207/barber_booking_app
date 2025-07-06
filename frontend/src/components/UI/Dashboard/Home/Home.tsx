@@ -9,7 +9,7 @@ import { isLoadingState } from "@/lib/utils/setIsLoadingState";
 
 import ConfirmModal from "../../ConfirmModal/ConfirmModal";
 import { deleteBarberBtn } from '@/datas/ButttonObjects';
-import { manageBarber } from "@/lib/api/manageBarber";
+import { manageBarber } from "@/lib/api/user/manageBarber";
 
 
 const Home: React.FC = () => {

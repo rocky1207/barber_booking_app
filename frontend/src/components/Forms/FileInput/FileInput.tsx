@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { uploadImage } from "@/lib/api/uploadImage";
+import { uploadImage } from "@/lib/api/user/uploadImage";
 import { formValidator } from "@/lib/validators/formValidator";
 import { registerValidationSchema } from "@/lib/validators/validationSchema";
 import styles from "../Form.module.css";

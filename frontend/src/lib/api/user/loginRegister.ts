@@ -1,4 +1,4 @@
-import api from "../axios";
+import api from "../../axios";
 import { ManageBarberReturnType } from "@/types/Api/ReturnType";
 export const loginRegister = async (url: string, data: Record<string, string>, apiAction: 'POST' | 'PATCH'): Promise<ManageBarberReturnType> => {
   let apiRequest;

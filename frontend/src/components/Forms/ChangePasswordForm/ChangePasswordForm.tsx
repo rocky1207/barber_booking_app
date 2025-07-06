@@ -4,7 +4,7 @@ import { changePasswordInputs } from "@/datas/Form/lnputObjects";
 import { changePasswordValidationSchema } from "@/lib/validators/validationSchema";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
-import { changePassword } from "@/lib/api/changePassword";
+import { changePassword } from "@/lib/api/user/changePassword";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import styles from "../Form.module.css";
