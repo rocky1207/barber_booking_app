@@ -18,13 +18,16 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, inde
         onAction: handleClick
     }
     const showButton = pathName === '/' ? true : false;
-    const showItem = role !== 'owner' ? false : true;
+    //const showItem = role !== 'owner' ? false : true;
+    const defaultAvatar = "/images/avatar.png"; ;
+    const src = file && file.trim() !== '' ? `${imageUrl}${file}` : defaultAvatar;
+    
     return (
         <li key={id} className={styles.barberItem}
         style={{ animationDelay: `${index * 0.2}s` }} /*dinamičko kašnjenje*/>
             <div className={styles.customerVew}>
                 <div className='profileImageDiv'>
-                    <img src={file?.trim() ? `${imageUrl}${file}` : '/images/avatar.png'} alt="Barber image" />
+                    <img src={src} alt="Barber image" />
                 </div>
                 <div className={styles.barberInfoDiv}>
                     <p>{username}</p>

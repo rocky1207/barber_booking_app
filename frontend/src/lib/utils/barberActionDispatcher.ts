@@ -21,11 +21,30 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
         }
     }
     if(actionDone === 'UPDATE') {
-        if('username' in data && 'file' in data && 'role' in data) {
+        if('username' in data && 'file' in data) {
+            const updatedbarbers = barbers.map((barber) => {
+                 if (barber.id === data.id) {
+                return {
+                    ...barber,
+                    username: data.username,
+                    file: data.file,
+                    ...(data.role && {role: data.role})
+                };
+            }
+            return barber;
+            });
+            dispatch(barberActions.setBarbers(updatedbarbers));
+            /*
             const removedItemBarbers = barbers.filter(barberItem => barberItem.id !== data.id);
             const newBarbersState = [...removedItemBarbers, data];
             dispatch(barberActions.setBarbers(newBarbersState));
-            if(loggedBarber.id === data.id) dispatch(barberActions.setLoggedBarber(data));
+            */
+            if(loggedBarber.id === data.id) dispatch(barberActions.setLoggedBarber({
+                ...loggedBarber,
+                username: data.username,
+                file: data.file,
+                ...(data.role && {role: data.role})
+            }));
             
         }
     }

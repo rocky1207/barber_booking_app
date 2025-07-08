@@ -1,6 +1,6 @@
 <?php
-require_once (__DIR__ . "/../controllers/AppController.php");
-require_once (__DIR__ . "/DatabaseModel.php");
+require_once (__DIR__ . "/../../controllers/AppController.php");
+require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/GetUserModel.php");
 class DeleteUserModel {
     public function deleteUser($id) {

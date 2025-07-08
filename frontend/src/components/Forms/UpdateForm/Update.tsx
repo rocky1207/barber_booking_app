@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Input from "../Input/Input";
 import FileInput from "../FileInput/FileInput";
-import { registerValidationSchema } from "@/lib/validators/validationSchema";
+import { updateValidationSchema } from "@/lib/validators/validationSchema";
 import { useAppDispatch, useAppSelector } from "@/store/hooks/typizedHooks";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -57,18 +57,25 @@ const Update: React.FC = () => {
         dispatch(barberActions.setCurrentBarberId(paramId));
         const form = e.currentTarget as HTMLFormElement;
         const formData = createFormData(e);
-        console.log(formData);
-        const data = {
-           ...formData,
-           id: userId!,
-           file: fileName
+        const validateData = {
+            ...formData,
+           // role: formData.role ? formData.role : barber?.role!,
+           role: formData.role,
+            file: fileName
         }
-        const validateInputs = formValidator(data, registerValidationSchema);
+        const validateInputs = formValidator(validateData, updateValidationSchema);
         if(!validateInputs.status) {
             setErrorMessage(validateInputs.message);
             return;
         }
+        const data = {
+           ...validateData,
+            id: userId!,
+        }
+        console.log(data);
+        
         const result = await loginRegister('user/updateUser.php', data, 'PATCH');
+        console.log(result);
         if(!result.success) {
             setErrorMessage(result.message);
             return;

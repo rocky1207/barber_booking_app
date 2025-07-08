@@ -8,16 +8,17 @@ $hash = '$2y$10$9FyK5y4fDLldu9AqQ9RLnOV13b66v2E6B7Sb6Yg5xGSHQ6yn3JAIe';
 var_dump(password_verify($unos, $hash));
 exit();
 */
-require_once (__DIR__ . "/../vendor/autoload.php");
-require_once (__DIR__ . "/DatabaseModel.php");
-require_once (__DIR__ . "/../controllers/AppController.php");
+//require_once (__DIR__ . "/../../vendor/autoload.php");
+require_once (__DIR__ . "/../../bootstrap.php");
+require_once (__DIR__ . "/../DatabaseModel.php");
+require_once (__DIR__ . "/../../controllers/AppController.php");
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use Dotenv\Dotenv;
+//use Dotenv\Dotenv;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+//$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+//$dotenv->load();
 //$2y$10$9FyK5y4fDLldu9AqQ9RLnOV13b66v2E6B7Sb6Yg5xGSHQ6yn3JAIe
 class UserLoginModel {
     private $secret_key;

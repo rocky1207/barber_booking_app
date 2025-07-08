@@ -1,5 +1,5 @@
 <?php
-require_once (__DIR__ . "/DatabaseModel.php");
+require_once (__DIR__ . "/../DatabaseModel.php");
 class GetUserModel {
     public function getUsers() {
         $query = "SELECT id, username, role, file FROM user";

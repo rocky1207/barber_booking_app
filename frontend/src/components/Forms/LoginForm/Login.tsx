@@ -31,12 +31,13 @@ const LogIn:React.FC = () => {
             return;
         }
         isLoadingState(true, dispatch); 
-        const result = await loginRegister("/login.php", data, 'POST');
+        const result = await loginRegister("auth/login.php", data, 'POST');
         if(!result.success) {
             isLoadingState(false, dispatch);
             setErrorMessage(result.message);
         return;
         } 
+        console.log(result);
         result?.data && dispatch(barberActions.setLoggedBarber(result?.data?.data));
         router.push('/login/dashboard');
     };
@@ -44,7 +45,7 @@ const LogIn:React.FC = () => {
     
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
-            <Input inputs={loginInputs} schema={formValidationSchema}/>
+            <Input inputs={loginInputs}/>
              {typeof errorMessage === 'string' && <p>{errorMessage}</p>}
              <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>

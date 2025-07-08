@@ -1,5 +1,5 @@
 export const apiRoutes = {
-    GET_CLIENTS: '/getClients.php',
+    GET_CLIENTS: 'user/getClients.php',
     UPDATE_USER: 'user/updateUser.php',
     DELETE_USER: 'user/deleteUser.php',
     INSERT_SERVICE: 'services/insertSeervice.php'
