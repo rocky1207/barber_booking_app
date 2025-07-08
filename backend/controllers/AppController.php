@@ -54,6 +54,7 @@ class AppController {
         }
     }
     public static function createMessage($message, $code=200) {
+        
         if (!is_int($code) || $code < 100 || $code > 599) {
             $code = 500;
         }
@@ -63,7 +64,6 @@ class AppController {
             "status" => $code,
             "message" => $message
         ]);
-        
         exit();
     }
 

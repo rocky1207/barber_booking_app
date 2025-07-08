@@ -1,12 +1,20 @@
 import api from "@/lib/axios";
+import { apiRoutes } from "../apiRoutes/apiRoutes";
 interface Service {
     userId: number;
     service: string;
     price: number;
     description: string;
 }
-export const addService = async (url: string, data: Service) => {
-    console.log(url, data);
+export const addService = async (action: string,data: Service): Promise<void> => {
+    console.log(action, data);
+    let response;
+    let actionDone;
+    if(action === 'INSERT') {
+        response = await api.post(apiRoutes.INSERT_SERVICE);
+        console.log(response);
+        actionDone = 'INSERTED';
+    }
     /*
     try {
         const response = await api.post(url, data);

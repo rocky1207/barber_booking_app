@@ -80,6 +80,7 @@ export const deleteBarberBtn: ApiBtnType = {
         action: 'DELETE',
         //divClass: '',
     };
+    /*
 export const updateBarberBtn: ApiBtnType = {
         validate: 'api',
         type: 'button',
@@ -88,6 +89,8 @@ export const updateBarberBtn: ApiBtnType = {
         action: 'UPDATE',
         //divClass: '',
     };
+    */
+/*
 export const barberServiceBtn: ApiBtnType = {
         validate: 'api',
         type: 'submit',
@@ -96,3 +99,4 @@ export const barberServiceBtn: ApiBtnType = {
         action: 'INSERT_SERVICE',
         //divClass: '',
     };
+    */

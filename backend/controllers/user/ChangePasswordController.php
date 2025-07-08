@@ -27,7 +27,6 @@ class ChangePasswordController {
             
            $changePasswordModel = new ChangePasswordModel();
            try {
-            AppController::databaseConnect();
             $changePasswordModel->changePassword($validateInputs);
             return [
                 "success" => true,
@@ -37,7 +36,6 @@ class ChangePasswordController {
                 ]
             ];
            } catch(Exception $e) {
-            var_dump($e->getMessage());
             AppController::createMessage($e->getMessage(), $e->getCode());
            }
            

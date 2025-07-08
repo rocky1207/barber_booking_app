@@ -1,10 +1,11 @@
 <?php
-require_once (__DIR__ . "/../controllers/AppController.php");
-require_once (__DIR__ . "/DatabaseModel.php");
+require_once (__DIR__ . "/../../controllers/AppController.php");
+require_once (__DIR__ . "/../DatabaseModel.php");
 class ChangePasswordModel {
     public function changePassword($data) {
         
         $query = "SELECT password FROM user WHERE id = :id";
+        AppController::databaseConnect();
         try {
             DatabaseModel::$pdo->beginTransaction();
             $stmt = DatabaseModel::$pdo->prepare($query);
@@ -30,7 +31,6 @@ class ChangePasswordModel {
                 DatabaseModel::$pdo->commit();
                 return $isChanged;
             }
-            
         } else {
             DatabaseModel::$pdo->rollBack();
             throw new Exception('Unos važeće lozinke nije ispravan.', 422);

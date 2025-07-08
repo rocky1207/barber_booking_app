@@ -34,11 +34,6 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
             return barber;
             });
             dispatch(barberActions.setBarbers(updatedbarbers));
-            /*
-            const removedItemBarbers = barbers.filter(barberItem => barberItem.id !== data.id);
-            const newBarbersState = [...removedItemBarbers, data];
-            dispatch(barberActions.setBarbers(newBarbersState));
-            */
             if(loggedBarber.id === data.id) dispatch(barberActions.setLoggedBarber({
                 ...loggedBarber,
                 username: data.username,

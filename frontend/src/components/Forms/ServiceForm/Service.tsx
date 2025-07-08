@@ -2,7 +2,6 @@ import { useState } from "react";
 import Input from "../Input/Input";
 import { serviceInputs } from "@/datas/Form/lnputObjects";
 import { serviceValidationSchema } from "@/lib/validators/validationSchema";
-import { barberServiceBtn } from "@/datas/ButttonObjects";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { useSearchParams } from "next/navigation";
@@ -34,7 +33,7 @@ const Service: React.FC = () => {
         userId: id!
     }
     console.log(data);
-    addService('service/addService.php', data)
+    addService('INSERT',  data);
     
 }
 

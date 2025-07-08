@@ -13,7 +13,7 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
         if (!onAction || !btnData.id || !action) return;
         let url: string = '';
         if(action === 'GET_TERMINS') url = apiRoutes.GET_CLIENTS;
-        if(action === 'UPDATE') url = apiRoutes.UPDATE_USER;
+       // if(action === 'UPDATE') url = apiRoutes.UPDATE_USER;
         if(action === 'DELETE') url = apiRoutes.DELETE_USER;
         if(action === 'INSERT_SERVICE') url = apiRoutes.INSERT_SERVICE;
         

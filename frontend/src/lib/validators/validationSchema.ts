@@ -1,6 +1,6 @@
 import { ValidationSchemaType } from "@/types/Form/ValidationSchemaType";
 
-export const formValidationSchema: ValidationSchemaType = {
+export const loginValidationSchema: ValidationSchemaType = {
     username: {
         required: true,
         pattern: /^[\p{L}0-9._]{3,20}$/u, // /^[A-Za-z0-9]{3,20}$/,

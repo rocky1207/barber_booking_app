@@ -39,7 +39,7 @@ const ChangePasswordForm: React.FC = () => {
     }
     return (
         <form className={styles.form} onSubmit={handleClick}>
-            <Input inputs={changePasswordInputs} schema={changePasswordValidationSchema} />
+            <Input inputs={changePasswordInputs} />
             <p>{message}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>

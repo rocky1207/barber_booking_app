@@ -36,6 +36,7 @@ api.interceptors.response.use(
     let statusCode;
     if (error.response) {
       console.log('da');
+      console.log(error.response);
       message = (error.response.data as any)?.message || message;
       statusCode = (error.response.data as any)?.status;
     } else if (error.request) {

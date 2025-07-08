@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import Input from "../Input/Input";
 import { loginInputs } from "@/datas/Form/lnputObjects";
-import { formValidationSchema } from "@/lib/validators/validationSchema";
+import { loginValidationSchema } from "@/lib/validators/validationSchema";
 import { formValidator } from "@/lib/validators/formValidator";
 import { createFormData } from "@/lib/utils/createFormData";
-import { loginRegister } from "@/lib/api/user/loginRegister";
+import { loginRegisterUpdate } from "@/lib/api/user/loginRegisterUpdate";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { barberActions } from "@/store/slices/barberSlice";
 import { isLoadingState } from "@/lib/utils/setIsLoadingState";
@@ -22,7 +22,7 @@ const LogIn:React.FC = () => {
         e.preventDefault();
         
         const data = createFormData(e);
-        const validateData = formValidator(data, formValidationSchema);
+        const validateData = formValidator(data, loginValidationSchema);
         
         console.log(validateData);
         if(!validateData.status) {
@@ -31,7 +31,7 @@ const LogIn:React.FC = () => {
             return;
         }
         isLoadingState(true, dispatch); 
-        const result = await loginRegister("auth/login.php", data, 'POST');
+        const result = await loginRegisterUpdate("auth/login.php", data, 'POST');
         if(!result.success) {
             isLoadingState(false, dispatch);
             setErrorMessage(result.message);

@@ -6,7 +6,7 @@ export const manageBarber = async (url: string, id: number): Promise<ManageBarbe
     let actionDone: string = '';
     try {
         let response;
-        if(url==='/getClients.php') {
+        if(url==='user/getClients.php') {
             response = await api.get(url, {params: {id}});
             actionDone = 'get_client';
         }else if(url==='user/updateUser.php'){
