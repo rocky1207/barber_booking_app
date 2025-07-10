@@ -30,7 +30,7 @@ class UserLoginModel {
     public function userLogin($user) {
         
         $query = "SELECT * FROM user WHERE username = :username";
-        
+        AppController::databaseConnect();
         try {
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute([

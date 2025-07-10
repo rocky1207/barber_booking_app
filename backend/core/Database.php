@@ -23,8 +23,8 @@ class Database {
             ]);
             return $this->pdo;
         } catch(PDOException $e) {
-           throw new Exception("Greška prilikom povezivanja sa bazom.", 500);
-          // throw new Exception($e->getMessage());
+          // throw new Exception("Greška prilikom povezivanja sa bazom.", 500);
+          throw new Exception($e->getMessage(), $e->getCode());
         }
     }
 }

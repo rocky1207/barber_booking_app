@@ -1,48 +1,43 @@
 <?php
 require_once (__DIR__ . "/../AppController.php");
 require_once (__DIR__ . "/../../models/user/UpdateUserModel.php");
+require_once (__DIR__ . "/../../validators/updateUserValidator.php");
 class UpdateUserController {
     
     public function updateUser($data) {
-        
-        $inputs = [
-            "id" => (int)$data["id"],
-            "username" => $data["username"],
-            //"role" => $data["role"],
-            "file" => $data["file"]
-        ];
-        $regex = [
-            "id" => AppController::INT_REGEX,
-            "username" => AppController::USERNAME_REGEX,
-           // "role" => AppController::ROLE_REGEX,
-            "file" => AppController::FILE_REGEX
-        ];
-        $messages = [
-            "id" => AppController::INT_ERROR_MESSAGE,
-            "username" => AppController::USERNAME_ERROR_MESSAGE,
-            //"role" => AppController::ROLE_ERROR_MESSAGE,
-            "file" => AppController::FILE_NAME_ERROR_MESSAGE
-        ];
-        if(isset($data["role"])) {
-            $inputs["role"] = $data["role"];
-            $regex["role"] = AppController::ROLE_REGEX;
-            $messages["role"] = AppController::FILE_NAME_ERROR_MESSAGE;
-        }
-        $validateInputs = AppController::validateInputs($inputs, $regex, $messages, 422);
-        if(!empty($validateInputs)) {
-            AppController::databaseConnect();
-            try {
-                $updateUserModel = new UpdateUserModel();
-                $user = $updateUserModel->updateUser($validateInputs);
-                return [
-                    "success" => true,
-                    "status" => 200,
-                    "message" => "Uspešno ažuriranje korisnika.",
-                    "data" => $user
+        $validateInputs = updateUserValidator($data);
+        if(!isset($validateInputs["role"])) {
+            $query = "UPDATE user
+            SET username = :username, file = :file
+            WHERE id = :id";
+            $execData = [
+                "username" => $validateInputs["username"],
+                "file" => $validateInputs["file"],
+                "id" => (int)$validateInputs["id"]
             ];
-            } catch(Exception $e) {
-                AppController::createMessage($e->getMessage(), $e->getCode());
-            }
+        } else {
+            $query = "UPDATE user
+            SET username = :username, role = :role, file = :file
+            WHERE id = :id";
+            $execData = [
+                "username" => $validateInputs["username"],
+                "role" => $validateInputs["role"],
+                "file" => $validateInputs["file"],
+                "id" => (int)$validateInputs["id"]
+            ];
+        };
+        
+        try {
+            $updateUserModel = new UpdateUserModel();
+            $user = $updateUserModel->updateUser($query, $execData);
+            return [
+                "success" => true,
+                "status" => 200,
+                "message" => "Uspešno ažuriranje korisnika.",
+                "data" => $user
+            ];
+        } catch(Exception $e) {
+            AppController::createMessage($e->getMessage(), $e->getCode());
         }
     }
 }

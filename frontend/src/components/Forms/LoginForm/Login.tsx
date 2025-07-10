@@ -9,35 +9,32 @@ import { createFormData } from "@/lib/utils/createFormData";
 import { loginRegisterUpdate } from "@/lib/api/user/loginRegisterUpdate";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { barberActions } from "@/store/slices/barberSlice";
-import { isLoadingState } from "@/lib/utils/setIsLoadingState";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from '../Form.module.css';
 const LogIn:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
     const dispatch = useAppDispatch();
     const router = useRouter();
     useEffect(() => {
-        isLoadingState(false, dispatch);
+        setIsLoadingState(false, dispatch);
       }, []);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
         const data = createFormData(e);
         const validateData = formValidator(data, loginValidationSchema);
-        
-        console.log(validateData);
         if(!validateData.status) {
-            isLoadingState(false, dispatch);
+            setIsLoadingState(false, dispatch);
             setErrorMessage(validateData.message);
             return;
         }
-        isLoadingState(true, dispatch); 
+        setIsLoadingState(true, dispatch); 
         const result = await loginRegisterUpdate("auth/login.php", data, 'POST');
         if(!result.success) {
-            isLoadingState(false, dispatch);
+            setIsLoadingState(false, dispatch);
             setErrorMessage(result.message);
         return;
         } 
-        console.log(result);
         result?.data && dispatch(barberActions.setLoggedBarber(result?.data?.data));
         router.push('/login/dashboard');
     };

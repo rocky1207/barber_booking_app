@@ -1,10 +1,10 @@
 <?php
 require_once (__DIR__ . "/../../models/user/GetUserModel.php");
 require_once (__DIR__ . "/../../models/DatabaseModel.php");
+require_once (__DIR__ . "/../../validators/getUserValidator.php");
 class GetUserController {
     private $getUserModel;
     public function __construct() {
-        AppController::databaseConnect();
         $this->getUserModel = new GetUserModel();
     }
     
@@ -23,29 +23,19 @@ class GetUserController {
         }
     }
     public function getUserById($id) {
-        $inputs = [
-            "id" => (int)$id,
-        ];
-        $regex = [
-            "id" => AppController::INT_REGEX,
-        ];
-        $messages = [
-            "id" => AppController::INT_ERROR_MESSAGE,
-        ];
-        $validateInputs = AppController::validateInputs($inputs, $regex, $messages, 422);
-        if(!empty($validateInputs)) {
-            try {
-                $user = $this->getUserModel->getUserById($validateInputs["id"]);
-                return [
-                        "success" => true,
-                        "status" => 200,  
-                        "message" => "Korisnik uspešno dobavljen.",
-                        "data" => $user
-                    ];
-            } catch (Exception $e) {
-                AppController::createMessage($e->getMessage(), $e->getCode());
-            }
+        $validateInputs = getUserValidator($id);
+        try {
+            $user = $this->getUserModel->getUserById($validateInputs["id"]);
+            return [
+                    "success" => true,
+                    "status" => 200,  
+                    "message" => "Korisnik uspešno dobavljen.",
+                    "data" => $user
+                ];
+        } catch (Exception $e) {
+            AppController::createMessage($e->getMessage(), $e->getCode());
         }
+        
     }
 }
 ?>

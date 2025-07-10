@@ -1,6 +1,7 @@
 import { barberActions } from "@/store/slices/barberSlice";
 import { AppDispatch } from "@/store/store";
 import store, { RootState }  from "@/store/store";
+import { logOut } from "../api/user/logOut";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
 
 export const barberActionDispatcher = (data: {id: number} | BasicBarberType, actionDone: string, dispatch: AppDispatch): void => {
@@ -12,6 +13,7 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
     if(actionDone === 'DELETE') {
         const newBarbersState = barbers.filter(barber => barber.id !== data.id);
         dispatch(barberActions.setBarbers(newBarbersState));
+        if(loggedBarber.id === data.id) logOut('auth/logout.php', {});
     }
     if(actionDone === 'INSERT') {
         if('username' in data && 'file' in data && 'role' in data) {
@@ -40,7 +42,6 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
                 file: data.file,
                 ...(data.role && {role: data.role})
             }));
-            
         }
     }
 } 

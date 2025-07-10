@@ -4,35 +4,30 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ ."/../../controllers/user/GetUserController.php");
 require_once (__DIR__ . "/GetUserModel.php");
 class UpdateUserModel {
-    public function updateUser($data) {
+    public function updateUser($query, $execData) {
         
-        $query = "UPDATE user
-        SET username = :username, role = :role, file = :file
-        WHERE id = :id";
         try {
+            AppController::databaseConnect();
+            if (!(DatabaseModel::$pdo instanceof PDO)) {
+                throw new Exception("PDO konekcija nije uspostavljena.", 500);
+            }
             DatabaseModel::$pdo->beginTransaction();
             $stmt = DatabaseModel::$pdo->prepare($query);
-            $result = $stmt->execute([
-                "username" => $data["username"],
-                "role" => $data["role"],
-                "file" => $data["file"],
-                "id" => $data["id"]
-            ]);
-            
+            $result = $stmt->execute($execData);
+            DatabaseModel::$pdo->commit();
             if(!$result) {
-                DatabaseModel::$pdo->rollBack();
                 throw new Exception("Ažuriranje nije uspelo", 404);
             } 
             $getUserModel = new GetUserModel();
-            $user = $getUserModel->getUserById($data["id"]);
+            $user = $getUserModel->getUserById($execData["id"]);
             if(empty($user)) {
-                DatabaseModel::$pdo->rollBack();
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             }
-            DatabaseModel::$pdo->commit();
             return $user;
         } catch(Exception $e) {
-            if(DatabaseModel::$pdo->inTransaction()) DatabaseModel::$pdo->rollBack();
+             if (isset(DatabaseModel::$pdo) && DatabaseModel::$pdo->inTransaction()) {
+                DatabaseModel::$pdo->rollBack();
+            }
             throw $e;
         }
     } 

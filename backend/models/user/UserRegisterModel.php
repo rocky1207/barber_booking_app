@@ -4,9 +4,14 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/GetUserModel.php");
 class UserRegisterModel {
     public function userRegister($data) {
-        DatabaseModel::$pdo->beginTransaction();
         $query = "INSERT INTO user (username, password, role, file) VALUES (:username, :password, :role, :file)";
+        
         try {
+            AppController::databaseConnect();
+            if (!(DatabaseModel::$pdo instanceof PDO)) {
+                throw new Exception("PDO konekcija nije uspostavljena.", 500);
+            }
+            DatabaseModel::$pdo->beginTransaction();
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute([
                 "username" => $data["username"],
@@ -15,23 +20,26 @@ class UserRegisterModel {
                 "file" => $data["file"]
             ]);
             if($stmt->rowCount() === 0) {
-                DatabaseModel::$pdo->rollBack();
                 throw new Exception("Registracija nije uspela", 404);
             }
             $lastId = DatabaseModel::$pdo->lastInsertId();
+            if (!$lastId) {
+                throw new Exception("Greška: ID korisnika nije dobijen nakon inserta.", 500);
+            }
+            DatabaseModel::$pdo->commit(); 
+            
             if($lastId) {
                 $id = (int)$lastId;
                 $getUserModel = new GetUserModel();
                 $user = $getUserModel->getUserById($id);
                 if(empty($user)) {
-                    DatabaseModel::$pdo->rollBack();
                     throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
                 }
-                DatabaseModel::$pdo->commit(); 
+                
                 return $user;
+            } else {
+                throw new Exception("Greška: ID korisnika nije dobijen nakon inserta.", 500);
             }
-           // DatabaseModel::$pdo->commit();
-           // return ["lastInsertId" => $lastId];
         } catch(Exception $e) {
             if (DatabaseModel::$pdo->inTransaction()) {
                 DatabaseModel::$pdo->rollBack();

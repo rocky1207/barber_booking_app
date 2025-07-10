@@ -12,7 +12,6 @@ const UserNavigation: React.FC = () => {
     const {loggedBarber} = useAppSelector((state: RootState) => state?.barber);
     const logOutHandler = async () => {
         const result = await logOut('auth/logout.php', {});
-        console.log(result);
         if(!result.success) {
             setErrorMessage(result.message);
         }
