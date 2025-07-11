@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ . '/../AppController.php');
 require_once (__DIR__ . "/../../models/user/UserLoginModel.php");
-require_once (__DIR__ . "/../../validators/loginValidator.php");
+require_once (__DIR__ . "/../../validators/user/loginValidator.php");
 class LoginController {
     
     public function login($data) {

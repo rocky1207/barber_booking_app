@@ -2,7 +2,7 @@
 require_once (__DIR__ . "/../AppController.php");
 require_once (__DIR__ . "/GetUserController.php");
 require_once (__DIR__ . "/../../models/user/ChangePasswordModel.php");
-require_once (__DIR__ . "/../../validators/changePasswordValidator.php");
+require_once (__DIR__ . "/../../validators/user/changePasswordValidator.php");
 class ChangePasswordController {
     public function changePassword($data) {
         $validateInputs = changePasswordValidator($data);

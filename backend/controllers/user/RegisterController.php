@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ . "/../AppController.php");
 require_once (__DIR__ . "/../../models/user/UserRegisterModel.php");
-require_once (__DIR__ . "/../../validators/registerUserValidator.php");
+require_once (__DIR__ . "/../../validators/user/registerUserValidator.php");
 class RegisterController {
     public function register($data) {
         $validateData = registerUserValidator($data);

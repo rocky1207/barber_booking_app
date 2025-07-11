@@ -89,7 +89,7 @@ export const serviceValidationSchema: ValidationSchemaType = {
     },
     description: {
         required: false,
-        pattern: /^[\p{L}0-9.,!?'"@+%&()\/\\\- \n]{3,1000}$/u,
+        pattern: /^[^<>]*$/ /* /^[\p{L}0-9.,!?'"@+%&()\/\\\- \n]{3,1000}$/u*/,
         errorMessage: 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.'
     }
 };

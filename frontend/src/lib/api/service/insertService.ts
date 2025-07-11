@@ -6,12 +6,12 @@ interface Service {
     price: number;
     description: string;
 }
-export const addService = async (action: string,data: Service): Promise<void> => {
+export const insertService = async (action: string, data: Service): Promise<void> => {
     console.log(action, data);
     let response;
     let actionDone;
     if(action === 'INSERT') {
-        response = await api.post(apiRoutes.INSERT_SERVICE);
+        response = await api.post(apiRoutes.INSERT_SERVICE, data);
         console.log(response);
         actionDone = 'INSERTED';
     }

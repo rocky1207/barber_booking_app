@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ . "/../AppController.php");
 require_once (__DIR__ . "/../../models/user/UpdateUserModel.php");
-require_once (__DIR__ . "/../../validators/updateUserValidator.php");
+require_once (__DIR__ . "/../../validators/user/updateUserValidator.php");
 class UpdateUserController {
     
     public function updateUser($data) {

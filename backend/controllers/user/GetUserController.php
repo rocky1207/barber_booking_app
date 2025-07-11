@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ . "/../../models/user/GetUserModel.php");
 require_once (__DIR__ . "/../../models/DatabaseModel.php");
-require_once (__DIR__ . "/../../validators/getUserValidator.php");
+require_once (__DIR__ . "/../../validators/user/getUserValidator.php");
 class GetUserController {
     private $getUserModel;
     public function __construct() {

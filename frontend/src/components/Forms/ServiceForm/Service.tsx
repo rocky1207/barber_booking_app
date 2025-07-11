@@ -5,7 +5,9 @@ import { serviceValidationSchema } from "@/lib/validators/validationSchema";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { useSearchParams } from "next/navigation";
-import { addService } from "@/lib/api/service/addService";
+import { insertService } from "@/lib/api/service/insertService";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import styles from '../Form.module.css';
 
 
@@ -16,7 +18,8 @@ const Service: React.FC = () => {
     const params = useSearchParams();
     const userId = params.get('id');
     const id = userId !== null ? parseInt(userId, 10) : undefined;
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const dispatch = useAppDispatch();
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = createFormData(e);
@@ -33,7 +36,8 @@ const Service: React.FC = () => {
         userId: id!
     }
     console.log(data);
-    addService('INSERT',  data);
+   // setIsLoadingState(true, dispatch);
+    const response = await insertService('INSERT',  data);
     
 }
 
@@ -42,7 +46,8 @@ console.log(message);
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
-            <textarea name="description" defaultValue='' placeholder='Opis'  id=""></textarea>
+            <textarea name="description" defaultValue='' placeholder='Opis'></textarea>
+            <p>{message}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
     );
