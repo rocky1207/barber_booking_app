@@ -1,9 +1,9 @@
 <?php
 require_once (__DIR__ . "/../../../controllers/AppController.php");
 AppController::verifyRequestMethod('GET');
-require_once (__DIR__ . "/../../../controllers/user/GetUserController.php");
+require_once (__DIR__ . "/../../../controllers/service/GetServiceController.php");
 header('Content-Type: application/json');
-$getUserController = new GetUserController();
-$response = $getUserController->getUsers();
+$getServiceController = new GetServiceController();
+$response = $getServiceController->getServices();
 echo json_encode($response);
 ?>

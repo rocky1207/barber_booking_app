@@ -6,9 +6,7 @@ require_once (__DIR__ . "/../../validators/user/deleteUserValidator.php");
 
 class DeleteUserController {
     public function deleteUser($data) {
-        
         $validateInputs = deleteUserValidator($data);
-        
         try{
             $deleteUserModel = new DeleteUserModel();
             $result = $deleteUserModel->deleteUser($validateInputs["id"]);
@@ -19,7 +17,7 @@ class DeleteUserController {
                 "message" => "Korisnik sa ID {$validateInputs["id"]} je obrisan.",
                 "data" => $result
             ];
-        }catch(Exception $e) {
+        } catch(Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }
     }

@@ -1,5 +1,5 @@
 <?php
-require_once (__DIR__ . "/../controllers/AppController.php");
+require_once (__DIR__ . "/../../controllers/AppController.php");
 function changePasswordValidator($data) {
     $inputs = [
             "id" => $data["id"],

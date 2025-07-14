@@ -1,5 +1,5 @@
 <?php
-require_once (__DIR__ . "/../controllers/AppController.php");
+require_once (__DIR__ . "/../../controllers/AppController.php");
 function updateUserValidator($data) {
     $inputs = [
         "id" => (int)$data["id"],
