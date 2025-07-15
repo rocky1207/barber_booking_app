@@ -6,7 +6,5 @@ header('Content-Type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
 $addServiceController = new InsertServiceController();
 $response = $addServiceController->insertService($data);
-var_dump($response);
-exit();
 echo json_encode($response);
 ?>

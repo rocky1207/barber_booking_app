@@ -21,15 +21,12 @@ class InsertServiceModel {
             $stmt->rowCount() === 0 && throw new Exception("Unos usluge nije uspeo", 404);
             $lastInsertId = DatabaseModel::$pdo->lastInsertId();
             !$lastInsertId && throw new Exception("Greška: ID korisnika nije dobijen nakon inserta.", 500);
-
-            DatabaseModel::$pdo->commit();
             // kod za dobavljanje usluge prema ID
             $id = (int)$lastInsertId;
             $getServiceController = new GetServiceController();
-            $getServiceController->getServicesById($id);
-            
-            exit();
-            return $lastInsertId;
+            $service = $getServiceController->getServicesById($id);
+            DatabaseModel::$pdo->commit();
+            return $service;
         } catch (Exception $e) {
             DatabaseModel::$pdo->inTransaction() && DatabaseModel::$pdo->rollBack();
             throw $e;

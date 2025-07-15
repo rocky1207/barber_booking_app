@@ -5,7 +5,6 @@ export const getBarbers = async (url: string): Promise<{success: boolean; data?:
     let data:{success: boolean; data?: MultiBarberReturnType; message?: string };
     try {
         const response = await api.get(url);
-        console.log(response.data);
         if(response.data.length === 0) data = {success: true, message: 'Trenutno nema raspoloživih frizera.'};
         data = {success: true, data: response.data};
     } catch(error: any) {

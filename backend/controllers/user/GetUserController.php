@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ . "/../../models/user/GetUserModel.php");
 require_once (__DIR__ . "/../../models/DatabaseModel.php");
-require_once (__DIR__ . "/../../validators/user/getUserValidator.php");
+require_once (__DIR__ . "/../../validators/getDataByIdValidator.php");
 class GetUserController {
     private $getUserModel;
     public function __construct() {
@@ -23,7 +23,7 @@ class GetUserController {
         }
     }
     public function getUserById($id) {
-        $validateInputs = getUserValidator($id);
+        $validateInputs = getDataByIdValidator($id);
         try {
             $user = $this->getUserModel->getUserById($validateInputs["id"]);
             return [

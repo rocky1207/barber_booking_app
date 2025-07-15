@@ -6,14 +6,13 @@ class InsertServiceController {
         $validateInputs = insertServiceValidator($data);
         try {
             $insertServiceModel = new InsertServiceModel();
-            $result = $insertServiceModel->insertService($data);
+            $result = $insertServiceModel->insertService($validateInputs);
             return [
                 "success" => true,
                 "status" => 200,
-                "message" => "Usluge su uspešno dobavljene.",
-                "data" => [
-                    "lastInsertedId" => $result
-                ]
+                "message" => "Usluga je uspešno unešena u bazu.",
+                "data" => $result
+                
             ];
         } catch(Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());

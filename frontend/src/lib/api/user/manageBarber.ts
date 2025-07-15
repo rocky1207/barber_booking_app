@@ -16,8 +16,6 @@ export const manageBarber = async (url: string, id: number): Promise<ManageBarbe
             response = await api.delete(url, {data: {id}});
             actionDone = 'delete';
         }
-        
-        console.log(response);
         if(response?.data?.success) {
             answer = {success: true, data: response?.data?.data || response?.data?.message, actionDone};
         } else {

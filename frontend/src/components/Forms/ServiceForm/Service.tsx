@@ -8,13 +8,12 @@ import { useSearchParams } from "next/navigation";
 import { insertService } from "@/lib/api/service/insertService";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
+import { SingleServiceType } from "@/types/Api/ReturnServiceType";
+import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import styles from '../Form.module.css';
 
-
-
-
 const Service: React.FC = () => {
-    const [message, setMessage] = useState<string>('');
+    const [message, setMessage] = useState<string | undefined>('');
     const params = useSearchParams();
     const userId = params.get('id');
     const id = userId !== null ? parseInt(userId, 10) : undefined;
@@ -23,10 +22,9 @@ const Service: React.FC = () => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = createFormData(e);
-    console.log(formData);
-    const validateForm = formValidator(formData, serviceValidationSchema);
-    if(!validateForm.status) {
-        setMessage(validateForm.message);
+    const validateInputs = formValidator(formData, serviceValidationSchema);
+    if(!validateInputs.status) {
+        setMessage(validateInputs.message);
         return;
     }
     const data = {
@@ -35,14 +33,31 @@ const Service: React.FC = () => {
         price: parseInt(formData.price, 10),
         userId: id!
     }
-    console.log(data);
-   // setIsLoadingState(true, dispatch);
+    setIsLoadingState(true, dispatch);
     const response = await insertService('INSERT',  data);
     
+    
+    if(!response.success) {
+        setMessage(response.message);
+        setIsLoadingState(false, dispatch);
+        return;
+    }
+    if (!response.data) {
+        setMessage("Neočekivani format odgovora sa servera.");
+        setIsLoadingState(false, dispatch);
+        return;
+    }
+if (response.data) {
+        console.log(response?.data);
+    }
+ 
+        
+    
+    setMessage(response.message);
+    serviceActionDispatcher(response.actionDone!.toUpperCase(), response.data, dispatch);
+    setIsLoadingState(false, dispatch);
+    form.reset();
 }
-
-console.log(message);
-
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />

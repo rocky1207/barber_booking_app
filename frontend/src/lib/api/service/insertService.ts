@@ -1,26 +1,31 @@
 import api from "@/lib/axios";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
-interface Service {
-    userId: number;
-    service: string;
-    price: number;
-    description: string;
-}
-export const insertService = async (action: string, data: Service): Promise<void> => {
+import { SingleServiceType, ManageServiceReturnType } from "@/types/Api/ReturnServiceType";
+import { BasicServiceType } from "@/types/Services/ServicesType";
+
+export const insertService = async (action: string, data: BasicServiceType): Promise<ManageServiceReturnType> => {
     console.log(action, data);
-    let response;
-    let actionDone;
-    if(action === 'INSERT') {
-        response = await api.post(apiRoutes.INSERT_SERVICE, data);
-        console.log(response);
-        actionDone = 'INSERTED';
-    }
-    /*
+    
+    let answer: ManageServiceReturnType;
+    let actionDone: string = '';
+    
     try {
-        const response = await api.post(url, data);
-        console.log(response);
+        let response;
+        if(action === 'INSERT') {
+            response = await api.post(apiRoutes.INSERT_SERVICE, data);
+            actionDone = 'INSERTED';
+            console.log(response);
+        }
+        if(response?.data?.success) {
+             const service: SingleServiceType = response.data.data.data; 
+             console.log(service);
+            //const message = response?.message;
+            answer = {success: true, data: service, message: response?.data.message, actionDone};
+        } else {
+            answer = {success: false, data: response?.data?.message  || 'Greška na serveru.'};
+        }
     } catch(error: any) {
-        console.log(error);
+        answer = {success: false, message: error?.message};
     }
-        */
+    return answer;
 }
