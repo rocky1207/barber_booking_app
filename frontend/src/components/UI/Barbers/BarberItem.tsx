@@ -11,7 +11,7 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, inde
     const pathName = usePathname();
     const imageUrl = 'http://barber_booking_app.local/images/';
     const handleClick = ():void => {
-            router.push('/services');
+            router.push(`/services?barberId=${id}`);
         }
     const newBookBtn = {
         ...bookBtn,

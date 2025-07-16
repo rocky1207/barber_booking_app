@@ -3,6 +3,7 @@ export const apiRoutes = {
     UPDATE_USER: 'user/updateUser.php',
     DELETE_USER: 'user/deleteUser.php',
     CHANGE_PASSWORD: '/user/changePassword.php',
-    INSERT_SERVICE: 'service/insertService.php'
+    INSERT_SERVICE: 'service/insertService.php',
+    GET_USER_SERVICES: 'service/getUserServices.php'
 } as const;
 export type ApiRoute = typeof apiRoutes[keyof typeof apiRoutes];
