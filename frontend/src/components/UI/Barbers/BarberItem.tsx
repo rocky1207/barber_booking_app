@@ -11,20 +11,23 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, inde
     const pathName = usePathname();
     const imageUrl = 'http://barber_booking_app.local/images/';
     const handleClick = ():void => {
-            router.push('/services');
+            router.push(`/services?barberId=${id}`);
         }
     const newBookBtn = {
         ...bookBtn,
         onAction: handleClick
     }
     const showButton = pathName === '/' ? true : false;
-    const showItem = role !== 'owner' ? false : true;
+    //const showItem = role !== 'owner' ? false : true;
+    const defaultAvatar = "/images/avatar.png"; ;
+    const src = file && file.trim() !== '' ? `${imageUrl}${file}` : defaultAvatar;
+    
     return (
         <li key={id} className={styles.barberItem}
         style={{ animationDelay: `${index * 0.2}s` }} /*dinamičko kašnjenje*/>
             <div className={styles.customerVew}>
                 <div className='profileImageDiv'>
-                    <img src={file?.trim() ? `${imageUrl}${file}` : '/images/avatar.png'} alt="Barber image" />
+                    <img src={src} alt="Barber image" />
                 </div>
                 <div className={styles.barberInfoDiv}>
                     <p>{username}</p>

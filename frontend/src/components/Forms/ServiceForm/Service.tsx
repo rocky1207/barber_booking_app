@@ -1,48 +1,68 @@
+import { useState } from "react";
 import Input from "../Input/Input";
 import { serviceInputs } from "@/datas/Form/lnputObjects";
 import { serviceValidationSchema } from "@/lib/validators/validationSchema";
-import { barberServiceBtn } from "@/datas/ButttonObjects";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { useSearchParams } from "next/navigation";
+import { insertService } from "@/lib/api/service/insertService";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+import { useAppDispatch } from "@/store/hooks/typizedHooks";
+import { SingleServiceType } from "@/types/Api/ReturnServiceType";
+import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import styles from '../Form.module.css';
-import { useState } from "react";
-
-
 
 const Service: React.FC = () => {
-    const [message, setMessage] = useState<string>('');
+    const [message, setMessage] = useState<string | undefined>('');
     const params = useSearchParams();
     const userId = params.get('id');
     const id = userId !== null ? parseInt(userId, 10) : undefined;
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const dispatch = useAppDispatch();
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = createFormData(e);
-    console.log(formData);
-    const validateForm = formValidator(formData, serviceValidationSchema);
-    if(!validateForm.status) {
-        setMessage(validateForm.message);
+    const validateInputs = formValidator(formData, serviceValidationSchema);
+    if(!validateInputs.status) {
+        setMessage(validateInputs.message);
         return;
     }
     const data = {
-        ...formData,
-        id: id
+        service: formData.service,
+        description: formData.description,
+        price: parseInt(formData.price, 10),
+        userId: id!
     }
-    console.log(data);
-}
-
-console.log(message);
-const newBarberServiceBtn = {
-    ...barberServiceBtn,
-    id: 5,
-    head: 'bla',
-    onAction: handleSubmit
+    setIsLoadingState(true, dispatch);
+    const response = await insertService('INSERT',  data);
+    
+    
+    if(!response.success) {
+        setMessage(response.message);
+        setIsLoadingState(false, dispatch);
+        return;
+    }
+    if (!response.data) {
+        setMessage("Neočekivani format odgovora sa servera.");
+        setIsLoadingState(false, dispatch);
+        return;
+    }
+if (response.data) {
+        console.log(response?.data);
+    }
+ 
+        
+    
+    setMessage(response.message);
+    serviceActionDispatcher(response.actionDone!.toUpperCase(), response.data, dispatch);
+    setIsLoadingState(false, dispatch);
+    form.reset();
 }
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
-            <textarea name="description" defaultValue='' placeholder='Opis'  id=""></textarea>
+            <textarea name="description" defaultValue='' placeholder='Opis'></textarea>
+            <p>{message}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
     );

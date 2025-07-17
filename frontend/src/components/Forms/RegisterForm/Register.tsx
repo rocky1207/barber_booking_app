@@ -8,7 +8,7 @@ import { formValidator } from "@/lib/validators/formValidator";
 import { registerValidationSchema } from "@/lib/validators/validationSchema";
 import FileInput from "../FileInput/FileInput";
 import { createFormData } from "@/lib/utils/createFormData";
-import { loginRegister } from "@/lib/api/loginRegister";
+import { loginRegisterUpdate } from "@/lib/api/user/loginRegisterUpdate";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { useSearchParams } from "next/navigation";
@@ -50,7 +50,7 @@ const Register:React.FC = () => {
             setErrorMessage(validateData.message);
             return;
         }
-        const result = await loginRegister('user/register.php', data, 'POST');
+        const result = await loginRegisterUpdate('user/register.php', data, 'POST');
         console.log(result);
         if(!result.success || !result.data) {
             setErrorMessage(result.message || "Greška prilikom registracije");

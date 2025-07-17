@@ -18,7 +18,6 @@ const barberSlice = createSlice({
     initialState,
     reducers: {
         setBarbers: (state, action: PayloadAction<BasicBarberType[]>) => {
-            console.log(action.payload);
             state.barbers = action.payload;
         },
         setLoggedBarber: (state, action: PayloadAction<BasicBarberType>) => {

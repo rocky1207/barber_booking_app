@@ -5,15 +5,14 @@ import { RootState } from "@/store/store";
 import UserNavigation from "../UserNavigation/UserNavigation";
 import BarberItem from "@/components/UI/Barbers/BarberItem";
 import BarberButtons from "@/components/UI/Barbers/BarberButtons";
-import { isLoadingState } from "@/lib/utils/setIsLoadingState";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 
 import ConfirmModal from "../../ConfirmModal/ConfirmModal";
 import { deleteBarberBtn } from '@/datas/ButttonObjects';
-import { manageBarber } from "@/lib/api/manageBarber";
+import { manageBarber } from "@/lib/api/user/manageBarber";
 
 
 const Home: React.FC = () => {
-  const [errMsg, setErrMsg] = useState<string>('');
   const dialog = useRef<HTMLDialogElement | null>(null);
   const {barbers, currentBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
   console.log(barbers);
@@ -21,7 +20,7 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   console.log(currentBarberId);
   useEffect(() => {
-    isLoadingState(false, dispatch);
+    setIsLoadingState(false, dispatch);
   }, []);
   /*
   useEffect(() => {
@@ -45,7 +44,6 @@ const Home: React.FC = () => {
       checkAuth();
   }, []);
   */
-  console.log(errMsg);
   const updatedDeleteBarberBtn = {
     ...deleteBarberBtn,
     id: currentBarberId,
@@ -58,7 +56,7 @@ const Home: React.FC = () => {
       <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}  />
       <section>
       <h1>MENADŽERSKA TABLA</h1>
-      {!errMsg ? <nav aria-label="Manage barber navigation">
+      <nav aria-label="Manage barber navigation">
         <UserNavigation />
         <ul>
           {barbers?.map((barber, index) => {
@@ -70,7 +68,7 @@ const Home: React.FC = () => {
             )
           })}
         </ul>
-      </nav> : <p className="textCenter">{errMsg}</p>}
+      </nav>
       </section>
       </>  
     );

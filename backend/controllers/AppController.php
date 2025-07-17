@@ -8,12 +8,12 @@ class AppController {
     public const INT_REGEX = "/^[1-9][0-9]*$/";
     public const SERVICE_REGEX = '/^[\p{L}0-9 .,!?()\-:;\'"\/\\\\@+%&]{3,255}$/u';
     public const PRICE_REGEX = "/^[0-9]{1,6}$/";
-    public const DESCRIPTION_REGEX = "/^[\p{L}0-9.,!?\"'@+%&()-:;\/\\\\\- \n]{3,1000}$/u";
+    public const DESCRIPTION_REGEX = "/^[^<>]*$/"/*"/^[\p{L}0-9.,!?\"'@+%&()-:;\/\\\\\- \n]{3,1000}$/u"*/;
 
     public const INT_ERROR_MESSAGE = 'Prosleđeni parametar mora biti broj.';
     public const USERNAME_ERROR_MESSAGE = 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.';
     public const PASSWORD_ERROR_MESSAGE = 'Lozinka počinje velikim slovom, sadrži najmanje jednu cifru, dozvoljava slova i znak !, i ima minimalnu dužinu od 4 karaktera.';
-    public const ROLE_ERROR_MESSAGE = 'Unesite "admin" ili "user".';
+    public const ROLE_ERROR_MESSAGE = 'Unesite "admin" ili "user ili student".';
     public const FILE_NAME_ERROR_MESSAGE =  'Naziv slike može sadržati samo tekstualne karaktere.';
     public const FILE_ERROR_MESSAAGE = 'Dozvoljeni su samo JPEG, PNG ili WEBP formati slika, maksimalne veličine do 5MB.';
     public const QUERY_ERROR_MESSAGE = 'Greška prilikom izvršenja upita';
@@ -21,6 +21,9 @@ class AppController {
     public const WRONG_PASSWORD_MESSAGE = 'Pogrešna lozinka.';
     public const NO_RESULT_MESSAGE =  'Nema rezultata za navedeni upit';
 
+    public const SERVICE_ERROR_MESSAGE = 'U polje "Usluga" uneli ste nedozvoljene karaktere, poput <, > i slično.';
+    public const SERVICE__PRICE_ERROR_MESSAGE = 'U polje "Cena" dozvoljeno je uneti samo cele brojeve.';
+    public const SERVICE_DESCRIPTION_ERROR_MESSAGE = 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.';
      /*
     public const EMAIL_REGEX = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
     public const NUMBER_REGEX = "/^\d+$/";
@@ -54,6 +57,7 @@ class AppController {
         }
     }
     public static function createMessage($message, $code=200) {
+        
         if (!is_int($code) || $code < 100 || $code > 599) {
             $code = 500;
         }
@@ -63,7 +67,6 @@ class AppController {
             "status" => $code,
             "message" => $message
         ]);
-        
         exit();
     }
 
@@ -87,7 +90,7 @@ class AppController {
     }
     public static function comparePasswords($password, $confirmedPassword) {
         if($password !== $confirmedPassword) {
-            self::createMessage('Novouneta lozinka mora biti identična u oba polja!');
+            self::createMessage('Novouneta lozinka mora biti identična u oba polja!', 422);
         } 
         return true;
     }

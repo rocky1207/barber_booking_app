@@ -5,7 +5,7 @@ export const formValidator = (data: { [key: string]: string | File }, schema:Val
         
       // const rules = schema[name];
         const value = data[key];
-        if(rules.required && !value) return {status: false, message: 'Tekstualna polja moraju biti popunjena'};
+        if(typeof value === 'string' && rules.required && !value) return {status: false, message: 'Tekstualna polja moraju biti popunjena'};
         //const value = newValue;
         if (value instanceof File) {
           if (!value.name) continue;

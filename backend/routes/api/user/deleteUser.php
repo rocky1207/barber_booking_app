@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ ."/../../../controllers/AppController.php");
 AppController::verifyRequestMethod('DELETE');
-require_once (__DIR__ . '/../../../controllers/DeleteUserController.php');
+require_once (__DIR__ . '/../../../controllers/user/DeleteUserController.php');
 header('Content-Type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
 $deleteUserController = new DeleteUserController();

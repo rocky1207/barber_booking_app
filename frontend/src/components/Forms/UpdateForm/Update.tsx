@@ -2,19 +2,19 @@
 import { useState } from "react";
 import Input from "../Input/Input";
 import FileInput from "../FileInput/FileInput";
-import { registerValidationSchema } from "@/lib/validators/validationSchema";
+import { updateValidationSchema } from "@/lib/validators/validationSchema";
 import { useAppDispatch, useAppSelector } from "@/store/hooks/typizedHooks";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/store/store";
-import { LoginInputType } from "@/types/Form/LoginInputType";
-import { loginRegister } from "@/lib/api/loginRegister";
+import { loginRegisterUpdate } from "@/lib/api/user/loginRegisterUpdate";
 import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import NavigateButton from "@/components/Button/NavigateButton";
 import { changePasswordBtn } from "@/datas/ButttonObjects";
 import { createFormData } from "@/lib/utils/createFormData";
 import { barberActions } from "@/store/slices/barberSlice";
 import { formValidator } from "@/lib/validators/formValidator";
+import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 import styles from '../Form.module.css';
 import extraStyles from './Update.module.css';
 
@@ -31,6 +31,7 @@ const Update: React.FC = () => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
+    const updateUserUrl = apiRoutes.UPDATE_USER;
     /*
     const updateInputs: LoginInputType[] = [
         {type: 'text', name: 'username', defaultValue: barber?.username, placeholder: "Korisničko ime"},
@@ -57,27 +58,31 @@ const Update: React.FC = () => {
         dispatch(barberActions.setCurrentBarberId(paramId));
         const form = e.currentTarget as HTMLFormElement;
         const formData = createFormData(e);
-        console.log(formData);
-        const data = {
-           ...formData,
-           id: userId!,
-           file: fileName
+        const validateData = {
+            ...formData,
+           // role: formData.role ? formData.role : barber?.role!,
+            role: formData.role,
+            file: fileName
         }
-        console.log(data);
-        const validateInputs = formValidator(data, registerValidationSchema);
+        const validateInputs = formValidator(validateData, updateValidationSchema);
         if(!validateInputs.status) {
             setErrorMessage(validateInputs.message);
             return;
         }
-        const result = await loginRegister('user/updateUser.php', data, 'PATCH');
+        const data = {
+           ...validateData,
+            id: userId!,
+        }
+        console.log(data);
+        
+        const result = await loginRegisterUpdate(updateUserUrl, data, 'PATCH');
+        console.log(result);
         if(!result.success) {
             setErrorMessage(result.message);
             return;
         }
-        setErrorMessage(result?.data?.message);
-        console.log(result);
+        setErrorMessage(result?.data?.message)
         const user = result?.data?.data;
-        console.log(user);
         user && barberActionDispatcher(user, 'UPDATE', dispatch);
     };
     

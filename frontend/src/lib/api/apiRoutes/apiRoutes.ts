@@ -1,7 +1,9 @@
 export const apiRoutes = {
-    GET_CLIENTS: '/getClients.php',
+    GET_CLIENTS: 'user/getClients.php',
     UPDATE_USER: 'user/updateUser.php',
     DELETE_USER: 'user/deleteUser.php',
-    INSERT_SERVICE: 'services/insertSeervice.php'
+    CHANGE_PASSWORD: '/user/changePassword.php',
+    INSERT_SERVICE: 'service/insertService.php',
+    GET_USER_SERVICES: 'service/getUserServices.php'
 } as const;
 export type ApiRoute = typeof apiRoutes[keyof typeof apiRoutes];

@@ -4,14 +4,16 @@ import { changePasswordInputs } from "@/datas/Form/lnputObjects";
 import { changePasswordValidationSchema } from "@/lib/validators/validationSchema";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
-import { changePassword } from "@/lib/api/changePassword";
-import { useAppSelector } from "@/store/hooks/typizedHooks";
+import { changePassword } from "@/lib/api/user/changePassword";
+import { useAppDispatch, useAppSelector } from "@/store/hooks/typizedHooks";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { RootState } from "@/store/store";
 import styles from "../Form.module.css";
 
 const ChangePasswordForm: React.FC = () => {
-    const {id} = useAppSelector((state: RootState) => state.barber?.loggedBarber)
+    const {id} = useAppSelector((state: RootState) => state.barber?.loggedBarber);
     const [message, setMessage] = useState<string>('');
+    const dispatch = useAppDispatch();
     const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
@@ -29,17 +31,23 @@ const ChangePasswordForm: React.FC = () => {
             confirmPassword: formData.confirmPassword,
             id: id
         }
-        
+        setIsLoadingState(true, dispatch);
         const response = await changePassword(data); 
-        console.log(response);
-        if(response) {
+        setIsLoadingState(true, dispatch);
+        if(!response.success) {
             setMessage(response.message);
+            setIsLoadingState(false, dispatch);
+            return;
         }
-        form.reset();
+        if(response.success) {
+            setMessage(response.message);
+            form.reset();
+        }
+        setIsLoadingState(false, dispatch);
     }
     return (
         <form className={styles.form} onSubmit={handleClick}>
-            <Input inputs={changePasswordInputs} schema={changePasswordValidationSchema} />
+            <Input inputs={changePasswordInputs} />
             <p>{message}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
