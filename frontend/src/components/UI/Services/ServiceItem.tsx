@@ -1,16 +1,18 @@
-const ServiceItem:React.FC = () => {
-    const services = [{id: '1', name: 'Šišanje', price: '1400'}, {id: '2', name: 'Stilizovanje brade', price: '800'},{id: '3', name: 'Pranje kose', price: '400'},{id: '4', name: 'Farbanje kose', price: '800'}];
+import { SingleServiceType } from '@/types/Api/ReturnServiceType';
+import { formatPrice } from '@/lib/utils/formatPrice';
+import { useRouter } from 'next/navigation';
+interface Props {
+    service: SingleServiceType;
+    index: number;
+}
+const ServiceItem:React.FC<Props> = ({service, index}) => {
+    const router = useRouter();
+    const servicePrice = formatPrice(service.price);
+    const handleClick = () => {router.push(`/booking?userId=${service.userId}&service=${service.userService}`)};
     return (
-        <>
-        {services.map((service, index) => {
-            return (
-            <li key={service.id} style={{ animationDelay: `${index * 0.2}s` }}>
-                <p>{service.name}: <span>{service.price}din.</span></p>
-            </li>
-            )
-        })}
-            
-        </>
+        <li key={service.id} style={{ animationDelay: `${index * 0.2}s` }}>
+            <button onClick={handleClick}>{service.userService}: <span>{servicePrice}din.</span></button>
+        </li>
     );
 };
 export default ServiceItem;

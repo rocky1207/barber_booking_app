@@ -1,6 +1,5 @@
 <?php
 require_once (__DIR__ . "/../DatabaseModel.php");
-
 class GetServiceModel {
     public function getUserServices($userId) {
         $query = "SELECT * FROM service WHERE userId = :userId";

@@ -8,8 +8,14 @@ class GetServiceController {
         try {
             $getServiceModel = new GetServiceModel();
             $services = $getServiceModel->getUserServices($validateData["id"]);
-            var_dump($services);
-            exit();
+            return [
+                "success" => true,
+                "status" => 200,
+                "message" => 'Usluge su uspešno dobavljene',
+                "data" => $services
+            ];
+           // var_dump($services);
+           // exit();
         } catch(Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }

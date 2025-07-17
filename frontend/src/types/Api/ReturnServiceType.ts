@@ -1,3 +1,8 @@
+export interface BasicServicesDataReturnType {
+    success: boolean;
+    message?: string;
+    actionDone?: string;
+}
 export interface SingleServiceType {
     id: number;
     userId: number;
@@ -5,9 +10,9 @@ export interface SingleServiceType {
     price: string;
     description: string;
 }
-export interface ManageServiceReturnType {
-    success: boolean;
-    message?: string;
+export interface ManageServiceReturnType extends BasicServicesDataReturnType {
     data?: SingleServiceType;
-    actionDone?: string;
+}
+export interface GetServicesReturnType extends BasicServicesDataReturnType {
+    data?: SingleServiceType[];
 }
