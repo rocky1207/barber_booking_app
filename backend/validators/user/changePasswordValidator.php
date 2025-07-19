@@ -1,6 +1,7 @@
 <?php
 require_once (__DIR__ . "/../../controllers/AppController.php");
 function changePasswordValidator($data) {
+    
     $inputs = [
             "id" => $data["id"],
             "oldPassword" => $data["oldPassword"],

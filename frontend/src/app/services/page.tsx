@@ -1,7 +1,7 @@
 
 import Header from "@/components/UI/Header/Header";
 import Services from "@/components/UI/Services/Services";
-import { getUserServices } from "@/lib/api/service/getUserServices";
+import { getAllServices } from "@/lib/api/service/getAllServices";
 import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 import Link from "next/link";
 
@@ -10,7 +10,8 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
     const id = parseInt(barberId, 10);
     let noIdbackUp;
     if(!id) noIdbackUp = <p>Ne postoji frizer sa ovim ID</p>
-    const {success, message, data} = await getUserServices(apiRoutes.GET_USER_SERVICES, id);
+   // console.log(apiRoutes.GET_ALL_SERVICES);
+    const {success, message, data} = await getAllServices(apiRoutes.GET_ALL_SERVICES);
     
     return (
         <>

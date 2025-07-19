@@ -2,7 +2,9 @@ import api from "@/lib/axios";
 import { GetServicesReturnType } from "@/types/Api/ReturnServiceType";
 export const getAllServices = async (url: string): Promise<GetServicesReturnType> => {
     let answer;
+    console.log(url);
     try {
+        
         const response = await api.get(url);
         if(response.status) {
             if(response.data.data.length() === 0) answer = {success: true,message: response.data.message || 'Nema nijedne unete usluge.'};

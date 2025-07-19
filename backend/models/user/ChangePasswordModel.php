@@ -14,6 +14,7 @@ class ChangePasswordModel {
                 "id" => $data["id"],
             ]);
             $password = $stmt->fetch();
+            
             if(!empty($password) && password_verify($data["oldPassword"], $password["password"])) {
                 AppController::comparePasswords($data["newPassword"], $data["confirmPassword"]);
                 $newQuery = "UPDATE user SET password = :newPassword WHERE id = :id";
