@@ -6,7 +6,7 @@ export const getUserServices = async (url: string, id: number): Promise<GetServi
     try {
         const response = await api.get(url, {params: {id}});
         if(response.data.success) {
-            if(response.data.data === 0) answer = {success: true, message: 'Nema unetih usluga za ovog frizera.'}
+            if(response.data.data.length() === 0) answer = {success: true, message: 'Nema unetih usluga za ovog frizera.'}
             answer = {
                 success: response.data.success, 
                 data: response.data.data,

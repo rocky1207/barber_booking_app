@@ -1,5 +1,5 @@
 "use client";
-import {useState, useEffect, useRef } from "react";
+import {useEffect, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import UserNavigation from "../UserNavigation/UserNavigation";

@@ -2,19 +2,27 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/store/hooks/typizedHooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
+import { barberActions } from "@/store/slices/barberSlice";
 import { RootState } from "@/store/store";
 import { logOut } from "@/lib/api/user/logOut";
 import styles from './UserNavigation.module.css';
 const UserNavigation: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const router = useRouter();
+    const dispatch = useAppDispatch();
     const {loggedBarber} = useAppSelector((state: RootState) => state?.barber);
     const logOutHandler = async () => {
         const result = await logOut('auth/logout.php', {});
         if(!result.success) {
             setErrorMessage(result.message);
         }
+        dispatch(barberActions.setLoggedBarber({
+        id: 0,
+        username: '',
+        file: '',
+        role: ''
+    }));
        router.push('/');
     };
     let showLink = false;

@@ -22,7 +22,7 @@ const Services:React.FC<Props> = ({services}) => {
         dispatch(serviceActions.setServiceSlice(updateServices));
     }, [services]);
     return (
-        <section className={styles.services}>
+        <section>
             <h1>ODABERITE USLUGU</h1>
             <nav aria-label="Choose service navigation">
                 <ul>

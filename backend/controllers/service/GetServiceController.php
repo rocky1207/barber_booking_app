@@ -3,6 +3,10 @@ require_once (__DIR__ . "/../../controllers/AppController.php");
 require_once (__DIR__ . "/../../validators/getDataByIdValidator.php");
 require_once (__DIR__ . "/../../models/service/GetServiceModel.php");
 class GetServiceController {
+    public function getAllServices() {
+        var_dump('get all services');
+        exit();
+    }
     public function getUserServices($userId) {
         $validateData = getDataByIdValidator($userId);
         try {
@@ -20,8 +24,8 @@ class GetServiceController {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }
     }
-    public function getServicesById($id) {
-        $validateData = getDataByIdValidator($id);
+    public function getServicesById($serviceId) {
+        $validateData = getDataByIdValidator($serviceId);
         try {
             $getServiceModel = new GetServiceModel();
             $service = $getServiceModel->getServiceById($validateData["id"]);

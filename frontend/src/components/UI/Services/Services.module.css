@@ -1,4 +1,4 @@
-.services ul li {
+.serviceItem {
    border: 1px solid var(--logoColor);
    border-radius: 20px;
    margin-bottom: 20px;
@@ -6,15 +6,15 @@
    opacity: 0;
    animation: slideInLeft .3s ease forwards;
 }
-.services ul li:hover,
-.services ul li:active {
+.serviceItem:hover,
+.serviceItem:active {
   cursor: pointer;
   /*margin-top: -10px;*/
  
   border-color: rgb(203, 188, 151);
   background-color: rgba(34, 32, 32, 1);
 }
-.services ul li button {
+.bookNavBtn {
   width: 100%;
 }
 @keyframes slideInLeft {
@@ -27,6 +27,6 @@
     transform: translateX(0);
   }
 }
-.services ul li:hover {
+.serviceItem:hover {
    cursor: pointer;
 }
