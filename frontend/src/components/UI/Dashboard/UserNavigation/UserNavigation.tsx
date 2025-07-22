@@ -32,7 +32,7 @@ const UserNavigation: React.FC = () => {
             {errorMessage && <p>{errorMessage}</p>}
             <ul className={styles.userNavigation}>
             <li><button onClick={logOutHandler}>LOG OUT</button></li>
-            {showLink && <li><Link href="/login/dashboard/register">NOVI KORISNIK</Link></li>}
+            {showLink && <li><Link href="/login/dashboard/user/register">NOVI KORISNIK</Link></li>}
             </ul>
         </>
     );

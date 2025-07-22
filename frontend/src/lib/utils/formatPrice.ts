@@ -4,4 +4,4 @@ export const formatPrice = (price: string | number): string => {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     }).format(number);
-}
+};

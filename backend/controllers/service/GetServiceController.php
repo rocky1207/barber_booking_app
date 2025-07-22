@@ -4,8 +4,17 @@ require_once (__DIR__ . "/../../validators/getDataByIdValidator.php");
 require_once (__DIR__ . "/../../models/service/GetServiceModel.php");
 class GetServiceController {
     public function getAllServices() {
-        var_dump('get all services');
-        exit();
+        try {
+            $getServiceModel = new GetServiceModel();
+            $allServices = $getServiceModel->getAllServices();
+            return [
+                "success" => true,
+                "status" => 200,
+                "data" => $allServices
+            ];
+        } catch (Exception $e) {
+            AppController::createMessage($e->getMessage(), $e->getCode());
+        }
     }
     public function getUserServices($userId) {
         $validateData = getDataByIdValidator($userId);

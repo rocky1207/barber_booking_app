@@ -2,6 +2,7 @@ import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { AppDispatch } from "@/store/store";
 import { serviceActions } from "@/store/slices/serviceSlice";
 import store, { RootState } from "@/store/store";
+import { formatPrice } from "./formatPrice";
 
 
 export const serviceActionDispatcher = (actionDone: string, data: SingleServiceType, dispatch: AppDispatch) => {
@@ -9,12 +10,15 @@ export const serviceActionDispatcher = (actionDone: string, data: SingleServiceT
     const services = state.service.services;
     console.log(data);
     if(actionDone === 'INSERTED') {
-        
-        const newData = [
+        const service = {
+            ...data,
+            price: formatPrice(data.price)
+        }
+        const updatedServices = [
             ...services,
-            data
+            service
         ];
-        dispatch(serviceActions.setServiceSlice(newData));
+        dispatch(serviceActions.setServiceSlice(updatedServices));
     }
     
 }

@@ -13,7 +13,8 @@ interface Props {
 const ServiceItem:React.FC<Props> = ({service, index}) => {
     const {role} = useAppSelector((state: RootState) => state.barber.loggedBarber);
     const router = useRouter();
-    const servicePrice = formatPrice(service.price);
+    console.log(service.price);
+    const servicePrice = service.price;
 
     const openModal = () => {
         console.log('radi');

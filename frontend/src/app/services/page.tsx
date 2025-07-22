@@ -3,6 +3,7 @@ import Header from "@/components/UI/Header/Header";
 import Services from "@/components/UI/Services/Services";
 import { getAllServices } from "@/lib/api/service/getAllServices";
 import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
+import { formatPrice } from "@/lib/utils/formatPrice";
 import Link from "next/link";
 
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
@@ -12,7 +13,13 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
     if(!id) noIdbackUp = <p>Ne postoji frizer sa ovim ID</p>
    // console.log(apiRoutes.GET_ALL_SERVICES);
     const {success, message, data} = await getAllServices(apiRoutes.GET_ALL_SERVICES);
-    
+    console.log(data);
+    const services = data?.map((service) => {
+        return {
+            ...service,
+            price: formatPrice(service.price)
+        }
+    })
     return (
         <>
         <Header />
@@ -24,7 +31,7 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
         <main className="wrapp">
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :
-            <Services services={data ?? []} />}
+            <Services services={services ?? []} />}
         </main>
         </>
     );

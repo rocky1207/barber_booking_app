@@ -67,14 +67,12 @@ const Register:React.FC = () => {
     };
 
 return (
-        <>
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={registerInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
              <p>{errorMessage}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
-        </>
     );
 };
 export default Register;

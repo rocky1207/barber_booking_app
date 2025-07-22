@@ -30,6 +30,12 @@ body {
     align-items: center;
     height: 100vh; 
 }
+.flexed {
+    display: flex;
+    justify-content: space-between; /* centriranje po vertikali */
+    align-items: center;
+     
+}
 .textCenter {
     text-align: center; 
 }

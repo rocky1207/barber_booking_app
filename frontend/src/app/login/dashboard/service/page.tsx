@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Header from "@/components/UI/Header/Header";
-import Services from "@/components/UI/Services/Services";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import ServiceItem from "@/components/UI/Services/ServiceItem";
@@ -9,28 +8,41 @@ import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { useSearchParams } from "next/navigation";
 const ServicePage: React.FC = () => {
     const {services} = useAppSelector((state: RootState) => state.service);
+    const {barbers} = useAppSelector((state: RootState) => state.barber);
     const params = useSearchParams();
-    const barberId = params.get('id');
-    console.log(barberId);
-    console.log(services);
-    return (
-        <>
-        <Header />
-        <nav className="wrapp">
-            <ul>
-                <li><Link href="/login/dashboard">back</Link></li>
-            </ul>
-        </nav>
-        <main className="wrapp">
-            <h1>USLUGE: <span>MARIJA</span></h1>
-            <nav aria-label="Choose service navigation">
+    const strBarberId = params.get('barberId');
+    const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
+    const userServices = services.filter(service => service.userId === barberId);
+    const barber = barberId !== null && barbers.find((barber) => barber.id === barberId!);
+    
+    const barberUsername: string = barber ? barber.username.toUpperCase() : 'NULL';
+    let showResult;
+    if(!barberId) showResult = <p className="textCenter">Nije prosleđen pravilan ID frizera.</p>;
+    if(userServices.length > 0) {
+        showResult = <nav aria-label="Choose service navigation">
                 <ul>
-                    {services.map((service: SingleServiceType, index: number) => {
+                    {userServices.map((service: SingleServiceType, index: number) => {
                         return <ServiceItem key={service.id} service={service} index={index}/>
                     })}
                     
                 </ul>
             </nav>
+    } else {
+       showResult = <p className="textCenter">Nema unetih usluga za izabranog frizera.</p>;
+    }
+    
+    return (
+        <>
+        <Header />
+        <nav className="wrapp">
+            <ul className="flexed">
+                <li><Link href="/login/dashboard">dashboard</Link></li>
+                <li><Link href={`/login/dashboard/service/insert?barberId=${barberId}`}>UNESITE USLUGU</Link></li>
+            </ul>
+        </nav>
+        <main className="wrapp">
+            <h1>USLUGE: <span>{barberUsername}</span></h1>
+            {showResult}
         </main>
         </>
     );
