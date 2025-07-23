@@ -50,6 +50,9 @@ h1 {
   margin-bottom: 60px;
   text-align: center;
 }
+.logOutDiv {
+  margin-bottom: 20px;
+}
 ul {
   list-style-type: none;
 }

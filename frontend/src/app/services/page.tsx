@@ -25,7 +25,7 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
         <Header />
         <nav className="wrapp">
             <ul>
-                <li><Link href="/">back</Link></li>
+                <li><Link href="/">home</Link></li>
             </ul>
         </nav>
         <main className="wrapp">

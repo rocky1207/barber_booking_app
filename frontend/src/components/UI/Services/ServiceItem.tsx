@@ -1,6 +1,5 @@
 import { SingleServiceType } from '@/types/Api/ReturnServiceType';
-import { formatPrice } from '@/lib/utils/formatPrice';
-import NavigateButton from '@/components/Button/NavigateButton';
+import ServiceButtons from './ServiceButtons';
 import { useRouter } from 'next/navigation';
 import { modalActionBtn } from '@/datas/ButttonObjects';
 import { useAppSelector } from '@/store/hooks/typizedHooks';
@@ -9,11 +8,12 @@ import styles from './Services.module.css';
 interface Props {
     service: SingleServiceType;
     index: number;
+    showBtns: boolean;
 }
-const ServiceItem:React.FC<Props> = ({service, index}) => {
+const ServiceItem:React.FC<Props> = ({index, service, showBtns}) => {
     const {role} = useAppSelector((state: RootState) => state.barber.loggedBarber);
     const router = useRouter();
-    console.log(service.price);
+    
     const servicePrice = service.price;
 
     const openModal = () => {
@@ -32,7 +32,7 @@ const ServiceItem:React.FC<Props> = ({service, index}) => {
     return (
         <li key={service.id} className={styles.serviceItem} style={{ animationDelay: `${index * 0.2}s` }}>
             <button className={styles.bookNavBtn} onClick={handleClick}>{service.userService}: <span>{servicePrice}din.</span></button>
-            {showBtn && <NavigateButton {...newModalActionBtn}/>}
+            {showBtns && <ServiceButtons />}
         </li>
     );
 };
