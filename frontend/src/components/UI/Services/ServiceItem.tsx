@@ -1,29 +1,23 @@
 import { SingleServiceType } from '@/types/Api/ReturnServiceType';
 import ServiceButtons from './ServiceButtons';
 import { useRouter } from 'next/navigation';
-import { modalActionBtn } from '@/datas/ButttonObjects';
 import { useAppSelector } from '@/store/hooks/typizedHooks';
 import { RootState } from '@/store/store';
+import { forwardRef } from 'react';
 import styles from './Services.module.css';
 interface Props {
     service: SingleServiceType;
     index: number;
     showBtns: boolean;
+    setDeleteServiceId: React.Dispatch<React.SetStateAction<number>>
 }
-const ServiceItem:React.FC<Props> = ({index, service, showBtns}) => {
+const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBtns, setDeleteServiceId},  ref) => {
     const {role} = useAppSelector((state: RootState) => state.barber.loggedBarber);
     const router = useRouter();
     
     const servicePrice = service.price;
 
-    const openModal = () => {
-        console.log('radi');
-       // router.push()
-    }
-    const newModalActionBtn = {
-        ...modalActionBtn,
-        onAction: openModal
-    }
+    
     let showBtn: boolean;
    // console.log(role);
     showBtn = role === 'owner' || role === 'admin' || role === 'user' ? true : false;
@@ -32,8 +26,8 @@ const ServiceItem:React.FC<Props> = ({index, service, showBtns}) => {
     return (
         <li key={service.id} className={styles.serviceItem} style={{ animationDelay: `${index * 0.2}s` }}>
             <button className={styles.bookNavBtn} onClick={handleClick}>{service.userService}: <span>{servicePrice}din.</span></button>
-            {showBtns && <ServiceButtons />}
+            {showBtns && <ServiceButtons serviceId={service.id} ref={ref} setDeleteServiceId={setDeleteServiceId} />}
         </li>
     );
-};
+});
 export default ServiceItem;

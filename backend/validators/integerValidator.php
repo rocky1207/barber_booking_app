@@ -1,6 +1,6 @@
 <?php
 require_once (__DIR__ . "/../controllers/AppController.php");
-function getDataByIdValidator($id) {
+function integerValidator($id) {
     $inputs = [
         "id" => (int)$id,
     ];

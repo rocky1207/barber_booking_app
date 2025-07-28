@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Header from "@/components/UI/Header/Header";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
@@ -9,10 +9,12 @@ import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { useSearchParams } from "next/navigation";
 import ConfirmModal from "@/components/UI/ConfirmModal/ConfirmModal";
 import { deleteBarberBtn } from "@/datas/ButttonObjects";
+import { manageService } from "@/lib/api/service/manageService";
 
 const ServicePage: React.FC = () => {
     const {services} = useAppSelector((state: RootState) => state.service);
     const {barbers} = useAppSelector((state: RootState) => state.barber);
+    const [deleteServiceId, setDeleteServiceId] = useState<number>(0);
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
@@ -28,7 +30,7 @@ const ServicePage: React.FC = () => {
         showResult = <nav aria-label="Choose service navigation">
                 <ul>
                     {userServices.map((service: SingleServiceType, index: number) => {
-                        return <ServiceItem key={service.id} service={service} index={index} showBtns={true} />
+                        return <ServiceItem key={service.id} service={service} index={index} showBtns={true} ref={dialog} setDeleteServiceId={setDeleteServiceId} />
                     })}
                     
                 </ul>
@@ -36,14 +38,18 @@ const ServicePage: React.FC = () => {
     } else {
        showResult = <p className="textCenter">Nema unetih usluga za izabranog frizera.</p>;
     }
-    /*const updatedBarberBtn = {
+    const updatedBarberBtn = {
         ...deleteBarberBtn,
-        id: 
-    }*/
+        action: 'DELETE_SERVICE',
+        id: deleteServiceId,
+        head: 'Da li ste sigurni?',
+        onAction: manageService
+    };
+    console.log(updatedBarberBtn);
     
     return (
         <>
-        <ConfirmModal ref={dialog} {...deleteBarberBtn}/>
+        <ConfirmModal ref={dialog} {...updatedBarberBtn}/>
         <Header />
         <nav className="wrapp">
             <ul className="flexed">

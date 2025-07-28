@@ -35,7 +35,6 @@ const Service: React.FC = () => {
     setIsLoadingState(true, dispatch);
     const response = await insertService('INSERT',  data);
     
-    
     if(!response.success) {
         setMessage(response.message);
         setIsLoadingState(false, dispatch);
@@ -47,7 +46,7 @@ const Service: React.FC = () => {
         return;
     }
     setMessage(response.message);
-    serviceActionDispatcher(response.actionDone!.toUpperCase(), response.data, dispatch);
+    serviceActionDispatcher(response.data, response.actionDone!.toUpperCase(), dispatch);
     setIsLoadingState(false, dispatch);
     form.reset();
 }

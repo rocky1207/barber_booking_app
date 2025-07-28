@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import styles from './Barbers.module.css';
 
 
-const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number}>(({barberId}, ref) => {
+const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barberId}, ref) => {
     const {loggedBarber} = useAppSelector((state: RootState) => state?.barber);
     const dispatch = useAppDispatch();
     const router = useRouter();

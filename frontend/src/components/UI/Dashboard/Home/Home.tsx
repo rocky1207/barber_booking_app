@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   console.log(loggedBarber);
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState<string>('');
-    const router = useRouter();
+  const router = useRouter();
     
   console.log(currentBarberId);
   useEffect(() => {

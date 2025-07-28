@@ -4,16 +4,13 @@ import { SingleServiceType, ManageServiceReturnType } from "@/types/Api/ReturnSe
 import { BasicServiceType } from "@/types/Services/ServicesType";
 
 export const insertService = async (action: string, data: BasicServiceType): Promise<ManageServiceReturnType> => {
-    console.log(action, data);
-    
     let answer: ManageServiceReturnType;
     let actionDone: string = '';
-    
     try {
         let response;
         if(action === 'INSERT') {
             response = await api.post(apiRoutes.INSERT_SERVICE, data);
-            actionDone = 'INSERTED';
+            actionDone = 'INSERT';
             console.log(response);
         }
         if(response?.data?.success) {
@@ -22,7 +19,8 @@ export const insertService = async (action: string, data: BasicServiceType): Pro
             //const message = response?.message;
             answer = {success: true, data: service, message: response?.data.message, actionDone};
         } else {
-            answer = {success: false, data: response?.data?.message  || 'Greška na serveru.'};
+           // answer = {success: false, data: response?.data?.message  || 'Greška na serveru.'};
+            throw new Error(response?.data?.message  || 'Greška na serveru.');
         }
     } catch(error: any) {
         answer = {success: false, message: error?.message};

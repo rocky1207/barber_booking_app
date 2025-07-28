@@ -1,6 +1,6 @@
 <?php
 require_once (__DIR__ . "/../../controllers/AppController.php");
-require_once (__DIR__ . "/../../validators/getDataByIdValidator.php");
+require_once (__DIR__ . "/../../validators/integerValidator.php");
 require_once (__DIR__ . "/../../models/service/GetServiceModel.php");
 class GetServiceController {
     public function getAllServices() {
@@ -17,7 +17,7 @@ class GetServiceController {
         }
     }
     public function getUserServices($userId) {
-        $validateData = getDataByIdValidator($userId);
+        $validateData = integerValidator($userId);
         try {
             $getServiceModel = new GetServiceModel();
             $services = $getServiceModel->getUserServices($validateData["id"]);
@@ -34,7 +34,7 @@ class GetServiceController {
         }
     }
     public function getServicesById($serviceId) {
-        $validateData = getDataByIdValidator($serviceId);
+        $validateData = integerValidator($serviceId);
         try {
             $getServiceModel = new GetServiceModel();
             $service = $getServiceModel->getServiceById($validateData["id"]);

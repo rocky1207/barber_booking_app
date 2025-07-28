@@ -4,6 +4,8 @@ import Services from "@/components/UI/Services/Services";
 import { getAllServices } from "@/lib/api/service/getAllServices";
 import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 import { formatPrice } from "@/lib/utils/formatPrice";
+import { manageService } from "@/lib/api/service/manageService";
+import { GetServicesReturnType } from "@/types/Api/ReturnServiceType";
 import Link from "next/link";
 
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
@@ -13,6 +15,7 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
     if(!id) noIdbackUp = <p>Ne postoji frizer sa ovim ID</p>
    // console.log(apiRoutes.GET_ALL_SERVICES);
     const {success, message, data} = await getAllServices(apiRoutes.GET_ALL_SERVICES);
+   
     console.log(data);
     const services = data?.map((service) => {
         return {
