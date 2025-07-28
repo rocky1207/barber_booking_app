@@ -10,7 +10,7 @@ const UpdatePage: React.FC = () => {
         <>
         <nav className="wrapp">
             <ul>
-                <li><Link href="/login/dashboard">back</Link></li>
+                <li><Link href="/login/dashboard">dashboard</Link></li>
             </ul>
         </nav>
         <main className="wrapp center">

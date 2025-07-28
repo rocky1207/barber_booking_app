@@ -1,26 +1,27 @@
 <?php
 require_once (__DIR__ . "/../AppController.php");
-require_once (__DIR__ . "/../../models/DatabaseModel.php");
 require_once (__DIR__ . "/../../models/user/DeleteUserModel.php");
-require_once (__DIR__ . "/../../validators/user/deleteUserValidator.php");
+require_once (__DIR__ . "/../../validators/integerValidator.php");
 
 class DeleteUserController {
     public function deleteUser($data) {
-        $validateInputs = deleteUserValidator($data);
+        $validateInputs = integerValidator($data['id']);
         try{
             $deleteUserModel = new DeleteUserModel();
-            $result = $deleteUserModel->deleteUser($validateInputs["id"]);
-            // return $result;
-            return [
+            $isDeleted = $deleteUserModel->deleteUser($validateInputs["id"]);
+            if($isDeleted ) {
+                return [
                 "success" => true,
                 "status" => 200, 
                 "message" => "Korisnik sa ID {$validateInputs["id"]} je obrisan.",
-                "data" => $result
+                "data" => $isDeleted 
             ];
+            } else {
+                throw throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
+            }
         } catch(Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }
     }
 }
-
 ?>

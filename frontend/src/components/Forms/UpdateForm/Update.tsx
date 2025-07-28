@@ -23,7 +23,7 @@ import extraStyles from './Update.module.css';
 const Update: React.FC = () => {
     const barberState = useAppSelector((state: RootState) => state?.barber);
     const params = useSearchParams();
-    const userId = params.get('id');
+    const userId = params.get('barberId');
     const paramId = userId !== null ? parseInt(userId, 10) : undefined;
     const barber = barberState?.barbers.find(barberItem => paramId === barberItem.id);
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');

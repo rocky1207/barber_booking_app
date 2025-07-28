@@ -8,14 +8,13 @@ import { useSearchParams } from "next/navigation";
 import { insertService } from "@/lib/api/service/insertService";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
-import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import styles from '../Form.module.css';
 
 const Service: React.FC = () => {
     const [message, setMessage] = useState<string | undefined>('');
     const params = useSearchParams();
-    const userId = params.get('id');
+    const userId = params.get('barberId');
     const id = userId !== null ? parseInt(userId, 10) : undefined;
     const dispatch = useAppDispatch();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +35,6 @@ const Service: React.FC = () => {
     setIsLoadingState(true, dispatch);
     const response = await insertService('INSERT',  data);
     
-    
     if(!response.success) {
         setMessage(response.message);
         setIsLoadingState(false, dispatch);
@@ -47,14 +45,8 @@ const Service: React.FC = () => {
         setIsLoadingState(false, dispatch);
         return;
     }
-if (response.data) {
-        console.log(response?.data);
-    }
- 
-        
-    
     setMessage(response.message);
-    serviceActionDispatcher(response.actionDone!.toUpperCase(), response.data, dispatch);
+    serviceActionDispatcher(response.data, response.actionDone!.toUpperCase(), dispatch);
     setIsLoadingState(false, dispatch);
     form.reset();
 }

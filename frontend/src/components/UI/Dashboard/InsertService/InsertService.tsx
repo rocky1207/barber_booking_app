@@ -1,7 +1,7 @@
+"use client";
 import Link from "next/link";
-import Register from "@/components/Forms/RegisterForm/Register";
-
-const RegisterPage: React.FC = () => {
+import Service from "@/components/Forms/ServiceForm/Service";
+const InsertService: React.FC = () => {
     return (
         <>
         <nav className="wrapp">
@@ -10,10 +10,10 @@ const RegisterPage: React.FC = () => {
             </ul>
         </nav>
         <main className="wrapp center">
-            <h1>UNESITE KORISNIKA</h1>
-            <Register/>
+            <h1>UNESITE USLUGU</h1>
+            <Service />
         </main>
         </>
-    )
+    );
 };
-export default RegisterPage;
+export default InsertService;
