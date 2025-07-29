@@ -1,11 +1,6 @@
-"use client";
+import Update from "@/components/Forms/Service/UpdateForm/Update";
 import Link from "next/link";
-import Update from "@/components/Forms/Barber/UpdateForm/Update"
-import { useSearchParams } from "next/navigation";
-const UpdatePage: React.FC = () => {
-    const params = useSearchParams();
-    const id = params.get('id');
-    console.log(id);
+const UpdatePage = () => {
     return (
         <>
         <nav className="wrapp">

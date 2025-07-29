@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Register from "@/components/Forms/RegisterForm/Register";
+import Register from "@/components/Forms/Barber/RegisterForm/Register";
 
 const RegisterPage: React.FC = () => {
     return (

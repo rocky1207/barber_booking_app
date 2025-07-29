@@ -1,5 +1,5 @@
 "use client";
-import ChangePasswordForm from "@/components/Forms/ChangePasswordForm/ChangePasswordForm";
+import ChangePasswordForm from "@/components/Forms/Barber/ChangePasswordForm/ChangePasswordForm";
 import Link from "next/link";
 const ChangePasswordPage: React.FC = () => {
     return (
