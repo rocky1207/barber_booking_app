@@ -9,12 +9,10 @@ export const manageBarber = async (url: string, id: number): Promise<ManageBarbe
         /*if(url==='user/getClients.php') {
             response = await api.get(url, {params: {id}});
             actionDone = 'get_client';
-        }else */if(url==='user/updateUser.php'){
-            response = await api.patch(url, {id});
-            actionDone = 'update';
-        }else if(url==='user/deleteUser.php') {
+        }else */
+        if(url==='user/deleteUser.php') {
             response = await api.delete(url, {data: {id}});
-            actionDone = 'delete';
+            actionDone = 'DELETE';
         }
         if(response?.data?.success) {
             answer = {success: true, data: response?.data?.data || response?.data?.message, actionDone};

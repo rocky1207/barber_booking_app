@@ -1,5 +1,5 @@
 "use client";
-import Service from '@/components/Forms/ServiceForm/Service';
+import Service from '@/components/Forms/Service/ServiceForm/Service';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 

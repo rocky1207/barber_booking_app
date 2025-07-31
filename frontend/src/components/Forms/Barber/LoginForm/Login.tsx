@@ -1,16 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
-import Input from "../Input/Input";
+import Input from "../../Input/Input";
 import { loginInputs } from "@/datas/Form/lnputObjects";
 import { loginValidationSchema } from "@/lib/validators/validationSchema";
 import { formValidator } from "@/lib/validators/formValidator";
 import { createFormData } from "@/lib/utils/createFormData";
-import { loginRegisterUpdate } from "@/lib/api/user/loginRegisterUpdate";
+import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { barberActions } from "@/store/slices/barberSlice";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
-import styles from '../Form.module.css';
+import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
+import styles from '../../Form.module.css';
 const LogIn:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
     const dispatch = useAppDispatch();
@@ -29,13 +30,13 @@ const LogIn:React.FC = () => {
             return;
         }
         setIsLoadingState(true, dispatch); 
-        const result = await loginRegisterUpdate("auth/login.php", data, 'POST');
+        const result = await loginRegisterUpdate(apiRoutes.LOGIN_USER, data, 'POST');
         if(!result.success) {
             setIsLoadingState(false, dispatch);
             setErrorMessage(result.message);
         return;
         } 
-        result?.data && dispatch(barberActions.setLoggedBarber(result?.data?.data));
+        result?.data && dispatch(barberActions.setLoggedBarber(result?.data.data));
         router.push('/login/dashboard');
     };
 

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Update from "@/components/Forms/UpdateForm/Update"
+import Update from "@/components/Forms/Barber/UpdateForm/Update"
 import { useSearchParams } from "next/navigation";
 const UpdatePage: React.FC = () => {
     const params = useSearchParams();

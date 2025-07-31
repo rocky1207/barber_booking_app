@@ -14,7 +14,7 @@ function insertServiceValidator($data) {
     ];
     $messages = [
         "service" => AppController::SERVICE_ERROR_MESSAGE,
-        "price" => AppController::SERVICE__PRICE_ERROR_MESSAGE,
+        "price" => AppController::SERVICE_PRICE_ERROR_MESSAGE,
         "userId" => AppController::INT_ERROR_MESSAGE,
     ];
     if(isset($data["description"]) && $data["description"] !== '') {
