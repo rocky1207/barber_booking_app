@@ -13,9 +13,9 @@ class UpdateUserModel {
             }
             DatabaseModel::$pdo->beginTransaction();
             $stmt = DatabaseModel::$pdo->prepare($query);
-            $result = $stmt->execute($execData);
+            $isUpdated = $stmt->execute($execData);
             DatabaseModel::$pdo->commit();
-            if(!$result) {
+            if(!$isUpdated) {
                 throw new Exception("Ažuriranje nije uspelo", 404);
             } 
             $getUserModel = new GetUserModel();

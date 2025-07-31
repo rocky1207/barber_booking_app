@@ -7,7 +7,12 @@ export const loginRegisterUpdate = async (url: string, data: Record<string, stri
   let answer;  
   try {
         const response = await apiRequest;
-        answer = {success: true, data: response?.data};
+        console.log(response?.data);
+        if(response?.data?.success) {
+          answer = {success: true, data: response?.data, message: response?.data.message};
+        } else {
+          answer = {success: false, message: response?.data.message || 'Greška prilikom izvršenja upita'};
+        }
       } catch(error: any) {
         answer = {success: false, message: error.message};
     }

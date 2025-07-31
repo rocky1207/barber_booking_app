@@ -10,6 +10,7 @@ import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { barberActions } from "@/store/slices/barberSlice";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 import styles from '../../Form.module.css';
 const LogIn:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
@@ -29,13 +30,13 @@ const LogIn:React.FC = () => {
             return;
         }
         setIsLoadingState(true, dispatch); 
-        const result = await loginRegisterUpdate("auth/login.php", data, 'POST');
+        const result = await loginRegisterUpdate(apiRoutes.LOGIN_USER, data, 'POST');
         if(!result.success) {
             setIsLoadingState(false, dispatch);
             setErrorMessage(result.message);
         return;
         } 
-        result?.data && dispatch(barberActions.setLoggedBarber(result?.data?.data));
+        result?.data && dispatch(barberActions.setLoggedBarber(result?.data.data));
         router.push('/login/dashboard');
     };
 

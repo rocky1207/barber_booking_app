@@ -11,6 +11,7 @@ export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType 
     console.log(data);
     let updatedServices: SingleServiceType[] = [];
     if(actionDone === 'INSERT') {
+        console.log(data);
         if('userId' in data && 'userService' in data && 'price' in data && 'description' in data) {
             const service = {
             ...data,
@@ -20,12 +21,25 @@ export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType 
             ...services,
             service
         ];
-        
         }
     };
     
     if(actionDone === 'DELETE') {
         updatedServices = services.filter(service => service.id !== data.id);
+    };
+    
+    if(actionDone === 'UPDATE') {
+        if('userId' in data && 'userService' in data && 'price' in data && 'description' in data) {
+            updatedServices = services.map((service) => {
+                if(service.id === data.id) {
+                    service = {
+                        ...data,
+                        price: formatPrice(data.price)
+                    }
+                }
+                return service;
+            });
+        }
     };
     dispatch(serviceActions.setServiceSlice(updatedServices));
 }

@@ -57,7 +57,8 @@ const Service: React.FC = () => {
         return;
     }
     setMessage(response.message);
-    serviceActionDispatcher(response.data.data, response.actionDone!.toUpperCase(), dispatch);
+    console.log(response);
+    response?.data && serviceActionDispatcher(response?.data?.data, 'INSERT', dispatch);
     setIsLoadingState(false, dispatch);
     form.reset();
 }

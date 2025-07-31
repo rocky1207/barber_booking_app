@@ -1,5 +1,6 @@
 export const apiRoutes = {
     GET_CLIENTS: 'user/getClients.php',
+    LOGIN_USER: 'auth/login.php',
     UPDATE_USER: 'user/updateUser.php',
     DELETE_USER: 'user/deleteUser.php',
     CHANGE_PASSWORD: '/user/changePassword.php',
