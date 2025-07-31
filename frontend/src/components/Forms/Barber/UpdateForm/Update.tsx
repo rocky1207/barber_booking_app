@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import Input from "../Input/Input";
-import FileInput from "../FileInput/FileInput";
+import Input from "../../Input/Input";
+import FileInput from "../../FileInput/FileInput";
 import { updateValidationSchema } from "@/lib/validators/validationSchema";
 import { useAppDispatch, useAppSelector } from "@/store/hooks/typizedHooks";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/store/store";
-import { loginRegisterUpdate } from "@/lib/api/user/loginRegisterUpdate";
+import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
 import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import NavigateButton from "@/components/Button/NavigateButton";
 import { changePasswordBtn } from "@/datas/ButttonObjects";
@@ -15,7 +15,7 @@ import { createFormData } from "@/lib/utils/createFormData";
 import { barberActions } from "@/store/slices/barberSlice";
 import { formValidator } from "@/lib/validators/formValidator";
 import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
-import styles from '../Form.module.css';
+import styles from '../../Form.module.css';
 import extraStyles from './Update.module.css';
 
 
@@ -23,7 +23,7 @@ import extraStyles from './Update.module.css';
 const Update: React.FC = () => {
     const barberState = useAppSelector((state: RootState) => state?.barber);
     const params = useSearchParams();
-    const userId = params.get('id');
+    const userId = params.get('barberId');
     const paramId = userId !== null ? parseInt(userId, 10) : undefined;
     const barber = barberState?.barbers.find(barberItem => paramId === barberItem.id);
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');

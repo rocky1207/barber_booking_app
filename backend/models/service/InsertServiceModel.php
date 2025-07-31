@@ -26,7 +26,7 @@ class InsertServiceModel {
             $getServiceController = new GetServiceController();
             $service = $getServiceController->getServicesById($id);
             DatabaseModel::$pdo->commit();
-            return $service;
+            return $service['data'];
         } catch (Exception $e) {
             DatabaseModel::$pdo->inTransaction() && DatabaseModel::$pdo->rollBack();
             throw $e;

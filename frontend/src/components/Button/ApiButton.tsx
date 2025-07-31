@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
-
+import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 
 const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
     const {className, text, type, validate, action, onAction, id, ...buttonProps} = btnData;
@@ -16,15 +16,28 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
         e.preventDefault();
         if (!onAction || !id || !action) return;
         let url: string = '';
-        if(action === 'GET_TERMINS') url = apiRoutes.GET_CLIENTS;
+        let slice: string = '';
+        if(action === 'GET_TERMINS') {
+            url = apiRoutes.GET_CLIENTS;
+          //  slice = 'BARBER';
+        } 
        // if(action === 'UPDATE') url = apiRoutes.UPDATE_USER;
-        if(action === 'DELETE') url = apiRoutes.DELETE_USER;
-        if(action === 'INSERT_SERVICE') url = apiRoutes.INSERT_SERVICE;
+        if(action === 'DELETE') {
+            url = apiRoutes.DELETE_USER;
+            slice = 'BARBER';
+        } 
+        
+        if(action === 'DELETE_SERVICE') {
+            url = apiRoutes.DELETE_SERVICE;
+            slice = 'SERVICE';
+        } 
+
         
         const {actionDone} = await onAction(url, id);
         const data = {id};
-        actionDone && barberActionDispatcher(data, actionDone.toUpperCase(), dispatch);
+        actionDone && slice === 'BARBER' && barberActionDispatcher(data, actionDone.toUpperCase(), dispatch);
         actionDone?.toUpperCase() === 'DELETE' && loggedBarrberId === id && router.push('/');
+        actionDone && slice === 'SERVICE' && serviceActionDispatcher(data, actionDone.toUpperCase(), dispatch);;
         dialogRef?.current?.close();
     }
     return (

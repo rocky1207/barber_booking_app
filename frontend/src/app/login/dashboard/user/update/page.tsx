@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Update from "@/components/Forms/UpdateForm/Update"
+import Update from "@/components/Forms/Barber/UpdateForm/Update"
 import { useSearchParams } from "next/navigation";
 const UpdatePage: React.FC = () => {
     const params = useSearchParams();
@@ -10,7 +10,7 @@ const UpdatePage: React.FC = () => {
         <>
         <nav className="wrapp">
             <ul>
-                <li><Link href="/login/dashboard">back</Link></li>
+                <li><Link href="/login/dashboard">dashboard</Link></li>
             </ul>
         </nav>
         <main className="wrapp center">

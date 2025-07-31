@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Input from "../Input/Input";
+import Input from "../../Input/Input";
 import { changePasswordInputs } from "@/datas/Form/lnputObjects";
 import { changePasswordValidationSchema } from "@/lib/validators/validationSchema";
 import { createFormData } from "@/lib/utils/createFormData";
@@ -8,7 +8,7 @@ import { changePassword } from "@/lib/api/user/changePassword";
 import { useAppDispatch, useAppSelector } from "@/store/hooks/typizedHooks";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { RootState } from "@/store/store";
-import styles from "../Form.module.css";
+import styles from "../../Form.module.css";
 
 const ChangePasswordForm: React.FC = () => {
     const {id} = useAppSelector((state: RootState) => state.barber?.loggedBarber);

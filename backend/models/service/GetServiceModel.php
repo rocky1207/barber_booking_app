@@ -1,6 +1,19 @@
 <?php
 require_once (__DIR__ . "/../DatabaseModel.php");
 class GetServiceModel {
+    public function getAllServices() {
+        $query = 'SELECT * FROM service';
+        try {
+            AppController::databaseConnect();
+            $stmt = DatabaseModel::$pdo->prepare($query);
+            $stmt->execute();
+            $allServices = $stmt->fetchAll();
+            
+            return $allServices;
+        } catch(Exception $e) {
+            throw $e;
+        }
+    }
     public function getUserServices($userId) {
         $query = "SELECT * FROM service WHERE userId = :userId";
         try {

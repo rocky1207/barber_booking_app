@@ -22,7 +22,7 @@ class AppController {
     public const NO_RESULT_MESSAGE =  'Nema rezultata za navedeni upit';
 
     public const SERVICE_ERROR_MESSAGE = 'U polje "Usluga" uneli ste nedozvoljene karaktere, poput <, > i slično.';
-    public const SERVICE__PRICE_ERROR_MESSAGE = 'U polje "Cena" dozvoljeno je uneti samo cele brojeve.';
+    public const SERVICE_PRICE_ERROR_MESSAGE = 'U polje "Cena" dozvoljeno je uneti samo cele brojeve.';
     public const SERVICE_DESCRIPTION_ERROR_MESSAGE = 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.';
      /*
     public const EMAIL_REGEX = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
@@ -79,7 +79,7 @@ class AppController {
             }
             
             !preg_match($regex[$key], ${$key}) && self::createMessage($messages[$key], $code);
-            if($key === 'id') {
+            if($key === 'id' || $key === 'price') {
                 $data[$key] = (int)${$key};
             } else {
                 $data[$key] = ${$key};

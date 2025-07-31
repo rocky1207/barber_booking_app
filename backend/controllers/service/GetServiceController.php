@@ -1,10 +1,23 @@
 <?php
 require_once (__DIR__ . "/../../controllers/AppController.php");
-require_once (__DIR__ . "/../../validators/getDataByIdValidator.php");
+require_once (__DIR__ . "/../../validators/integerValidator.php");
 require_once (__DIR__ . "/../../models/service/GetServiceModel.php");
 class GetServiceController {
+    public function getAllServices() {
+        try {
+            $getServiceModel = new GetServiceModel();
+            $allServices = $getServiceModel->getAllServices();
+            return [
+                "success" => true,
+                "status" => 200,
+                "data" => $allServices
+            ];
+        } catch (Exception $e) {
+            AppController::createMessage($e->getMessage(), $e->getCode());
+        }
+    }
     public function getUserServices($userId) {
-        $validateData = getDataByIdValidator($userId);
+        $validateData = integerValidator($userId);
         try {
             $getServiceModel = new GetServiceModel();
             $services = $getServiceModel->getUserServices($validateData["id"]);
@@ -20,8 +33,8 @@ class GetServiceController {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }
     }
-    public function getServicesById($id) {
-        $validateData = getDataByIdValidator($id);
+    public function getServicesById($serviceId) {
+        $validateData = integerValidator($serviceId);
         try {
             $getServiceModel = new GetServiceModel();
             $service = $getServiceModel->getServiceById($validateData["id"]);

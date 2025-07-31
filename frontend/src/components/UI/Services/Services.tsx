@@ -1,37 +1,47 @@
 "use client";
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ServiceItem from './ServiceItem';
 import { SingleServiceType } from '@/types/Api/ReturnServiceType';
 import { useAppDispatch } from '@/store/hooks/typizedHooks';
 import { serviceActions } from '@/store/slices/serviceSlice';
-import { formatPrice } from '@/lib/utils/formatPrice';
-import styles from './Services.module.css';
+import { useSearchParams } from 'next/navigation';
 
 interface Props {
   services: SingleServiceType[];
 };
 const Services:React.FC<Props> = ({services}) => {
-    const updateServices = services.map((service: SingleServiceType) => {
+    const [dleteServiceId, setDeleteServiceId] = useState<number>(0);
+    const params = useSearchParams();
+    const strBarberId = params.get('barberId');
+    const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
+    
+   /* const updateServices = services.map((service: SingleServiceType) => {
         return {
             ...service,
             price: formatPrice(service.price)
         }
     })
+        */
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(serviceActions.setServiceSlice(updateServices));
+        dispatch(serviceActions.setServiceSlice(services));
     }, [services]);
+    const userServices = services.filter((service) => {
+        return service.userId === barberId});
+    console.log(barberId);
+    console.log(userServices);
     return (
-        <section className={styles.services}>
+        <section>
             <h1>ODABERITE USLUGU</h1>
-            <nav aria-label="Choose service navigation">
+            {userServices.length > 0 ? <nav aria-label="Choose service navigation">
                 <ul>
-                    {services.map((service: SingleServiceType, index: number) => {
-                        return <ServiceItem key={service.id} service={service} index={index}/>
+                    {userServices.map((service: SingleServiceType, index: number) => {
+                        return <ServiceItem key={service.id} service={service} index={index} showBtns={false} setDeleteServiceId={setDeleteServiceId}/>
                     })}
                     
                 </ul>
-            </nav>
+            </nav>:
+            <p className='textCenter'>Trenutno nema unetih usluga za izabranog frizera</p> }
         </section>
     );
 };

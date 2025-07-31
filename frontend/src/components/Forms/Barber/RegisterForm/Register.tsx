@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
-import Input from "../Input/Input";
+import Input from "../../Input/Input";
 import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import { registerInputs } from "@/datas/Form/lnputObjects";
 import { formValidator } from "@/lib/validators/formValidator";
 import { registerValidationSchema } from "@/lib/validators/validationSchema";
-import FileInput from "../FileInput/FileInput";
+import FileInput from "../../FileInput/FileInput";
 import { createFormData } from "@/lib/utils/createFormData";
-import { loginRegisterUpdate } from "@/lib/api/user/loginRegisterUpdate";
+import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { useSearchParams } from "next/navigation";
-import styles from '../Form.module.css';
+import styles from '../../Form.module.css';
 
 const Register:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
@@ -67,14 +67,12 @@ const Register:React.FC = () => {
     };
 
 return (
-        <>
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={registerInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
              <p>{errorMessage}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
-        </>
     );
 };
 export default Register;

@@ -2,19 +2,44 @@ import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { AppDispatch } from "@/store/store";
 import { serviceActions } from "@/store/slices/serviceSlice";
 import store, { RootState } from "@/store/store";
+import { formatPrice } from "./formatPrice";
 
 
-export const serviceActionDispatcher = (actionDone: string, data: SingleServiceType, dispatch: AppDispatch) => {
+export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType , actionDone: string, dispatch: AppDispatch): void => {
     const state: RootState = store.getState();
     const services = state.service.services;
     console.log(data);
-    if(actionDone === 'INSERTED') {
-        
-        const newData = [
+    let updatedServices: SingleServiceType[] = [];
+    if(actionDone === 'INSERT') {
+        console.log(data);
+        if('userId' in data && 'userService' in data && 'price' in data && 'description' in data) {
+            const service = {
+            ...data,
+            price: formatPrice(data.price)
+        }
+        updatedServices = [
             ...services,
-            data
+            service
         ];
-        dispatch(serviceActions.setServiceSlice(newData));
-    }
+        }
+    };
     
+    if(actionDone === 'DELETE') {
+        updatedServices = services.filter(service => service.id !== data.id);
+    };
+    
+    if(actionDone === 'UPDATE') {
+        if('userId' in data && 'userService' in data && 'price' in data && 'description' in data) {
+            updatedServices = services.map((service) => {
+                if(service.id === data.id) {
+                    service = {
+                        ...data,
+                        price: formatPrice(data.price)
+                    }
+                }
+                return service;
+            });
+        }
+    };
+    dispatch(serviceActions.setServiceSlice(updatedServices));
 }
