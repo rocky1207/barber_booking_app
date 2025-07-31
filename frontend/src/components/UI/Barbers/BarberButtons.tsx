@@ -14,12 +14,21 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barbe
     const dispatch = useAppDispatch();
     const router = useRouter();
     const openModal = () => {
-        dispatch(barberActions.setCurrentBarberId(barberId));
+        dispatch(barberActions.setActionBarberId(barberId));
         if(ref && typeof ref !== "function" && ref.current) ref.current.showModal();
     }
-    const updatePage = () => {router.push(`/login/dashboard/user/update?barberId=${barberId}`)};
-    const appointmentsPage = () => {router.push(`/login/dashboard/appointments?id=${barberId}`)};
-    const servicesPage = () => {router.push(`/login/dashboard/service?barberId=${barberId}`)};
+    const updatePage = () => {
+        dispatch(barberActions.setActionBarberId(barberId));
+        router.push(`/login/dashboard/user/update?barberId=${barberId}`)
+    };
+    const appointmentsPage = () => {
+        dispatch(barberActions.setActionBarberId(barberId));
+        router.push(`/login/dashboard/appointments?id=${barberId}`)
+    };
+    const servicesPage = () => {
+        dispatch(barberActions.setActionBarberId(barberId));
+        router.push(`/login/dashboard/service?barberId=${barberId}`)
+    };
     const newTerminsBtn = {
         ...terminsBtn,
         id: barberId,

@@ -17,14 +17,14 @@ import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 const Update: React.FC = () => {
     const [message, setMessage] = useState<string | undefined>('');
     const {services} = useAppSelector((state: RootState) => state?.service);
-    const {isLoading} = useAppSelector((state: RootState) => state?.ui);
     const dispatch = useAppDispatch();
     const params = useSearchParams();
     const strId = params.get('serviceId');
     const serviceId = strId ? parseInt(strId, 10) : null;
     const service = services.find(item => item.id === serviceId);
     console.log(service);
-    const servicePrice = parseInt(service?.price!, 10).toString();
+    const servicePrice = service?.price.replace(/\./g, '').replace(/,\d{2}$/, '');
+    console.log(servicePrice);
     const serviceInputs = [
         {type: 'text', name: 'service', defaultValue: service?.userService, placeholder: "Usluga"},
         {type: 'text', name: 'price', defaultValue: servicePrice, placeholder: "Cena"},

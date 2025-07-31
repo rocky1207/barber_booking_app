@@ -10,7 +10,7 @@ const initialState: BarberSliceType = {
         file: '',
         role: ''
     },
-    currentBarberId: undefined
+    actionBarberId: undefined
 };
 
 const barberSlice = createSlice({
@@ -23,8 +23,8 @@ const barberSlice = createSlice({
         setLoggedBarber: (state, action: PayloadAction<BasicBarberType>) => {
             state.loggedBarber = action.payload;
         },
-        setCurrentBarberId: (state, action: PayloadAction<number | undefined>) => {
-            state.currentBarberId = action.payload;
+        setActionBarberId: (state, action: PayloadAction<number | undefined>) => {
+            state.actionBarberId = action.payload;
         }
     }
 });

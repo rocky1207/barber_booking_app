@@ -15,14 +15,13 @@ import { barberActions } from "@/store/slices/barberSlice";
 
 const Home: React.FC = () => {
   const dialog = useRef<HTMLDialogElement | null>(null);
-  const {barbers, currentBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
+  const {barbers, actionBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
   console.log(barbers);
   console.log(loggedBarber);
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
     
-  console.log(currentBarberId);
   useEffect(() => {
     setIsLoadingState(false, dispatch);
   }, []);
@@ -63,7 +62,7 @@ const Home: React.FC = () => {
      };
   const updatedDeleteBarberBtn = {
     ...deleteBarberBtn,
-    id: currentBarberId,
+    id: actionBarberId,
     head: 'Da li ste sigurni?',
     onAction: manageBarber
   }

@@ -15,5 +15,5 @@ export interface ExtendedBarberType extends BasicBarberType {
 export interface BarberSliceType {
   barbers: BasicBarberType[];
   loggedBarber: BasicBarberType;
-  currentBarberId: number | undefined;
+  actionBarberId: number | undefined;
 }
