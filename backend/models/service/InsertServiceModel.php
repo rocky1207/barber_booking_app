@@ -4,7 +4,7 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/../../controllers/service/GetServiceController.php");
 class InsertServiceModel {
     public function insertService($data) {
-        $query = "INSERT INTO service (userId, userService, price, description) VALUES (:userId, :userService, :price, :description)";
+        $query = "INSERT INTO service (userId, userService, price) VALUES (:userId, :userService, :price)";
         try {
             AppController::databaseConnect();
             if (!(DatabaseModel::$pdo instanceof PDO)) {
@@ -15,8 +15,8 @@ class InsertServiceModel {
             $stmt->execute([
                 "userId" => $data["userId"],
                 "userService" => $data["service"],
-                "price" => $data["price"],
-                "description" => $data["description"],
+                "price" => $data["price"]
+                //"description" => $data["description"],
             ]);
             $stmt->rowCount() === 0 && throw new Exception("Unos usluge nije uspeo", 404);
             $lastInsertId = DatabaseModel::$pdo->lastInsertId();

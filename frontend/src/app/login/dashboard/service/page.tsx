@@ -12,16 +12,17 @@ import { deleteBarberBtn } from "@/datas/ButttonObjects";
 import { manageService } from "@/lib/api/service/manageService";
 
 const ServicePage: React.FC = () => {
-    const {services} = useAppSelector((state: RootState) => state.service);
-    const {barbers} = useAppSelector((state: RootState) => state.barber);
-    const [deleteServiceId, setDeleteServiceId] = useState<number>(0);
+    const {services, serviceActionId } = useAppSelector((state: RootState) => state?.service);
+    const {barbers} = useAppSelector((state: RootState) => state?.barber);
+    //const [deleteServiceId, setDeleteServiceId] = useState<number>(0);
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
     const userServices = services.filter(service => service.userId === barberId);
     const barber = barberId !== null && barbers.find((barber) => barber.id === barberId!);
     const dialog = useRef<HTMLDialogElement | null>(null);
-    
+    console.log(services);
+    console.log(serviceActionId);
     
     const barberUsername: string = barber ? barber.username.toUpperCase() : 'NULL';
     let showResult;
@@ -30,7 +31,7 @@ const ServicePage: React.FC = () => {
         showResult = <nav aria-label="Choose service navigation">
                 <ul>
                     {userServices.map((service: SingleServiceType, index: number) => {
-                        return <ServiceItem key={service.id} service={service} index={index} showBtns={true} ref={dialog} setDeleteServiceId={setDeleteServiceId} />
+                        return <ServiceItem key={service.id} service={service} index={index} showBtns={true} ref={dialog} />
                     })}
                     
                 </ul>
@@ -41,7 +42,8 @@ const ServicePage: React.FC = () => {
     const updatedBarberBtn = {
         ...deleteBarberBtn,
         action: 'DELETE_SERVICE',
-        id: deleteServiceId,
+        //id: deleteServiceId,
+        id: serviceActionId,
         head: 'Da li ste sigurni?',
         onAction: manageService
     };

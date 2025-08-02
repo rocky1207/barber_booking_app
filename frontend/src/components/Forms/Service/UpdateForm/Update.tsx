@@ -43,7 +43,7 @@ const Update: React.FC = () => {
             id: service?.id.toString()!,
             service: formData.service,
             price: formData.price,
-            description: formData.description
+           // description: formData.description
         }
         
         //const data = validateInputs
@@ -62,7 +62,7 @@ const Update: React.FC = () => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
-            <textarea name='description' defaultValue={service?.description}></textarea>
+            {/*<textarea name='description' defaultValue={service?.description}></textarea>*/}
             <p>{message}</p>
             <button type='submit'>POŠALJI</button>
         </form>

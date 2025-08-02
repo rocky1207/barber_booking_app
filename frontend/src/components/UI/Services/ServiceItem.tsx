@@ -19,7 +19,7 @@ const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBt
    // console.log(role);
     showBtn = role === 'owner' || role === 'admin' || role === 'user' ? true : false;
     //console.log(showBtn);
-    const handleClick = () => {router.push(`/booking?userId=${service.userId}&service=${service.userService}`)};
+    const handleClick = () => {router.push(`/booking?barberId=${service.userId}&serviceId=${service.id}`)};
 
     return (
         <li key={service.id} className={styles.serviceItem} style={{ animationDelay: `${index * 0.2}s` }}>

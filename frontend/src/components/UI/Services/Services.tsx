@@ -10,7 +10,7 @@ interface Props {
   services: SingleServiceType[];
 };
 const Services:React.FC<Props> = ({services}) => {
-    const [dleteServiceId, setDeleteServiceId] = useState<number>(0);
+   // const [dleteServiceId, setDeleteServiceId] = useState<number>(0);
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
@@ -36,7 +36,7 @@ const Services:React.FC<Props> = ({services}) => {
             {userServices.length > 0 ? <nav aria-label="Choose service navigation">
                 <ul>
                     {userServices.map((service: SingleServiceType, index: number) => {
-                        return <ServiceItem key={service.id} service={service} index={index} showBtns={false} setDeleteServiceId={setDeleteServiceId}/>
+                        return <ServiceItem key={service.id} service={service} index={index} showBtns={false} />
                     })}
                     
                 </ul>
