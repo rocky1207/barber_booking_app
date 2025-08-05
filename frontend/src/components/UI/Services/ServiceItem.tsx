@@ -1,8 +1,9 @@
 import { SingleServiceType } from '@/types/Api/ReturnServiceType';
 import ServiceButtons from './ServiceButtons';
 import { useRouter } from 'next/navigation';
-import { useAppSelector } from '@/store/hooks/typizedHooks';
+import { useAppSelector, useAppDispatch } from '@/store/hooks/typizedHooks';
 import { RootState } from '@/store/store';
+import { serviceActions } from '@/store/slices/serviceSlice';
 import { forwardRef } from 'react';
 import styles from './Services.module.css';
 interface Props {
@@ -13,13 +14,19 @@ interface Props {
 }
 const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBtns},  ref) => {
     const {role} = useAppSelector((state: RootState) => state.barber.loggedBarber);
+    const {choosenServices} = useAppSelector((state: RootState) => state?.service);
+    const dispatch = useAppDispatch();
     const router = useRouter();
     const servicePrice = service.price;
     let showBtn: boolean;
    // console.log(role);
     showBtn = role === 'owner' || role === 'admin' || role === 'user' ? true : false;
     //console.log(showBtn);
-    const handleClick = () => {router.push(`/booking?barberId=${service.userId}&serviceId=${service.id}`)};
+    const handleClick = () => {
+       // router.push(`/booking?barberId=${service.userId}&serviceId=${service.id}`);
+       if(!choosenServices.includes(service.id)) dispatch(serviceActions.setChoosenServices([...choosenServices, service.id]));
+       
+    };
 
     return (
         <li key={service.id} className={styles.serviceItem} style={{ animationDelay: `${index * 0.2}s` }}>

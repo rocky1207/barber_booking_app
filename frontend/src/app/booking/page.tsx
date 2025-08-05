@@ -15,7 +15,7 @@ const BookingPage = async ({searchParams}: Props) => {
                 <li><Link href={`/services?barberId=${params.barberId}`}>usluge</Link></li>
             </ul>
         </nav>
-        <main className="wrapp">
+        <main className="middle">
             <BookService />
         </main>
         </>

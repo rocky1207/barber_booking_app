@@ -2,8 +2,11 @@
   --background: rgba(10,10,10,1);
   --foreground: #171717;
   --logoColor: rgba(238, 186, 64, 1);
+  
 }
-
+.rdp-root {
+  --rdp-nav-height: 60px !important;
+}
 body {
   color: var(--logoColor);
   background: var(--background);
@@ -29,6 +32,12 @@ body {
     margin-top: -100px;
     align-items: center;
     height: 100vh; 
+}
+.middle {
+    display: flex;
+    justify-content: center; /* centriranje po vertikali */
+    align-items: center;
+     
 }
 .flexed {
     display: flex;
