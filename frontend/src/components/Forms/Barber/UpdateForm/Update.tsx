@@ -55,7 +55,7 @@ const Update: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(barberActions.setCurrentBarberId(paramId));
+        dispatch(barberActions.setActionBarberId(paramId));
         const form = e.currentTarget as HTMLFormElement;
         const formData = createFormData(e);
         const validateData = {

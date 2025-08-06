@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useAppSelector } from "@/store/hooks/typizedHooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { DayPicker} from "react-day-picker";
 import 'react-day-picker/dist/style.css';
 import styles from './Booking.module.css';
@@ -11,6 +12,8 @@ import styles from './Booking.module.css';
 const BookService: React.FC = () => {
     const {services, choosenServices} = useAppSelector((state: RootState) => state?.service);
     console.log(services);
+    const dispatch = useAppDispatch();
+    useEffect(() => {setIsLoadingState(false, dispatch)}, []);
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;

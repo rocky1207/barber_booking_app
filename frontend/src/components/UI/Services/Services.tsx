@@ -9,6 +9,7 @@ import { barberActions } from '@/store/slices/barberSlice';
 import { uiActions } from '@/store/slices/UiSlice';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
+import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 
 interface Props {
   services: SingleServiceType[];
@@ -28,8 +29,9 @@ const Services:React.FC<Props> = ({services}) => {
     })
         */
     const dispatch = useAppDispatch();
+    
     useEffect(() => {
-        dispatch(uiActions.setIsLoading(false));
+        setIsLoadingState(false, dispatch);
         dispatch(serviceActions.setServiceSlice(services));
     }, [services]);
     const userServices = services.filter((service) => {
@@ -41,7 +43,10 @@ const Services:React.FC<Props> = ({services}) => {
     }).join('&');
     console.log(serviceParams);
 
-    const handleClick = () => {router.push(`/booking?barberId=${barberId}&${serviceParams}`)};
+    const handleClick = () => {
+        router.push(`/booking?barberId=${barberId}&${serviceParams}`);
+        setIsLoadingState(true, dispatch);
+    };
     return (
         <section>
             <h1>ODABERITE USLUGU</h1>

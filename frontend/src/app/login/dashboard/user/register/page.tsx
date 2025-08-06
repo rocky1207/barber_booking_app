@@ -1,3 +1,4 @@
+"user client";
 import Link from "next/link";
 import Register from "@/components/Forms/Barber/RegisterForm/Register";
 

@@ -13,6 +13,7 @@ import { manageBarber } from "@/lib/api/user/manageBarber";
 import { useRouter } from "next/navigation";
 import { barberActions } from "@/store/slices/barberSlice";
 
+
 const Home: React.FC = () => {
   const dialog = useRef<HTMLDialogElement | null>(null);
   const {barbers, actionBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
@@ -58,6 +59,7 @@ const Home: React.FC = () => {
          file: '',
          role: ''
      }));
+     setIsLoadingState(true, dispatch);
         router.push('/');
      };
   const updatedDeleteBarberBtn = {

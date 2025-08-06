@@ -6,7 +6,7 @@ import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { manageService } from "@/lib/api/service/manageService";
 import { GetServicesReturnType } from "@/types/Api/ReturnServiceType";
-import Link from "next/link";
+import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
     const {barberId} = await searchParams;
@@ -22,15 +22,17 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
             ...service,
             price: formatPrice(service.price)
         }
-    })
+    });
+
+    const navigationData = {
+        navClass: 'wrapp',
+        ulClass: '',
+        liItem: [{link: "/", text: 'početna', itemClass: ''}]
+    }
     return (
         <>
         <Header />
-        <nav className="wrapp">
-            <ul>
-                <li><Link href="/">home</Link></li>
-            </ul>
-        </nav>
+        <PageNavigation {...navigationData} />
         <main className="wrapp">
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :

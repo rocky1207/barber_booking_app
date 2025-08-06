@@ -1,14 +1,16 @@
 "use client";
 import LogIn from "@/components/Forms/Barber/LoginForm/Login";
-import Link from "next/link";
+import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+
 const LogInPage:React.FC = () => {
+    const navigationData = {
+        navClass: 'wrapp',
+        ulClass: '',
+        liItem: [{link: "/", text: 'početna', itemClass: ''}]
+    }
     return (
         <>
-        <nav className="wrapp">
-            <ul>
-                <li><Link href="/">back</Link></li>
-            </ul>
-        </nav>
+        <PageNavigation {...navigationData} />
         <main className="wrapp center">
             <h1>UNESITE VAŠE PODATKE</h1>
             <LogIn/>

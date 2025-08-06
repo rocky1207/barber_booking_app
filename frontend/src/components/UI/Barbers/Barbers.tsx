@@ -4,15 +4,18 @@ import BarberItem from "./BarberItem";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { barberActions } from "@/store/slices/barberSlice";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from './Barbers.module.css';
 
 //const barbers = [{id: 1, username: "Rocky", role: "owner", file: ''}];
 const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
   const dispatch = useAppDispatch();
   const barbers = allBarbers.filter(barberItem => barberItem.role !== 'owner');
- 
   useEffect(() => {
-    dispatch(barberActions.setBarbers(barbers));
+    setIsLoadingState(false, dispatch);
+    }, []);
+  useEffect(() => {
+   dispatch(barberActions.setBarbers(barbers));
   }, [barbers]);
   
     return (
