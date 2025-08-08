@@ -5,7 +5,7 @@ import { bookBtn } from '@/datas/ButttonObjects';
 import { useRouter } from "next/navigation";
 import { usePathname } from 'next/navigation';
 import { useAppDispatch } from '@/store/hooks/typizedHooks';
-import { uiActions } from '@/store/slices/UiSlice';
+import { uiActions } from '@/store/slices/uiSlice';
 import styles from './Barbers.module.css';
 
 

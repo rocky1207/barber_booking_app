@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks/typizedHooks';
 import { serviceActions } from '@/store/slices/serviceSlice';
 import { useSearchParams } from 'next/navigation';
 import { barberActions } from '@/store/slices/barberSlice';
-import { uiActions } from '@/store/slices/UiSlice';
+import { uiActions } from '@/store/slices/uiSlice';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';

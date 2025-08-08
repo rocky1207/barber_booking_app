@@ -5,8 +5,8 @@ import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from './UserNavigation.module.css';
+
 const UserNavigation: React.FC = () => {
-    
     const {loggedBarber} = useAppSelector((state: RootState) => state?.barber);
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -18,12 +18,10 @@ const UserNavigation: React.FC = () => {
     }
     return (
         <>
-            
-            <ul className={styles.userNavigation}>
+        <ul className={styles.userNavigation}>
             {showLink && <li><button onClick={handleClick}>POČETNA</button></li>}
             {showLink && <li><Link href="/login/dashboard/user/register">NOVI KORISNIK</Link></li>}
-            
-            </ul>
+        </ul>
         </>
     );
 };

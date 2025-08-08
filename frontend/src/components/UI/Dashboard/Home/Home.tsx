@@ -75,8 +75,8 @@ const Home: React.FC = () => {
       <section>
         <div className='logOutDiv'><button onClick={logOutHandler}>LOG OUT</button></div>
       <h1>MENADŽERSKA TABLA</h1>
+      <UserNavigation />
       <nav aria-label="Manage barber navigation">
-        <UserNavigation />
         {errorMessage && <p>{errorMessage}</p>}
         <ul>
           {barbers?.map((barber, index) => {

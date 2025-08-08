@@ -2,7 +2,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import barberReducer from '../slices/barberSlice';
 import serviceReducer from '../slices/serviceSlice';
-import uiReducer from '../slices/UiSlice';
+import uiReducer from '../slices/uiSlice';
 
 const barberPersistConfig = {
   key: 'barber',

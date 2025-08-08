@@ -6,6 +6,7 @@ import { RootState } from '@/store/store';
 import { serviceActions } from '@/store/slices/serviceSlice';
 import { forwardRef } from 'react';
 import styles from './Services.module.css';
+
 interface Props {
     service: SingleServiceType;
     index: number;
@@ -19,18 +20,19 @@ const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBt
     const router = useRouter();
     const servicePrice = service.price;
     let showBtn: boolean;
-   // console.log(role);
+   
     showBtn = role === 'owner' || role === 'admin' || role === 'user' ? true : false;
-    //console.log(showBtn);
+    
+    const isActive = choosenServices.includes(service.id);
     const handleClick = () => {
-       // router.push(`/booking?barberId=${service.userId}&serviceId=${service.id}`);
+        // router.push(`/booking?barberId=${service.userId}&serviceId=${service.id}`);
        if(!choosenServices.includes(service.id)) dispatch(serviceActions.setChoosenServices([...choosenServices, service.id]));
-       
     };
 
+
     return (
-        <li key={service.id} className={styles.serviceItem} style={{ animationDelay: `${index * 0.2}s` }}>
-            <button className={styles.bookNavBtn} onClick={handleClick}>{service.userService}: <span>{servicePrice}din.</span></button>
+        <li key={service.id} className={`${styles.serviceItem} ${isActive ? styles.serviceItemActive : ''}`} style={{ animationDelay: `${index * 0.2}s` }}>
+            <button className={styles.bookNavBtn} onClick={handleClick}>{service.userService}: {servicePrice}din.</button>
             {showBtns && <ServiceButtons serviceId={service.id} ref={ref} />}
         </li>
     );

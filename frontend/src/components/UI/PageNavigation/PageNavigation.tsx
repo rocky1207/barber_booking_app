@@ -4,8 +4,6 @@ import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { NavigationPropsType } from "@/types/Navigation/NavigationPropsType";
 
-
-
 const PageNavigation: React.FC<NavigationPropsType> = ({...navigationData}) => {
     const {navClass, ulClass, liItem} = navigationData;
     const router = useRouter();

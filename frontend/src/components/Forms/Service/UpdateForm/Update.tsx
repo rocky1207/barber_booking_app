@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Input from "../../Input/Input";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
-import { uiActions } from "@/store/slices/UiSlice";
+import { uiActions } from "@/store/slices/uiSlice";
 import { RootState } from "@/store/store";
 import { useSearchParams } from "next/navigation";
 import { createFormData } from "@/lib/utils/createFormData";

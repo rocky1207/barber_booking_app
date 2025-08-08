@@ -14,6 +14,13 @@
   border-color: rgb(203, 188, 151);
   background-color: rgba(34, 32, 32, 1);
 }
+
+.serviceItemActive {
+  
+ 
+  border-color: rgb(203, 188, 151);
+  background-color: rgba(34, 32, 32, 1);
+}
 .bookNavBtn {
   width: 100%;
 }
@@ -26,7 +33,4 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
-.serviceItem:hover {
-   cursor: pointer;
 }
