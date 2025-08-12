@@ -1,7 +1,7 @@
 :root {
   --background: rgba(10,10,10,1);
   --foreground: #171717;
-  --logoColor: rgba(238, 186, 64, 1);
+  --logoColor: rgb(238, 186, 64);
   
 }
 .rdp-root {

@@ -19,7 +19,7 @@ const BookService: React.FC = () => {
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
    // const service = services.find(service => service.id === serviceId);
    const selectedServices = services.map((service) => {
-    return choosenServices.find((bla) => bla === service.id);
+    return choosenServices.find((bla) => bla.id === service.id);
 
    })
    const [selected, setSelected] = useState<Date>();

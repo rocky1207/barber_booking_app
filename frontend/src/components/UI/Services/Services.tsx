@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 
+
 interface Props {
   services: SingleServiceType[];
 };
@@ -28,6 +29,7 @@ const Services:React.FC<Props> = ({services}) => {
         }
     })
         */
+       
     const dispatch = useAppDispatch();
     
     useEffect(() => {
@@ -38,15 +40,7 @@ const Services:React.FC<Props> = ({services}) => {
         return service.userId === barberId});
     console.log(barberId);
     console.log(userServices);
-    const serviceParams = choosenServices.map((service, i) => {
-        return `serviceId${i+1}=${service}`
-    }).join('&');
-    console.log(serviceParams);
-
-    const handleClick = () => {
-        router.push(`/booking?barberId=${barberId}&${serviceParams}`);
-        setIsLoadingState(true, dispatch);
-    };
+    
     return (
         <section>
             <h1>ODABERITE USLUGU</h1>
@@ -55,11 +49,9 @@ const Services:React.FC<Props> = ({services}) => {
                     {userServices.map((service: SingleServiceType, index: number) => {
                         return <ServiceItem key={service.id} service={service} index={index} showBtns={false} />
                     })}
-                    
                 </ul>
             </nav>:
             <p className='textCenter'>Trenutno nema unetih usluga za izabranog frizera</p>}
-             <button onClick={handleClick}>NASTAVI</button>
         </section>
     );
 };

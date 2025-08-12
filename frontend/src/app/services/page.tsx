@@ -7,6 +7,7 @@ import { formatPrice } from "@/lib/utils/formatPrice";
 import { manageService } from "@/lib/api/service/manageService";
 import { GetServicesReturnType } from "@/types/Api/ReturnServiceType";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import SelectedServices from "@/components/UI/Services/SelectedServices";
 
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
     const {barberId} = await searchParams;
@@ -37,7 +38,9 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :
             <Services services={services ?? []} />}
+            
         </main>
+        <SelectedServices />
         </>
     );
 };

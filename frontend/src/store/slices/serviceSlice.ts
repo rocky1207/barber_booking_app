@@ -5,7 +5,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 export interface ServiceState {
   services: SingleServiceType[];
   serviceActionId: number;
-  choosenServices: number[];
+  choosenServices: SingleServiceType[];
 }
 const initialState: ServiceState = {
     services: [],
@@ -25,7 +25,7 @@ const serviceSlice = createSlice({
         setActionServiceId: (state, action: PayloadAction<number>) => {
             state.serviceActionId = action.payload;
         },
-        setChoosenServices: (state, action: PayloadAction<number[]>) => {
+        setChoosenServices: (state, action: PayloadAction<SingleServiceType[]>) => {
             state.choosenServices = action.payload;
         }
     }
