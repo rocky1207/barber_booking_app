@@ -48,6 +48,22 @@
   left: 50%;
   transform: translateX(-50%);
   padding: 20px 0;
+  border-radius: 30px 30px 0 0;
+}
+.showServicesDiv {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.showServicesDiv::after {
+  content: "";
+  position: absolute;
+  bottom: 0; /* linija na dnu */
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: var(--logoColor);
+  
 }
 /*
 .selectedServiceSection div {
@@ -55,16 +71,46 @@
   justify-content: space-between;
 }
   */
+.flexLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* razmak između teksta i strelice */
+  max-width: 70%;
+  margin-right: 20px;
+  
+}
+.flexLeftText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
 .continueButton {
   background-color: var(--logoColor);
   color: black;
   font-weight: 600;
   padding: 8px 10px;
   border-radius: 10px;
+  flex-shrink: 0;
 }
+.continueButtonEmpty {
+  background-color: rgb(57, 57, 57) !important;
+  }
 .arrowButton {
-  display: block;
   font-size: 30px;
-  margin: 0 0 0 10px;
+  
   align-items: center;
+  flex-shrink: 0;
+}
+.selectedServices {
+  
+  margin-top: 20px;
+}
+.selectedServices li {
+  margin-top: 10px;
+}
+
+.selectedServices li p:last-child {
+  color: rgba(238, 186, 64, .5);
 }

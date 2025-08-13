@@ -1,64 +1,45 @@
 'use client';
+import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks/typizedHooks';
 import { RootState } from '@/store/store';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
+import { selectedServiceElCreator } from '@/lib/utils/selectedServiceElCreator';
 import styles from './Services.module.css';
+
 const SelectedServices: React.FC = () => {
+    const [showServices, setShowServices] = useState<boolean>(false);
+    const {barbers} = useAppSelector((state: RootState) => state?.barber);
     const {choosenServices} = useAppSelector((state: RootState) => state?.service);
         const params = useSearchParams();
         const strBarberId = params.get('barberId');
         const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
         const router = useRouter();
         const dispatch = useAppDispatch();
-    console.log(choosenServices);
     const serviceParams = choosenServices.map((service, i) => {
         return `serviceId${i+1}=${service}`
     }).join('&');
-    console.log(serviceParams);
-
+    const choosenBaber = barbers?.find(barber => barber.id === barberId);
+    console.log(choosenBaber);
     const handleClick = () => {
+       if(choosenServices.length === 0) return;
         router.push(`/booking?barberId=${barberId}&${serviceParams}`);
         setIsLoadingState(true, dispatch);
     };
-    let text: string;
-    let element;
-    if(choosenServices.length === 0) {
-        text = 'Izaberite uslugu';
-        element = <p>{text}</p>
-            
-    }else if(choosenServices.length === 1) {
-        text = `${choosenServices[0].userService}: ${choosenServices[0].price}`;
-        element = <ul>
-                <li>{text}</li>
-            </ul>
-        
-    } else {
-        text = `${choosenServices.length} usluge`;
-        element = <div className='flexed'><p>{text}</p><button className={styles.arrowButton}>
-            <svg
-                width="20"
-                height="20"
-                fill="#eeba40"
-                version="1.1"
-                id="Capa_1"
-                viewBox="0 0 199.404 199.404"
-                >
-                <g strokeWidth="0"></g>
-                <g strokeLinecap="round" strokeLinejoin="round"></g>
-                <g>
-                    <polygon points="0,135.411 28.285,163.695 99.703,92.277 171.119,163.695 199.404,135.412 99.703,35.709" />
-                </g>
-            </svg>
-            </button></div>;
+    const data = {
+        choosenServices, setShowServices, showServices, choosenBaber
     }
+    const {element, elementTwo} = selectedServiceElCreator(data);
+
+    
     return (
         <section className={`${styles.selectedServiceSection}`}>
-            <div className='wrapp flexed'>
+            <div className={`${showServices && styles.showServicesDiv} wrapp flexed`}>
             {element}
-            <button className={styles.continueButton} onClick={handleClick} >NASTAVI</button>
+            <button className={`${styles.continueButton} ${choosenServices.length === 0 && styles.continueButtonEmpty}`} onClick={handleClick} >NASTAVI</button>
             </div>
+             {showServices && elementTwo}
         </section>
     )
 };
