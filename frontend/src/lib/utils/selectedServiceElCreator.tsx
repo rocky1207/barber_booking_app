@@ -7,18 +7,18 @@ import styles from '@/components/UI/Services/Services.module.css';
 interface Props {
     choosenServices: SingleServiceType[], 
     setShowServices: React.Dispatch<React.SetStateAction<boolean>>,
-showServices: boolean,
-choosenBaber: BasicBarberType | undefined
-
+    showServices: boolean,
+    choosenBaber: BasicBarberType | undefined
 }
+
 export const selectedServiceElCreator = ({ choosenServices, setShowServices, showServices, choosenBaber}: Props) => {
     
     const handleShowServices = () => {
         setShowServices(prev => !prev);
     }
     let text: string;
-    let element: React.ReactNode;
-    let elementTwo: React.ReactNode;
+    let serviceDivElement: React.ReactNode;
+    let serviceUlElement: React.ReactNode;
     const arrow = {
             width: '15',
             height: '20',
@@ -26,7 +26,7 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
         }
     if(choosenServices.length === 0) {
         text = 'Izaberite uslugu';
-        element = <p>{text}</p>
+        serviceDivElement = <p>{text}</p>
             
     } else if(choosenServices.length > 0) {
         if(choosenServices.length === 1) {
@@ -35,10 +35,13 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
             text = `${choosenServices.length} usluge`;
         }
         
-        element = <div className={styles.flexLeft}><p className={styles.flexLeftText}>{text}</p><button onClick={handleShowServices} className={styles.arrowButton}>
-                {!showServices ? <ArrowUp {...arrow} /> : <ArrowDown {...arrow} />}
-            </button></div>;
-        elementTwo = <ul className={`${styles.selectedServices} wrapp`}>
+        serviceDivElement = <div className={styles.flexLeft}>
+            <p className={styles.flexLeftText}>{text}</p>
+            <button onClick={handleShowServices} className={styles.arrowButton}>
+                    {!showServices ? <ArrowUp {...arrow} /> : <ArrowDown {...arrow} />}
+                </button>
+            </div>;
+        serviceUlElement = <ul className={`${styles.selectedServices} wrapp`}>
                 {choosenServices.map((service) => {
                     const text = `${service.userService}: ${service.price}`;
                     return (
@@ -50,5 +53,5 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
                 })}
             </ul>
     };
-    return {element, elementTwo};
+    return {serviceDivElement, serviceUlElement};
 }

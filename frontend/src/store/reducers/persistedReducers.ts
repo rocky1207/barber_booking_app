@@ -3,13 +3,18 @@ import storage from 'redux-persist/lib/storage';
 import barberReducer from '../slices/barberSlice';
 import serviceReducer from '../slices/serviceSlice';
 import uiReducer from '../slices/uiSlice';
+import appointmentReducer from '../slices/appointmentSlice';
 
 const barberPersistConfig = {
   key: 'barber',
-  storage,
+  storage
 };
 const servicePersistConfig = {
   key: 'service',
+  storage
+};
+const appointmentPersistConfig = {
+  key: 'appointment',
   storage
 };
 
@@ -22,5 +27,6 @@ const uiPersistConfig = {
 export const reducers = {
   barber: persistReducer(barberPersistConfig, barberReducer),
   service: persistReducer(servicePersistConfig, serviceReducer),
+  appointment: persistReducer(appointmentPersistConfig, appointmentReducer),
   ui: uiReducer
 };

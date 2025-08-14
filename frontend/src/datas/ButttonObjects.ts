@@ -72,6 +72,15 @@ export const terminsBtn: NavigateBtnType = {
         //divClass: '',
         onAction: () => {}
     };
+export const continueBtn: NavigateBtnType = {
+    validate: 'navigacija',
+    type: 'button',
+    className: '',
+    text: 'NASTAVI',
+    // action: 'GET_TERMINS',
+    //divClass: '',
+    onAction: () => {}
+};
 export const deleteBarberBtn: ApiBtnType = {
         validate: 'api',
         type: 'button',
@@ -80,6 +89,7 @@ export const deleteBarberBtn: ApiBtnType = {
         action: 'DELETE',
         //divClass: '',
     };
+
     /*
 export const updateBarberBtn: ApiBtnType = {
         validate: 'api',

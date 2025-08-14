@@ -6,6 +6,7 @@
 }
 .rdp-root {
   --rdp-nav-height: 60px !important;
+  --rdp-accent-background-color: rgb(41, 41, 41) !important;
 }
 body {
   color: var(--logoColor);
@@ -37,7 +38,7 @@ body {
     display: flex;
     justify-content: center; /* centriranje po vertikali */
     align-items: center;
-     
+    flex-direction: column;
 }
 .flexed {
     display: flex;

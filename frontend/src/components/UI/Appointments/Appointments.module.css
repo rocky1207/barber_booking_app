@@ -1,0 +1,64 @@
+.appointmentsUl {
+    margin: 50px 0;
+    gap: 3px 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.appointmentsUl li {
+    border: 1px solid var(--logoColor);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    width: 130px;
+    padding: 15px 0;
+    text-align: center; 
+    background: rgb(41, 41, 41);
+}
+.appointmentsUl li:hover,
+.appointmentsUl li:active {
+    cursor: pointer;
+    background: rgb(28, 28, 28);
+}
+
+/*
+
+.root {
+    position: relative;
+  background-color: rgb(62, 62, 62);
+  color: var(--logoColor);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  width: 80%;
+}
+.month {
+padding: 20px 0 0 0;
+width: 100%;
+}
+.caption {
+  font-weight: bold;
+  color: gold;
+  margin-bottom: 10px;
+}
+
+.day {
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.day_selected {
+  background-color: gold;
+  color: black;
+}
+.nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+}
+.grid {
+    width: 200px;
+}
+    */
+

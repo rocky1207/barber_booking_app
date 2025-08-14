@@ -6,10 +6,10 @@ import { RootState } from "@/store/store";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { DayPicker} from "react-day-picker";
 import 'react-day-picker/dist/style.css';
-import styles from './Booking.module.css';
+import styles from './Appointments.module.css';
 
 
-const BookService: React.FC = () => {
+const Calendar: React.FC = () => {
     const {services, choosenServices} = useAppSelector((state: RootState) => state?.service);
     console.log(services);
     const dispatch = useAppDispatch();
@@ -38,8 +38,17 @@ const BookService: React.FC = () => {
             footer={
                 selected ? `Izabrani datum: ${selected.getDate().toString().padStart(2, '0')}/${(selected.getMonth() + 1).toString().padStart(2, '0')}/${selected.getFullYear()}` : "Izaberite datum."
             }
+            classNames={{
+               /* root: styles.root,
+                month: styles.month,
+                caption: styles.caption,
+                day: styles.day,
+                day_selected: styles.day_selected,
+                nav: styles.nav,
+                month_grid: styles.grid*/
+            }}
         />
         
     );
 };
-export default BookService;
+export default Calendar;

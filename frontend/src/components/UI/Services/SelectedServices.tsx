@@ -6,40 +6,46 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 import { selectedServiceElCreator } from '@/lib/utils/selectedServiceElCreator';
+import { continueBtn } from '@/datas/ButttonObjects';
+import NavigateButton from '@/components/Button/NavigateButton';
 import styles from './Services.module.css';
 
 const SelectedServices: React.FC = () => {
     const [showServices, setShowServices] = useState<boolean>(false);
     const {barbers} = useAppSelector((state: RootState) => state?.barber);
     const {choosenServices} = useAppSelector((state: RootState) => state?.service);
-        const params = useSearchParams();
-        const strBarberId = params.get('barberId');
-        const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
-        const router = useRouter();
-        const dispatch = useAppDispatch();
+    const params = useSearchParams();
+    const strBarberId = params.get('barberId');
+    const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
+    const router = useRouter();
+    const dispatch = useAppDispatch();
     const serviceParams = choosenServices.map((service, i) => {
-        return `serviceId${i+1}=${service}`
+        return `serviceId${i+1}=${service.id}`
     }).join('&');
     const choosenBaber = barbers?.find(barber => barber.id === barberId);
-    console.log(choosenBaber);
+    
     const handleClick = () => {
        if(choosenServices.length === 0) return;
-        router.push(`/booking?barberId=${barberId}&${serviceParams}`);
+        router.push(`/appointments?barberId=${barberId}&${serviceParams}`);
         setIsLoadingState(true, dispatch);
     };
     const data = {
         choosenServices, setShowServices, showServices, choosenBaber
     }
-    const {element, elementTwo} = selectedServiceElCreator(data);
-
+    const {serviceDivElement, serviceUlElement} = selectedServiceElCreator(data);
+    const updateContinueBtn = {
+        ...continueBtn,
+        className: `${styles.continueButton} ${choosenServices.length === 0 && styles.continueButtonEmpty}`,
+        onAction: handleClick
+    }
     
     return (
         <section className={`${styles.selectedServiceSection}`}>
             <div className={`${showServices && styles.showServicesDiv} wrapp flexed`}>
-            {element}
-            <button className={`${styles.continueButton} ${choosenServices.length === 0 && styles.continueButtonEmpty}`} onClick={handleClick} >NASTAVI</button>
+                {serviceDivElement}
+                <NavigateButton {...updateContinueBtn}/>
             </div>
-             {showServices && elementTwo}
+            {showServices && serviceUlElement}
         </section>
     )
 };

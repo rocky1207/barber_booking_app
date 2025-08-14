@@ -1,6 +1,6 @@
-import BookService from "@/components/Booking/BookService";
+import Calendar from "@/components/UI/Appointments/Calendar";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
-
+import AvailableAppointments from "@/components/UI/Appointments/AvailableAppointments";
 interface Props {
     searchParams: Promise<{barberId: string; serviceId: string}>
 }
@@ -16,7 +16,8 @@ const BookingPage = async ({searchParams}: Props) => {
         <>
         <PageNavigation {...navigationData} />
         <main className="middle">
-            <BookService />
+            <Calendar />
+            <AvailableAppointments />
         </main>
         </>
     )
