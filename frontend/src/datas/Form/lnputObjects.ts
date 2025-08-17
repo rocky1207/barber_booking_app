@@ -18,3 +18,8 @@ export const serviceInputs: LoginInputType[] = [
     {type: 'text', name: 'service', defaultValue: '', placeholder: "Usluga"},
     {type: 'text', name: 'price', defaultValue: '', placeholder: "Cena"},
 ];
+export const appointmentInputs: LoginInputType[] = [
+    {type: 'text', name: 'name', defaultValue: '', placeholder: "Ime"},
+    {type: 'text', name: 'surname', defaultValue: '', placeholder: "Prezime"},
+    {type: 'text', name: 'email', defaultValue: '', placeholder: "Email"},
+];

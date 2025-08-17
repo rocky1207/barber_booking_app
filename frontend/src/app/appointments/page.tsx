@@ -1,6 +1,7 @@
 import Calendar from "@/components/UI/Appointments/Calendar";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import AvailableAppointments from "@/components/UI/Appointments/AvailableAppointments";
+import SelectedServices from "@/components/UI/Services/SelectedServices";
 interface Props {
     searchParams: Promise<{barberId: string; serviceId: string}>
 }
@@ -10,7 +11,7 @@ const BookingPage = async ({searchParams}: Props) => {
     const navigationData = {
         navClass: 'wrapp',
         ulClass: 'flexed',
-        liItem: [{link: "/", text: 'početna', itemClass: ''}, {link: `/services?barberId=${params.barberId}`, text: 'usluge', itemClass: ''}]
+        liItem: [{link: `/services?barberId=${params.barberId}`, text: '<<', itemClass: ''}, {link: "/", text: 'početna', itemClass: ''}]
     }
     return (
         <>
@@ -19,6 +20,7 @@ const BookingPage = async ({searchParams}: Props) => {
             <Calendar />
             <AvailableAppointments />
         </main>
+        <SelectedServices />
         </>
     )
 }

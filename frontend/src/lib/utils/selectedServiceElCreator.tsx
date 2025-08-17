@@ -24,11 +24,7 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
             height: '20',
             fill: '#eeba40'
         }
-    if(choosenServices.length === 0) {
-        text = 'Izaberite uslugu';
-        serviceDivElement = <p>{text}</p>
-            
-    } else if(choosenServices.length > 0) {
+    if(choosenServices.length > 0) {
         if(choosenServices.length === 1) {
             text = `${choosenServices[0].userService}: ${choosenServices[0].price}`;
         } else {

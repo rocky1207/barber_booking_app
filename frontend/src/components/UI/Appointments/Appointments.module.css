@@ -10,8 +10,7 @@
     border: 1px solid var(--logoColor);
     border-radius: 8px;
     margin-bottom: 15px;
-    width: 130px;
-    padding: 15px 0;
+    
     text-align: center; 
     background: rgb(41, 41, 41);
 }
@@ -20,7 +19,10 @@
     cursor: pointer;
     background: rgb(28, 28, 28);
 }
-
+.appointmentsUl button {
+  width: 130px;
+    padding: 15px 0;
+}
 /*
 
 .root {

@@ -24,16 +24,21 @@ const initialState = {
         '18:30',
         '19:00', 
         '19:30'
-        ]
+        ],
+    selectedTerm: ''
 };
 
 const appointmentSlice = createSlice({
     name: 'appointment',
     initialState,
     reducers: {
-        setTermin: (state, action: PayloadAction<[]>) => {
+        setTerms: (state, action: PayloadAction<[]>) => {
             console.log(action.payload);
             state.terms = action.payload;
+        },
+        setSelectedTerm: (state, action: PayloadAction<string>) => {
+            console.log(action.payload);
+            state.selectedTerm = action.payload;
         }
     }
 });

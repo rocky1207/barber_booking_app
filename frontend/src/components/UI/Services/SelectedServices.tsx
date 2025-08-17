@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks/typizedHooks';
 import { RootState } from '@/store/store';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 import { selectedServiceElCreator } from '@/lib/utils/selectedServiceElCreator';
@@ -17,13 +17,16 @@ const SelectedServices: React.FC = () => {
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
+    const pathName = usePathname().replace('/', '');
+    console.log(pathName);
     const router = useRouter();
     const dispatch = useAppDispatch();
     const serviceParams = choosenServices.map((service, i) => {
         return `serviceId${i+1}=${service.id}`
     }).join('&');
     const choosenBaber = barbers?.find(barber => barber.id === barberId);
-    
+    const bla = choosenServices.length > 0;
+    console.log(bla);
     const handleClick = () => {
        if(choosenServices.length === 0) return;
         router.push(`/appointments?barberId=${barberId}&${serviceParams}`);
@@ -40,13 +43,15 @@ const SelectedServices: React.FC = () => {
     }
     
     return (
-        <section className={`${styles.selectedServiceSection}`}>
-            <div className={`${showServices && styles.showServicesDiv} wrapp flexed`}>
+        <>
+        {bla && <section className={`${styles.selectedServiceSection}`}>
+            <div className='wrapp flexed'>
                 {serviceDivElement}
-                <NavigateButton {...updateContinueBtn}/>
+                {!pathName.includes('appointments') && <NavigateButton {...updateContinueBtn}/>}
             </div>
             {showServices && serviceUlElement}
-        </section>
+        </section>}
+        </>
     )
 };
 export default SelectedServices;
