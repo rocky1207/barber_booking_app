@@ -7,14 +7,13 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import styles from './Appointments.module.css';
 const AvailableAppointments: React.FC = () => {
-    const {terms} = useAppSelector((state: RootState) => state?.appointment);
+    const {terms, selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     console.log(terms);
     const dispatch = useAppDispatch();
     const router = useRouter();
     const queryString = useSearchParams().toString();
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log(e.currentTarget.innerText);
-        dispatch(appointmentActions.setSelectedTerm(e.currentTarget.innerText));
+        dispatch(appointmentActions.setSelectedTerm({...selectedTerm, time: e.currentTarget.innerText}));
         router.push(`/appointments/create?${queryString}`);
     };
     console.log(queryString);

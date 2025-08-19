@@ -25,7 +25,10 @@ const initialState = {
         '19:00', 
         '19:30'
         ],
-    selectedTerm: ''
+    selectedTerm: {
+        date: '',
+        time: ''
+    }
 };
 
 const appointmentSlice = createSlice({
@@ -36,7 +39,7 @@ const appointmentSlice = createSlice({
             console.log(action.payload);
             state.terms = action.payload;
         },
-        setSelectedTerm: (state, action: PayloadAction<string>) => {
+        setSelectedTerm: (state, action: PayloadAction<{date: string, time: string}>) => {
             console.log(action.payload);
             state.selectedTerm = action.payload;
         }

@@ -26,6 +26,7 @@ const serviceSlice = createSlice({
             state.serviceActionId = action.payload;
         },
         setChoosenServices: (state, action: PayloadAction<SingleServiceType[]>) => {
+            console.log(action.payload);
             state.choosenServices = action.payload;
         }
     }

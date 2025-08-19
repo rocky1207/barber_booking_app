@@ -84,12 +84,35 @@ export const serviceValidationSchema: ValidationSchemaType = {
     },
     price: {
         required: true,
-        pattern: /^[0-9]{1,6}$/,
-        errorMessage: 'U polje "Cena" dozvoljeno je uneti samo cele brojeve.'
+        pattern: /^[0-9]{1,9}$/,
+        errorMessage: 'U polje "Cena" dozvoljeno je uneti samo cele brojeve, do 9 karaktera.'
     },
     description: {
         required: false,
         pattern: /^[^<>]*$/ /* /^[\p{L}0-9.,!?'"@+%&()\/\\\- \n]{3,1000}$/u*/,
         errorMessage: 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.'
+    }
+};
+
+export const appointmentValidationSchema: ValidationSchemaType = {
+    name: {
+        required: true,
+        pattern: /^[A-Za-zŠĐČĆŽšđčćž ]+$/,
+        errorMessage: 'Dozvoljeni su samo slovni karakteri.'
+    },
+    surname: {
+        required: true,
+        pattern: /^[A-Za-zŠĐČĆŽšđčćž ]+$/,
+        errorMessage: 'Dozvoljeni su samo slovni karakteri.'
+    },
+    phone: {
+        required: true,
+        pattern: /^\d+$/,
+        errorMessage: 'Unesite samo brojeve.'
+    },
+    email: {
+        required: false,
+        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/ /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/,
+        errorMessage: 'Neispravan format email adrese.'
     }
 };
