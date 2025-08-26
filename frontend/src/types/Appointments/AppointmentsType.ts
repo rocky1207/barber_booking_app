@@ -3,6 +3,6 @@ export interface BasicAppointmentsType {
     name: string;
     surname: string;
     phone: string;
-    email?: string;
-    serviceIds: number[]
+    email: string;
+    services: {serviceId: number; date: string;}[]
 }

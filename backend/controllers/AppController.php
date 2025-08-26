@@ -9,6 +9,9 @@ class AppController {
     public const SERVICE_REGEX = '/^[\p{L}0-9 .,!?()\-:;\'"\/\\\\@+%&]{3,255}$/u';
     public const PRICE_REGEX = "/^[0-9]{1,6}$/";
     public const DESCRIPTION_REGEX = "/^[^<>]*$/"/*"/^[\p{L}0-9.,!?\"'@+%&()-:;\/\\\\\- \n]{3,1000}$/u"*/;
+    public const NAME_REGEX = "/^[A-Za-zŠĐČĆŽšđčćž ]+$/";
+    public const PHONE_REGEX = "/^\d+$/";
+    public const EMAIL_REGEX = "/^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/" /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/; 
 
     public const INT_ERROR_MESSAGE = 'Prosleđeni parametar mora biti broj.';
     public const USERNAME_ERROR_MESSAGE = 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.';
@@ -24,6 +27,10 @@ class AppController {
     public const SERVICE_ERROR_MESSAGE = 'U polje "Usluga" uneli ste nedozvoljene karaktere, poput <, > i slično.';
     public const SERVICE_PRICE_ERROR_MESSAGE = 'U polje "Cena" dozvoljeno je uneti samo cele brojeve.';
     public const SERVICE_DESCRIPTION_ERROR_MESSAGE = 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.';
+
+    public const NAME_ERROR_MESSAGE = 'Dozvoljena su samo slovni kakrakteri.';
+    public const PHONE_ERROR_MESSAGE = 'Unesite samo brojeve.';
+    public const EMAIL_ERROR_MESSAGE = 'Neispravan format email adrese.';
      /*
     public const EMAIL_REGEX = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
     public const NUMBER_REGEX = "/^\d+$/";

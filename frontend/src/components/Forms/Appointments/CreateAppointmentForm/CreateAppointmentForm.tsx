@@ -12,8 +12,17 @@ import styles from '../../Form.module.css';
 const CreateAppointment: React.FC = () => {
     const [message, setMessage] = useState<string>('');
     const {choosenServices} = useAppSelector((state: RootState) => state?.service);
+    const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
+        
     console.log(choosenServices);
-    const serviceIds = choosenServices.map((service) => service.id);
+    console.log(selectedTerm);
+    const services = choosenServices.map((service) => {
+       // const time = selectedTerm.time +
+        return {
+            serviceId: service.id,
+            date: selectedTerm.date,
+        }
+    });
     
     const handleSubmmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -34,7 +43,7 @@ const CreateAppointment: React.FC = () => {
         surname: formData.surname,
         phone: formData.phone,
         email: formData.email,
-        serviceIds
+        services
     }
     
     createAppointment('INSERT', data);

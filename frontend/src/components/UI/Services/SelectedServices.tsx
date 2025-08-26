@@ -14,12 +14,10 @@ const SelectedServices: React.FC = () => {
     const [showServices, setShowServices] = useState<boolean>(false);
     const {barbers} = useAppSelector((state: RootState) => state?.barber);
     const {choosenServices} = useAppSelector((state: RootState) => state?.service);
-    const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
     const pathName = usePathname().replace('/', '');
-    console.log(selectedTerm);
     const router = useRouter();
     const dispatch = useAppDispatch();
     const serviceParams = choosenServices.map((service, i) => {
