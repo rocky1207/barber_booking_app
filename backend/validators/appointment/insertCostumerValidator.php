@@ -2,7 +2,7 @@
 
 require_once (__DIR__ . "/../../controllers/AppController.php");
 
-function insertServiceValidator($data) {
+function insertCostumerValidator($data) {
     $inputs = [
         "name" => $data["name"],
         "surname" => $data["surname"],
