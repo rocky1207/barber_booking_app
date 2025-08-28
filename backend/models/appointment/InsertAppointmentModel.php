@@ -4,6 +4,7 @@ require_once (__DIR__ . '/../DatabaseModel.php');
 require_once (__DIR__ . '/../user/GetUserModel.php');
 class InsertAppointmentModel {
     public function insertAppointment($costumer, $appointment) {
+        
        try {
             AppController::databaseConnect();
             DatabaseModel::$pdo->beginTransaction();
@@ -22,7 +23,22 @@ class InsertAppointmentModel {
                     'email' => $costumer['email'] ?? ''
                 ]);
                 $costumerId = (int)DatabaseModel::$pdo->lastInsertId();
-                var_dump($costumerId);
+                $serviceIds = array_column($appointment, 'serviceId');
+                $in = str_repeat('?,', count($serviceIds)-1) . '?';
+                $serviceQuery = "SELECT id FROM service WHERE id IN ($in)";
+                $stmt = DatabaseModel::$pdo->prepare($serviceQuery);
+                $stmt->execute($serviceIds);
+                $serviceIdsData = $stmt->fetchAll();
+                $validServiceIds = [];
+                $i=0;
+                foreach ($serviceIdsData as $id) {
+                    $validServiceIds[$i] = $id['id'];
+                    $i++;
+                }
+                
+                var_dump($validServiceIds);
+                exit();
+                
             } else {
                 throw new Exception('Došlo je do greške prilikom izvršenja upita. Pokušajte ponovo.', 500);
             }

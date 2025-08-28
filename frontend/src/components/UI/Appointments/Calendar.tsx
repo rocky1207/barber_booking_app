@@ -16,6 +16,7 @@ const Calendar: React.FC = () => {
     const {services, choosenServices} = useAppSelector((state: RootState) => state?.service);
     const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     console.log(services);
+    console.log(selected);
     const dispatch = useAppDispatch();
     useEffect(() => {setIsLoadingState(false, dispatch)}, []);
     const params = useSearchParams();
