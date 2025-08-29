@@ -12,7 +12,13 @@ class InsertAppointmentController {
         //$validateInputs['userId'] = 55;
         try {
             $insertAppointmentModel = new InsertAppointmentModel();
-            $insertAppointmentModel->insertAppointment($validateInputs, $appointment);
+            $appointmentData = $insertAppointmentModel->insertAppointment($validateInputs, $appointment);
+            return [
+                "success" => true,
+                "status" => 200,
+                "message" => "Uspešno ste zakazali termin.",
+                "data" => $appointmentData
+            ];
         } catch(Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }

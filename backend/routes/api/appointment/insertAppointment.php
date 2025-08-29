@@ -5,6 +5,6 @@ require_once (__DIR__ . '/../../../controllers/appointment/InsertAppointmentCont
 header('Content-Type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
 $insertAppointmentController = new InsertAppointmentController();
-$insertAppointmentController->insertAppointment($data);
-
+$response = $insertAppointmentController->insertAppointment($data);
+echo json_encode($response);
 ?>
