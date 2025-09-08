@@ -10,7 +10,6 @@
     border: 1px solid var(--logoColor);
     border-radius: 8px;
     margin-bottom: 15px;
-    
     text-align: center; 
     background: rgb(41, 41, 41);
 }
@@ -21,7 +20,15 @@
 }
 .appointmentsUl button {
   width: 130px;
-    padding: 15px 0;
+  padding: 15px 0;
+}
+.liDisabled {
+opacity: .5;
+}
+.buttonDisabled {
+  cursor: default;
+  background: rgb(28, 28, 28);
+  
 }
 /*
 

@@ -57,7 +57,9 @@ class InsertAppointmentModel {
 
                 $selectCostumerQuery = "SELECT * FROM costumer WHERE id = :id";
                 $selectCostumerStmt = DatabaseModel::$pdo->prepare($selectCostumerQuery);
-                $selectCostumerStmt->execute(["id" => 100]);
+                $selectCostumerStmt->execute(["id" => $costumerId]);
+                $costumerRow = $selectCostumerStmt->fetch();
+                !$costumerRow && throw new Exception("Nije pronađen frizer sa id {$costumerId}", 400);
             } else {
                 throw new Exception('Došlo je do greške prilikom izvršenja upita. Pokušajte ponovo.', 500);
             }
