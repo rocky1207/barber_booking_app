@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
     terms: [
-        '9:00', 
-        '9:30', 
+        '09:00', 
+        '09:30', 
         '10:00', 
         '10:30', 
         '11:00', 
