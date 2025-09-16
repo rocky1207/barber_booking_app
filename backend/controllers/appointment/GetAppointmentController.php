@@ -12,12 +12,16 @@ class GetAppointmentController {
         try {
             $getAppointmentModel = new GetAppointmentModel();
             $result = $getAppointmentModel->getReservedAppointments($validateUserId['id'], $validateDate['date']);
-            $appointments = array_column($result, 'time');
+            
+            // Extract just the time values for backward compatibility
+            $appointmentTimes = array_column($result, 'time');
+            
             return [
                 "success" => true,
                 "status" => 200,
                 "message" => 'Zakazani termini su uspešno dobavljeni',
-                "data" => $appointments
+                "data" => $appointmentTimes,
+                "detailedData" => $result // Include full appointment details for future use
             ];
         } catch (Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());

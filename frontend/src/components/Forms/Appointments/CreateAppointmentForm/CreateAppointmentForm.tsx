@@ -24,7 +24,8 @@ const CreateAppointment: React.FC = () => {
 
     
     const services = choosenServices.map((service, i) => {
-        const appointmentTime = `${timeData[i].hour.toString()}:${timeData[i].minutes.toString().padStart(2, '0')}`;
+        // Use the timeString from the improved formatTime function
+        const appointmentTime = timeData[i].timeString;
         
         return {
             serviceId: service.id,
