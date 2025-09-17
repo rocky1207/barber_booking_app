@@ -10,6 +10,7 @@ class GetAppointmentModel {
             WHERE s.userId = :userId
               AND a.date = :date
             ";
+        /*ORDER BY a.time ASC*/
         try {
             AppController::databaseConnect();
             $stmt = DatabaseModel::$pdo->prepare($query);

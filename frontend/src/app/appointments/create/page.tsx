@@ -3,11 +3,10 @@ import SelectedServices from "@/components/UI/Services/SelectedServices";
 const CreateAppointmentPage = () => {
     return (
         <>
-        <main className="center">
-        
-        <CreateAppointment />
-        </main>
-        <SelectedServices />
+            <main className="center">
+                <CreateAppointment />
+            </main>
+            <SelectedServices />
         </>
     );
 };

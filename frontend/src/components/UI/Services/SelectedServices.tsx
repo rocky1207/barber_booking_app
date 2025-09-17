@@ -8,6 +8,7 @@ import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 import { selectedServiceElCreator } from '@/lib/utils/selectedServiceElCreator';
 import { continueBtn } from '@/datas/ButttonObjects';
 import NavigateButton from '@/components/Button/NavigateButton';
+import Pencil from '../SvgIcons/Pencil';
 import styles from './Services.module.css';
 
 const SelectedServices: React.FC = () => {
@@ -40,7 +41,14 @@ const SelectedServices: React.FC = () => {
         className: `${styles.continueButton} ${choosenServices.length === 0 && styles.continueButtonEmpty}`,
         onAction: handleClick
     }
-    
+    const svgData = {
+            width: '20',
+            height: '25',
+            fill: '#eeba40'
+        }
+    const clickHandle = () => {
+        router.push(`/appointments?barberId=${barberId}&${serviceParams}`);
+    }
     return (
         <>
         {choosenServices.length > 0 && <section className={`${styles.selectedServiceSection}`}>
@@ -48,9 +56,14 @@ const SelectedServices: React.FC = () => {
                 {serviceDivElement}
                 {!pathName.includes('appointments') && <NavigateButton {...updateContinueBtn}/>}
             </div>
-            {showServices && selectedTerm.time && selectedTerm.date && <div className='wrapp'>
-                <p>{selectedTerm.time}</p>
-                <p>{selectedTerm.date}</p>
+            {showServices && selectedTerm.time && selectedTerm.date && <div className={`wrapp flexed ${styles.selectedTerm}`}>
+                <div>
+                    <p>{selectedTerm.time}</p>
+                    <p>{selectedTerm.date}</p>
+                </div>
+                <div>
+                    <button onClick={clickHandle}><Pencil {...svgData} /></button>
+                </div>
             </div>}
             {showServices && serviceUlElement}
         </section>}

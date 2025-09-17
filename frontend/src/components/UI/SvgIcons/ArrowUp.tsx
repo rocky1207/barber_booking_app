@@ -3,12 +3,12 @@ interface Props {
     height: string;
     fill: string;
 }
-const ArrowUp: React.FC<Props> = ({...arrow}) => {
+const ArrowUp: React.FC<Props> = ({...svgData}) => {
     return (
         <svg
-            width={arrow.width}
-            height={arrow.height}
-            fill={arrow.fill}
+            width={svgData.width}
+            height={svgData.height}
+            fill={svgData.fill}
             version="1.1"
             id="Capa_1"
             viewBox="0 0 199.404 199.404"

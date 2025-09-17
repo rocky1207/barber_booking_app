@@ -19,7 +19,7 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
     let text: string;
     let serviceDivElement: React.ReactNode;
     let serviceUlElement: React.ReactNode;
-    const arrow = {
+    const svgData = {
             width: '15',
             height: '20',
             fill: '#eeba40'
@@ -34,7 +34,7 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
         serviceDivElement = <div className={styles.flexLeft}>
             <p className={styles.flexLeftText}>{text}</p>
             <button onClick={handleShowServices} className={styles.arrowButton}>
-                    {!showServices ? <ArrowUp {...arrow} /> : <ArrowDown {...arrow} />}
+                    {!showServices ? <ArrowUp {...svgData} /> : <ArrowDown {...svgData} />}
                 </button>
             </div>;
         serviceUlElement = <ul className={`${styles.selectedServices} wrapp`}>
