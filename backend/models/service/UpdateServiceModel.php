@@ -4,7 +4,7 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/GetServiceModel.php");
 class UpdateServiceModel {
     public function updateService($execData) {
-         $query = 'UPDATE service SET userService = :userService, price = :price, description = :description WHERE id = :id';
+         $query = 'UPDATE service SET userService = :userService, price = :price WHERE id = :id';
         try {
             AppController::databaseConnect();
             DatabaseModel::$pdo->beginTransaction();

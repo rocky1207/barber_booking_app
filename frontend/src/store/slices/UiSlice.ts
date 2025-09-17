@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 
 const initialState: {isLoading: boolean} = {
     isLoading: false
@@ -10,6 +11,9 @@ const uiSlice = createSlice({
     reducers: {
         setIsLoading: (state, action: PayloadAction<boolean>) => {
             state.isLoading = action.payload
+        },
+        setIsActive: (state, action: PayloadAction<boolean>) => {
+
         }
     }
 });

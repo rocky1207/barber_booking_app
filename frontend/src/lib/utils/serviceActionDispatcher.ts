@@ -12,7 +12,7 @@ export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType 
     let updatedServices: SingleServiceType[] = [];
     if(actionDone === 'INSERT') {
         console.log(data);
-        if('userId' in data && 'userService' in data && 'price' in data && 'description' in data) {
+        if('userId' in data && 'userService' in data && 'price' in data) {
             const service = {
             ...data,
             price: formatPrice(data.price)
@@ -29,7 +29,7 @@ export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType 
     };
     
     if(actionDone === 'UPDATE') {
-        if('userId' in data && 'userService' in data && 'price' in data && 'description' in data) {
+        if('userId' in data && 'userService' in data && 'price' in data) {
             updatedServices = services.map((service) => {
                 if(service.id === data.id) {
                     service = {

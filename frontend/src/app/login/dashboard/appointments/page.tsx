@@ -1,3 +1,4 @@
+"use client";
 import Header from "@/components/UI/Header/Header";
 const AppointmentsPage: React.FC =  () => {
     return (

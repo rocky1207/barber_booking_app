@@ -38,7 +38,7 @@ const Service: React.FC = () => {
         */
     const data = {
         service: formData.service,
-        description: formData.description,
+       // description: formData.description,
         price: parseInt(formData.price, 10).toString(),
         userId: id?.toString()!
     }
@@ -65,7 +65,7 @@ const Service: React.FC = () => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
-            <textarea name="description" defaultValue='' placeholder='Opis'></textarea>
+            {/*<textarea name="description" defaultValue='' placeholder='Opis'></textarea>*/}
             <p>{message}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>

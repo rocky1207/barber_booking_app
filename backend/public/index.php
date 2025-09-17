@@ -8,6 +8,34 @@ exit;
 session_start();
 //require_once __DIR__ . '/../vendor/autoload.php';
 require_once(__DIR__ . "/../controllers/AppController.php");
+// Auto-setup MySQL EVENT for daily cleanup (idempotent)
+try {
+    require_once(__DIR__ . '/../models/appointment/CleanupCostumersModel.php');
+    $cleanupModel = new CleanupCostumersModel();
+    $cleanupModel->setupDailyCleanupEvent();
+} catch (Throwable $e) {
+    // Silently ignore to avoid breaking requests if permissions are missing
+}
+
+// Fallback: simple daily trigger without MySQL EVENT (executes once per day after cutoff time)
+try {
+    $cutoffTime = '00:01:00'; // HH:MM:SS
+    $today = (new DateTime('now'))->format('Y-m-d');
+    $nowTime = (new DateTime('now'))->format('H:i:s');
+    $tmpDir = __DIR__ . '/../tmp';
+    $stampFile = $tmpDir . '/cleanup_last_run.txt';
+    if (!is_dir($tmpDir)) { @mkdir($tmpDir, 0777, true); }
+    $lastRun = file_exists($stampFile) ? trim(@file_get_contents($stampFile)) : '';
+    if ($nowTime >= $cutoffTime && $lastRun !== $today) {
+        require_once(__DIR__ . '/../controllers/appointment/CleanupCostumersController.php');
+        $cleanupController = new CleanupCostumersController();
+        // Run immediate cleanup for all past dates
+        $cleanupController->runNow();
+        @file_put_contents($stampFile, $today);
+    }
+} catch (Throwable $e) {
+    // ignore
+}
 
 // Uhvati URI
 $uri = $_SERVER['REQUEST_URI'];

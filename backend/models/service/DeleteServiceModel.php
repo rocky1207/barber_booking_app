@@ -24,6 +24,7 @@ class DeleteServiceModel {
             throw $e;
         }
     }
+    /*
     public function deleteAllUserServices($userId) {
         $query = 'DELETE FROM service WHERE userId = :userId';
         try {
@@ -36,5 +37,6 @@ class DeleteServiceModel {
             throw $e;
         }
     }
+        */
 }
 ?>

@@ -11,7 +11,6 @@ export const insertService = async (action: string, data: BasicServiceType): Pro
         if(action === 'INSERT') {
             response = await api.post(apiRoutes.INSERT_SERVICE, data);
             actionDone = 'INSERT';
-            console.log(response);
         }
         if(response?.data?.success) {
              const service: SingleServiceType = response.data.data.data; 

@@ -1,9 +1,13 @@
 :root {
   --background: rgba(10,10,10,1);
   --foreground: #171717;
-  --logoColor: rgba(238, 186, 64, 1);
+  --logoColor: rgb(238, 186, 64);
+  
 }
-
+.rdp-root {
+  --rdp-nav-height: 60px !important;
+  --rdp-accent-background-color: rgb(41, 41, 41) !important;
+}
 body {
   color: var(--logoColor);
   background: var(--background);
@@ -30,12 +34,19 @@ body {
     align-items: center;
     height: 100vh; 
 }
+.middle {
+    display: flex;
+    justify-content: center; /* centriranje po vertikali */
+    align-items: center;
+    flex-direction: column;
+}
 .flexed {
     display: flex;
     justify-content: space-between; /* centriranje po vertikali */
     align-items: center;
      
 }
+
 .textCenter {
     text-align: center; 
 }

@@ -1,10 +1,12 @@
 import { SingleServiceType } from '@/types/Api/ReturnServiceType';
 import ServiceButtons from './ServiceButtons';
 import { useRouter } from 'next/navigation';
-import { useAppSelector } from '@/store/hooks/typizedHooks';
+import { useAppSelector, useAppDispatch } from '@/store/hooks/typizedHooks';
 import { RootState } from '@/store/store';
+import { serviceActions } from '@/store/slices/serviceSlice';
 import { forwardRef } from 'react';
 import styles from './Services.module.css';
+
 interface Props {
     service: SingleServiceType;
     index: number;
@@ -12,20 +14,32 @@ interface Props {
    // setDeleteServiceId: React.Dispatch<React.SetStateAction<number>>
 }
 const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBtns},  ref) => {
-    const {role} = useAppSelector((state: RootState) => state.barber.loggedBarber);
+    const {role} = useAppSelector((state: RootState) => state?.barber?.loggedBarber);
+    const {choosenServices} = useAppSelector((state: RootState) => state?.service);
+    const dispatch = useAppDispatch();
     const router = useRouter();
-    
     const servicePrice = service.price;
-
-    
     let showBtn: boolean;
-   // console.log(role);
+   
     showBtn = role === 'owner' || role === 'admin' || role === 'user' ? true : false;
-    //console.log(showBtn);
-    const handleClick = () => {router.push(`/booking?userId=${service.userId}&service=${service.userService}`)};
+    
+    
+    let isActive;
+    const handleClick = () => {
+        // router.push(`/booking?barberId=${service.userId}&serviceId=${service.id}`);
+        const exists = choosenServices.some(s => s.id === service.id);
+        let updated: SingleServiceType[];
+        if(exists) {
+            updated = choosenServices.filter(s => s.id !== service.id);
+        } else {
+            updated = [...choosenServices, service];
+        }
+        dispatch(serviceActions.setChoosenServices(updated));
+    };
+    isActive = choosenServices.some(s => s.id === service.id);
     return (
-        <li key={service.id} className={styles.serviceItem} style={{ animationDelay: `${index * 0.2}s` }}>
-            <button className={styles.bookNavBtn} onClick={handleClick}>{service.userService}: <span>{servicePrice}din.</span></button>
+        <li key={service.id} className={`${styles.serviceItem} ${isActive ? styles.serviceItemActive : ''}`} style={{ animationDelay: `${index * 0.2}s` }}>
+            <button className={styles.bookNavBtn} onClick={handleClick}>{service.userService}: {servicePrice}din.</button>
             {showBtns && <ServiceButtons serviceId={service.id} ref={ref} />}
         </li>
     );

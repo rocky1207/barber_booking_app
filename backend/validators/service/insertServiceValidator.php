@@ -17,14 +17,15 @@ function insertServiceValidator($data) {
         "price" => AppController::SERVICE_PRICE_ERROR_MESSAGE,
         "userId" => AppController::INT_ERROR_MESSAGE,
     ];
+    /*
     if(isset($data["description"]) && $data["description"] !== '') {
         $inputs["description"] = $data["description"];
         $regex["description"] = AppController::DESCRIPTION_REGEX;
         $messages["description"] =  AppController::SERVICE_DESCRIPTION_ERROR_MESSAGE;
     }  
-    
+    */
     $validateInputs = AppController::validateInputs($inputs, $regex, $messages, 400);
-    !empty($validateInputs) && !isset($validateInputs["description"]) && $validateInputs["description"] = '';
+    //!empty($validateInputs) && !isset($validateInputs["description"]) && $validateInputs["description"] = '';
     if(!empty($validateInputs)) {
         return $validateInputs;
     } else {

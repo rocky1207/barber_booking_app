@@ -11,12 +11,13 @@ class UpdateServiceController {
             "price" => $validateInputs["price"],
             "id" => $validateInputs["id"]
         ];
+        /*
         if(!isset($validateInputs['description'])) {
             $execData["description"] = '';
         } else {
              $execData["description"] = $validateInputs["description"];
         }
-        
+        */
         try {
             $updateServiceModel = new UpdateServiceModel();
             $service = $updateServiceModel->updateService($execData);

@@ -2,7 +2,7 @@
 // components/LoadingOverlay.tsx
 import React from 'react';
 import { useAppSelector } from '@/store/hooks/typizedHooks';
-import { useSelector } from "react-redux";
+
 const LoadingOverlay: React.FC = () => {
   const isLoading = useAppSelector(state => state.ui.isLoading);
 
@@ -15,5 +15,4 @@ const LoadingOverlay: React.FC = () => {
     </div>
   );
 };
-
 export default LoadingOverlay;

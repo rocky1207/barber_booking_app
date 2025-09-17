@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Service from "@/components/Forms/ServiceForm/Service";
+import Service from "@/components/Forms/Service/ServiceForm/Service";
 const InsertService: React.FC = () => {
     return (
         <>

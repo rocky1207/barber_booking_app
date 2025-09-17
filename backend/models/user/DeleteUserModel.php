@@ -12,10 +12,11 @@ class DeleteUserModel {
             DatabaseModel::$pdo->beginTransaction();
             $getUserModel = new GetUserModel();
             $user = $getUserModel->getUserById($id);
+            
             if(!empty($user)) {
-                $deleteServiceModel = new DeleteServiceModel();
-                $areAllServicesDeleted = $deleteServiceModel->deleteAllUserServices($id);
-                !$areAllServicesDeleted &&  throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
+               // $deleteServiceModel = new DeleteServiceModel();
+               // $areAllServicesDeleted = $deleteServiceModel->deleteAllUserServices($id);
+              //  !$areAllServicesDeleted &&  throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
                 $stmt = DatabaseModel::$pdo->prepare($query);
                 $stmt->execute(["id" => $id]);
                 if($stmt->rowCount() === 0) {

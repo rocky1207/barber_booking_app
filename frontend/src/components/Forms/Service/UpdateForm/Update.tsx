@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Input from "../../Input/Input";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
-import { uiActions } from "@/store/slices/UiSlice";
+import { uiActions } from "@/store/slices/uiSlice";
 import { RootState } from "@/store/store";
 import { useSearchParams } from "next/navigation";
 import { createFormData } from "@/lib/utils/createFormData";
@@ -13,6 +13,8 @@ import { formValidator } from "@/lib/validators/formValidator";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import styles from '../../Form.module.css';
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
+
+
 
 const Update: React.FC = () => {
     const [message, setMessage] = useState<string | undefined>('');
@@ -43,7 +45,7 @@ const Update: React.FC = () => {
             id: service?.id.toString()!,
             service: formData.service,
             price: formData.price,
-            description: formData.description
+           // description: formData.description
         }
         
         //const data = validateInputs
@@ -62,7 +64,7 @@ const Update: React.FC = () => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
-            <textarea name='description' defaultValue={service?.description}></textarea>
+            {/*<textarea name='description' defaultValue={service?.description}></textarea>*/}
             <p>{message}</p>
             <button type='submit'>POŠALJI</button>
         </form>

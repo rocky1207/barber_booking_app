@@ -4,13 +4,18 @@ import { ExtendedBarberType } from '@/types/Barbers/BarbersType';
 import { bookBtn } from '@/datas/ButttonObjects';
 import { useRouter } from "next/navigation";
 import { usePathname } from 'next/navigation';
+import { useAppDispatch } from '@/store/hooks/typizedHooks';
+import { uiActions } from '@/store/slices/uiSlice';
 import styles from './Barbers.module.css';
+
 
 const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, index, children}) => {
     const router = useRouter();
     const pathName = usePathname();
     const imageUrl = 'http://barber_booking_app.local/images/';
+    const dispatch = useAppDispatch();
     const handleClick = ():void => {
+            dispatch(uiActions.setIsLoading(true));
             router.push(`/services?barberId=${id}`);
         }
     const newBookBtn = {

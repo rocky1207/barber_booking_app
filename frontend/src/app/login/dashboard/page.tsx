@@ -1,4 +1,4 @@
-
+"use client";
 import Home from "@/components/UI/Dashboard/Home/Home";
 import Header from "@/components/UI/Header/Header";
 //import { cookies } from 'next/headers';
