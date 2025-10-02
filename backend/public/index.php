@@ -48,13 +48,16 @@ $path = ltrim($path, '/');
 
 // Ako fizički fajl postoji (npr. static file), posluži ga direktno
 $fullPath = __DIR__ . "/{$path}";
+
 if (file_exists($fullPath) && is_file($fullPath)) {
+    
     return require $fullPath;
 }
 
 // Ako tražimo nešto unutar `api/`, pokušaj da nađeš u routes/api
 $apiPrefix = 'api/';
 if (str_starts_with($path, $apiPrefix)) {
+    
     $relativePath = substr($path, strlen($apiPrefix));
     $routeFile = __DIR__ . "/../routes/api/{$relativePath}";
 
