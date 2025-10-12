@@ -61,8 +61,6 @@ const CreateAppointment: React.FC = () => {
         if(!validateInputs.status) {setMessage(validateInputs.message); return;}
 
         //setMessage('Uspešno ste zakazali termin.');
-        
-        
         const data = {
             userId: choosenServices[0].userId,
             name: formData.name,

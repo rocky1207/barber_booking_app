@@ -98,17 +98,17 @@ export const appointmentValidationSchema: ValidationSchemaType = {
     name: {
         required: true,
         pattern: /^[A-Za-zŠĐČĆŽšđčćž ]+$/,
-        errorMessage: 'Dozvoljeni su samo slovni karakteri.'
+        errorMessage: 'U polje za ime dozvoljeni su samo slovni karakteri.'
     },
     surname: {
         required: true,
         pattern: /^[A-Za-zŠĐČĆŽšđčćž ]+$/,
-        errorMessage: 'Dozvoljeni su samo slovni karakteri.'
+        errorMessage: 'U polje za prezime dozvoljeni su samo slovni karakteri.'
     },
     phone: {
         required: true,
         pattern: /^\d+$/,
-        errorMessage: 'Unesite samo brojeve.'
+        errorMessage: 'Unesite brojeve u polje za broj telefona.'
     },
     email: {
         required: false,
