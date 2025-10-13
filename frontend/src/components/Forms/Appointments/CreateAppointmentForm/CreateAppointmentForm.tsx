@@ -8,7 +8,7 @@ import { appointmentInputs } from "@/datas/Form/lnputObjects";
 import { formValidator } from "@/lib/validators/formValidator";
 import { appointmentValidationSchema } from "@/lib/validators/validationSchema";
 import { createFormData } from "@/lib/utils/createFormData";
-import { createAppointment } from "@/lib/api/appointments/createAppointment";
+import { postAppointmentApi } from "@/lib/api/appointments/postAppointmentApi";
 import { formatTime } from "@/lib/utils/formatTime";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { appointmentActionDispatcher } from "@/lib/utils/appointmentActionDispatcher";
@@ -70,7 +70,7 @@ const CreateAppointment: React.FC = () => {
             services
         }
         
-        const response = await createAppointment('INSERT', data);
+        const response = await postAppointmentApi('INSERT', data);
         if(!response.success) {
             setMessage(response.message);
             setIsLoadingState(false, dispatch);

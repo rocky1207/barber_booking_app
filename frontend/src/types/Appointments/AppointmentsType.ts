@@ -6,6 +6,20 @@ export interface BasicAppointmentsType {
     email: string;
     services: {serviceId: number; date: string;}[]
 };
+export interface ClientAppointmentsType {
+    name: string;
+    surname: string;
+    phone: string;
+};
+export interface ClientAppointmentsSliceType extends ClientAppointmentsType {
+    appointmentId: number;
+    costumerId: number;
+    date: string;
+    serviceId: number;
+    serviceName: string;
+    servicePrice: string;
+    time: string;
+};
 /**
  * Interface for working hours configuration
  */
