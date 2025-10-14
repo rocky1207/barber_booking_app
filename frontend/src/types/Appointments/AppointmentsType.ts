@@ -20,6 +20,11 @@ export interface ClientAppointmentsSliceType extends ClientAppointmentsType {
     servicePrice: string;
     time: string;
 };
+export interface AppointmentsSliceType  {
+    terms: string[];
+    selectedTerm: {date: string, time: string};
+    clientTerms: ClientAppointmentsSliceType[],
+};
 /**
  * Interface for working hours configuration
  */

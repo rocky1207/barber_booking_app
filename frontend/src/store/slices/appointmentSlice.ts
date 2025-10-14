@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppointmentsSliceType, ClientAppointmentsSliceType } from "@/types/Appointments/AppointmentsType";
 
-const initialState = {
+const initialState: AppointmentsSliceType = {
     terms: [
         '09:00', 
         '09:30', 
@@ -28,20 +29,23 @@ const initialState = {
     selectedTerm: {
         date: '',
         time: ''
-    }
+    },
+    clientTerms: []
 };
 
 const appointmentSlice = createSlice({
     name: 'appointment',
     initialState,
     reducers: {
-        setTerms: (state, action: PayloadAction<[]>) => {
-            console.log(action.payload);
+        setTerms: (state, action: PayloadAction<string[]>) => {
             state.terms = action.payload;
         },
         setSelectedTerm: (state, action: PayloadAction<{date: string, time: string}>) => {
-            console.log(action.payload);
             state.selectedTerm = action.payload;
+        },
+        setClientTerms: (state, action: PayloadAction<ClientAppointmentsSliceType[]>) => {
+            console.log(action.payload);
+            state.clientTerms = action.payload;
         }
     }
 });

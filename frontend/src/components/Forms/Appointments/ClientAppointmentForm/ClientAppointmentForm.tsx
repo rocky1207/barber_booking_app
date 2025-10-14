@@ -8,6 +8,8 @@ import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { appointmentValidationSchema } from "@/lib/validators/validationSchema";
 import { postAppointmentApi } from "@/lib/api/appointments/postAppointmentApi";
+import { appointmentActions } from "@/store/slices/appointmentSlice";
+
 import styles from '../../Form.module.css';
 const ClientAppointmentForm = () => {
     const [message, setMessage] = useState<string>('');
@@ -31,6 +33,11 @@ const ClientAppointmentForm = () => {
         
         const response = await postAppointmentApi('GET_CLIENT_APPOINTMENTS', data);
         console.log(response);
+        if(response.success) {
+            const data = Array.isArray(response.data) ? response.data : [];
+            dispatch(appointmentActions.setClientTerms(data));
+        } 
+        
     }
     return (
         <form className={styles.form} onSubmit={handleSubmmit}>

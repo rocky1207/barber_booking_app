@@ -26,12 +26,12 @@ export const postAppointmentApi = async (action: string, data: BasicAppointments
         console.log(response);
     }
     */
-    response = await api.post(route, data);
-    if(response?.data?.success) {
-        answer = {success: true, data: response.data.data, message: response.data.message, actionDone};
-    } else {
-        throw new Error(response?.data?.message || 'Greška na serveru.');
-        }
+        response = await api.post(route, data);
+        if(response?.data?.success) {
+            answer = {success: true, data: response.data.data, message: response.data.message, actionDone};
+        } else {
+            throw new Error(response?.data?.message || 'Greška na serveru.');
+            }
     } catch(error: any) {
         answer = {success: false, message: error?.message};
     }
