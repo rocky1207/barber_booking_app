@@ -24,3 +24,8 @@ export const appointmentInputs: LoginInputType[] = [
     {type: 'text', name: 'phone', defaultValue: '', placeholder: "Broj telefona"},
     {type: 'text', name: 'email', defaultValue: '', placeholder: "Email"},
 ];
+export const clientAppointmentInputs: LoginInputType[] = [
+    {type: 'text', name: 'name', defaultValue: '', placeholder: "Ime"},
+    {type: 'text', name: 'surname', defaultValue: '', placeholder: "Prezime"},
+    {type: 'text', name: 'phone', defaultValue: '', placeholder: "Broj telefona"},
+];

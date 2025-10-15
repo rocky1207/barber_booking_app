@@ -29,8 +29,8 @@ class AppController {
     public const SERVICE_PRICE_ERROR_MESSAGE = 'U polje "Cena" dozvoljeno je uneti samo cele brojeve.';
     public const SERVICE_DESCRIPTION_ERROR_MESSAGE = 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.';
 
-    public const NAME_ERROR_MESSAGE = 'Dozvoljena su samo slovni kakrakteri.';
-    public const PHONE_ERROR_MESSAGE = 'Unesite samo brojeve.';
+    public const NAME_ERROR_MESSAGE = 'U polje za ime i prezime dozvoljeni su samo slovni kakrakteri.';
+    public const PHONE_ERROR_MESSAGE = 'Unesite brojeve u polje za broj telefona.';
     public const EMAIL_ERROR_MESSAGE = 'Neispravan format email adrese.';
 
     public const DATE_ERROR_MESSAGE = 'Neispravan format datuma.';

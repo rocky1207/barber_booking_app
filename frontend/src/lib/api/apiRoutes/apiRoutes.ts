@@ -11,5 +11,6 @@ export const apiRoutes = {
     UPDATE_SERVICE: 'service/updateService.php',
     INSERT_APPOINTMENT: 'appointment/insertAppointment.php',
     GET_RESERVED_APPOINTMENTS: 'appointment/getReservedAppointments.php',
+    GET_CLIENT_APPOINTMENTS: 'appointment/getClientAppointments.php',
 } as const;
 export type ApiRoute = typeof apiRoutes[keyof typeof apiRoutes];
