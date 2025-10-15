@@ -10,16 +10,16 @@ import { appointmentActions } from "@/store/slices/appointmentSlice";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from './Barbers.module.css';
 
-//const barbers = [{id: 1, username: "Rocky", role: "owner", file: ''}];
 const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
   const {choosenServices} = useAppSelector((state: RootState) => state?.service);
-  const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
+  //const {clientTerm} = useAppSelector((state: RootState) => state?.appointment);
   console.log(choosenServices); 
   const dispatch = useAppDispatch();
   const barbers = allBarbers.filter(barberItem => barberItem.role !== 'owner');
   useEffect(() => {
     choosenServices.length > 0 && dispatch(serviceActions.setChoosenServices([]));
     dispatch(appointmentActions.setSelectedTerm({date: '', time: ''}));
+    dispatch(appointmentActions.setClientTerms([]));
     setIsLoadingState(false, dispatch);
     }, []);
   useEffect(() => {

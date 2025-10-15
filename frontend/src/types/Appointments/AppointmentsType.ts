@@ -19,6 +19,8 @@ export interface ClientAppointmentsSliceType extends ClientAppointmentsType {
     serviceName: string;
     servicePrice: string;
     time: string;
+    userId: number;
+    barber: string;
 };
 export interface AppointmentsSliceType  {
     terms: string[];

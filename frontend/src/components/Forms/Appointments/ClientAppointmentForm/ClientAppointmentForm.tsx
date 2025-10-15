@@ -33,11 +33,16 @@ const ClientAppointmentForm = () => {
         
         const response = await postAppointmentApi('GET_CLIENT_APPOINTMENTS', data);
         console.log(response);
-        if(response.success) {
-            const data = Array.isArray(response.data) ? response.data : [];
-            dispatch(appointmentActions.setClientTerms(data));
+        if(!response.success) {
+            setMessage(response.message);
+            setIsLoadingState(false, dispatch);
+            return;
         } 
-        
+        const terms = Array.isArray(response.data) ? response.data : [];
+        dispatch(appointmentActions.setClientTerms(terms));
+        setMessage('');
+        form.reset();
+        setIsLoadingState(false, dispatch);
     }
     return (
         <form className={styles.form} onSubmit={handleSubmmit}>

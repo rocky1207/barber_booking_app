@@ -3,7 +3,7 @@ require_once (__DIR__ . '/../../controllers/AppController.php');
 require_once (__DIR__ . '/../DatabaseModel.php');
 class GetAppointmentModel {
     public function getReservedAppointments($userId, $date) {
-     $query = "
+    $query = "
             SELECT a.time
             FROM appointment a
             JOIN service s ON a.serviceId = s.id
@@ -35,12 +35,15 @@ class GetAppointmentModel {
             s.id AS serviceId,
             a.id AS appointmentId,
             c.id AS costumerId,
+            u.id AS userId,
             c.name,
             c.surname,
-            c.phone
+            c.phone,
+            u.username AS barber
         FROM appointment a
         JOIN costumer c ON a.costumerId = c.id
         JOIN service s ON a.serviceId = s.id
+        JOIN user u ON c.userId = u.id
         WHERE LOWER(c.name) = LOWER(:name)
             AND LOWER(c.surname) = LOWER(:surname)
             AND c.phone = :phone

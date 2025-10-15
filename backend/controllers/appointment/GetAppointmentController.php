@@ -34,6 +34,9 @@ class GetAppointmentController {
         try {
             $getAppointmentModel = new GetAppointmentModel();
             $response = $getAppointmentModel->getClientAppointments($validateInputs);
+            if(!$response) {
+               throw new Exception('Ne postoje zakazani termini za podatke koje ste uneli.', 422);
+            }
             return [
                 "success" => true,
                 "status" => 200,

@@ -88,4 +88,26 @@ width: 100%;
     width: 200px;
 }
     */
-
+.clientAppointment {
+  margin: 50px 0;
+  
+}
+.clientAppointment h2 {
+  margin-bottom: 10px;
+}
+.clientAppointment ul {
+  max-width: 500px;
+}
+.clientAppointment li {
+  flex-wrap: wrap;
+  gap: 30px;
+  border: 1px solid var(--logoColor);
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+}
+.clientAppointment li .action {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: flex-end;
+}
