@@ -4,7 +4,7 @@ import { BasicAppointmentsType } from "@/types/Appointments/AppointmentsType";
 import { InsertAppointmentReturnData } from "@/types/Api/ReturnAppointmentType";
 import { ClientAppointmentsType } from "@/types/Appointments/AppointmentsType";
 import { GetClientAppointmentsReturnData } from "@/types/Api/ReturnAppointmentType";
-export const postAppointmentApi = async (action: string, data: BasicAppointmentsType | ClientAppointmentsType): Promise<InsertAppointmentReturnData | GetClientAppointmentsReturnData> => {
+export const postAppointmentApi = async (action: string, data: BasicAppointmentsType | ClientAppointmentsType | number): Promise<InsertAppointmentReturnData | GetClientAppointmentsReturnData> => {
     let answer: InsertAppointmentReturnData;
     let actionDone: string = '';
     let route: string = '';

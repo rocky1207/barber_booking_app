@@ -30,7 +30,8 @@ const initialState: AppointmentsSliceType = {
         date: '',
         time: ''
     },
-    clientTerms: []
+    clientTerms: [],
+    actionAppointmentId: 0
 };
 
 const appointmentSlice = createSlice({
@@ -46,6 +47,10 @@ const appointmentSlice = createSlice({
         setClientTerms: (state, action: PayloadAction<ClientAppointmentsSliceType[]>) => {
             console.log(action.payload);
             state.clientTerms = action.payload;
+        },
+        setActionAppointmentId: (state, action: PayloadAction<number>) => {
+            console.log(action.payload);
+            state.actionAppointmentId = action.payload;
         }
     }
 });
