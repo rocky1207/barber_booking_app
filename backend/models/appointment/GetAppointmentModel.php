@@ -2,6 +2,19 @@
 require_once (__DIR__ . '/../../controllers/AppController.php');
 require_once (__DIR__ . '/../DatabaseModel.php');
 class GetAppointmentModel {
+    public function getAppointment($id) {
+        $query = "SELECT * FROM appointment WHERE id = :id";
+        try {
+            //AppController::databaseConnect();
+            $stmt = DatabaseModel::$pdo->prepare($query);
+            $stmt->execute(['id' => $id]);
+            $appointment = $stmt->fetchAll();
+            if(empty($appointment)) throw new Exception("Nije pronađen nijedan termin sa ID {$id}", 404);
+            return $appointment;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
     public function getReservedAppointments($userId, $date) {
     $query = "
             SELECT a.time

@@ -32,7 +32,7 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
             slice = 'SERVICE';
         } 
         if(action === 'DELETE_APPOINTMENT') {
-            url = apiRoutes.DELETE_CLIENT_APPOINTMENTS;
+            url = apiRoutes.DELETE_CLIENT_APPOINTMENT;
             slice = 'APPOINTMENT';
         }
         

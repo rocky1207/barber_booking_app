@@ -1,7 +1,7 @@
 import api from "@/lib/axios"
 export const deleteClientAppointment = async (url: string, id: number): Promise<any> => {
     console.log(url, id);
-    return;
+    
     let answer;
     try {
         const response = await api.delete(url, {data: {id}});

@@ -17,6 +17,7 @@ const ClientAppointments: React.FC = () => {
     
     const deleteleAppointmentBtn = {
         ...deleteBarberBtn,
+        head: 'DA LI STE SIGURNI?',
         id: actionAppointmentId,
         action: 'DELETE_APPOINTMENT',
         onAction: deleteClientAppointment
@@ -24,7 +25,7 @@ const ClientAppointments: React.FC = () => {
     
     return (
         <>
-        < ConfirmModal ref={dialog} {...deleteleAppointmentBtn}/>
+        <ConfirmModal ref={dialog} {...deleteleAppointmentBtn}/>
         <section className={styles.clientAppointment}>
         <h2>{clientTerms[0]?.name} {clientTerms[0]?.surname}</h2>
         <ul>
