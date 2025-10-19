@@ -6,6 +6,7 @@ import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
+import { appointmentActionDispatcher } from "@/lib/utils/appointmentActionDispatcher";
 
 const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
     const {className, text, type, validate, action, onAction, id, ...buttonProps} = btnData;
@@ -17,10 +18,10 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
         if (!onAction || !id || !action) return;
         let url: string = '';
         let slice: string = '';
-        if(action === 'GET_TERMINS') {
-            url = apiRoutes.GET_CLIENTS;
+       // if(action === 'GET_CLIENTS') {
+         //   url = apiRoutes.GET_CLIENTS;
           //  slice = 'BARBER';
-        } 
+        //} 
        // if(action === 'UPDATE') url = apiRoutes.UPDATE_USER;
         if(action === 'DELETE') {
             url = apiRoutes.DELETE_USER;
@@ -41,6 +42,7 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
         actionDone && slice === 'BARBER' && barberActionDispatcher(data, actionDone.toUpperCase(), dispatch);
         actionDone?.toUpperCase() === 'DELETE' && loggedBarrberId === id && router.push('/');
         actionDone && slice === 'SERVICE' && serviceActionDispatcher(data, actionDone.toUpperCase(), dispatch);
+        actionDone && slice === 'APPOINTMENT' && appointmentActionDispatcher(data, actionDone.toUpperCase(), dispatch);
         dialogRef?.current?.close();
     }
     return (

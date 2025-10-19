@@ -1,13 +1,12 @@
 import { barberActions } from "@/store/slices/barberSlice";
-import { AppDispatch } from "@/store/store";
-import store, { RootState }  from "@/store/store";
+import store, { AppDispatch, RootState }  from "@/store/store";
 import { logOut } from "../api/user/logOut";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
 
 export const barberActionDispatcher = (data: {id: number} | BasicBarberType, actionDone: string, dispatch: AppDispatch): void => {
     const state: RootState = store.getState();
     const barbers = state.barber.barbers;
-    const actionId = state.barber.currentBarberId;
+    const actionId = state.barber.actionBarberId;
     const loggedBarber = state.barber.loggedBarber;
     console.log(actionId);
     if(actionDone === 'DELETE') {

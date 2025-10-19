@@ -13,11 +13,10 @@ class DeleteClientAppointmentModel {
             $costumerId = $appointment[0]['costumerId'];
             if(!empty($appointment)) {
                 $stmt = DatabaseModel::$pdo->prepare($query);
-                $isDeleted = $stmt->execute(['id' => $id]);
+                $stmt->execute(['id' => $id]);
                 $stmt->rowCount() === 0 && throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
-               // $newQuery = "SELECT id FROM appointment WHERE id = :cusotmerId";
-                $isQuery = 'SELECT COUNT(*) FROM appointment WHERE costumerId = :costumerId';
-                $stmt = DatabaseModel::$pdo->prepare($isQuery);
+                $countAppointmentQuery = 'SELECT COUNT(*) FROM appointment WHERE costumerId = :costumerId';
+                $stmt = DatabaseModel::$pdo->prepare($countAppointmentQuery);
                 $stmt->execute(['costumerId' => $costumerId]);
                 $count = $stmt->fetchColumn();
                 if((int)$count === 0) {
@@ -26,7 +25,7 @@ class DeleteClientAppointmentModel {
                     $deleteStmt->execute(['costumerId' => $costumerId]);
                 }
                 DatabaseModel::$pdo->commit();
-                return $isDeleted;
+                return $id;
             } else {
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             }
