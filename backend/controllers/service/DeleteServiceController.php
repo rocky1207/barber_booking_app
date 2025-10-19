@@ -18,7 +18,6 @@ class DeleteServiceController {
             } else {
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             }
-            
         } catch(Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());
         };

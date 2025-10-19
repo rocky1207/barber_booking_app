@@ -9,10 +9,12 @@ export const manageService = async (url: string, id: number): Promise<ManageBarb
     let actionDone: string = '';
     try {
         let response;
+        /*
         if(url === 'service/getAllServices.php') {
             response = await api.get('url...');
             actionDone = 'GET_ALL_CLIENTS';
         }
+            */
         if(url === 'service/deleteService.php') {
             response = await api.delete(apiRoutes.DELETE_SERVICE, {data:{id}});
             actionDone = 'DELETE';

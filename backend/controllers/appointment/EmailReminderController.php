@@ -95,7 +95,6 @@ class EmailReminderController {
                     "errors" => $errors
                 ]
             ];
-            
         } catch (Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }

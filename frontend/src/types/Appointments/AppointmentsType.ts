@@ -26,6 +26,7 @@ export interface AppointmentsSliceType  {
     terms: string[];
     selectedTerm: {date: string, time: string};
     clientTerms: ClientAppointmentsSliceType[],
+    actionAppointmentId: number
 };
 /**
  * Interface for working hours configuration

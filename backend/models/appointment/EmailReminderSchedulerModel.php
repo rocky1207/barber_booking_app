@@ -1,4 +1,5 @@
 <?php
+
 require_once (__DIR__ . '/../../controllers/AppController.php');
 require_once (__DIR__ . '/../DatabaseModel.php');
 
@@ -23,7 +24,7 @@ class EmailReminderSchedulerModel {
             $createEventSql = "
                 CREATE EVENT ev_send_email_reminders
                 ON SCHEDULE EVERY 1 DAY
-                STARTS TIMESTAMP(CURRENT_DATE, '15:00:00')
+                STARTS TIMESTAMP(CURRENT_DATE, '19:30:00')
                 DO
                 BEGIN
                     -- Pozovi PHP skriptu koja šalje email podsetnike
@@ -63,7 +64,7 @@ class EmailReminderSchedulerModel {
             $createEventSql = "
                 CREATE EVENT ev_send_email_reminders_http
                 ON SCHEDULE EVERY 1 DAY
-                STARTS TIMESTAMP(CURRENT_DATE, '15:00:00')
+                STARTS TIMESTAMP(CURRENT_DATE, '19:30:00')
                 DO
                 BEGIN
                     -- Kreiraj log entry da je event pokrenut
