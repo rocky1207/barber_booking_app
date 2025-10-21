@@ -13,20 +13,24 @@ import styles from './Appointments.module.css';
 
 const Calendar: React.FC = () => {
     const [selected, setSelected] = useState<Date>(new Date());
-    const {services, choosenServices} = useAppSelector((state: RootState) => state?.service);
+    //const {services, choosenServices} = useAppSelector((state: RootState) => state?.service);
     const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
-    console.log(services);
-    console.log(selected);
+    //console.log(services);
+    //console.log(selected);
     const dispatch = useAppDispatch();
     useEffect(() => {setIsLoadingState(false, dispatch)}, []);
+    /*
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
+    */
    // const service = services.find(service => service.id === serviceId);
+   /*
     const selectedServices = services.map((service) => {
     return choosenServices.find((item) => item.id === service.id);
 
-    })
+    });
+    */
     //const fullDate = selected && `${selected.getDate().toString().padStart(2, '0')}/${(selected.getMonth() + 1).toString().padStart(2, '0')}/${selected.getFullYear()}`;
     const fullDate = formatDate(selected);
     console.log(fullDate);

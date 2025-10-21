@@ -19,15 +19,15 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barbe
     }
     const updatePage = () => {
         dispatch(barberActions.setActionBarberId(barberId));
-        router.push(`/login/dashboard/user/update?barberId=${barberId}`)
+        router.push(`/login/dashboard/user/update?barberId=${barberId}`);
     };
     const appointmentsPage = () => {
         dispatch(barberActions.setActionBarberId(barberId));
-        router.push(`/login/dashboard/appointments?id=${barberId}`)
+        router.push(`/login/dashboard/appointments?barberId=${barberId}`);
     };
     const servicesPage = () => {
         dispatch(barberActions.setActionBarberId(barberId));
-        router.push(`/login/dashboard/service?barberId=${barberId}`)
+        router.push(`/login/dashboard/service?barberId=${barberId}`);
     };
     const newTerminsBtn = {
         ...terminsBtn,
