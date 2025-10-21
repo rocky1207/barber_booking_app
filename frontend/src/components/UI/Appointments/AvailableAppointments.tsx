@@ -9,7 +9,7 @@ import { useSearchParams } from 'next/navigation';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 import { getReservedAppointments } from '@/lib/api/appointments/getReservedAppointments';
 import { calculateAvailableTimeSlots } from '@/lib/utils/calculateAvailableAppointments';
-import { normalizeTimeString } from '@/lib/utils/timeUtils';
+import { normalizeTimeString, filterAvailableTimeSlots } from '@/lib/utils/timeUtils';
 import styles from './Appointments.module.css';
 
 
@@ -30,7 +30,6 @@ const AvailableAppointments: React.FC = () => {
                 setAvailableSlots([]);
                 return;
             }
-            
             setIsLoading(true);
             try {
                 const reservedAppointments = await getReservedAppointments({
@@ -47,7 +46,10 @@ const AvailableAppointments: React.FC = () => {
                             bufferTime: 0
                         }
                     );
-                    setAvailableSlots(slots);
+                    
+                    // Filter out slots that are in the past or too close to current time
+                    const filteredSlots = filterAvailableTimeSlots(slots, selectedTerm.date, 60);
+                    setAvailableSlots(filteredSlots);
                 } else {
                     console.error('Failed to fetch reserved appointments:', reservedAppointments.message);
                     setAvailableSlots([]);
@@ -75,7 +77,7 @@ const AvailableAppointments: React.FC = () => {
     if (isLoading) {
         return (
             <div className={`${styles.appointmentsUl} wrapp`}>
-                <p>Loading available time slots...</p>
+                <p>Učitavanje dostupnih termina...</p>
             </div>
         );
     }
@@ -83,7 +85,7 @@ const AvailableAppointments: React.FC = () => {
     if (availableSlots.length === 0 && selectedTerm.date) {
         return (
             <div className={`${styles.appointmentsUl} wrapp`}>
-                <p>No available time slots for the selected date.</p>
+                <p>Nema dostupnih termina za izabrani datum.</p>
             </div>
         );
     }
