@@ -7,6 +7,7 @@ import { formatPrice } from "@/lib/utils/formatPrice";
 import { manageService } from "@/lib/api/service/manageService";
 import { GetServicesReturnType } from "@/types/Api/ReturnServiceType";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import { servicesPageNav } from "@/datas/NavigationObjects";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
@@ -24,16 +25,11 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
             price: formatPrice(service.price)
         }
     });
-
-    const navigationData = {
-        navClass: 'wrapp',
-        ulClass: '',
-        liItem: [{link: "/", text: 'početna', itemClass: ''}]
-    }
+    
     return (
         <>
         <Header />
-        <PageNavigation {...navigationData} />
+        <PageNavigation {...servicesPageNav} />
         <main className="wrapp">
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :

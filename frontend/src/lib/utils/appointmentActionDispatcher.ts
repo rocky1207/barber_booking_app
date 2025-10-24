@@ -6,10 +6,17 @@ console.log(data);
 console.log(action);
 }
 */
-export const appointmentActionDispatcher = (data: {id: number}, action: string, dispatch: AppDispatch): void => {
+export const appointmentActionDispatcher = (data: {id: number}, actionDone: string, dispatch: AppDispatch): void => {
     const state: RootState = store.getState();
-    const clientTerms = state.appointment.clientTerms;
-    const updatedClientTerms = clientTerms.filter(term => term.appointmentId !== data.id);
-    console.log(updatedClientTerms);
-    dispatch(appointmentActions.setClientTerms(updatedClientTerms));
+    if(actionDone === 'DELETE_APPOINTMENT') {
+        const clientTerms = state.appointment.clientTerms;
+        const updatedClientTerms = clientTerms.filter(term => term.appointmentId !== data.id);
+        console.log(updatedClientTerms);
+        dispatch(appointmentActions.setClientTerms(updatedClientTerms));
+    } else if(actionDone === 'DELETE_BARBER_APPOINTMENT') {
+        const barberTerms = state.appointment.barberTerms;
+        const updatedBarberTerms = barberTerms.filter((term) => term.appointmentId !== data.id);
+        dispatch(appointmentActions.setBarberTerms(updatedBarberTerms));
+    }
+    
 }

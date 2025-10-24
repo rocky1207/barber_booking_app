@@ -14,7 +14,7 @@ const BarberAppointments: React.FC<{appointments: BarberAppointmentsType[]}> = (
             ...deleteBarberBtn,
             head: 'DA LI STE SIGURNI?',
             id: actionAppointmentId,
-            action: 'DELETE_APPOINTMENT',
+            action: 'DELETE_BARBER_APPOINTMENT',
             onAction: deleteClientAppointment
         }
     return (

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppointmentsSliceType, ClientAppointmentsSliceType } from "@/types/Appointments/AppointmentsType";
+import { AppointmentsSliceType, ClientAppointmentsSliceType, BarberAppointmentsType } from "@/types/Appointments/AppointmentsType";
 
 const initialState: AppointmentsSliceType = {
     terms: [
@@ -31,6 +31,7 @@ const initialState: AppointmentsSliceType = {
         time: ''
     },
     clientTerms: [],
+    barberTerms: [],
     actionAppointmentId: 0
 };
 
@@ -47,6 +48,9 @@ const appointmentSlice = createSlice({
         setClientTerms: (state, action: PayloadAction<ClientAppointmentsSliceType[]>) => {
             console.log(action.payload);
             state.clientTerms = action.payload;
+        },
+        setBarberTerms: (state, action: PayloadAction<BarberAppointmentsType[]>) => {
+            state.barberTerms = action.payload;
         },
         setActionAppointmentId: (state, action: PayloadAction<number>) => {
             console.log(action.payload);

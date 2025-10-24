@@ -26,6 +26,7 @@ export interface AppointmentsSliceType  {
     terms: string[];
     selectedTerm: {date: string, time: string};
     clientTerms: ClientAppointmentsSliceType[],
+    barberTerms: BarberAppointmentsType[];
     actionAppointmentId: number
 };
 export interface BarberAppointmentsType extends ClientAppointmentsType {

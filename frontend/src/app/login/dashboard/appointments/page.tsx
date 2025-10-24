@@ -6,17 +6,19 @@ import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
+import { appointmentActions } from "@/store/slices/appointmentSlice";
 import { getBarberAppointments } from "@/lib/api/appointments/getBarberAppointments";
 import { BarberAppointmentsType } from "@/types/Appointments/AppointmentsType";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+import { appointmentsPageNav } from "@/datas/NavigationObjects";
 import styles from '@/components/UI/Appointments/Appointments.module.css';
 import 'react-day-picker/dist/style.css';
 
 
 const AppointmentsPage: React.FC =  () => {
-    const [appointments, setAppointments] = useState<BarberAppointmentsType[]>([]);
+    //const [appointments, setAppointments] = useState<BarberAppointmentsType[]>([]);
     const [message, setMessage] = useState<string>('');
-    const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
+    const {barberTerms, selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     const {actionBarberId, barbers} = useAppSelector((state: RootState) => state?.barber);
     const dispatch = useAppDispatch();
     const selectedBarber = barbers?.filter(barber => barber.id === actionBarberId);
@@ -35,10 +37,12 @@ const AppointmentsPage: React.FC =  () => {
                 } 
                 const dataArr = response.data ?? [];
                 if(dataArr.length === 0) {
-                    setAppointments([]);
+                   //setAppointments([]);
+                    dispatch(appointmentActions.setBarberTerms([]));
                     setMessage('Nema rezultata za izabrani datum.');
                 } else {
-                    setAppointments(dataArr);
+                   // setAppointments(dataArr);
+                    dispatch(appointmentActions.setBarberTerms(dataArr));
                     setMessage('');
                 }
             } catch (error: any) {
@@ -48,20 +52,20 @@ const AppointmentsPage: React.FC =  () => {
         }
         getApp();
     }, [selectedTerm.date, actionBarberId]);
-    const navigationData = {navClass: 'wrapp', ulClass: '', liItem: [{text: 'dashboard', itemClass: '', link: '/login/dashboard'}]};
+    
     return (
         <>
-        <PageNavigation {...navigationData} />
+        <PageNavigation {...appointmentsPageNav} />
         <main className="wrapp">
             <h1>ZAKAZANI TERMINI</h1>
             <section className="middle">
                 <Calendar />
             </section>
             <div className={styles.barberAppointmentsHeadDiv}>
-            <h3>Frizer: <span>{selectedBarber[0].username}</span></h3>
-            <h4>Datum: {selectedTerm.date}</h4>
+                <h3>Frizer: <span>{selectedBarber[0].username}</span></h3>
+                <h4>Datum: {selectedTerm.date}</h4>
             </div>
-            <BarberAppointments appointments={appointments} />
+            <BarberAppointments appointments={barberTerms} />
             <p className='middle'>{message}</p>
         </main>
         </>
