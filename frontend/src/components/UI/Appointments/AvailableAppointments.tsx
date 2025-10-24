@@ -12,7 +12,6 @@ import { calculateAvailableTimeSlots } from '@/lib/utils/calculateAvailableAppoi
 import { normalizeTimeString, filterAvailableTimeSlots } from '@/lib/utils/timeUtils';
 import styles from './Appointments.module.css';
 
-
 const AvailableAppointments: React.FC = () => {
     const [availableSlots, setAvailableSlots] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,8 +35,8 @@ const AvailableAppointments: React.FC = () => {
                     userId: choosenServices[0].userId, 
                     date: selectedTerm.date
                 });
-                
                 if (reservedAppointments.success && reservedAppointments.data) {
+                    console.log(reservedAppointments);
                     const slots = calculateAvailableTimeSlots(
                         reservedAppointments.data, 
                         {
@@ -92,7 +91,7 @@ const AvailableAppointments: React.FC = () => {
     
     return (
         <ul className={`${styles.appointmentsUl} wrapp`}>
-            {availableSlots.map((slot) => (
+            {availableSlots?.map((slot) => (
                 <li key={slot}>
                     <button 
                         onClick={() => handleSlotClick(slot)}

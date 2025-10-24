@@ -15,6 +15,48 @@ class GetAppointmentModel {
             throw $e;
         }
     }
+    public function getReservedAndBarberAppointments($data) { 
+        if($data['action'] === 'RESERVED_APPOINTMENTS') {
+            $query = "
+            SELECT a.time
+            FROM appointment a
+            JOIN service s ON a.serviceId = s.id
+            WHERE s.userId = :userId
+              AND a.date = :date
+            ";
+        } else if ($data['action'] === 'BARBER_APPOINTMENTS') {
+            $query = "
+            SELECT 
+                a.id AS appointmentId,
+                a.time,
+                a.date,
+                s.userService,
+                s.price,
+                c.name,
+                c.surname,
+                c.phone
+            FROM appointment a
+            JOIN service s ON a.serviceId = s.id
+            JOIN costumer c ON a.costumerId = c.id
+            WHERE s.userId = :userId
+              AND a.date = :date
+            ORDER BY a.time
+            ";
+        };
+        try {
+            AppController::databaseConnect();
+            $stmt = DatabaseModel::$pdo->prepare($query);
+            $stmt->execute([
+                "userId" => $data['userId'],
+                "date" => $data['date']
+            ]);
+            $appointments = $stmt->fetchAll();
+            return $appointments;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+    /*
     public function getReservedAppointments($userId, $date) {
     $query = "
             SELECT a.time
@@ -23,13 +65,47 @@ class GetAppointmentModel {
             WHERE s.userId = :userId
               AND a.date = :date
             ";
-        /*ORDER BY a.time ASC*/
+        (ORDER BY a.time ASC)
         try {
             AppController::databaseConnect();
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute([
                 "userId" => $userId,
                 "date" => $date
+            ]);
+            $appointments = $stmt->fetchAll();
+            return $appointments;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+    */
+    public function getBarberAppointments($data) {
+        
+    $query = "
+            SELECT 
+                a.id AS appointmentId,
+                a.time,
+                a.date,
+                s.userService,
+                s.price,
+                c.name,
+                c.surname,
+                c.phone
+            FROM appointment a
+            JOIN service s ON a.serviceId = s.id
+            JOIN costumer c ON a.costumerId = c.id
+            WHERE s.userId = :userId
+              AND a.date = :date
+            ORDER BY a.time
+            ";
+        /*ORDER BY a.time ASC*/
+        try {
+            AppController::databaseConnect();
+            $stmt = DatabaseModel::$pdo->prepare($query);
+            $stmt->execute([
+                "userId" => $data['userId'],
+                "date" => $data['date']
             ]);
             $appointments = $stmt->fetchAll();
             return $appointments;
