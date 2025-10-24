@@ -26,8 +26,16 @@ export interface AppointmentsSliceType  {
     terms: string[];
     selectedTerm: {date: string, time: string};
     clientTerms: ClientAppointmentsSliceType[],
+    barberTerms: BarberAppointmentsType[];
     actionAppointmentId: number
 };
+export interface BarberAppointmentsType extends ClientAppointmentsType {
+    appointmentId: number;
+    date: string;
+    price: string;
+    time: string;
+    userService: string;
+}
 /**
  * Interface for working hours configuration
  */

@@ -32,13 +32,15 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
             url = apiRoutes.DELETE_SERVICE;
             slice = 'SERVICE';
         } 
-        if(action === 'DELETE_APPOINTMENT') {
+        if(action === 'DELETE_APPOINTMENT' || action === 'DELETE_BARBER_APPOINTMENT') {
             url = apiRoutes.DELETE_CLIENT_APPOINTMENT;
             slice = 'APPOINTMENT';
         }
         
-        const {actionDone} = await onAction(url, id);
+        let {actionDone} = await onAction(url, id);
         const data = {id};
+        if(action === 'DELETE_APPOINTMENT') actionDone = 'DELETE_APPOINTMENT';
+        if(action === 'DELETE_BARBER_APPOINTMENT') actionDone = 'DELETE_BARBER_APPOINTMENT';
         actionDone && slice === 'BARBER' && barberActionDispatcher(data, actionDone.toUpperCase(), dispatch);
         actionDone?.toUpperCase() === 'DELETE' && loggedBarrberId === id && router.push('/');
         actionDone && slice === 'SERVICE' && serviceActionDispatcher(data, actionDone.toUpperCase(), dispatch);

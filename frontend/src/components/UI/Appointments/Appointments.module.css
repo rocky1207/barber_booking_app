@@ -111,3 +111,10 @@ width: 100%;
   display: flex;
   justify-content: flex-end;
 }
+
+.barberAppointmentsHeadDiv {
+  margin-top: 80px;
+}
+.barberAppointmentsHeadDiv h3 {
+  margin-bottom: 10px;
+}

@@ -1,8 +1,10 @@
 import api from "@/lib/axios";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
-import { GetReservedAppointmentsReturnDataType } from "@/types/Api/ReturnAppointmentType";
-export const getReservedAppointments = async (data: {userId: number, date: string}): Promise<GetReservedAppointmentsReturnDataType> => {
-    const updatedData = {...data, action: 'RESERVED_APPOINTMENTS'}
+import { GetBarberAppointmentsReturnDataType } from "@/types/Api/ReturnAppointmentType";
+
+export const getBarberAppointments = async (data: {userId: number, date: string}): Promise<GetBarberAppointmentsReturnDataType> => {
+    console.log(data);
+    const updatedData = {...data, action: 'BARBER_APPOINTMENTS'};
     let answer;
     try {
         const response = await api.post(apiRoutes.GET_BARBER_APPOINTMENTS, updatedData);
@@ -11,7 +13,7 @@ export const getReservedAppointments = async (data: {userId: number, date: strin
                 success: true, 
                 data: response.data.data,
                 message: response.data.message,
-                actionDone: 'GET_RESERVED_APPOINTMENTS'
+                actionDone: 'GET_BARBER_APPOINTMENTS'
             };
         } else {
             throw new Error(response.data.message || 'Greška prilikom izvršenja upita');
@@ -19,7 +21,5 @@ export const getReservedAppointments = async (data: {userId: number, date: strin
     } catch (error: any) {
         answer = {success: false, message: error.message};
     }
-    console.log(answer);
     return answer;
-        
 };

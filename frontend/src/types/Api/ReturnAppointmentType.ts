@@ -1,4 +1,5 @@
 import { ClientAppointmentsSliceType } from "../Appointments/AppointmentsType";
+import { BarberAppointmentsType } from "../Appointments/AppointmentsType";
 export interface BasicAppointmentReturnType {
     success: boolean;
     message: string;
@@ -7,8 +8,11 @@ export interface BasicAppointmentReturnType {
 export interface InsertAppointmentReturnData extends BasicAppointmentReturnType {
     data?: {date: string, startAppointment: string};
 };
-export interface GetReservedAppointmentsReturnData extends BasicAppointmentReturnType {
+export interface GetReservedAppointmentsReturnDataType extends BasicAppointmentReturnType {
     data?: string[];
+};
+export interface GetBarberAppointmentsReturnDataType extends BasicAppointmentReturnType {
+    data?: BarberAppointmentsType[];
 };
 export interface GetClientAppointmentsReturnData extends BasicAppointmentReturnType {
     data?: ClientAppointmentsSliceType[];
