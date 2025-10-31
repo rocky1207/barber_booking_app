@@ -13,6 +13,7 @@ class AppController {
     public const PHONE_REGEX = "/^\d+$/";
     public const EMAIL_REGEX = "/^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/" /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/; 
     public const DATE_REGEX = "/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/";
+    public const TIME_REGEX = "/^(?:[01]\d|2[0-3]):[0-5]\d$/";
 
     public const INT_ERROR_MESSAGE = 'Prosleđeni parametar mora biti broj.';
     public const USERNAME_ERROR_MESSAGE = 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.';
@@ -34,6 +35,7 @@ class AppController {
     public const EMAIL_ERROR_MESSAGE = 'Neispravan format email adrese.';
 
     public const DATE_ERROR_MESSAGE = 'Neispravan format datuma.';
+    public const TIME_ERROR_MESSAGE = 'Neispravan format vremena.';
      /*
     public const EMAIL_REGEX = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
     public const NUMBER_REGEX = "/^\d+$/";

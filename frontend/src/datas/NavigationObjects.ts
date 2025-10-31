@@ -17,7 +17,8 @@ export const servicesPageNav = {
 export const adminPageNav = {
     navClass: 'wrapp',
     ulClass: '',
-    liItem: [{link: "/", text: 'početna', itemClass: ''}]
+    liItem: [
+        {link: "/", text: 'početna', itemClass: ''}]
 }
 export const appointmentsPageNav = {
     navClass: 'wrapp', 

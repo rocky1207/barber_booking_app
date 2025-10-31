@@ -70,7 +70,7 @@ const CreateAppointment: React.FC = () => {
             services
         }
         
-        const response = await postAppointmentApi('INSERT', data);
+        const response = await postAppointmentApi('INSERT_CLIENT_APPOINTMNET', data);
         if(!response.success) {
             setMessage(response.message);
             setIsLoadingState(false, dispatch);
@@ -84,16 +84,23 @@ const CreateAppointment: React.FC = () => {
         console.log(response);
         //setMessage(response.message);
         
-        appointmentActionDispatcher(response?.data, 'INSERT', dispatch);
         
-        setDialogData({
-            date: response.data.date,
-            time: response.data.startAppointment,
-        });
-        localStorage.setItem('appointmentSuccess', JSON.stringify({
-            date: response.data.date,
-            time: response.data.startAppointment,
-        }));
+        if(response.actionDone === 'INSERT_CLIENT_APPOINTMNET') {
+            
+            const insertData = response.data as { date: string; startAppointment: string };
+            //appointmentActionDispatcher(insertData, response.actionDone, dispatch);
+            setDialogData({
+                date: insertData.date,
+                time: insertData.startAppointment,
+            });
+            localStorage.setItem('appointmentSuccess', JSON.stringify({
+                date: insertData.date,
+                time: insertData.startAppointment,
+            }));
+        }
+        
+        
+        
         form.reset();
         setIsLoadingState(false, dispatch);
         if(dialog && typeof dialog !== "function" && dialog.current) dialog.current.showModal();

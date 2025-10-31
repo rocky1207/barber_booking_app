@@ -68,12 +68,18 @@ const Home: React.FC = () => {
     head: 'Da li ste sigurni?',
     onAction: manageBarber
   }
+  const hoursHandler = () => {
+         dispatch(barberActions.setActionBarberId(loggedBarber?.id));
+
+    router.push('/login/dashboard/working-hours');
+  }
   
     return (
       <>
       <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}  />
       <section>
         <div className='logOutDiv'><button onClick={logOutHandler}>LOG OUT</button></div>
+        <div className=''><button onClick={hoursHandler}>radno vreme</button></div>
       <h1>MENADŽERSKA TABLA</h1>
       <UserNavigation />
       <nav aria-label="Manage barber navigation">

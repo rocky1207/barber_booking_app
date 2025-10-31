@@ -1,0 +1,127 @@
+.container {
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.container h3 {
+    margin: 0 0 1rem 0;
+    color: #333;
+    text-align: center;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.message {
+    color: #e74c3c;
+    text-align: center;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    background: #fdf2f2;
+    border: 1px solid #fecaca;
+    border-radius: 4px;
+}
+
+.empty {
+    text-align: center;
+    color: #666;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.content {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dates {
+    flex: 1;
+    min-width: 200px;
+}
+
+.dateRange {
+    font-weight: 500;
+    color: #333;
+    font-size: 1rem;
+}
+
+.times {
+    flex: 1;
+    min-width: 150px;
+}
+
+.timeRange {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.editBtn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.editBtn:hover {
+    background: #2980b9;
+}
+
+.deleteBtn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.deleteBtn:hover {
+    background: #c0392b;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .actions {
+        justify-content: center;
+    }
+}
+
+

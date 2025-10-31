@@ -7,6 +7,7 @@ import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import { appointmentActionDispatcher } from "@/lib/utils/appointmentActionDispatcher";
+import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
 
 const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
     const {className, text, type, validate, action, onAction, id, ...buttonProps} = btnData;
@@ -36,6 +37,11 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
             url = apiRoutes.DELETE_CLIENT_APPOINTMENT;
             slice = 'APPOINTMENT';
         }
+        if(action === 'DELETE_WORKING_HOURS_BY_ID') {
+            url = apiRoutes.DELETE_WORKING_HOURS_BY_ID;
+            slice = 'WORKING_HOURS';
+            
+        }
         
         let {actionDone} = await onAction(url, id);
         const data = {id};
@@ -45,6 +51,7 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
         actionDone?.toUpperCase() === 'DELETE' && loggedBarrberId === id && router.push('/');
         actionDone && slice === 'SERVICE' && serviceActionDispatcher(data, actionDone.toUpperCase(), dispatch);
         actionDone && slice === 'APPOINTMENT' && appointmentActionDispatcher(data, actionDone.toUpperCase(), dispatch);
+        actionDone && slice === 'WORKING_HOURS' && workingHoursActiondispatcher(data, actionDone.toUpperCase(), dispatch);//workingHoursActiondispatcher(data, actionDone.toUpperCase(), dispatch);
         dialogRef?.current?.close();
     }
     return (

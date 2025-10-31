@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 import { getReservedAppointments } from '@/lib/api/appointments/getReservedAppointments';
-import { calculateAvailableTimeSlots } from '@/lib/utils/calculateAvailableAppointments';
+import { calculateAvailableTimeSlotsWithWorkingHours } from '@/lib/utils/calculateAvailableAppointments';
 import { normalizeTimeString, filterAvailableTimeSlots } from '@/lib/utils/timeUtils';
 import styles from './Appointments.module.css';
 
@@ -37,13 +37,15 @@ const AvailableAppointments: React.FC = () => {
                 });
                 if (reservedAppointments.success && reservedAppointments.data) {
                     console.log(reservedAppointments);
-                    const slots = calculateAvailableTimeSlots(
+                    const slots = await calculateAvailableTimeSlotsWithWorkingHours(
                         reservedAppointments.data, 
                         {
                             serviceCount: choosenServices.length,
                             slotDuration: 30,
                             bufferTime: 0
-                        }
+                        },
+                        choosenServices[0].userId,
+                        selectedTerm.date
                     );
                     
                     // Filter out slots that are in the past or too close to current time
