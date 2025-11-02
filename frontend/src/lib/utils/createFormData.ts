@@ -4,7 +4,6 @@ export const createFormData = (e: React.FormEvent<HTMLFormElement>) => {
     const elements = Array.from(form.elements);
     console.log(elements);
     elements.forEach((element) => {
-        console.log(element);
         const isInputOrTextArea = element instanceof HTMLInputElement || 
         element instanceof HTMLTextAreaElement;
         if(!isInputOrTextArea) return;

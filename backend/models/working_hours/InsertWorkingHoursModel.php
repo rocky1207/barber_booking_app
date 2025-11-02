@@ -1,6 +1,7 @@
 <?php
 require_once (__DIR__ . '/../../controllers/AppController.php');
 require_once (__DIR__ . '/../DatabaseModel.php');
+require_once (__DIR__ . '/GetWorkingHoursModel.php');
 
 class InsertWorkingHoursModel {
     public function insertWorkingHours($data) {
@@ -26,8 +27,11 @@ class InsertWorkingHoursModel {
             }
             
             $workingHoursId = (int)DatabaseModel::$pdo->lastInsertId();
+            $getWorkingHoursModel = new GetWorkingHoursModel();
+            $workingHours = $getWorkingHoursModel->getWorkingHoursById($workingHoursId);
             DatabaseModel::$pdo->commit();
-            
+            return $workingHours;
+            /*
             return [
                 "id" => $workingHoursId,
                 "userId" => $data['userId'],
@@ -36,7 +40,7 @@ class InsertWorkingHoursModel {
                 "start_time" => $data['start_time'],
                 "end_time" => $data['end_time']
             ];
-            
+            */
         } catch(Exception $e) {
             DatabaseModel::$pdo->inTransaction() && DatabaseModel::$pdo->rollBack();
             throw $e;

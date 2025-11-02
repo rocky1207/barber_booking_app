@@ -29,6 +29,7 @@ export const workingHoursApi = {
     },
     */
     // Get working hours by ID
+    /*
     getWorkingHoursById: async (id: number): Promise<WorkingHoursApiResponse> => {
         const response = await fetch(`${API_BASE_URL}/api/working_hours/getWorkingHoursById.php?id=${id}`, {
             method: 'GET',
@@ -38,7 +39,7 @@ export const workingHoursApi = {
         });
         return response.json();
     },
-
+    */
     // Get working hours for specific date
     /*
     getWorkingHoursForDate: async (userId: number, date: string): Promise<WorkingHoursApiResponse> => {
@@ -75,6 +76,7 @@ export const workingHoursApi = {
     },
 
     // Delete working hours
+    /*
     deleteWorkingHours: async (id: number): Promise<WorkingHoursApiResponse> => {
         const response = await fetch(`${API_BASE_URL}/api/working_hours/deleteWorkingHours.php`, {
             method: 'DELETE',
@@ -85,6 +87,7 @@ export const workingHoursApi = {
         });
         return response.json();
     },
+    */
 };
 
 

@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 import Input from "../../Input/Input";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
-import { workingHoursInputs } from "@/datas/Form/WorkingHoursInputObjects";
+//import { workingHoursInputs } from "@/datas/Form/WorkingHoursInputObjects";
+import { workingHoursInputs } from "@/datas/Form/lnputObjects";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
-import { workingHoursValidationSchema } from "@/lib/validators/workingHoursValidationSchema";
+import { workingHoursValidationSchema } from "@/lib/validators/validationSchema";
 //import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
-
-import { insertWorkingHours } from "@/lib/api/working_hours/insertWorkingHours";
+import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
+import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
 import styles from './InsertWorkingHoursForm.module.css';
 
 interface InsertWorkingHoursFormProps {
@@ -62,15 +63,15 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         };
         
         // const response = await workingHoursApi.insertWorkingHours(data);
-        const response = await insertWorkingHours(data);
-        
+        const response = await insertUpdateWorkingHours(data, 'POST');
+        console.log(response);
         if(!response.success) {
             setMessage(response.message);
             setIsLoadingState(false, dispatch);
             return;
         }
-        
-        setMessage('Radni sati su uspešno uneseni.');
+        workingHoursActiondispatcher(response.data, 'INSERT_WORKING_HOURS', dispatch);
+        setMessage(response.data.message);
         form.reset();
         setIsLoadingState(false, dispatch);
         

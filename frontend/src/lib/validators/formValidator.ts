@@ -1,6 +1,7 @@
 import { ValidationSchemaType } from "@/types/Form/ValidationSchemaType";
 export const formValidator = (data: { [key: string]: string | File }, schema:ValidationSchemaType):{status: boolean; message: string;} => {
-    for (const key in data) {
+  console.log(data);  
+  for (const key in data) {
         const rules = schema[key];
         
       // const rules = schema[name];

@@ -1,4 +1,5 @@
 import { LoginInputType } from "@/types/Form/LoginInputType";
+//import { WorkingHoursInputType } from "@/types/Form/WorkingHoursInputType";
 export const loginInputs: LoginInputType[] = [
     {type: 'text', name: 'username', defaultValue: '', placeholder: "Korisničko ime"},
     {type: 'text', name: 'password', defaultValue: '', placeholder: "Lozinka"},
@@ -28,4 +29,10 @@ export const clientAppointmentInputs: LoginInputType[] = [
     {type: 'text', name: 'name', defaultValue: '', placeholder: "Ime"},
     {type: 'text', name: 'surname', defaultValue: '', placeholder: "Prezime"},
     {type: 'text', name: 'phone', defaultValue: '', placeholder: "Broj telefona"},
+];
+export const workingHoursInputs: LoginInputType[] = [
+    {type: 'date', name: 'start_date', defaultValue: '', placeholder: "Datum od", /*required: true*/},
+    {type: 'date', name: 'end_date', defaultValue: '', placeholder: "Datum do", /*required: true*/},
+    {type: 'time', name: 'start_time', defaultValue: '', placeholder: "Vreme od", /*required: true*/},
+    {type: 'time', name: 'end_time', defaultValue: '', placeholder: "Vreme do", /*required: true*/},
 ];

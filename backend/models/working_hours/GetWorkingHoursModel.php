@@ -27,7 +27,8 @@ class GetWorkingHoursModel {
             if(empty($workingHours)) {
                 throw new Exception("Radni sati sa ID {$id} nisu pronađeni.", 404);
             }
-            return (int)$id;
+            return $workingHours[0];
+            //return (int)$id;
         } catch (Exception $e) {
             throw $e;
         }
@@ -51,7 +52,7 @@ class GetWorkingHoursModel {
                 'date' => $date
             ]);
             $workingHours = $stmt->fetchAll();
-            return $workingHours;
+            return $workingHours[0];
         } catch (Exception $e) {
             throw $e;
         }

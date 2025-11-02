@@ -8,17 +8,17 @@ import styles from './WorkingHoursManager.module.css';
 
 const WorkingHoursManager: React.FC = () => {
     const [showInsertForm, setShowInsertForm] = useState<boolean>(false);
-    const [refreshTrigger, setRefreshTrigger] = useState<number>(0);
+    //const [refreshTrigger, setRefreshTrigger] = useState<number>(0);
     const { loggedBarber } = useAppSelector((state: RootState) => state?.barber);
     const loggedBarberId: number = loggedBarber.id;
 
     const handleInsertSuccess = () => {
         setShowInsertForm(false);
-        setRefreshTrigger(prev => prev + 1);
+       //setRefreshTrigger(prev => prev + 1);
     };
 
     const handleWorkingHoursChange = () => {
-        setRefreshTrigger(prev => prev + 1);
+       // setRefreshTrigger(prev => prev + 1);
     };
 
     return (
@@ -44,7 +44,7 @@ const WorkingHoursManager: React.FC = () => {
 
             <div className={styles.listContainer}>
                 <WorkingHoursList 
-                    key={refreshTrigger}
+                    key={loggedBarberId/*refreshTrigger*/}
                     loggedBarberId={loggedBarberId} 
                     onWorkingHoursChange={handleWorkingHoursChange}
                 />

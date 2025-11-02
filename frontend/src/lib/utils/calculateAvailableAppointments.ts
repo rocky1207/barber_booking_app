@@ -85,7 +85,7 @@ export const calculateAvailableTimeSlotsWithWorkingHours = async (
     }
     
     // Use the first working hours entry (assuming one per day for now)
-    const workingHours = response.data[0];
+    const workingHours = response.data;
     const workStartTime = workingHours.start_time.substring(0, 5); // Remove seconds
     const workEndTime = workingHours.end_time.substring(0, 5);
     

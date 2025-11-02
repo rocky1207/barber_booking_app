@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import Input from "../../Input/Input";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
-import { workingHoursInputs } from "@/datas/Form/WorkingHoursInputObjects";
+//import { workingHoursInputs } from "@/datas/Form/WorkingHoursInputObjects";
+import { workingHoursInputs } from "@/datas/Form/lnputObjects";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
-import { workingHoursValidationSchema } from "@/lib/validators/workingHoursValidationSchema";
-import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
+import { workingHoursValidationSchema } from "@/lib/validators/validationSchema";
+//import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
+import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
 import { WorkingHoursType } from "@/types/WorkingHours/WorkingHoursType";
 import styles from './UpdateWorkingHoursForm.module.css';
 
@@ -35,7 +37,12 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         
         const form = e.currentTarget;
         const formData = createFormData(e);
-        const validateInputs = formValidator(formData, workingHoursValidationSchema);
+        const newFormData = {
+            ...formData,
+            start_time: formData.start_time.substring(0, 5), 
+            end_time: formData.end_time.substring(0, 5)
+        }
+        const validateInputs = formValidator(newFormData, workingHoursValidationSchema);
         
         if(!validateInputs.status) {
             setMessage(validateInputs.message);
@@ -58,21 +65,22 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         }
 
         const data = {
+            id: workingHours.id,
             start_date: formData.start_date,
             end_date: formData.end_date,
-            start_time: formData.start_time,
-            end_time: formData.end_time
+            start_time: formData.start_time.substring(0, 5), 
+            end_time: formData.end_time.substring(0, 5)
         };
         
-        const response = await workingHoursApi.updateWorkingHours(workingHours.id, data);
-        
+        //const response = await workingHoursApi.updateWorkingHours(workingHours.id, data);
+        const response = await insertUpdateWorkingHours(data, 'PUT');
         if(!response.success) {
             setMessage(response.message);
             setIsLoadingState(false, dispatch);
             return;
         }
         
-        setMessage('Radni sati su uspešno ažurirani.');
+        setMessage(response.data.message || 'Radni sati su uspešno ažurirani.');
         setIsLoadingState(false, dispatch);
         
         if(onSuccess) {

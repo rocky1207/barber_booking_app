@@ -2,6 +2,7 @@
 require_once (__DIR__ . '/../../controllers/AppController.php');
 require_once (__DIR__ . '/../../models/working_hours/GetWorkingHoursModel.php');
 require_once (__DIR__ . '/../../validators/integerValidator.php');
+require_once (__DIR__ . '/../../validators/dateValidator.php');
 
 class GetWorkingHoursController {
     public function getWorkingHoursByUserId($userId) {
@@ -38,7 +39,7 @@ class GetWorkingHoursController {
     
     public function getWorkingHoursForDate($userId, $date) {
         $validateUserId = integerValidator($userId);
-        $validateDate = integerValidator($date);
+        $validateDate = dateValidator($date);
         try {
             $getWorkingHoursModel = new GetWorkingHoursModel();
             $workingHours = $getWorkingHoursModel->getWorkingHoursForDate($validateUserId['id'], $validateDate['date']);
