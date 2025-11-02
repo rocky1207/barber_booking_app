@@ -51,6 +51,11 @@ export const updateValidationSchema: ValidationSchemaType = {
         pattern: /^(admin|user|student)$/,
         errorMessage: 'Unesite "admin" ili "user".'
     },
+    suspended: {
+        required: true,
+        pattern: /^(0|1)$/,
+        errorMessage: 'SELECT polje mora biti popunjeno.'
+    },
     file: {
         required: false,
         pattern: /^$|^.+\.(jpg|jpeg|png|webp)$/i,

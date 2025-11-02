@@ -29,6 +29,7 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
                     ...barber,
                     username: data.username,
                     file: data.file,
+                    suspended: data.suspended,
                     ...(data.role && {role: data.role})
                 };
             }

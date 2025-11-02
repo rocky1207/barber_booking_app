@@ -57,7 +57,8 @@ const Home: React.FC = () => {
          id: 0,
          username: '',
          file: '',
-         role: ''
+         role: '',
+         suspended: 0
      }));
      setIsLoadingState(true, dispatch);
         router.push('/');
@@ -77,7 +78,7 @@ const Home: React.FC = () => {
     return (
       <>
       <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}  />
-      <section>
+      {loggedBarber.suspended !== 0 ? <p>Nemate više pristup aplikaciji</p> : <section>
         <div className='logOutDiv'><button onClick={logOutHandler}>LOG OUT</button></div>
         <div className=''><button onClick={hoursHandler}>radno vreme</button></div>
       <h1>MENADŽERSKA TABLA</h1>
@@ -95,7 +96,7 @@ const Home: React.FC = () => {
           })}
         </ul>
       </nav>
-      </section>
+      </section>}
       </>  
     );
 };

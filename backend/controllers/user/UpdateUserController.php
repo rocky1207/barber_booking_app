@@ -8,21 +8,23 @@ class UpdateUserController {
         $validateInputs = updateUserValidator($data);
         if(!isset($validateInputs["role"])) {
             $query = "UPDATE user
-            SET username = :username, file = :file
+            SET username = :username, file = :file, suspended = :suspended
             WHERE id = :id";
             $execData = [
                 "username" => $validateInputs["username"],
                 "file" => $validateInputs["file"],
+                "suspended" => (int)$validateInputs["suspended"],
                 "id" => (int)$validateInputs["id"]
             ];
         } else {
             $query = "UPDATE user
-            SET username = :username, role = :role, file = :file
+            SET username = :username, role = :role, file = :file, suspended = :suspended
             WHERE id = :id";
             $execData = [
                 "username" => $validateInputs["username"],
                 "role" => $validateInputs["role"],
                 "file" => $validateInputs["file"],
+                "suspended" => (int)$validateInputs["suspended"],
                 "id" => (int)$validateInputs["id"]
             ];
         };

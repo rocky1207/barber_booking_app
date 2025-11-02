@@ -18,6 +18,16 @@
     display: none;
     width: 100%;
 }
+.form input[type="checkbox"] {
+    width: 30px;
+    transform: scale(2.5);
+    cursor: pointer;
+    accent-color: #000; /* opciono — menja boju kvadratića kad je čekiran */
+    margin-right: 20px;
+}
+.form label {
+    font-size: 20px;
+}
 .fileBtn {
     font-size: 16px;
     background-color: rgba(255, 255, 255, 0.1); /* vrlo svetla providna boja */

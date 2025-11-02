@@ -5,6 +5,7 @@ export interface BasicBarberType {
   username: string;
   file: string;
   role: string;
+  suspended: number;
 }
 
 export interface ExtendedBarberType extends BasicBarberType {

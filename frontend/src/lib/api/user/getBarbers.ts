@@ -10,5 +10,5 @@ export const getBarbers = async (url: string): Promise<{success: boolean; data?:
     } catch(error: any) {
         data = {success: false, message: error.message};
     }
-    return data;
+     return data;
  }
