@@ -4,6 +4,7 @@ class AppController {
     public const USERNAME_REGEX = "/^[\p{L}0-9._]{3,20}$/u";
     public const PASSWORD_REGEX = "/^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{4,}$/u";
     public const ROLE_REGEX = "/^(admin|user|student)$/";
+    public const TRUE_OR_FALSE_REGEX = "/^(0|1)$/";
     public const FILE_REGEX = "/^$|^.+\.(jpg|jpeg|png|webp)$/i";
     public const INT_REGEX = "/^[1-9][0-9]*$/";
     public const SERVICE_REGEX = '/^[\p{L}0-9 .,!?()\-:;\'"\/\\\\@+%&]{3,255}$/u';
@@ -13,11 +14,13 @@ class AppController {
     public const PHONE_REGEX = "/^\d+$/";
     public const EMAIL_REGEX = "/^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/" /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/; 
     public const DATE_REGEX = "/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/";
+    public const TIME_REGEX = "/^(?:[01]\d|2[0-3]):[0-5]\d$/";
 
     public const INT_ERROR_MESSAGE = 'Prosleđeni parametar mora biti broj.';
     public const USERNAME_ERROR_MESSAGE = 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.';
     public const PASSWORD_ERROR_MESSAGE = 'Lozinka počinje velikim slovom, sadrži najmanje jednu cifru, dozvoljava slova i znak !, i ima minimalnu dužinu od 4 karaktera.';
     public const ROLE_ERROR_MESSAGE = 'Unesite "admin" ili "user ili student".';
+    public const SELECT_FIELD_ERROR_MESSAGE = 'SELECT polje mora biti izabrano';
     public const FILE_NAME_ERROR_MESSAGE =  'Naziv slike može sadržati samo tekstualne karaktere.';
     public const FILE_ERROR_MESSAAGE = 'Dozvoljeni su samo JPEG, PNG ili WEBP formati slika, maksimalne veličine do 5MB.';
     public const QUERY_ERROR_MESSAGE = 'Greška prilikom izvršenja upita';
@@ -34,6 +37,7 @@ class AppController {
     public const EMAIL_ERROR_MESSAGE = 'Neispravan format email adrese.';
 
     public const DATE_ERROR_MESSAGE = 'Neispravan format datuma.';
+    public const TIME_ERROR_MESSAGE = 'Neispravan format vremena.';
      /*
     public const EMAIL_REGEX = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
     public const NUMBER_REGEX = "/^\d+$/";

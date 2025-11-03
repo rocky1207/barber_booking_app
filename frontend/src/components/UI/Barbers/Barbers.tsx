@@ -16,6 +16,7 @@ const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
   console.log(choosenServices); 
   const dispatch = useAppDispatch();
   const barbers = allBarbers.filter(barberItem => barberItem.role !== 'owner');
+  console.log(barbers);
   useEffect(() => {
     choosenServices.length > 0 && dispatch(serviceActions.setChoosenServices([]));
     dispatch(appointmentActions.setSelectedTerm({date: '', time: ''}));
@@ -34,7 +35,7 @@ const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
               {barbers.map((barberItem, index) => {
                 const barber = {...barberItem, index: index};
                 return (
-                  <BarberItem  key={barber.id} {...barber} />
+                  barberItem.suspended !== 1 && <BarberItem  key={barber.id} {...barber} />
                 )
               })}
             </ul>

@@ -68,6 +68,7 @@ class UserLoginModel {
                     "username" => $data["username"],
                     "file" => $data["file"],
                     "role" => $data["role"],
+                    "suspended" => $data["suspended"],
             ];
             /*
             return [

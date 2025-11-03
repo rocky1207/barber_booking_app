@@ -51,6 +51,11 @@ export const updateValidationSchema: ValidationSchemaType = {
         pattern: /^(admin|user|student)$/,
         errorMessage: 'Unesite "admin" ili "user".'
     },
+    suspended: {
+        required: true,
+        pattern: /^(0|1)$/,
+        errorMessage: 'SELECT polje mora biti popunjeno.'
+    },
     file: {
         required: false,
         pattern: /^$|^.+\.(jpg|jpeg|png|webp)$/i,
@@ -114,5 +119,28 @@ export const appointmentValidationSchema: ValidationSchemaType = {
         required: false,
         pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/ /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/,
         errorMessage: 'Neispravan format email adrese.'
+    }
+};
+
+export const workingHoursValidationSchema: ValidationSchemaType = {
+    start_date: {
+        required: true,
+        pattern: /^\d{4}-\d{2}-\d{2}$/,
+        errorMessage: 'Datum mora biti u formatu YYYY-MM-DD.'
+    },
+    end_date: {
+        required: true,
+        pattern: /^\d{4}-\d{2}-\d{2}$/,
+        errorMessage: 'Datum mora biti u formatu YYYY-MM-DD.'
+    },
+    start_time: {
+        required: true,
+        pattern: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+        errorMessage: 'Vreme mora biti u formatu HH:MM.'
+    },
+    end_time: {
+        required: true,
+        pattern: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+        errorMessage: 'Vreme mora biti u formatu HH:MM.'
     }
 };

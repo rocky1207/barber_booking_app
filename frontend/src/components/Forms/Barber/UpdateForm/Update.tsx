@@ -39,31 +39,45 @@ const Update: React.FC = () => {
     ];
     */
    let updateInputs;
+   
    if(barberState?.loggedBarber.role === 'admin' || barberState?.loggedBarber.role === 'owner') {
+    console.log(barber);
+    const checked = barber?.suspended === 1 ? true : false;
+    console.log(checked);
     updateInputs = [
         {type: 'text', name: 'username', defaultValue: barber?.username, placeholder: "Korisničko ime"},
         {type: 'text', name: 'role', defaultValue: barber?.role, placeholder: "Uloga"},
+        {type: 'checkbox', name: 'suspended', defaultValue: barber?.suspended.toString(), defaultChecked:checked},
     ];
    } else {
     updateInputs = [
         {type: 'text', name: 'username', defaultValue: barber?.username, placeholder: "Korisničko ime"},
     ];
    }
-    console.log(barberState?.loggedBarber);
-    console.log(paramId);
+   // console.log(barberState?.loggedBarber);
+    //console.log(paramId);
         
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(barberActions.setActionBarberId(paramId));
         const form = e.currentTarget as HTMLFormElement;
+        //console.log(form);
+        
         const formData = createFormData(e);
+        console.log(formData.suspended);
+        
+        const suspendedInput = form.elements.namedItem('suspended') as HTMLInputElement | null;
+        const suspendedValue = suspendedInput ? (suspendedInput.checked ? '1' : '0') : '0';
         const validateData = {
             ...formData,
            // role: formData.role ? formData.role : barber?.role!,
             role: formData.role,
-            file: fileName
+            file: fileName,
+            suspended: suspendedValue 
         }
+        console.log(validateData);
+        
         const validateInputs = formValidator(validateData, updateValidationSchema);
         if(!validateInputs.status) {
             setErrorMessage(validateInputs.message);
@@ -72,17 +86,19 @@ const Update: React.FC = () => {
         const data = {
            ...validateData,
             id: userId!,
+            suspended: parseInt(validateData.suspended, 10)
         }
         console.log(data);
         
         const result = await loginRegisterUpdate(updateUserUrl, data, 'PATCH');
-        console.log(result);
+        //console.log(result);
         if(!result.success) {
             setErrorMessage(result.message);
             return;
         }
         setErrorMessage(result?.data?.message)
         const user = result?.data?.data;
+        console.log(user);
         user && barberActionDispatcher(user, 'UPDATE', dispatch);
     };
     
@@ -109,8 +125,16 @@ const Update: React.FC = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={updateInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
+            
              <p>{errorMessage}</p>
+             {/*<div>
+            <label>
+            <input type="checkbox" name="isSuspended" value="suspenduj" />
+            SUSPENDUJ
+            </label>
+            </div>*/}
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
+            
         </form>
         <div className={extraStyles.changePasswordDiv}>
             {showButton &&<NavigateButton {...newChangePasswordBtn} />}

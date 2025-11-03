@@ -9,16 +9,17 @@ import { registerValidationSchema } from "@/lib/validators/validationSchema";
 import FileInput from "../../FileInput/FileInput";
 import { createFormData } from "@/lib/utils/createFormData";
 import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
-import { useAppSelector } from "@/store/hooks/typizedHooks";
-import { RootState } from "@/store/store";
-import { useSearchParams } from "next/navigation";
+//import { useAppSelector } from "@/store/hooks/typizedHooks";
+//import { RootState } from "@/store/store";
+//import { useSearchParams } from "next/navigation";
 import styles from '../../Form.module.css';
 
 const Register:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
     const [fileName, setFileName] = useState<string>('');
-    const {barbers} = useAppSelector((state: RootState) => state?.barber);
+   // const {barbers} = useAppSelector((state: RootState) => state?.barber);
     const dispatch = useAppDispatch();
+    /*
     const params = useSearchParams();
     const userId = params.get('id');
     const paramId = userId !== null ? parseInt(userId, 10) : undefined;
@@ -38,7 +39,7 @@ const Register:React.FC = () => {
     } else {
         console.log(`hello top`);
     }
-    
+    */
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
@@ -56,11 +57,8 @@ const Register:React.FC = () => {
             setErrorMessage(result.message || "Greška prilikom registracije");
             return;
         };
-        
         const user = result.data.data;
-            
         barberActionDispatcher(user, 'INSERT', dispatch);
-        console.log(registerInputs);
         form.reset();
         setFileName('');
         setErrorMessage('Uspešno ste uneli novog korisnika');

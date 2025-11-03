@@ -11,9 +11,9 @@ export const postAppointmentApi = async (action: string, data: BasicAppointments
     try {
         let response;
         
-        if(action === 'INSERT') {
+        if(action === 'INSERT_CLIENT_APPOINTMNET') {
             route = apiRoutes.INSERT_APPOINTMENT;
-            actionDone = 'INSERT';
+            actionDone = 'INSERT_CLIENT_APPOINTMNET';
         }
         if(action === 'GET_CLIENT_APPOINTMENTS') {
             route = apiRoutes.GET_CLIENT_APPOINTMENTS;

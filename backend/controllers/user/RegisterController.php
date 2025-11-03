@@ -5,6 +5,7 @@ require_once (__DIR__ . "/../../validators/user/registerUserValidator.php");
 class RegisterController {
     public function register($data) {
         $validateData = registerUserValidator($data);
+        $validateData['suspended'] = 0;
         try {
             $userRegisterModel = new UserRegisterModel();
             $user = $userRegisterModel->userRegister($validateData);

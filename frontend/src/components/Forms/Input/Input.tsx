@@ -39,15 +39,16 @@ const Input:React.FC<{inputs:LoginInputType[]}> = ({inputs}) => {
   return (
     <>
       {inputs.map((input) => {
-        
+      const labelText = input.name === 'suspended' ? 'SUSPENDUJ' : '';
         return (
           <div key={input.name}>
+            <label htmlFor="">
             <input
               {...input}
               defaultValue={input.defaultValue || ''}
               /*onBlur={handleBlur}*/
-            />
-            
+            />{labelText}
+            </label>
           </div>
         );
       })}

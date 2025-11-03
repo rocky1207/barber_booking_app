@@ -18,7 +18,10 @@ const Calendar: React.FC = () => {
     //console.log(services);
     //console.log(selected);
     const dispatch = useAppDispatch();
-    useEffect(() => {setIsLoadingState(false, dispatch)}, []);
+    useEffect(() => {
+        setIsLoadingState(false, dispatch);
+      //  dispatch(appointmentActions.setBarberTerms([]));
+    }, []);
     /*
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
