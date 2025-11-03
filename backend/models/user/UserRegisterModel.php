@@ -4,7 +4,7 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/GetUserModel.php");
 class UserRegisterModel {
     public function userRegister($data) {
-        $query = "INSERT INTO user (username, password, role, file) VALUES (:username, :password, :role, :file)";
+        $query = "INSERT INTO user (username, password, role, file, suspended) VALUES (:username, :password, :role, :file, :suspended)";
         
         try {
             AppController::databaseConnect();
@@ -17,7 +17,8 @@ class UserRegisterModel {
                 "username" => $data["username"],
                 "password" => password_hash($data["password"], PASSWORD_DEFAULT),
                 "role" => $data["role"],
-                "file" => $data["file"]
+                "file" => $data["file"],
+                "suspended" => $data["suspended"],
             ]);
             if($stmt->rowCount() === 0) {
                 throw new Exception("Registracija nije uspela", 404);
