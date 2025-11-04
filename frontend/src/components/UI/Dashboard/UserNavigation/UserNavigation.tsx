@@ -17,12 +17,12 @@ const UserNavigation: React.FC = () => {
         router.push('/');
     }
     return (
-        <>
+        <nav>
         <ul className={styles.userNavigation}>
             {showLink && <li><button onClick={handleClick}>POČETNA</button></li>}
             {showLink && <li><Link href="/login/dashboard/user/register">NOVI KORISNIK</Link></li>}
         </ul>
-        </>
+        </nav>
     );
 };
 export default UserNavigation;

@@ -11,7 +11,8 @@ const PageNavigation: React.FC<NavigationPropsType> = ({...navigationData}) => {
     
     const handleClick = (link: string) => {
         router.push(link);
-        setIsLoadingState(true, dispatch);
+        if(link === '/') setIsLoadingState(true, dispatch);
+        
     }
     return (
         <nav className={navClass}>

@@ -16,9 +16,11 @@ const LogIn:React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
     const dispatch = useAppDispatch();
     const router = useRouter();
+    /*
     useEffect(() => {
         setIsLoadingState(false, dispatch);
       }, []);
+      */
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
