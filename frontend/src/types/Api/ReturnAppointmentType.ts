@@ -17,3 +17,6 @@ export interface GetBarberAppointmentsReturnDataType extends BasicAppointmentRet
 export interface GetClientAppointmentsReturnData extends BasicAppointmentReturnType {
     data?: ClientAppointmentsSliceType[];
 };
+export interface DeleteClientAppointmentReturnDataType extends BasicAppointmentReturnType {
+    data?: {deletedAppointmentId: number};
+}

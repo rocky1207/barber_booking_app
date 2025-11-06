@@ -4,18 +4,27 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/GetUserModel.php");
 class UserRegisterModel {
     public function userRegister($data) {
-        $query = "INSERT INTO user (username, password, role, file, suspended) VALUES (:username, :password, :role, :file, :suspended)";
-        
+        $registerQuery = "INSERT INTO user (username, password, user_email, role, file, suspended) VALUES (:username, :password, :user_email, :role, :file, :suspended)";
+        $selectEmailQuery = "SELECT user_email FROM user WHERE user_email = :user_email";
         try {
             AppController::databaseConnect();
             if (!(DatabaseModel::$pdo instanceof PDO)) {
                 throw new Exception("PDO konekcija nije uspostavljena.", 500);
             }
             DatabaseModel::$pdo->beginTransaction();
-            $stmt = DatabaseModel::$pdo->prepare($query);
+            $emailExistsStmt = DatabaseModel::$pdo->prepare($selectEmailQuery);
+            $emailExistsStmt->execute([
+                "user_email" => $data["user_email"]
+            ]);
+            $emailExist = $emailExistsStmt->fetchAll();
+            if(!empty($emailExist)) {
+                throw new Exception('Mejl koji Ste uneli već postoji. Izaberite neki drugi email', 422);
+            };
+            $stmt = DatabaseModel::$pdo->prepare($registerQuery);
             $stmt->execute([
                 "username" => $data["username"],
                 "password" => password_hash($data["password"], PASSWORD_DEFAULT),
+                "user_email" => $data["user_email"],
                 "role" => $data["role"],
                 "file" => $data["file"],
                 "suspended" => $data["suspended"],

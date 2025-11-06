@@ -4,7 +4,7 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 class GetUserModel {
     
     public function getUsers() {
-        $query = "SELECT id, username, role, file, suspended FROM user";
+        $query = "SELECT id, username, role, file, user_email, suspended FROM user";
         try {
             AppController::databaseConnect();
             $stmt = DatabaseModel::$pdo->prepare($query);
@@ -17,7 +17,7 @@ class GetUserModel {
         }
     }
     public function getUserById($id) {
-        $query = "SELECT id, username, role, file, suspended FROM user WHERE id = :id";
+        $query = "SELECT id, username, role, file, user_email, suspended FROM user WHERE id = :id";
         try {
            // AppController::databaseConnect();
             $stmt = DatabaseModel::$pdo->prepare($query);

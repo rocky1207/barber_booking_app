@@ -4,18 +4,21 @@ function registerUserValidator($data) {
     $inputs = [
         "username" => $data["username"],
         "password" => $data["password"],
+        "user_email" => $data["user_email"],
         "role" => $data["role"],
         "file" => $data["file"]
     ];
     $regex = [
         "username" => AppController::USERNAME_REGEX,
         "password" => AppController::PASSWORD_REGEX,
+        "user_email" => AppController::EMAIL_REGEX,
         "role" => AppController::ROLE_REGEX,
         "file" => AppController::FILE_REGEX,
     ];
     $messages = [
         "username" => AppController::USERNAME_ERROR_MESSAGE,
         "password" => AppController::PASSWORD_ERROR_MESSAGE,
+        "user_email" => AppController::EMAIL_ERROR_MESSAGE,
         "role" => AppController::ROLE_ERROR_MESSAGE,
         "file" => AppController::FILE_NAME_ERROR_MESSAGE
     ];

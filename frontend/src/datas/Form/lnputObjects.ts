@@ -9,6 +9,7 @@ export const registerInputs: LoginInputType[] = [
     {type: 'text', name: 'username', defaultValue: '', placeholder: "Korisničko ime"}, 
     {type: 'text', name: 'password', defaultValue: '', placeholder: "Lozinka"},
     {type: 'text', name: 'role', defaultValue: '', placeholder: "Uloga"},
+    {type: 'text', name: 'user_email', defaultValue: '', placeholder: "Email"},
 ];
 export const changePasswordInputs: LoginInputType[] = [
     {type: 'text', name: 'oldPassword', defaultValue: '', placeholder: "Unesite staru lozinku"},

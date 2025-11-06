@@ -24,6 +24,11 @@ export const registerValidationSchema: ValidationSchemaType = {
         pattern: /^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{8,}$/u,
         errorMessage: 'Lozinka počinje velikim slovom, obavezan je najmanje 1 broj, dozvoljava slova i znak "!", mora imati minimalnu dužinu od 8 karaktera.'
     },
+    user_email: {
+        required: true,
+        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/ /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/,
+        errorMessage: 'Neispravan format email adrese.'
+    },
     /*confirmPassword: {
         required: true,
         errorMessage: 'Lozinke moraju biti identične.'
@@ -143,4 +148,12 @@ export const workingHoursValidationSchema: ValidationSchemaType = {
         pattern: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
         errorMessage: 'Vreme mora biti u formatu HH:MM.'
     }
+};
+
+export const emailValidationSchema: ValidationSchemaType = {
+    email: {
+        required: true,
+        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/ /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/,
+        errorMessage: 'Neispravan format email adrese.'
+    },
 };
