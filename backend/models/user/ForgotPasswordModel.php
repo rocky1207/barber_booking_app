@@ -2,6 +2,7 @@
 require_once (__DIR__ . '/../../vendor/autoload.php');
 require_once (__DIR__  . '/../../controllers/AppController.php');
 require_once (__DIR__  . '/../DatabaseModel.php');
+require_once (__DIR__ . '/AdminSecurityAlertModel.php');
 
 
 
@@ -10,8 +11,8 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 class ForgotPasswordModel {
-    private const MAX_RESET_PER_USER_PER_HOUR = 500;  // koliko tokena po korisniku / sat
-    private const MAX_RESET_PER_IP_PER_HOUR = 500;   // koliko zahteva po IP / sat
+    private const MAX_RESET_PER_USER_PER_HOUR = 3;  // koliko tokena po korisniku / sat
+    private const MAX_RESET_PER_IP_PER_HOUR = 10;   // koliko zahteva po IP / sat
     private const RATE_WINDOW = '1 HOUR';          // interval koji koristimo u SQL
     private $smtpHost;
     private $smtpPort;
@@ -62,6 +63,10 @@ class ForgotPasswordModel {
                 // Samo logujemo grešku u email_error_log
                 $errorMsg = 'Ukoliko postoji korisnik sa unetim emailom, primićete email sa uputstvom.';
                 $this->logEmailError('error', $errorMsg, 'forgot_password_flow', null, $data['email']);
+                
+                // Proveri da li treba poslati security alert adminu
+                $this->checkSecurityAlert($ip, $data['email'], null, 'invalid_email');
+                
                 DatabaseModel::$pdo->rollBack();
                 throw new Exception($errorMsg, 422);
             }
@@ -77,6 +82,10 @@ class ForgotPasswordModel {
                 // i u email_error_log
                 $this->logPasswordResetRequest($userId, $ip);
                 $this->logEmailError('error', $e->getMessage(), 'forgot_password_flow', $userId, $data['email']);
+                
+                // Proveri da li treba poslati security alert adminu
+                $this->checkSecurityAlert($ip, $data['email'], $userId, 'rate_limit_exceeded');
+                
                 DatabaseModel::$pdo->rollBack();
                 throw $e;
             }
@@ -104,6 +113,10 @@ class ForgotPasswordModel {
             if($insertNewTokenStmt->rowCount() === 0) {
                 $errorMsg = 'Unos novog tokena nije uspeo';
                 $this->logEmailError('error', $errorMsg, 'forgot_password_flow', $userId, $data['email']);
+                
+                // Proveri da li treba poslati security alert adminu
+                $this->checkSecurityAlert($ip, $data['email'], $userId, 'token_creation_failed');
+                
                 DatabaseModel::$pdo->rollBack();
                 throw new Exception($errorMsg, 422);
             }
@@ -120,6 +133,9 @@ class ForgotPasswordModel {
             
             if(!$isRecoveryPasswordEmailSent) {
                 // Email nije poslat - već je logovano u sendRecoveryPasswordEmail
+                // Proveri da li treba poslati security alert adminu
+                $this->checkSecurityAlert($ip, $data['email'], $userId, 'email_sending_failed');
+                
                 // Rollback transakcije
                 DatabaseModel::$pdo->rollBack();
                 return [
@@ -148,6 +164,9 @@ class ForgotPasswordModel {
             } else {
                 // Loguj grešku koja nije već obrađena
                 $this->logEmailError('error', $e->getMessage(), 'forgot_password_flow', $userId ?? null, $data['email'] ?? null);
+                
+                // Proveri da li treba poslati security alert adminu
+                $this->checkSecurityAlert($ip ?? $this->getClientIp(), $data['email'] ?? null, $userId ?? null, 'unexpected_error');
             }
             
             throw $e;
@@ -299,6 +318,21 @@ class ForgotPasswordModel {
         };
         return $saved;
     }
+    
+    /**
+     * Proverava da li treba poslati security alert adminu
+     */
+    private function checkSecurityAlert($ip, $email, $userId, $errorType) {
+        try {
+            $alertModel = new AdminSecurityAlertModel();
+            $alertModel->checkAndSendSecurityAlert($ip, $email, $userId, $errorType);
+        } catch (Throwable $e) {
+            // Ne bacamo exception jer ovo je sekundarna operacija
+            // Ne želimo da alert sistem utiče na glavni flow
+            error_log("Security alert check failed: " . $e->getMessage());
+        }
+    }
+    
     private function createLoggingPdo() {
         $host = $_ENV['DB_HOST'] ?? '127.0.0.1';
         $db   = $_ENV['DB_NAME'] ?? 'your_db';
