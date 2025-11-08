@@ -8,10 +8,13 @@ class ForgotPasswordController {
         try {
             $forgotPasswordModel = new ForgotPasswordModel();
             $response = $forgotPasswordModel->forgotPassword($validateInputs);
+            if(!$response['success']) {
+                throw new Exception($response['message'], $response['status']);
+            }
             return [
                 "success" => true,
                 "status" => 200,
-                "data" => $response,
+                "data" => $response['user'],
                 "message" => 'Ukoliko postoji korisnik sa unetim emailom, primićete email sa uputstvom.'
             ];
         } catch (Exception $e) {
