@@ -5,6 +5,8 @@ require_once (__DIR__ . '/../models/user/DeleteOldErrorLogsModel.php');
 
 $model = new DeleteOldErrorLogsModel();
 $result = $model->deleteOldErrorLogs();
+var_dump($resut);
+exit();
 /*
 $logDir = __DIR__ . '/../tmp';
 if (!is_dir($logDir)) { @mkdir($logDir, 0777, true); }

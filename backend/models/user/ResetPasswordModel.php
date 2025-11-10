@@ -3,8 +3,8 @@ require_once(__DIR__ . '/../../controllers/AppController.php');
 require_once (__DIR__ . '/../DatabaseModel.php');
 class ResetPasswordModel {
     public function resetPassword($data) {
-        $selectUserQuery = "SELECT * FROM password_resets WHERE user_id = :user_id
-        AND used = :used LIMIT 1";
+        ;
+        $selectUserQuery = "SELECT * FROM password_resets WHERE user_id = :user_id LIMIT 1";
         $updateUsedQuery = "UPDATE password_resets SET used = :used WHERE id = :id";
         $updatePasswordQuery = "UPDATE user SET password = :password WHERE id = :id";
         $currentTime = (new DateTime())->format('Y-m-d H:i:s');
@@ -15,9 +15,9 @@ class ResetPasswordModel {
             DatabaseModel::$pdo->beginTransaction();
             $selectUseStmt = DatabaseModel::$pdo->prepare($selectUserQuery);
             $selectUseStmt->execute([
-                'user_id' => (int)$data['userId'], 
-                'used' => 0]);
+                'user_id' => (int)$data['userId']]);
             $user = $selectUseStmt->fetch();
+            
             if(!$user) throw new Exception('Nevalidan ID.', 422);
             if($currentTime > $user['expires_at']) throw new Exception('Istekao token.', 401);
             $isHashEqual = hash_equals($computedHash, $user['token_hash']);
@@ -26,7 +26,8 @@ class ResetPasswordModel {
             $updateUsedStmt->execute([
                 'id' => (int)$user['id'], 
                 'used' => 1]);
-            $updateUsedStmt->rowCount() === 0 && throw new Exception('Greška prilikom izvršenja upita.', 500);
+                
+          //  $updateUsedStmt->rowCount() === 0 && throw new Exception('Greška prilikom izvršenja upita.', 500);
             $updatePasswordStmt = DatabaseModel::$pdo->prepare($updatePasswordQuery);
             $updatePasswordStmt->execute([
                 'id' => (int)$data['userId'], 

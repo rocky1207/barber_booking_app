@@ -1,6 +1,8 @@
 import api from "@/lib/axios";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
-export const forgotPassword = async (data: {email: string}) => {
+import { ReturnForgotPasswordType } from "@/types/Api/ReturnBarberType";
+
+export const forgotPassword = async (data: {email: string}): Promise<ReturnForgotPasswordType> => {
     let answer;
     const url = apiRoutes.FORGOT_PASSWORD;
     try {
@@ -16,7 +18,6 @@ export const forgotPassword = async (data: {email: string}) => {
         } else {
             throw new Error(response.data.message || 'Greška prilikom izvršenja upita');
         }
-
     } catch (error: any) {
         answer = {success: false, message: error.message};
     };

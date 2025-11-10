@@ -1,5 +1,5 @@
 import api from '@/lib/axios';
-import { BasicReturnDataType } from '@/types/Api/ReturnType';
+import { BasicReturnDataType } from '@/types/Api/ReturnBarberType';
 export const logOut = async (url: string, data: {}): Promise<BasicReturnDataType> => {
     let answer;
     try {

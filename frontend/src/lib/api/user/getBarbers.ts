@@ -1,5 +1,5 @@
 import api from "../../axios";
-import { MultiBarberReturnType } from "@/types/Api/ReturnType";
+import { MultiBarberReturnType } from "@/types/Api/ReturnBarberType";
 export const getBarbers = async (url: string): Promise<{success: boolean; data?: MultiBarberReturnType; message?: string }> => {
     
     let data:{success: boolean; data?: MultiBarberReturnType; message?: string };
