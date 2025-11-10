@@ -40,3 +40,8 @@ export const forgotPasswordPageNav = {
     ulClass: 'flexed', 
     liItem: [{text: '<<', itemClass: '', link: '/login'}, {link: "/", text: 'početna', itemClass: ''}]
 };
+export const resetPasswordPageNav = {
+    navClass: 'wrapp', 
+    ulClass: '', 
+    liItem: [{text: '<<', itemClass: '', link: '/forgot-password'}]
+};

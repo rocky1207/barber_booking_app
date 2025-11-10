@@ -11,8 +11,8 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 class ForgotPasswordModel {
-    private const MAX_RESET_PER_USER_PER_HOUR = 3;  // koliko tokena po korisniku / sat
-    private const MAX_RESET_PER_IP_PER_HOUR = 10;   // koliko zahteva po IP / sat
+    private const MAX_RESET_PER_USER_PER_HOUR = 500;  //3 koliko tokena po korisniku / sat
+    private const MAX_RESET_PER_IP_PER_HOUR = 500;   //10 koliko zahteva po IP / sat
     private const RATE_WINDOW = '1 HOUR';          // interval koji koristimo u SQL
     private $smtpHost;
     private $smtpPort;
@@ -123,6 +123,7 @@ class ForgotPasswordModel {
 
             // 6) Pošalji email
             $this->link = "http://localhost:3000/reset-password?token={$this->rawToken}&user_id={$userId}";
+            
             $userEmailData = [
                 "username" => $user["username"],
                 "user_email" => $user["user_email"],
@@ -361,6 +362,7 @@ class ForgotPasswordModel {
                 .total { font-weight: bold; font-size: 1.1em; color: #e74c3c; }
                 .footer { text-align: center; padding: 20px; background-color: #34495e; color: white; }
                 .contact-info { margin: 10px 0; }
+                .link-details a { cursor: pointer; color: blue}
             </style>
         </head>
         <body>
@@ -376,7 +378,7 @@ class ForgotPasswordModel {
                     <p>Kliknite na link ispod ovog teksta koji će Vas odvesti na stranicu za kreiranje nove lozinke..</p>
                     
                     <div class='link-details'>
-                        <p>Link: <a>{$this->link}</a></p>
+                        <p>Link: <a href={$this->link}>{$this->link}</a></p>
                     </div>
                 </div>
                 

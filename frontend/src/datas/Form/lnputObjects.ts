@@ -19,6 +19,10 @@ export const changePasswordInputs: LoginInputType[] = [
 export const forgotPasswordInputs: LoginInputType[] = [
     {type: 'text', name: 'email', defaultValue: '', placeholder: "Email"},
 ];
+export const resetPasswordInputs: LoginInputType[] = [
+    {type: 'text', name: 'newPassword', defaultValue: '', placeholder: "Unesite novu lozinku"},
+    {type: 'text', name: 'confirmPassword', defaultValue: '', placeholder: "Potvrdite novu lozinku"},
+];
 export const serviceInputs: LoginInputType[] = [
     {type: 'text', name: 'service', defaultValue: '', placeholder: "Usluga"},
     {type: 'text', name: 'price', defaultValue: '', placeholder: "Cena"},

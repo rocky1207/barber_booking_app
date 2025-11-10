@@ -14,7 +14,7 @@ export const forgotPassword = async (data: {email: string}) => {
                 actionDone: 'FORGOT_PASSWORD'
             }
         } else {
-            throw new Error('Greška prilikom izvršenja upita');
+            throw new Error(response.data.message || 'Greška prilikom izvršenja upita');
         }
 
     } catch (error: any) {

@@ -85,6 +85,18 @@ export const changePasswordValidationSchema: ValidationSchemaType = {
         errorMessage: 'Lozinka počinje velikim slovom, obavezan je najmanje 1 broj, dozvoljava slova i znak "!", mora imati minimalnu dužinu od 8 karaktera.'
     }
 };
+export const resetPasswordValidationSchema: ValidationSchemaType = {
+    newPassword: {
+        required: true,
+        pattern: /^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{8,}$/u,
+        errorMessage: 'Lozinka počinje velikim slovom, obavezan je najmanje 1 broj, dozvoljava slova i znak "!", mora imati minimalnu dužinu od 8 karaktera.'
+    },
+    confirmPassword: {
+        required: true,
+        pattern: /^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{8,}$/u,
+        errorMessage: 'Lozinka počinje velikim slovom, obavezan je najmanje 1 broj, dozvoljava slova i znak "!", mora imati minimalnu dužinu od 8 karaktera.'
+    },
+};
 
 export const serviceValidationSchema: ValidationSchemaType = {
     service: {

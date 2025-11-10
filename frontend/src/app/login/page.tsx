@@ -11,7 +11,7 @@ const LogInPage:React.FC = () => {
         <main className="wrapp center">
             <h1>UNESITE VAŠE PODATKE</h1>
             <LogIn/>
-            <p><Link href='login/forgot-password'>Zaboravljena lozinka?</Link></p>
+            <p><Link href='/forgot-password'>Zaboravljena lozinka?</Link></p>
         </main>
         </>
     );
