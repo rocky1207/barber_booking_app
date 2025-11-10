@@ -7,6 +7,7 @@ exit;
 */
 session_start();
 //require_once __DIR__ . '/../vendor/autoload.php';
+require_once (__DIR__ . '/../bootstrap.php');
 require_once(__DIR__ . "/../controllers/AppController.php");
 // Auto-setup MySQL EVENT for daily cleanup (idempotent)
 try {

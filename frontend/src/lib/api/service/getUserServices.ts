@@ -5,20 +5,19 @@ export const getUserServices = async (url: string, id: number): Promise<GetServi
     let answer;
     try {
         const response = await api.get(url, {params: {id}});
-        if(response.data.success) {
+        if(response.status === 200) {
             if(response.data.data.length() === 0) answer = {success: true, message: 'Nema unetih usluga za ovog frizera.'}
             answer = {
-                success: response.data.success, 
+                success: true, 
                 data: response.data.data,
-                actionDone: 'GET_USER_SERVICES'
+                actionDone: 'GET_USER_SERVICES',
+                message: response.data.message
             } 
         } else {
             throw new Error(response?.data.message || 'Nepoznata greška');
         }
     } catch(error: any) {
         answer = {success: false, message: error.message}
-        console.log(error.message);
     }
-    
     return answer;
 } 

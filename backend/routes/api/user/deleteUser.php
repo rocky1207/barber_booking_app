@@ -7,3 +7,4 @@ $data = json_decode(file_get_contents('php://input'), true);
 $deleteUserController = new DeleteUserController();
 $response = $deleteUserController->deleteUser($data);
 echo json_encode($response);
+?>

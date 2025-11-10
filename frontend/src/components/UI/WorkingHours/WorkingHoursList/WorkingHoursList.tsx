@@ -204,3 +204,4 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
 export default WorkingHoursList;
 
 
+

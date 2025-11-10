@@ -18,3 +18,9 @@ export interface BarberSliceType {
   loggedBarber: BasicBarberType;
   actionBarberId: number | undefined;
 }
+
+export interface ForgotPasswordType {
+    id: number;
+    username: string;
+    user_email: string;
+}

@@ -9,9 +9,17 @@ export const registerInputs: LoginInputType[] = [
     {type: 'text', name: 'username', defaultValue: '', placeholder: "Korisničko ime"}, 
     {type: 'text', name: 'password', defaultValue: '', placeholder: "Lozinka"},
     {type: 'text', name: 'role', defaultValue: '', placeholder: "Uloga"},
+    {type: 'text', name: 'user_email', defaultValue: '', placeholder: "Email"},
 ];
 export const changePasswordInputs: LoginInputType[] = [
     {type: 'text', name: 'oldPassword', defaultValue: '', placeholder: "Unesite staru lozinku"},
+    {type: 'text', name: 'newPassword', defaultValue: '', placeholder: "Unesite novu lozinku"},
+    {type: 'text', name: 'confirmPassword', defaultValue: '', placeholder: "Potvrdite novu lozinku"},
+];
+export const forgotPasswordInputs: LoginInputType[] = [
+    {type: 'text', name: 'email', defaultValue: '', placeholder: "Email"},
+];
+export const resetPasswordInputs: LoginInputType[] = [
     {type: 'text', name: 'newPassword', defaultValue: '', placeholder: "Unesite novu lozinku"},
     {type: 'text', name: 'confirmPassword', defaultValue: '', placeholder: "Potvrdite novu lozinku"},
 ];

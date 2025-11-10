@@ -4,10 +4,8 @@ export const getAllServices = async (url: string): Promise<GetServicesReturnType
     let answer;
     console.log(url);
     try {
-        
         const response = await api.get(url);
-        console.log(response.data.data);
-        if(response.status) {
+        if(response.status === 200) {
             if(response.data.length === 0) answer = {success: true,message: response.data.message || 'Nema nijedne unete usluge.'};
             answer = {
                 success: response.data.success,
@@ -18,7 +16,6 @@ export const getAllServices = async (url: string): Promise<GetServicesReturnType
             throw new Error(response.data.message || 'Nepoznata greška.');
         }
     } catch(error: any) {
-        console.log(error.message);
         answer = {success: false, message: error.message};
     }
     return answer;

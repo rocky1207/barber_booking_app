@@ -1,4 +1,4 @@
-import { ManageBarberReturnType } from "../Api/ReturnType";
+import { ManageBarberReturnType } from "../Api/ReturnBarberType";
 export interface BasicBtnType {
     validate: string;
     type: 'submit' | 'button';

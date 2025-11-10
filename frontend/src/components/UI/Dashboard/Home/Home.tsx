@@ -13,7 +13,6 @@ import { manageBarber } from "@/lib/api/user/manageBarber";
 import { useRouter } from "next/navigation";
 import { barberActions } from "@/store/slices/barberSlice";
 
-
 const Home: React.FC = () => {
   const dialog = useRef<HTMLDialogElement | null>(null);
   const {barbers, actionBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
@@ -26,6 +25,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     setIsLoadingState(false, dispatch);
   }, []);
+  
   /*
   useEffect(() => {
     
@@ -79,8 +79,13 @@ const Home: React.FC = () => {
       <>
       <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}  />
       {loggedBarber.suspended !== 0 ? <p>Nemate više pristup aplikaciji</p> : <section>
-        <div className='logOutDiv'><button onClick={logOutHandler}>LOG OUT</button></div>
-        <div className=''><button onClick={hoursHandler}>radno vreme</button></div>
+        <nav>
+          <ul className="flexed">
+            <li><button onClick={logOutHandler}>LOG OUT</button></li>
+            <li className=''><button onClick={hoursHandler}>RADNO VREME</button></li>
+          </ul>
+        </nav>
+        
       <h1>MENADŽERSKA TABLA</h1>
       <UserNavigation />
       <nav aria-label="Manage barber navigation">

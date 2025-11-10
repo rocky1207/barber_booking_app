@@ -1,5 +1,5 @@
 import api from '@/lib/axios';
-import { ManageBarberReturnType } from '@/types/Api/ReturnType';
+import { ManageBarberReturnType } from '@/types/Api/ReturnBarberType';
 
 export const manageBarber = async (url: string, id: number): Promise<ManageBarberReturnType> => {
     let answer: ManageBarberReturnType;

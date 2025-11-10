@@ -4,6 +4,7 @@ export const apiRoutes = {
     UPDATE_USER: 'user/updateUser.php',
     DELETE_USER: 'user/deleteUser.php',
     CHANGE_PASSWORD: '/user/changePassword.php',
+    FORGOT_PASSWORD: '/user/forgotPassword.php',
     INSERT_SERVICE: 'service/insertService.php',
     GET_USER_SERVICES: 'service/getUserServices.php',
     GET_ALL_SERVICES: 'service/getAllServices.php',

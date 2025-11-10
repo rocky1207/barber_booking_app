@@ -7,28 +7,24 @@ import { GetClientAppointmentsReturnData } from "@/types/Api/ReturnAppointmentTy
 export const postAppointmentApi = async (action: string, data: BasicAppointmentsType | ClientAppointmentsType | number): Promise<InsertAppointmentReturnData | GetClientAppointmentsReturnData> => {
     let answer: InsertAppointmentReturnData;
     let actionDone: string = '';
-    let route: string = '';
+    let url: string = '';
     try {
         let response;
-        
         if(action === 'INSERT_CLIENT_APPOINTMNET') {
-            route = apiRoutes.INSERT_APPOINTMENT;
+            url = apiRoutes.INSERT_APPOINTMENT;
             actionDone = 'INSERT_CLIENT_APPOINTMNET';
         }
         if(action === 'GET_CLIENT_APPOINTMENTS') {
-            route = apiRoutes.GET_CLIENT_APPOINTMENTS;
+            url = apiRoutes.GET_CLIENT_APPOINTMENTS;
             actionDone = 'GET_CLIENT_APPOINTMENTS';
         }
-        /*
-    if(action === 'INSERT') {
-        response = await api.post(apiRoutes.INSERT_APPOINTMENT, data);
-        actionDone = 'INSERT';
-        console.log(response);
-    }
-    */
-        response = await api.post(route, data);
-        if(response?.data?.success) {
-            answer = {success: true, data: response.data.data, message: response.data.message, actionDone};
+        response = await api.post(url, data);
+        if(response.status === 200) {
+            answer = {
+                success: true, 
+                data: response.data.data, 
+                message: response.data.message, 
+                actionDone};
         } else {
             throw new Error(response?.data?.message || 'Greška na serveru.');
             }

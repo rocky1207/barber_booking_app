@@ -1,4 +1,6 @@
 import { BasicBarberType } from "../Barbers/BarbersType";
+import { BasicApiReturnType } from "./BasicApiReturnType";
+import { ForgotPasswordType } from "../Barbers/BarbersType";
 export interface BasicReturnDataType {
     success: boolean;
     status: number;
@@ -15,5 +17,12 @@ export interface ManageBarberReturnType {
     success: boolean; 
     message?: string; 
     data?: SingleBarberReturnType;
+    actionDone?: string;
+}
+
+
+
+export interface ReturnForgotPasswordType extends BasicApiReturnType {
+    data?:ForgotPasswordType;
     actionDone?: string;
 }

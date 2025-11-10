@@ -18,13 +18,11 @@ const ChangePasswordForm: React.FC = () => {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
         const formData = createFormData(e);
-    
         const validateInputs = formValidator(formData, changePasswordValidationSchema);
         if(!validateInputs.status) {
             setMessage(validateInputs.message);
             return;
         }
-        
         const data = {
             oldPassword: formData.oldPassword,
             newPassword: formData.newPassword,
@@ -33,16 +31,13 @@ const ChangePasswordForm: React.FC = () => {
         }
         setIsLoadingState(true, dispatch);
         const response = await changePassword(data); 
-        setIsLoadingState(true, dispatch);
         if(!response.success) {
             setMessage(response.message);
             setIsLoadingState(false, dispatch);
             return;
         }
-        if(response.success) {
-            setMessage(response.message);
-            form.reset();
-        }
+        setMessage(response.message);
+        form.reset();
         setIsLoadingState(false, dispatch);
     }
     return (
