@@ -21,16 +21,14 @@ const ClientAppointmentForm = () => {
         const form = e.currentTarget;
         const formData = createFormData(e);
         console.log(formData);
-        //const validateInputs = formValidator(formData, appointmentValidationSchema);
-       // if(!validateInputs.status) {setMessage(validateInputs.message); return;};
-       // console.log(validateInputs);
-        //setMessage('');
+        const validateInputs = formValidator(formData, appointmentValidationSchema);
+        if(!validateInputs.status) {setMessage(validateInputs.message); return;};
         const data = {
             name: formData.name,
             surname: formData.surname,
             phone: formData.phone,
         };
-        
+        setIsLoadingState(true, dispatch);
         const response = await postAppointmentApi('GET_CLIENT_APPOINTMENTS', data);
         console.log(response);
         if(!response.success) {

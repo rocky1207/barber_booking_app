@@ -15,6 +15,7 @@ import { createFormData } from "@/lib/utils/createFormData";
 import { barberActions } from "@/store/slices/barberSlice";
 import { formValidator } from "@/lib/validators/formValidator";
 import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from '../../Form.module.css';
 import extraStyles from './Update.module.css';
 
@@ -26,7 +27,7 @@ const Update: React.FC = () => {
     const userId = params.get('barberId');
     const paramId = userId !== null ? parseInt(userId, 10) : undefined;
     const barber = barberState?.barbers.find(barberItem => paramId === barberItem.id);
-    const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+    const [message, setMessage] = useState<string>('');
     const [fileName, setFileName] = useState<string>(barber?.file ?? '');
 
     const dispatch = useAppDispatch();
@@ -65,8 +66,6 @@ const Update: React.FC = () => {
         //console.log(form);
         
         const formData = createFormData(e);
-        console.log(formData.suspended);
-        
         const suspendedInput = form.elements.namedItem('suspended') as HTMLInputElement | null;
         const suspendedValue = suspendedInput ? (suspendedInput.checked ? '1' : '0') : '0';
         const validateData = {
@@ -76,11 +75,10 @@ const Update: React.FC = () => {
             file: fileName,
             suspended: suspendedValue 
         }
-        console.log(validateData);
         
         const validateInputs = formValidator(validateData, updateValidationSchema);
         if(!validateInputs.status) {
-            setErrorMessage(validateInputs.message);
+            setMessage(validateInputs.message);
             return;
         }
         const data = {
@@ -88,18 +86,18 @@ const Update: React.FC = () => {
             id: userId!,
             suspended: parseInt(validateData.suspended, 10)
         }
-        console.log(data);
+        setIsLoadingState(true, dispatch);
+        const response = await loginRegisterUpdate(updateUserUrl, data, 'PATCH');
         
-        const result = await loginRegisterUpdate(updateUserUrl, data, 'PATCH');
-        //console.log(result);
-        if(!result.success) {
-            setErrorMessage(result.message);
+        if(!response.success) {
+            setMessage(response.message);
+             setIsLoadingState(false, dispatch);
             return;
         }
-        setErrorMessage(result?.data?.message)
-        const user = result?.data?.data;
-        console.log(user);
+        setMessage(response.data.message)
+        const user = response?.data?.data;
         user && barberActionDispatcher(user, 'UPDATE', dispatch);
+         setIsLoadingState(false, dispatch);
     };
     
     const handleClick = () => {
@@ -126,7 +124,7 @@ const Update: React.FC = () => {
             <Input inputs={updateInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
             
-             <p>{errorMessage}</p>
+             <p>{message}</p>
              {/*<div>
             <label>
             <input type="checkbox" name="isSuspended" value="suspenduj" />

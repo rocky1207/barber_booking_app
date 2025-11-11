@@ -51,16 +51,17 @@ const Service: React.FC = () => {
         setIsLoadingState(false, dispatch);
         return;
     }
+    /*
     if (!response.data) {
         setMessage("Neočekivani format odgovora sa servera.");
         setIsLoadingState(false, dispatch);
         return;
     }
+        */
     setMessage(response.message);
-    console.log(response);
     response?.data && serviceActionDispatcher(response?.data?.data, 'INSERT', dispatch);
-    setIsLoadingState(false, dispatch);
     form.reset();
+    setIsLoadingState(false, dispatch);
 }
     return (
         <form className={styles.form} onSubmit={handleSubmit}>

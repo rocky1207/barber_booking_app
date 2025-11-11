@@ -33,8 +33,7 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsLoadingState(true, dispatch);
-        
+       
         const form = e.currentTarget;
         const formData = createFormData(e);
         const newFormData = {
@@ -46,21 +45,21 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         
         if(!validateInputs.status) {
             setMessage(validateInputs.message);
-            setIsLoadingState(false, dispatch);
+           // setIsLoadingState(false, dispatch);
             return;
         }
 
         // Validate date range
         if (new Date(formData.start_date) > new Date(formData.end_date)) {
             setMessage('Datum početka mora biti pre datuma završetka.');
-            setIsLoadingState(false, dispatch);
+           // setIsLoadingState(false, dispatch);
             return;
         }
 
         // Validate time range
         if (formData.start_time >= formData.end_time) {
             setMessage('Vreme početka mora biti pre vremena završetka.');
-            setIsLoadingState(false, dispatch);
+           // setIsLoadingState(false, dispatch);
             return;
         }
 
@@ -71,7 +70,7 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
             start_time: formData.start_time.substring(0, 5), 
             end_time: formData.end_time.substring(0, 5)
         };
-        
+         setIsLoadingState(true, dispatch);
         //const response = await workingHoursApi.updateWorkingHours(workingHours.id, data);
         const response = await insertUpdateWorkingHours(data, 'PUT');
         if(!response.success) {

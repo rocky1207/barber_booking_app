@@ -12,10 +12,12 @@ import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
 //import { useAppSelector } from "@/store/hooks/typizedHooks";
 //import { RootState } from "@/store/store";
 //import { useSearchParams } from "next/navigation";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+
 import styles from '../../Form.module.css';
 
 const Register:React.FC = () => {
-    const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+    const [message, setMessage] = useState<string>('');
     const [fileName, setFileName] = useState<string>('');
    // const {barbers} = useAppSelector((state: RootState) => state?.barber);
     const dispatch = useAppDispatch();
@@ -48,27 +50,30 @@ const Register:React.FC = () => {
         
         const validateData = formValidator(data, registerValidationSchema);
         if(!validateData.status) {
-            setErrorMessage(validateData.message);
+            setMessage(validateData.message);
             return;
         }
-        const result = await loginRegisterUpdate('user/register.php', data, 'POST');
-        console.log(result);
-        if(!result.success || !result.data) {
-            setErrorMessage(result.message || "Greška prilikom registracije");
+        setIsLoadingState(true, dispatch);
+        const response = await loginRegisterUpdate('user/register.php', data, 'POST');
+        //console.log(result);
+        if(!response.success/* || !result.data*/) {
+            setMessage(response.message || "Greška prilikom registracije");
+            setIsLoadingState(false, dispatch);
             return;
         };
-        const user = result.data.data;
+        const user = response.data.data;
         barberActionDispatcher(user, 'INSERT', dispatch);
         form.reset();
         setFileName('');
-        setErrorMessage('Uspešno ste uneli novog korisnika');
+        setMessage(response.data.message || 'Uspešno ste uneli novog korisnika');
+        setIsLoadingState(false, dispatch);
     };
 
 return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={registerInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
-             <p>{errorMessage}</p>
+             <p>{message}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
     );

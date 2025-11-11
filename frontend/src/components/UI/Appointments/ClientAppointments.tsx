@@ -5,9 +5,11 @@ import { RootState } from "@/store/store";
 import { formatDate } from "@/lib/utils/formatDate";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import ClientAppointment from "./ClientAppointment";
-import { deleteBarberBtn} from "@/datas/ButttonObjects";
+//import { deleteBarberBtn} from "@/datas/ButttonObjects";
+import { deleteBtn } from "@/datas/ButttonObjects";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-import { deleteClientAppointment } from "@/lib/api/appointments/deleteClientAppointment";
+//import { deleteClientAppointment } from "@/lib/api/appointments/deleteClientAppointment";
+import { deleteById } from "@/lib/api/deleteById";
 import styles from './Appointments.module.css';
 const ClientAppointments: React.FC = () => {
     const {clientTerms, actionAppointmentId} = useAppSelector((state: RootState) => state.appointment);
@@ -16,11 +18,13 @@ const ClientAppointments: React.FC = () => {
     
     
     const deleteAppointmentBtn = {
-        ...deleteBarberBtn,
-        head: 'DA LI STE SIGURNI?',
+        //...deleteBarberBtn,
+        ...deleteBtn,
+        //head: 'DA LI STE SIGURNI?',
         id: actionAppointmentId,
-        action: 'DELETE_APPOINTMENT',
-        onAction: deleteClientAppointment
+        action: 'DELETE_CLIENT_APPOINTMENT',
+        //onAction: deleteClientAppointment
+        onAction: deleteById
     }
     
     return (
@@ -29,7 +33,7 @@ const ClientAppointments: React.FC = () => {
         <section className={styles.clientAppointment}>
         <h2>{clientTerms[0]?.name} {clientTerms[0]?.surname}</h2>
         <ul>
-            { clientTerms.map((term) => {
+            {clientTerms.map((term) => {
                 const date = formatDate(new Date(term.date));
                 const time = term.time.split(':').slice(0, 2).join(':');
                 const servicePrice = formatPrice(term.servicePrice);

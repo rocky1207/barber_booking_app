@@ -40,6 +40,7 @@ const LogIn:React.FC = () => {
         } 
         result?.data && dispatch(barberActions.setLoggedBarber(result?.data.data));
         router.push('/login/dashboard');
+        //setIsLoadingState(false, dispatch);
     };
 
     

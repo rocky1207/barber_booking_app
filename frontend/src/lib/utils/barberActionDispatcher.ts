@@ -8,8 +8,7 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
     const barbers = state.barber.barbers;
     const actionId = state.barber.actionBarberId;
     const loggedBarber = state.barber.loggedBarber;
-    console.log(actionId);
-    if(actionDone === 'DELETE') {
+    if(actionDone === 'DELETE_BARBER') {
         const newBarbersState = barbers.filter(barber => barber.id !== data.id);
         dispatch(barberActions.setBarbers(newBarbersState));
         if(loggedBarber.id === data.id) logOut('auth/logout.php', {});

@@ -1,9 +1,9 @@
 import api from "@/lib/axios";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
-import { ManageBarberReturnType } from "@/types/Api/ReturnBarberType";
+import { DeleteBarberReturnType } from "@/types/Api/ReturnBarberType";
 import { GetServicesReturnType } from "@/types/Api/ReturnServiceType";
 
-export const manageService = async (url: string, id: number): Promise<ManageBarberReturnType> => {
+export const manageService = async (url: string, id: number): Promise<DeleteBarberReturnType> => {
     console.log('manageService');
     let answer;
     let actionDone: string = '';

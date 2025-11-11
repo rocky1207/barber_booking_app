@@ -28,29 +28,27 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsLoadingState(true, dispatch);
-        
         const form = e.currentTarget;
         const formData = createFormData(e);
         const validateInputs = formValidator(formData, workingHoursValidationSchema);
         
         if(!validateInputs.status) {
             setMessage(validateInputs.message);
-            setIsLoadingState(false, dispatch);
+           // setIsLoadingState(false, dispatch);
             return;
         }
 
         // Validate date range
         if (new Date(formData.start_date) > new Date(formData.end_date)) {
             setMessage('Datum početka mora biti pre datuma završetka.');
-            setIsLoadingState(false, dispatch);
+           // setIsLoadingState(false, dispatch);
             return;
         }
 
         // Validate time range
         if (formData.start_time >= formData.end_time) {
             setMessage('Vreme početka mora biti pre vremena završetka.');
-            setIsLoadingState(false, dispatch);
+            //setIsLoadingState(false, dispatch);
             return;
         }
 
@@ -63,6 +61,7 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         };
         
         // const response = await workingHoursApi.insertWorkingHours(data);
+        setIsLoadingState(true, dispatch);
         const response = await insertUpdateWorkingHours(data, 'POST');
         console.log(response);
         if(!response.success) {

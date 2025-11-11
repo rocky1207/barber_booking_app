@@ -1,5 +1,4 @@
 "use client";
-
 import { useRef, useState, useEffect } from "react";
 import { uploadImage } from "@/lib/api/user/uploadImage";
 import { formValidator } from "@/lib/validators/formValidator";
@@ -13,7 +12,6 @@ interface FileProps {
 const FileInput: React.FC<FileProps> = ({setFileName, fileName}) => {
     const [choosenImageName, setChoosenImageName] = useState<string>('Slika nije izbrana');
     const inputRef = useRef<HTMLInputElement>(null);
-    console.log(fileName);
     const handleButtonClick = () => {
         inputRef.current?.click();
     };
@@ -34,13 +32,12 @@ const FileInput: React.FC<FileProps> = ({setFileName, fileName}) => {
             setChoosenImageName(validationResult.message);
             return;
         }
-
-        const result = await uploadImage('user/uploadImage.php', formData);
-        if(!result.success) {
-            setChoosenImageName(result.message);
+        const response = await uploadImage('user/uploadImage.php', formData);
+        if(!response.success) {
+            setChoosenImageName(response.message);
             return;
         } 
-        setFileName(result.fileName);
+        setFileName(response.fileName);
     };
     return (
         <div>

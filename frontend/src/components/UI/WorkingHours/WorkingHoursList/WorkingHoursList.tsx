@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { workingHoursApi } from '@/lib/api/working_hours/workingHoursApi';
-import { WorkingHoursType } from '@/types/WorkingHours/WorkingHoursType';
+//import { workingHoursApi } from '@/lib/api/working_hours/workingHoursApi';
+//import { WorkingHoursType } from '@/types/WorkingHours/WorkingHoursType';
 import UpdateWorkingHoursForm from '@/components/Forms/WorkingHours/UpdateWorkingHoursForm/UpdateWorkingHoursForm';
 import { getWorkingHoursByUserId } from '@/lib/api/working_hours/getWorkingHoursByUserId';
 import { useAppSelector, useAppDispatch } from '@/store/hooks/typizedHooks';
@@ -12,9 +12,11 @@ import styles from './WorkingHoursList.module.css';
 
 import ConfirmModal from '../../ConfirmModal/ConfirmModal';
 import { modalActionBtn } from '@/datas/ButttonObjects';
-import { deleteBarberBtn } from '@/datas/ButttonObjects';
+//import { deleteBarberBtn } from '@/datas/ButttonObjects';
+import { deleteBtn } from '@/datas/ButttonObjects';
 import NavigateButton from '@/components/Button/NavigateButton';
-import { deleteWorkingHours } from '@/lib/api/working_hours/deleteWorkingHours';
+//import { deleteWorkingHours } from '@/lib/api/working_hours/deleteWorkingHours';
+import { deleteById } from '@/lib/api/deleteById';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 
 interface WorkingHoursListProps {
@@ -121,11 +123,13 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
 
     
     const updatedDeleteBarberBtn = {
-        ...deleteBarberBtn,
+        //...deleteBarberBtn,
+        ...deleteBtn,
         id: actionWorkingHoursId,
-        head: 'DA LI STE SIGURNI??',
+       // head: 'DA LI STE SIGURNI??',
         action: 'DELETE_WORKING_HOURS_BY_ID',
-        onAction: deleteWorkingHours
+        //onAction: deleteWorkingHours
+        onAction: deleteById
     }
 
 

@@ -8,7 +8,7 @@ import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { appointmentActions } from "@/store/slices/appointmentSlice";
 import { getBarberAppointments } from "@/lib/api/appointments/getBarberAppointments";
-import { BarberAppointmentsType } from "@/types/Appointments/AppointmentsType";
+//import { BarberAppointmentsType } from "@/types/Appointments/AppointmentsType";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { appointmentsPageNav } from "@/datas/NavigationObjects";
 import styles from '@/components/UI/Appointments/Appointments.module.css';
@@ -17,7 +17,7 @@ import 'react-day-picker/dist/style.css';
 
 const AppointmentsPage: React.FC =  () => {
     //const [appointments, setAppointments] = useState<BarberAppointmentsType[]>([]);
-    const [message, setMessage] = useState<string>('');
+    const [message, setMessage] = useState<string>('Nema retultata za navedeni datum.');
     const {barberTerms, selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     const {actionBarberId, barbers} = useAppSelector((state: RootState) => state?.barber);
     const dispatch = useAppDispatch();

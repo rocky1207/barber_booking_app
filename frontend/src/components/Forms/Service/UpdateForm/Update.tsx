@@ -11,6 +11,7 @@ import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 import { serviceValidationSchema } from "@/lib/validators/validationSchema";
 import { formValidator } from "@/lib/validators/formValidator";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from '../../Form.module.css';
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 
@@ -36,11 +37,9 @@ const Update: React.FC = () => {
         console.log(e.currentTarget);
         const formData = createFormData(e);
         const validateData = formValidator(formData, serviceValidationSchema);
-        console.log(validateData);
         if(!validateData.status) {
             setMessage(validateData.message);
         } 
-        
         const data = {
             id: service?.id.toString()!,
             service: formData.service,
@@ -49,17 +48,19 @@ const Update: React.FC = () => {
         }
         
         //const data = validateInputs
-        dispatch(uiActions.setIsLoading(true));
+        //dispatch(uiActions.setIsLoading(true));
+        setIsLoadingState(true, dispatch);
         const response = await loginRegisterUpdate(apiRoutes.UPDATE_SERVICE, data, 'PATCH');
-        if(!response?.success) {
+        if(!response.success) {
             setMessage(response?.message);
-            dispatch(uiActions.setIsLoading(false));
+            //dispatch(uiActions.setIsLoading(false));
+            setIsLoadingState(false, dispatch);
         }
-        console.log(response);
-        setMessage(response?.message || response?.data?.message);
-        dispatch(uiActions.setIsLoading(false));
         
-        response?.data?.data && serviceActionDispatcher(response?.data?.data, 'UPDATE', dispatch);
+        setMessage(response.message/* || response?.data?.message*/);
+        //dispatch(uiActions.setIsLoading(false));
+        setIsLoadingState(false, dispatch);
+        response.data.data && serviceActionDispatcher(response.data.data, 'UPDATE', dispatch);
     }
     return (
         <form className={styles.form} onSubmit={handleSubmit}>

@@ -1,8 +1,9 @@
 import api from '@/lib/axios';
-import { ManageBarberReturnType } from '@/types/Api/ReturnBarberType';
+import { DeleteBarberReturnType } from '@/types/Api/ReturnBarberType';
+import { DeleteReturnType } from '@/types/Api/ApiReturnType';
 
-export const manageBarber = async (url: string, id: number): Promise<ManageBarberReturnType> => {
-    let answer: ManageBarberReturnType;
+export const deleteBarber = async (url: string, id: number): Promise<DeleteReturnType> => {
+    let answer: DeleteReturnType;
     let actionDone: string = '';
     try {
         let response;
@@ -15,7 +16,7 @@ export const manageBarber = async (url: string, id: number): Promise<ManageBarbe
             actionDone = 'DELETE';
         }
         if(response?.data?.success) {
-            answer = {success: true, data: response?.data?.data || response?.data?.message, actionDone};
+            answer = {success: true, data: response?.data?.data, message: response?.data?.message, actionDone};
         } else {
             // answer = {success: false, message: response?.data?.message || 'Greška na serveru.'};
             throw new Error(response?.data?.message || 'Greška na serveru.');

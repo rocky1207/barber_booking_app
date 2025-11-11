@@ -24,7 +24,7 @@ export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType 
         }
     };
     
-    if(actionDone === 'DELETE') {
+    if(actionDone === 'DELETE_SERVICE') {
         updatedServices = services.filter(service => service.id !== data.id);
     };
     
