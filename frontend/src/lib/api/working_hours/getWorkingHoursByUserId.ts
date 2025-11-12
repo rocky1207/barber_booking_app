@@ -2,7 +2,7 @@ import { WorkingHoursApiResponse, WorkingHoursFormData } from '@/types/WorkingHo
 import api from '@/lib/axios';
 import { apiRoutes } from '../apiRoutes/apiRoutes';
 
-export const getWorkingHoursByUserId = async (userId: number): Promise<any> => {
+export const getWorkingHoursByUserId = async (userId: number): Promise<WorkingHoursApiResponse> => {
     let answer;
     try {
         const response = await api.get(`${apiRoutes.GET_WORKING_HOURS_BY_USER_ID}?userId=${userId}`, {params: {id: userId}});

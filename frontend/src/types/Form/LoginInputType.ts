@@ -1,4 +1,4 @@
-import { ValidationSchemaType } from "./ValidationSchemaType";
+//import { ValidationSchemaType } from "./ValidationSchemaType";
 export interface LoginInputType {
     type: string;
     name: string;

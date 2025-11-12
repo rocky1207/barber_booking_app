@@ -41,11 +41,19 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
     }, [loggedBarberId]);
 
     const fetchWorkingHours = async () => {
-        try {
+       // try {
             //setLoading(true);
             //const response = await workingHoursApi.getWorkingHoursByUserId(userId);
             const response = await getWorkingHoursByUserId(loggedBarberId);
             console.log(response);
+            if(!response.success) {
+                setMessage(response.message || 'Greška pri učitavanju radnih sati.');
+                setIsLoadingState(false, dispatch);
+                return;
+            }
+            workingHoursActiondispatcher(response.data ?? [], 'GET_USER_WORKING_HOURS', dispatch);
+            setIsLoadingState(false, dispatch);
+            /*
             if (response.success && response.data) {
                // setWorkingHours(Array.isArray(response.data) ? response.data : []);
                 workingHoursActiondispatcher(response.data ?? [], 'GET_USER_WORKING_HOURS', dispatch);
@@ -53,12 +61,13 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
             } else {
                 setMessage(response.message || 'Greška pri učitavanju radnih sati.');
             }
+                
         } catch (error) {
             setMessage('Greška pri učitavanju radnih sati.');
         } finally {
             //setLoading(false);
             setIsLoadingState(false, dispatch);
-        }
+        }*/
     };
     /*
     const handleDelete = async (id: number) => {

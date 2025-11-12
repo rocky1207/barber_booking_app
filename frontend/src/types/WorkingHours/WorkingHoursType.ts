@@ -1,3 +1,4 @@
+import { BasicApiReturnType } from "../Api/ApiReturnType";
 export interface WorkingHoursType {
     id: number;
     userId: number;
@@ -22,13 +23,17 @@ export interface WorkingHoursFormData {
     start_time: string;
     end_time: string;
 }
-
+export interface WorkingHoursApiResponse extends BasicApiReturnType {
+    data?: WorkingHoursType | WorkingHoursType[] | WorkingHoursWithUserType[];
+}
+/*
 export interface WorkingHoursApiResponse {
     success: boolean;
     status: number;
     message: string;
     data?: WorkingHoursType | WorkingHoursType[] | WorkingHoursWithUserType[];
 }
+    */
 
 
 

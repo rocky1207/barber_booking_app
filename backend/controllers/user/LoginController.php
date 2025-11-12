@@ -5,13 +5,16 @@ require_once (__DIR__ . "/../../validators/user/loginValidator.php");
 class LoginController {
     
     public function login($data) {
+        
         $validateData = loginValidator($data);
         try {
             $userLoginModel = new UserLoginModel();
             $user = $userLoginModel->userLogin($validateData);
+            /*
             if(empty($user)) {
                 AppController::createMessage("Neispravno korisničko ime ili lozinka", 422);
             }
+                */
             return [
             "success" => true,
             "status" => 200,

@@ -1,8 +1,9 @@
+/*
 import api from "@/lib/axios";
 import { WorkingHoursApiResponse } from "@/types/WorkingHours/WorkingHoursType";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
 
-export const deleteWorkingHours = async (url: string, id: number): Promise<any> => {
+export const deleteWorkingHours = async (url: string, id: number): Promise<WorkingHoursApiResponse> => {
     let answer;
     try {
         const response = await api.delete(url, {data: id});
@@ -23,3 +24,4 @@ export const deleteWorkingHours = async (url: string, id: number): Promise<any> 
         console.log(answer);
     return answer;
     };
+    */

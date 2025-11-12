@@ -1,3 +1,4 @@
+/*
 import api from "@/lib/axios";
 import { DeleteClientAppointmentReturnDataType } from "@/types/Api/ReturnAppointmentType";
 export const deleteClientAppointment = async (url: string, id: number): Promise<DeleteClientAppointmentReturnDataType> => {
@@ -19,3 +20,4 @@ export const deleteClientAppointment = async (url: string, id: number): Promise<
     }
     return answer;
 }
+    */

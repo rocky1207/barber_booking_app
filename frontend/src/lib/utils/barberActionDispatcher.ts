@@ -2,18 +2,20 @@ import { barberActions } from "@/store/slices/barberSlice";
 import store, { AppDispatch, RootState }  from "@/store/store";
 import { logOut } from "../api/user/logOut";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
+import { apiRoutes } from "../api/apiRoutes/apiRoutes";
 
 export const barberActionDispatcher = (data: {id: number} | BasicBarberType, actionDone: string, dispatch: AppDispatch): void => {
     const state: RootState = store.getState();
     const barbers = state.barber.barbers;
     const actionId = state.barber.actionBarberId;
     const loggedBarber = state.barber.loggedBarber;
+    if(actionDone === 'LOGIN_BARBER') dispatch(barberActions.setLoggedBarber(data as BasicBarberType));
     if(actionDone === 'DELETE_BARBER') {
         const newBarbersState = barbers.filter(barber => barber.id !== data.id);
         dispatch(barberActions.setBarbers(newBarbersState));
-        if(loggedBarber.id === data.id) logOut('auth/logout.php', {});
+        if(loggedBarber.id === data.id) logOut(apiRoutes.LOGOUT_USER, {});
     }
-    if(actionDone === 'INSERT') {
+    if(actionDone === 'REGISTER_BARBER') {
         if('username' in data && 'file' in data && 'role' in data) {
             const newBarbersState = [...barbers, data];
             console.log(newBarbersState);

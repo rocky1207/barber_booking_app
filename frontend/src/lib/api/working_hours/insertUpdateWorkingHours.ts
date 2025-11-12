@@ -1,7 +1,7 @@
 import { WorkingHoursApiResponse, WorkingHoursFormData } from '@/types/WorkingHours/WorkingHoursType';
 import api from '@/lib/axios';
 import { apiRoutes } from '../apiRoutes/apiRoutes';
-export const insertUpdateWorkingHours = async (data: WorkingHoursFormData, apiAction: 'POST' | 'PUT'): Promise<any> => {
+export const insertUpdateWorkingHours = async (data: WorkingHoursFormData, apiAction: 'POST' | 'PUT'): Promise<WorkingHoursApiResponse> => {
     console.log(data);
     let actionDone: string = '';
     let url: string = '';

@@ -1,3 +1,4 @@
+/*
 import api from '@/lib/axios';
 import { DeleteBarberReturnType } from '@/types/Api/ReturnBarberType';
 import { DeleteReturnType } from '@/types/Api/ApiReturnType';
@@ -11,6 +12,7 @@ export const deleteBarber = async (url: string, id: number): Promise<DeleteRetur
             response = await api.get(url, {params: {id}});
             actionDone = 'get_client';
         }else */
+        /*
         if(url==='user/deleteUser.php') {
             response = await api.delete(url, {data: {id}});
             actionDone = 'DELETE';
@@ -28,3 +30,4 @@ export const deleteBarber = async (url: string, id: number): Promise<DeleteRetur
     return answer;
 
 };
+*/
