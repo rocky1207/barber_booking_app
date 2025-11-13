@@ -94,7 +94,7 @@ const Update: React.FC = () => {
              setIsLoadingState(false, dispatch);
             return;
         }
-        setMessage(response.data.message)
+        setMessage(response.message)
         const user = response?.data?.data;
         user && barberActionDispatcher(user, 'UPDATE', dispatch);
          setIsLoadingState(false, dispatch);

@@ -79,7 +79,7 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
             return;
         }
         
-        setMessage(response.data.message || 'Radni sati su uspešno ažurirani.');
+        setMessage(response.message || 'Radni sati su uspešno ažurirani.');
         setIsLoadingState(false, dispatch);
         
         if(onSuccess) {

@@ -12,7 +12,7 @@ import ConfirmModal from "../../ConfirmModal/ConfirmModal";
 //import { deleteBarberBtn } from '@/datas/ButttonObjects';
 //import { deleteBarber } from "@/lib/api/user/deleteBarber";
 import { deleteBtn } from "@/datas/ButttonObjects";
-import { deleteById } from "@/lib/api/deleteById";
+import { deleteItemsById } from "@/lib/api/deleteItemsById";
 import { useRouter } from "next/navigation";
 import { barberActions } from "@/store/slices/barberSlice";
 
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
     action: 'DELETE_BARBER',
     id: actionBarberId,
     //head: 'Da li ste sigurni?',
-    onAction: deleteById
+    onAction: deleteItemsById
    // onAction: deleteBarber
   }
   const hoursHandler = () => {

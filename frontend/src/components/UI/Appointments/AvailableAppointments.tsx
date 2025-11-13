@@ -7,7 +7,10 @@ import { useAppDispatch } from '@/store/hooks/typizedHooks';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
-import { getReservedAppointments } from '@/lib/api/appointments/getReservedAppointments';
+//import { getReservedAppointments } from '@/lib/api/appointments/getReservedAppointments';
+import { getItemsByUserId } from '@/lib/api/getItemsByUserId';
+import { GetReservedAppointmentsReturnDataType } from '@/types/Api/ReturnAppointmentType';
+
 import { calculateAvailableTimeSlotsWithWorkingHours } from '@/lib/utils/calculateAvailableAppointments';
 import { normalizeTimeString, filterAvailableTimeSlots } from '@/lib/utils/timeUtils';
 import styles from './Appointments.module.css';
@@ -31,10 +34,17 @@ const AvailableAppointments: React.FC = () => {
             }
             setIsLoading(true);
             try {
+                /*
                 const reservedAppointments = await getReservedAppointments({
                     userId: choosenServices[0].userId, 
                     date: selectedTerm.date
                 });
+                */
+                const data = await getItemsByUserId({
+                    userId: choosenServices[0].userId, 
+                    date: selectedTerm.date
+                }, 'GET_RESERVED_APPOINTMENTS');
+                const reservedAppointments = data as GetReservedAppointmentsReturnDataType;
                 if (reservedAppointments.success && reservedAppointments.data) {
                     console.log(reservedAppointments);
                     const slots = await calculateAvailableTimeSlotsWithWorkingHours(

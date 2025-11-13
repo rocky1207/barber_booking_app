@@ -12,12 +12,8 @@ export const loginRegisterUser = async (data: Record<string, string | number>, a
   if(action === 'REGISTER_BARBER') {
     url = apiRoutes.REGISTER_USER;
   }
-    console.log(url);
-    console.log(answer);
-    console.log(actionDone);
   try {
         const response = await api.post(url, data);;
-        console.log(response);
         if(response.data.status === 200) {
           answer = {
             success: true, 

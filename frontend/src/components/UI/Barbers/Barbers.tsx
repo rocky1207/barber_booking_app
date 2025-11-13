@@ -11,6 +11,7 @@ import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from './Barbers.module.css';
 
 const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
+  console.log(allBarbers);
   const {choosenServices} = useAppSelector((state: RootState) => state?.service);
   //const {clientTerm} = useAppSelector((state: RootState) => state?.appointment);
   console.log(choosenServices); 

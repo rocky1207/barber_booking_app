@@ -11,7 +11,7 @@ import ConfirmModal from "@/components/UI/ConfirmModal/ConfirmModal";
 //import { deleteBarberBtn } from "@/datas/ButttonObjects";
 import { deleteBtn } from "@/datas/ButttonObjects";
 //import { manageService } from "@/lib/api/service/manageService";
-import { deleteById } from "@/lib/api/deleteById";
+import { deleteItemsById } from "@/lib/api/deleteItemsById";
 
 const ServicePage: React.FC = () => {
     const {services, serviceActionId } = useAppSelector((state: RootState) => state?.service);
@@ -49,7 +49,7 @@ const ServicePage: React.FC = () => {
         id: serviceActionId,
        // head: 'Da li ste sigurni?',
         //onAction: manageService
-        onAction: deleteById
+        onAction: deleteItemsById
     };
     console.log(deleteServiceBtn);
     

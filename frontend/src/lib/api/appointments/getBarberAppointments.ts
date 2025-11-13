@@ -1,3 +1,4 @@
+/*
 import api from "@/lib/axios";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
 import { GetBarberAppointmentsReturnDataType } from "@/types/Api/ReturnAppointmentType";
@@ -7,7 +8,7 @@ export const getBarberAppointments = async (data: {userId: number, date: string}
     const updatedData = {...data, action: 'BARBER_APPOINTMENTS'};
     let answer;
     try {
-        const response = await api.post(apiRoutes.GET_BARBER_APPOINTMENTS, updatedData);
+        const response = await api.post(apiRoutes.GET_RESERVED_AND_BARBER_APPOINTMENTS, updatedData);
         if(response.data.status === 200) {
             answer = {
                 success: true, 
@@ -23,3 +24,4 @@ export const getBarberAppointments = async (data: {userId: number, date: string}
     }
     return answer;
 };
+*/

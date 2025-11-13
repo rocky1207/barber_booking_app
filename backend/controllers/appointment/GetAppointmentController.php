@@ -10,10 +10,11 @@ class GetAppointmentController {
         $formatedDate = normalizeDateDMY($data['date']);
         $validateUserId = integerValidator((int)$data['userId']);
         $validateDate = dateValidator($formatedDate);
-        if($data['action'] === 'RESERVED_APPOINTMENTS' || $data['action'] === 'BARBER_APPOINTMENTS') {
+        if($data['action'] === 'GET_RESERVED_APPOINTMENTS' || $data['action'] === 'GET_BARBER_APPOINTMENTS') {
             $data = ['action' => $data['action'], 'userId' => $validateUserId['id'], 'date' => $validateDate['date']];
         } else {
-            AppController::createMessage('Nepoznata akcija', 422);
+            throw new Exception('Nepoznata akcija', 422);
+            //AppController::createMessage('Nepoznata akcija', 422);
         }
         
         try {

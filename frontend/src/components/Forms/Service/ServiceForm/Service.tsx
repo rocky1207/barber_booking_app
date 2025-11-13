@@ -12,6 +12,7 @@ import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import styles from '../../Form.module.css';
 import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
 import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
+import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 
 const Service: React.FC = () => {
     const [message, setMessage] = useState<string | undefined>('');
@@ -44,7 +45,8 @@ const Service: React.FC = () => {
     }
     setIsLoadingState(true, dispatch);
    // const response = await insertService('INSERT',  data);
-    const response = await loginRegisterUpdate(apiRoutes.INSERT_SERVICE, data, 'POST');
+    const responseData = await loginRegisterUpdate(apiRoutes.INSERT_SERVICE, data, 'POST');
+    const response = responseData as any;
     
     if(!response.success) {
         setMessage(response.message);
@@ -59,7 +61,7 @@ const Service: React.FC = () => {
     }
         */
     setMessage(response.message);
-    response?.data && serviceActionDispatcher(response?.data?.data, 'INSERT', dispatch);
+    response?.data && serviceActionDispatcher(response?.data, 'INSERT', dispatch);
     form.reset();
     setIsLoadingState(false, dispatch);
 }

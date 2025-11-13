@@ -8,7 +8,7 @@ import { useAppSelector } from '@/store/hooks/typizedHooks';
 import { RootState } from '@/store/store';
 //import { deleteClientAppointment } from '@/lib/api/appointments/deleteClientAppointment';
 
-import { deleteById } from '@/lib/api/deleteById';
+import { deleteItemsById } from '@/lib/api/deleteItemsById';
 import styles from './Appointments.module.css';
 const BarberAppointments: React.FC<{appointments: BarberAppointmentsType[]}> = ({appointments}) => {
     const {actionAppointmentId} = useAppSelector((state: RootState) => state.appointment);
@@ -20,7 +20,7 @@ const BarberAppointments: React.FC<{appointments: BarberAppointmentsType[]}> = (
             id: actionAppointmentId,
             action: 'DELETE_BARBER_APPOINTMENT',
             //onAction: deleteClientAppointment
-            onAction: deleteById
+            onAction: deleteItemsById
         }
     return (
         <>

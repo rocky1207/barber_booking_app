@@ -1,12 +1,21 @@
 import api from '@/lib/axios';
-import { BasicReturnDataType } from '@/types/Api/ReturnBarberType';
-export const logOut = async (url: string, data: {}): Promise<BasicReturnDataType> => {
+import { BasicApiReturnType } from '@/types/Api/ApiReturnType';
+export const logOut = async (url: string, data: {}): Promise<BasicApiReturnType> => {
     let answer;
     try {
         const response = await api.post(url, data);
-        answer = {success: true, status: response.status, message: response.data.message};
+        if(response.data.status === 200) {
+            answer = {
+                success: true, 
+                message: response.data.message, 
+                actionDone: 'LOGOUT_BARBER'
+            };
+        } else {
+          throw new Error(response.data.message || 'Greška prilikom izvršenja upita.'); 
+        }
+        
     } catch(error: any) {
-        answer = {success: false, status: error.status, message: error.message};
+        answer = {success: false, message: error.message};
     }
     return answer;
 }

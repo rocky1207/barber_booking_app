@@ -1,3 +1,4 @@
+/*
 import api from "@/lib/axios";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
 import { DeleteBarberReturnType } from "@/types/Api/ReturnBarberType";
@@ -25,3 +26,4 @@ export const manageService = async (url: string, id: number): Promise<DeleteBarb
     }
     return answer;
 };
+*/

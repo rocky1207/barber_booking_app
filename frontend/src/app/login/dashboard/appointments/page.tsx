@@ -7,7 +7,9 @@ import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { appointmentActions } from "@/store/slices/appointmentSlice";
-import { getBarberAppointments } from "@/lib/api/appointments/getBarberAppointments";
+//import { getBarberAppointments } from "@/lib/api/appointments/getBarberAppointments";
+import { getItemsByUserId } from "@/lib/api/getItemsByUserId";
+import { GetBarberAppointmentsReturnDataType } from "@/types/Api/ReturnAppointmentType";
 //import { BarberAppointmentsType } from "@/types/Appointments/AppointmentsType";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { appointmentsPageNav } from "@/datas/NavigationObjects";
@@ -29,7 +31,9 @@ const AppointmentsPage: React.FC =  () => {
         const getApp = async () => {
             setIsLoadingState(true, dispatch);
             try {
-                const response = await getBarberAppointments(data);
+                //const response = await getBarberAppointments(data);
+                const responseData = await getItemsByUserId(data, 'GET_BARBER_APPOINTMENTS');
+                const response = responseData as GetBarberAppointmentsReturnDataType;
                 if(!response.success) {
                     setMessage(response.message);
                     setIsLoadingState(false, dispatch);

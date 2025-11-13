@@ -50,7 +50,8 @@ const Update: React.FC = () => {
         //const data = validateInputs
         //dispatch(uiActions.setIsLoading(true));
         setIsLoadingState(true, dispatch);
-        const response = await loginRegisterUpdate(apiRoutes.UPDATE_SERVICE, data, 'PATCH');
+        const responseData = await loginRegisterUpdate(apiRoutes.UPDATE_SERVICE, data, 'PATCH');
+        const response = responseData as any;
         if(!response.success) {
             setMessage(response?.message);
             //dispatch(uiActions.setIsLoading(false));

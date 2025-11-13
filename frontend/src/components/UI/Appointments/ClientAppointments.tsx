@@ -9,7 +9,7 @@ import ClientAppointment from "./ClientAppointment";
 import { deleteBtn } from "@/datas/ButttonObjects";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 //import { deleteClientAppointment } from "@/lib/api/appointments/deleteClientAppointment";
-import { deleteById } from "@/lib/api/deleteById";
+import { deleteItemsById } from "@/lib/api/deleteItemsById";
 import styles from './Appointments.module.css';
 const ClientAppointments: React.FC = () => {
     const {clientTerms, actionAppointmentId} = useAppSelector((state: RootState) => state.appointment);
@@ -24,7 +24,7 @@ const ClientAppointments: React.FC = () => {
         id: actionAppointmentId,
         action: 'DELETE_CLIENT_APPOINTMENT',
         //onAction: deleteClientAppointment
-        onAction: deleteById
+        onAction: deleteItemsById
     }
     
     return (

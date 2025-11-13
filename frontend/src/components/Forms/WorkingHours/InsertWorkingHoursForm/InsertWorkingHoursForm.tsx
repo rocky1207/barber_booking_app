@@ -11,13 +11,18 @@ import { workingHoursValidationSchema } from "@/lib/validators/validationSchema"
 //import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
 import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
 import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
+
+import { WorkingHoursType } from "@/types/WorkingHours/WorkingHoursType";
+import { BasicApiReturnType } from "@/types/Api/ApiReturnType";
 import styles from './InsertWorkingHoursForm.module.css';
 
 interface InsertWorkingHoursFormProps {
     loggedBarberId: number;
     onSuccess?: () => void;
 }
-
+interface Response extends BasicApiReturnType {
+    data: WorkingHoursType
+}
 const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedBarberId, onSuccess }) => {
     const [message, setMessage] = useState<string>('');
     const dispatch = useAppDispatch();
@@ -62,7 +67,8 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         
         // const response = await workingHoursApi.insertWorkingHours(data);
         setIsLoadingState(true, dispatch);
-        const response = await insertUpdateWorkingHours(data, 'POST');
+        const responseData = await insertUpdateWorkingHours(data, 'POST');
+        const response = responseData as Response;
         console.log(response);
         if(!response.success) {
             setMessage(response.message);
@@ -70,7 +76,7 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
             return;
         }
         workingHoursActiondispatcher(response.data, 'INSERT_WORKING_HOURS', dispatch);
-        setMessage(response.data.message);
+        setMessage(response.message);
         form.reset();
         setIsLoadingState(false, dispatch);
         

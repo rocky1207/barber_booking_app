@@ -2,7 +2,7 @@ import api from "@/lib/axios";
 import { apiRoutes } from "./apiRoutes/apiRoutes";
 import { DeleteReturnType } from "@/types/Api/ApiReturnType";
 
-export const deleteById = async (action: string, id: number): Promise<DeleteReturnType> => {
+export const deleteItemsById = async (action: string, id: number): Promise<DeleteReturnType> => {
    let answer;
     let actionDone = action.toUpperCase();
     let url = '';

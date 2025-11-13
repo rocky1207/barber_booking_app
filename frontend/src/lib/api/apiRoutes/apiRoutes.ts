@@ -1,5 +1,6 @@
 export const apiRoutes = {
     GET_CLIENTS: 'user/getClients.php',
+    GET_USERS: 'user/getUser.php',
     REGISTER_USER: 'user/register.php',
     LOGIN_USER: 'auth/login.php',
     LOGOUT_USER: 'auth/logout.php',
@@ -13,8 +14,8 @@ export const apiRoutes = {
     DELETE_SERVICE: 'service/deleteService.php',
     UPDATE_SERVICE: 'service/updateService.php',
     INSERT_APPOINTMENT: 'appointment/insertAppointment.php',
-    GET_RESERVED_APPOINTMENTS: 'appointment/getReservedAppointments.php',
-    GET_BARBER_APPOINTMENTS: 'appointment/getBarberAppointments.php',
+    //GET_RESERVED_APPOINTMENTS: 'appointment/getReservedAppointments.php',
+    GET_RESERVED_AND_BARBER_APPOINTMENTS: 'appointment/getReservedAndBarberAppointments.php',
     GET_CLIENT_APPOINTMENTS: 'appointment/getClientAppointments.php',
     DELETE_CLIENT_APPOINTMENT: 'appointment/deleteClientAppointment.php',
     GET_WORKING_HOURS_BY_USER_ID: 'working_hours/getWorkingHoursByUserId.php',

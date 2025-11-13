@@ -11,5 +11,11 @@ setcookie("token", "", [
   "samesite" => "Lax"
 ]);
 
-AppController::createMessage("Uspešno ste se odjavili", 200);
+//AppController::createMessage("Uspešno ste se odjavili", 200);
+$response = [
+  'success' => true,
+  'status' => 200,
+  'message' => 'Uspešno ste se odjavili.'
+];
+echo json_encode($response);
 ?>

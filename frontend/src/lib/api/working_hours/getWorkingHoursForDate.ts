@@ -1,3 +1,4 @@
+/*
 import api from "@/lib/axios";
 import { WorkingHoursApiResponse } from "@/types/WorkingHours/WorkingHoursType";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
@@ -20,3 +21,4 @@ export const getWorkingHoursForDate = async (userId: number, date: string): Prom
     }
     return answer;
     };
+    */
