@@ -8,10 +8,12 @@ import { appointmentInputs } from "@/datas/Form/lnputObjects";
 import { formValidator } from "@/lib/validators/formValidator";
 import { appointmentValidationSchema } from "@/lib/validators/validationSchema";
 import { createFormData } from "@/lib/utils/createFormData";
-import { postAppointmentApi } from "@/lib/api/appointments/postAppointmentApi";
+//import { postAppointmentApi } from "@/lib/api/appointments/getClientAppointments";
+import { insertItems } from "@/lib/api/insertItems";
 import { formatTime } from "@/lib/utils/formatTime";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 //import { appointmentActionDispatcher } from "@/lib/utils/appointmentActionDispatcher";
+import { InsertAppointmentApiReturnType } from "@/types/Appointments/AppointmentsType";
 import NewAppointmentModal from "@/components/UI/NewAppointmentModal/NewAppointmentModal";
 import styles from '../../Form.module.css';
 const CreateAppointment: React.FC = () => {
@@ -54,7 +56,7 @@ const CreateAppointment: React.FC = () => {
         const validateInputs = formValidator(formData, appointmentValidationSchema);
         
         if(!validateInputs.status) {setMessage(validateInputs.message); return;}
-        const data = {
+        const newData = {
             userId: choosenServices[0].userId,
             name: formData.name,
             surname: formData.surname,
@@ -63,24 +65,29 @@ const CreateAppointment: React.FC = () => {
             services
         }
         setIsLoadingState(true, dispatch);
-        const response = await postAppointmentApi('INSERT_CLIENT_APPOINTMNET', data);
-        if(!response.success) {
-            setMessage(response.message);
+        //const response = await postAppointmentApi('INSERT_CLIENT_APPOINTMNET', data);
+        const responseData = await insertItems(newData, 'INSERT_CLIENT_APPOINTMENT');
+        const {success, data, message, actionDone } = responseData as InsertAppointmentApiReturnType;
+        console.log(data);
+        if(!success) {
+            setMessage(message);
             setIsLoadingState(false, dispatch);
             return;
         }
-        if(!response.data) {
+        /*
+        if(!data) {
             setMessage('Neočekivan format odgovora sa servera.');
             setIsLoadingState(false, dispatch);
             return;
         }
-        console.log(response);
+            */
+       // console.log(response);
         //setMessage(response.message);
         
         
-        if(response.actionDone === 'INSERT_CLIENT_APPOINTMNET') {
+        if(actionDone === 'INSERT_CLIENT_APPOINTMENT') {
             
-            const insertData = response.data as { date: string; startAppointment: string };
+            const insertData = data as { date: string; startAppointment: string };
             //appointmentActionDispatcher(insertData, response.actionDone, dispatch);
             setDialogData({
                 date: insertData.date,
@@ -91,14 +98,12 @@ const CreateAppointment: React.FC = () => {
                 time: insertData.startAppointment,
             }));
         }
-        
-        
-        
         form.reset();
         setIsLoadingState(false, dispatch);
         if(dialog && typeof dialog !== "function" && dialog.current) dialog.current.showModal();
+        
     }
-console.log(dialogData);
+//console.log(dialogData);
     
  return (
     <>

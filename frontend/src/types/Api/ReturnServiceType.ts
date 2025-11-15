@@ -13,8 +13,8 @@ export interface SingleServiceType {
     price: string;
     description: string;
 }
-export interface ManageServiceReturnType extends BasicApiReturnType {
-    data?: SingleServiceType;
+export interface InsertUpdateServiceReturnType extends BasicApiReturnType {
+    data: SingleServiceType;
 }
 export interface GetServicesReturnType extends BasicApiReturnType {
     data?: SingleServiceType[];

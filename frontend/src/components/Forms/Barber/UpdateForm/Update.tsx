@@ -7,7 +7,8 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks/typizedHooks";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/store/store";
-import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
+//import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
+import { updateItems } from "@/lib/api/updateItems";
 import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import NavigateButton from "@/components/Button/NavigateButton";
 import { changePasswordBtn } from "@/datas/ButttonObjects";
@@ -16,6 +17,7 @@ import { barberActions } from "@/store/slices/barberSlice";
 import { formValidator } from "@/lib/validators/formValidator";
 import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+import { SingleBarberReturnType } from "@/types/Api/ReturnBarberType";
 import styles from '../../Form.module.css';
 import extraStyles from './Update.module.css';
 
@@ -81,22 +83,24 @@ const Update: React.FC = () => {
             setMessage(validateInputs.message);
             return;
         }
-        const data = {
+        const updateData = {
            ...validateData,
             id: userId!,
             suspended: parseInt(validateData.suspended, 10)
         }
         setIsLoadingState(true, dispatch);
-        const response = await loginRegisterUpdate(updateUserUrl, data, 'PATCH');
-        
-        if(!response.success) {
-            setMessage(response.message);
-             setIsLoadingState(false, dispatch);
+       // const response = await loginRegisterUpdate(updateUserUrl, data, 'PATCH');
+        const responseData = await updateItems(updateData, 'UPDATE_BARBER');
+         const {success, data, message, actionDone} = responseData as SingleBarberReturnType;
+        console.log(data);
+        if(!success) {
+            setMessage(message);
+            setIsLoadingState(false, dispatch);
             return;
         }
-        setMessage(response.message)
-        const user = response?.data?.data;
-        user && barberActionDispatcher(user, 'UPDATE', dispatch);
+        setMessage(message)
+        
+         actionDone && barberActionDispatcher(data, actionDone, dispatch);
          setIsLoadingState(false, dispatch);
     };
     

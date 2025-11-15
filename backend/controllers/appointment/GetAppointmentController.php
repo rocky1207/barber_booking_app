@@ -20,13 +20,15 @@ class GetAppointmentController {
         try {
             $getAppointmentModel = new GetAppointmentModel();
             $result = $getAppointmentModel->getReservedAndBarberAppointments($data);
-            if($data['action'] === 'RESERVED_APPOINTMENTS') {
+            $msg = 'Termini za izabranog frizera su uspešno dobavljeni.';
+            if($data['action'] === 'GET_RESERVED_APPOINTMENTS') {
                // $data = ['action' => $data['action'], 'userId' => $validateUserId['id'], 'date' => $validateDate['date']];
                 //$result = $getAppointmentModel->getReservedAppointments($validateUserId['id'], $validateDate['date']);
                 //$result = $getAppointmentModel->getUniversal($data);
                 // Extract just the time values for backward compatibility
                 $appointmentTimes = array_column($result, 'time');
                 $result = $appointmentTimes;
+                $msg = 'Rezervisani termini za izabranog frizera su uspešno dobavljeni.';
                 /*
                 return [
                     "success" => true,
@@ -54,10 +56,11 @@ class GetAppointmentController {
             ];
             */
             }
+
             return [
                 "success" => true,
                 "status" => 200,
-                "message" => 'Zakazani termini su uspešno dobavljeni',
+                "message" => $msg,
                 "data" => $result // $appointmentTimes,
                // "detailedData" => $result // Include full appointment details for future use
             ];

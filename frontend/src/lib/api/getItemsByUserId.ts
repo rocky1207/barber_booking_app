@@ -1,4 +1,4 @@
-import { WorkingHoursApiResponse, WorkingHoursFormData } from '@/types/WorkingHours/WorkingHoursType';
+import { WorkingHoursWithUserApiReturnType, WorkingHoursFormData } from '@/types/WorkingHours/WorkingHoursType';
 import { GetServicesReturnType } from '@/types/Api/ReturnServiceType';
 import { GetBarberAppointmentsReturnDataType, GetReservedAppointmentsReturnDataType } from '@/types/Api/ReturnAppointmentType';
 import api from '@/lib/axios';
@@ -8,7 +8,7 @@ type PromiseReturnDataType =
     GetServicesReturnType | 
     GetReservedAppointmentsReturnDataType | 
     GetBarberAppointmentsReturnDataType | 
-    WorkingHoursApiResponse | 
+    WorkingHoursWithUserApiReturnType | 
     WorkingHoursFormData;
 
 export const getItemsByUserId = async (data: {userId: number, date: string}, action: string): Promise<PromiseReturnDataType> => {

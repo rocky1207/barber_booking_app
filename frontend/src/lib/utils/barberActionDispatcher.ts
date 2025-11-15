@@ -5,6 +5,8 @@ import { BasicBarberType } from "@/types/Barbers/BarbersType";
 import { apiRoutes } from "../api/apiRoutes/apiRoutes";
 
 export const barberActionDispatcher = (data: {id: number} | BasicBarberType, actionDone: string, dispatch: AppDispatch): void => {
+    console.log(data);
+    console.log(actionDone);
     const state: RootState = store.getState();
     const barbers = state.barber.barbers;
     const actionId = state.barber.actionBarberId;
@@ -22,7 +24,7 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
             dispatch(barberActions.setBarbers(newBarbersState));
         }
     }
-    if(actionDone === 'UPDATE') {
+    if(actionDone === 'UPDATE_BARBER') {
         if('username' in data && 'file' in data) {
             const updatedbarbers = barbers.map((barber) => {
                  if (barber.id === data.id) {

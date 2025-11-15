@@ -23,11 +23,8 @@ class GetWorkingHoursModel {
             //AppController::databaseConnect();
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute(['id' => (int)$id]);
-            $workingHours = $stmt->fetchAll();
-            if(empty($workingHours)) {
-                throw new Exception("Radni sati sa ID {$id} nisu pronađeni.", 404);
-            }
-            return $workingHours[0];
+            $workingHours = $stmt->fetch();
+            return $workingHours;
             //return (int)$id;
         } catch (Exception $e) {
             throw $e;
@@ -51,8 +48,9 @@ class GetWorkingHoursModel {
                 'userId' => $userId,
                 'date' => $date
             ]);
-            $workingHours = $stmt->fetchAll();
-            return $workingHours[0];
+            $workingHours = $stmt->fetch();
+           // if(!$workingHours) {}
+            return $workingHours;
         } catch (Exception $e) {
             throw $e;
         }

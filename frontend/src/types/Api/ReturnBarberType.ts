@@ -14,7 +14,7 @@ export interface LoginBarberReturnType extends BasicBarberType {
 }
     */
 export interface SingleBarberReturnType extends BasicApiReturnType {
-    data?: BasicBarberType;
+    data: BasicBarberType;
 }
 export interface MultiBarberReturnType extends BasicApiReturnType {
     data: BasicBarberType[];

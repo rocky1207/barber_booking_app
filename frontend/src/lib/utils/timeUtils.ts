@@ -29,6 +29,7 @@ export const isValidTimeSlot = (time: string): boolean => {
  * @returns Minutes since midnight
  */
 export const timeToMinutes = (timeStr: string): number => {
+    console.log(timeStr);
     const [hours, minutes] = timeStr.split(':').map(Number);
     return hours * 60 + minutes;
 };

@@ -8,7 +8,7 @@ import { getItemsByUserId } from '@/lib/api/getItemsByUserId';
 import { useAppSelector, useAppDispatch } from '@/store/hooks/typizedHooks';
 import { workingHoursActions } from '@/store/slices/workingHoursSlice';
 import { workingHoursActiondispatcher } from '@/lib/utils/workingHoursActionDispatcher';
-import { WorkingHoursApiResponse } from '@/types/WorkingHours/WorkingHoursType';
+import { WorkingHoursApiReturnType } from '@/types/WorkingHours/WorkingHoursType';
 import { RootState } from '@/store/store';
 import ConfirmModal from '../../ConfirmModal/ConfirmModal';
 import { modalActionBtn } from '@/datas/ButttonObjects';
@@ -47,13 +47,14 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
             //const response = await workingHoursApi.getWorkingHoursByUserId(userId);
             //const response = await getWorkingHoursByUserId(loggedBarberId);
             const responseData = await getItemsByUserId({userId:loggedBarberId, date: ''}, 'GET_WORKING_HOURS_BY_USER_ID');
-            const response = responseData as WorkingHoursApiResponse;
+            const response = responseData as WorkingHoursApiReturnType;
             console.log(response);
             if(!response.success) {
                 setMessage(response.message || 'Greška pri učitavanju radnih sati.');
                 setIsLoadingState(false, dispatch);
                 return;
-            }
+            };
+            //setMessage(response.message || 'Radni sati su uspešno dohvaćeni.');
             workingHoursActiondispatcher(response.data ?? [], 'GET_USER_WORKING_HOURS', dispatch);
             setIsLoadingState(false, dispatch);
             /*

@@ -1,3 +1,4 @@
+/*
 import api from "@/lib/axios";
 import { apiRoutes } from "../apiRoutes/apiRoutes";
 import { SingleServiceType, ManageServiceReturnType } from "@/types/Api/ReturnServiceType";
@@ -27,4 +28,4 @@ export const insertService = async (action: string, data: BasicServiceType): Pro
         answer = {success: false, message: error?.message};
     }
     return answer;
-}
+}*/

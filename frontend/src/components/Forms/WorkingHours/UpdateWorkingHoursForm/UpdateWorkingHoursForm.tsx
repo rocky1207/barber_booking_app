@@ -9,7 +9,8 @@ import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { workingHoursValidationSchema } from "@/lib/validators/validationSchema";
 //import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
-import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
+//import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
+import { updateItems } from "@/lib/api/updateItems";
 import { WorkingHoursType } from "@/types/WorkingHours/WorkingHoursType";
 import styles from './UpdateWorkingHoursForm.module.css';
 
@@ -63,7 +64,7 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
             return;
         }
 
-        const data = {
+        const updateData = {
             id: workingHours.id,
             start_date: formData.start_date,
             end_date: formData.end_date,
@@ -72,16 +73,17 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         };
          setIsLoadingState(true, dispatch);
         //const response = await workingHoursApi.updateWorkingHours(workingHours.id, data);
-        const response = await insertUpdateWorkingHours(data, 'PUT');
-        if(!response.success) {
-            setMessage(response.message);
+       // const response = await insertUpdateWorkingHours(data, 'PUT');
+       const responseData = await updateItems(updateData, 'UPDATE_WORKING_HOURS');
+       const {success, message, data, actionDone} = responseData;
+        if(!success) {
+            setMessage(message);
+            
             setIsLoadingState(false, dispatch);
             return;
         }
-        
-        setMessage(response.message || 'Radni sati su uspešno ažurirani.');
+        setMessage(message || 'Radni sati su uspešno ažurirani.');
         setIsLoadingState(false, dispatch);
-        
         if(onSuccess) {
             onSuccess();
         }

@@ -10,19 +10,16 @@ import { formValidator } from "@/lib/validators/formValidator";
 import { workingHoursValidationSchema } from "@/lib/validators/validationSchema";
 //import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
 import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
-import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
-
-import { WorkingHoursType } from "@/types/WorkingHours/WorkingHoursType";
-import { BasicApiReturnType } from "@/types/Api/ApiReturnType";
+//import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
+import { insertItems } from "@/lib/api/insertItems";
+import { InsertUpdateWorkingHoursApiReturnType } from "@/types/WorkingHours/WorkingHoursType";
 import styles from './InsertWorkingHoursForm.module.css';
 
 interface InsertWorkingHoursFormProps {
     loggedBarberId: number;
     onSuccess?: () => void;
 }
-interface Response extends BasicApiReturnType {
-    data: WorkingHoursType
-}
+
 const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedBarberId, onSuccess }) => {
     const [message, setMessage] = useState<string>('');
     const dispatch = useAppDispatch();
@@ -57,7 +54,7 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
             return;
         }
 
-        const data = {
+        const insertData = {
             userId: loggedBarberId,
             start_date: formData.start_date,
             end_date: formData.end_date,
@@ -67,16 +64,17 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         
         // const response = await workingHoursApi.insertWorkingHours(data);
         setIsLoadingState(true, dispatch);
-        const responseData = await insertUpdateWorkingHours(data, 'POST');
-        const response = responseData as Response;
-        console.log(response);
-        if(!response.success) {
-            setMessage(response.message);
+       // const responseData = await insertUpdateWorkingHours(data, 'POST');
+        const responseData = await insertItems(insertData, 'INSERT_WORKING_HOURS');
+        const {success, data, message} = responseData as InsertUpdateWorkingHoursApiReturnType;
+       // console.log(response);
+        if(!success) {
+            setMessage(message);
             setIsLoadingState(false, dispatch);
             return;
         }
-        workingHoursActiondispatcher(response.data, 'INSERT_WORKING_HOURS', dispatch);
-        setMessage(response.message);
+        data && workingHoursActiondispatcher(data, 'INSERT_WORKING_HOURS', dispatch);
+        setMessage(message);
         form.reset();
         setIsLoadingState(false, dispatch);
         
