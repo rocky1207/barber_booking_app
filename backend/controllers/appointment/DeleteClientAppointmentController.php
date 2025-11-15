@@ -6,17 +6,19 @@ class DeleteClientAppointmentController {
         $validateInputs = integerValidator($id);
         try {
             $deleteClientAppointmentModel = new DeleteClientAppointmentModel();
-            $response = $deleteClientAppointmentModel->deleteClientAppointment($validateInputs['id']);
-            if($response) {
+            //$response = $deleteClientAppointmentModel->deleteClientAppointment($validateInputs['id']);
+            $deletedAppointmentId = $deleteClientAppointmentModel->deleteClientAppointment($validateInputs['id']);
+           // if($response) {
                 return [
                 "success" => true,
                 "status"  => 200,
                 "message" => 'Zakazani termin je uspešno obrisan',
-                "data" => ['deletedAppointmentId' => $response]
+                //"data" => ['deletedAppointmentId' => $response]
+                "data" => ['id' => (int)$deletedAppointmentId]
             ];
-            } else {
+           /* } else {
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
-            }
+            }*/
         } catch (Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }

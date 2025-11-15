@@ -1,8 +1,5 @@
-export interface BasicServicesDataReturnType {
-    success: boolean;
-    message?: string;
-    actionDone?: string;
-}
+import { BasicApiReturnType } from "./ApiReturnType";
+
 export interface SingleServiceType {
     id: number;
     userId: number;
@@ -10,9 +7,9 @@ export interface SingleServiceType {
     price: string;
     description: string;
 }
-export interface ManageServiceReturnType extends BasicServicesDataReturnType {
-    data?: SingleServiceType;
+export interface InsertUpdateServiceReturnType extends BasicApiReturnType {
+    data: SingleServiceType;
 }
-export interface GetServicesReturnType extends BasicServicesDataReturnType {
+export interface GetServicesReturnType extends BasicApiReturnType {
     data?: SingleServiceType[];
 }

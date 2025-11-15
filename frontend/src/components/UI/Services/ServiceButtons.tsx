@@ -11,6 +11,7 @@ interface Props {
     //setDeleteServiceId: React.Dispatch<React.SetStateAction<number>>;
 }
 const ServiceButtons = forwardRef<HTMLDialogElement, Props>(({serviceId}, ref) => {
+    console.log(ref);
     const router = useRouter();
     const dispatch = useAppDispatch();
     const openModal = () => {

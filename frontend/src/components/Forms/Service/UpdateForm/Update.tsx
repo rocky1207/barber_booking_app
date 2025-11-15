@@ -2,22 +2,21 @@
 import { useState } from "react";
 import Input from "../../Input/Input";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
-import { uiActions } from "@/store/slices/uiSlice";
 import { RootState } from "@/store/store";
 import { useSearchParams } from "next/navigation";
 import { createFormData } from "@/lib/utils/createFormData";
-import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
-import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
+import { updateItems } from "@/lib/api/updateItems";
 import { serviceValidationSchema } from "@/lib/validators/validationSchema";
 import { formValidator } from "@/lib/validators/formValidator";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+import { InsertUpdateServiceReturnType } from "@/types/Api/ReturnServiceType";
 import styles from '../../Form.module.css';
-import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 
 
 
 const Update: React.FC = () => {
-    const [message, setMessage] = useState<string | undefined>('');
+    const [message, setMessage] = useState<string>('');
     const {services} = useAppSelector((state: RootState) => state?.service);
     const dispatch = useAppDispatch();
     const params = useSearchParams();
@@ -36,36 +35,32 @@ const Update: React.FC = () => {
         console.log(e.currentTarget);
         const formData = createFormData(e);
         const validateData = formValidator(formData, serviceValidationSchema);
-        console.log(validateData);
         if(!validateData.status) {
             setMessage(validateData.message);
         } 
-        
-        const data = {
+        const updateData = {
             id: service?.id.toString()!,
             service: formData.service,
             price: formData.price,
-           // description: formData.description
         }
         
-        //const data = validateInputs
-        dispatch(uiActions.setIsLoading(true));
-        const response = await loginRegisterUpdate(apiRoutes.UPDATE_SERVICE, data, 'PATCH');
-        if(!response?.success) {
-            setMessage(response?.message);
-            dispatch(uiActions.setIsLoading(false));
+        setIsLoadingState(true, dispatch);
+        const responseData = await updateItems(updateData, 'UPDATE_SERVICE');
+        const {success, data, message, actionDone} = responseData as InsertUpdateServiceReturnType;
+        console.log(data);
+        if(!success) {
+            setMessage(message);
+             setIsLoadingState(false, dispatch);
         }
-        console.log(response);
-        setMessage(response?.message || response?.data?.message);
-        dispatch(uiActions.setIsLoading(false));
         
-        response?.data?.data && serviceActionDispatcher(response?.data?.data, 'UPDATE', dispatch);
+        setMessage(message);
+        setIsLoadingState(false, dispatch);
+        actionDone && serviceActionDispatcher(data, actionDone, dispatch);
     }
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
-            {/*<textarea name='description' defaultValue={service?.description}></textarea>*/}
-            <p>{message}</p>
+             <p>{message}</p>
             <button type='submit'>POŠALJI</button>
         </form>
     );

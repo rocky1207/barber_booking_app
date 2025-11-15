@@ -9,13 +9,18 @@ import { registerValidationSchema } from "@/lib/validators/validationSchema";
 import FileInput from "../../FileInput/FileInput";
 import { createFormData } from "@/lib/utils/createFormData";
 import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
+import { loginRegisterUser } from "@/lib/api/user/loginRegisterUser";
+import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 //import { useAppSelector } from "@/store/hooks/typizedHooks";
 //import { RootState } from "@/store/store";
 //import { useSearchParams } from "next/navigation";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+
 import styles from '../../Form.module.css';
+import { BasicBarberType } from "@/types/Barbers/BarbersType";
 
 const Register:React.FC = () => {
-    const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+    const [message, setMessage] = useState<string>('');
     const [fileName, setFileName] = useState<string>('');
    // const {barbers} = useAppSelector((state: RootState) => state?.barber);
     const dispatch = useAppDispatch();
@@ -44,31 +49,35 @@ const Register:React.FC = () => {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
         const formData = createFormData(e);
-        const data = {...formData, file: fileName};
+        const newFormData = {...formData, file: fileName};
         
-        const validateData = formValidator(data, registerValidationSchema);
+        const validateData = formValidator(newFormData, registerValidationSchema);
         if(!validateData.status) {
-            setErrorMessage(validateData.message);
+            setMessage(validateData.message);
             return;
         }
-        const result = await loginRegisterUpdate('user/register.php', data, 'POST');
-        console.log(result);
-        if(!result.success || !result.data) {
-            setErrorMessage(result.message || "Greška prilikom registracije");
+        setIsLoadingState(true, dispatch);
+       // const response = await loginRegisterUpdate('user/register.php', data, 'POST');
+        const {success, data, actionDone} = await loginRegisterUser(newFormData, 'REGISTER_BARBER');
+        //console.log(result);
+        if(!success/* || !result.data*/) {
+            setMessage(message || "Greška prilikom registracije");
+            setIsLoadingState(false, dispatch);
             return;
         };
-        const user = result.data.data;
-        barberActionDispatcher(user, 'INSERT', dispatch);
+        //const user = response.data;
+        barberActionDispatcher(data as BasicBarberType, actionDone as string, dispatch);
         form.reset();
         setFileName('');
-        setErrorMessage('Uspešno ste uneli novog korisnika');
+        setMessage(message || 'Uspešno ste uneli novog korisnika');
+        setIsLoadingState(false, dispatch);
     };
 
 return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={registerInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
-             <p>{errorMessage}</p>
+             <p>{message}</p>
             <button type="submit" className={styles.submitBtn}>POŠALJI</button>
         </form>
     );

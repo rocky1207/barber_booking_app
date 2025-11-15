@@ -5,12 +5,12 @@ import store, { RootState } from "@/store/store";
 import { formatPrice } from "./formatPrice";
 
 
-export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType , actionDone: string, dispatch: AppDispatch): void => {
+export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType, actionDone: string, dispatch: AppDispatch): void => {
     const state: RootState = store.getState();
     const services = state.service.services;
     console.log(data);
     let updatedServices: SingleServiceType[] = [];
-    if(actionDone === 'INSERT') {
+    if(actionDone === 'INSERT_SERVICE') {
         console.log(data);
         if('userId' in data && 'userService' in data && 'price' in data) {
             const service = {
@@ -24,11 +24,11 @@ export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType 
         }
     };
     
-    if(actionDone === 'DELETE') {
+    if(actionDone === 'DELETE_SERVICE') {
         updatedServices = services.filter(service => service.id !== data.id);
     };
     
-    if(actionDone === 'UPDATE') {
+    if(actionDone === 'UPDATE_SERVICE') {
         if('userId' in data && 'userService' in data && 'price' in data) {
             updatedServices = services.map((service) => {
                 if(service.id === data.id) {

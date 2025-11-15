@@ -4,10 +4,15 @@ import {
   DEFAULT_WORKING_HOURS, 
 } from './timeUtils';
 import { AppointmentConfig } from '@/types/Appointments/AppointmentsType';
+import { BasicApiReturnType } from '@/types/Api/ApiReturnType';
 //import { workingHoursApi } from '@/lib/api/working_hours/workingHoursApi';
-import { getWorkingHoursForDate } from '../api/working_hours/getWorkingHoursForDate';
+//import { getWorkingHoursForDate } from '../api/working_hours/getWorkingHoursForDate';
+import { getItemsByUserId } from '../api/getItemsByUserId';
+import { WorkingHoursType } from '@/types/WorkingHours/WorkingHoursType';
 
-
+interface ResponseType extends BasicApiReturnType {
+  data: WorkingHoursType;
+}
 
 /**
  * Calculates available time slots for appointments
@@ -29,10 +34,12 @@ export const calculateAvailableTimeSlots = (
   const TOTAL_DURATION = serviceCount * slotDuration;
   
   // Create reserved time intervals with proper duration
+console.log(reservedAppointments);
   const reservedIntervals = reservedAppointments.map(time => ({
     start: timeToMinutes(time),
     end: timeToMinutes(time) + slotDuration + bufferTime
   }));
+    
   
   // Generate all possible time slots
   const availableSlots: string[] = [];
@@ -77,15 +84,18 @@ export const calculateAvailableTimeSlotsWithWorkingHours = async (
     
     // Get barber's working hours for the selected date
     //const response = await workingHoursApi.getWorkingHoursForDate(userId, apiDate);
-    const response = await getWorkingHoursForDate(userId, apiDate);
+    //const response = await getWorkingHoursForDate(userId, apiDate);
+    const responseData = await getItemsByUserId({userId, date: apiDate}, 'GET_WORKING_HOURS_FOR_DATE');
+    const response = responseData as ResponseType;
     console.log(response);
-    if (!response.success || !response.data || response.data.length === 0) {
+    if (!response.success || !response.data /* || response.data.length === 0*/) {
       // No working hours for this date - barber is not working
       return [];
     }
     
     // Use the first working hours entry (assuming one per day for now)
     const workingHours = response.data;
+    console.log(workingHours);
     const workStartTime = workingHours.start_time.substring(0, 5); // Remove seconds
     const workEndTime = workingHours.end_time.substring(0, 5);
     

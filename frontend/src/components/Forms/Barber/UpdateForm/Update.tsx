@@ -7,7 +7,8 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks/typizedHooks";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/store/store";
-import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
+//import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
+import { updateItems } from "@/lib/api/updateItems";
 import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import NavigateButton from "@/components/Button/NavigateButton";
 import { changePasswordBtn } from "@/datas/ButttonObjects";
@@ -15,6 +16,8 @@ import { createFormData } from "@/lib/utils/createFormData";
 import { barberActions } from "@/store/slices/barberSlice";
 import { formValidator } from "@/lib/validators/formValidator";
 import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+import { SingleBarberReturnType } from "@/types/Api/ReturnBarberType";
 import styles from '../../Form.module.css';
 import extraStyles from './Update.module.css';
 
@@ -26,7 +29,7 @@ const Update: React.FC = () => {
     const userId = params.get('barberId');
     const paramId = userId !== null ? parseInt(userId, 10) : undefined;
     const barber = barberState?.barbers.find(barberItem => paramId === barberItem.id);
-    const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+    const [message, setMessage] = useState<string>('');
     const [fileName, setFileName] = useState<string>(barber?.file ?? '');
 
     const dispatch = useAppDispatch();
@@ -65,8 +68,6 @@ const Update: React.FC = () => {
         //console.log(form);
         
         const formData = createFormData(e);
-        console.log(formData.suspended);
-        
         const suspendedInput = form.elements.namedItem('suspended') as HTMLInputElement | null;
         const suspendedValue = suspendedInput ? (suspendedInput.checked ? '1' : '0') : '0';
         const validateData = {
@@ -76,30 +77,31 @@ const Update: React.FC = () => {
             file: fileName,
             suspended: suspendedValue 
         }
-        console.log(validateData);
         
         const validateInputs = formValidator(validateData, updateValidationSchema);
         if(!validateInputs.status) {
-            setErrorMessage(validateInputs.message);
+            setMessage(validateInputs.message);
             return;
         }
-        const data = {
+        const updateData = {
            ...validateData,
             id: userId!,
             suspended: parseInt(validateData.suspended, 10)
         }
+        setIsLoadingState(true, dispatch);
+       // const response = await loginRegisterUpdate(updateUserUrl, data, 'PATCH');
+        const responseData = await updateItems(updateData, 'UPDATE_BARBER');
+         const {success, data, message, actionDone} = responseData as SingleBarberReturnType;
         console.log(data);
-        
-        const result = await loginRegisterUpdate(updateUserUrl, data, 'PATCH');
-        //console.log(result);
-        if(!result.success) {
-            setErrorMessage(result.message);
+        if(!success) {
+            setMessage(message);
+            setIsLoadingState(false, dispatch);
             return;
         }
-        setErrorMessage(result?.data?.message)
-        const user = result?.data?.data;
-        console.log(user);
-        user && barberActionDispatcher(user, 'UPDATE', dispatch);
+        setMessage(message)
+        
+         actionDone && barberActionDispatcher(data, actionDone, dispatch);
+         setIsLoadingState(false, dispatch);
     };
     
     const handleClick = () => {
@@ -126,7 +128,7 @@ const Update: React.FC = () => {
             <Input inputs={updateInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
             
-             <p>{errorMessage}</p>
+             <p>{message}</p>
              {/*<div>
             <label>
             <input type="checkbox" name="isSuspended" value="suspenduj" />

@@ -7,12 +7,13 @@ class DeleteWorkingHoursController {
         $validateInputs = integerValidator($id);
         try {
             $deleteWorkingHoursModel = new DeleteWorkingHoursModel();
-            $deleteWorkingHoursModel->deleteWorkingHours($validateInputs['id']);
+            //$deleteWorkingHoursModel->deleteWorkingHours($validateInputs['id']);
+            $deletedWorkingHoursId = $deleteWorkingHoursModel->deleteWorkingHours($validateInputs['id']);
             return [
                 "success" => true,
                 "status" => 200,
                 "message" => 'Unos radnih sati je uspešno obrisan.',
-                "data" => $id
+                "data" => ['id' => (int)$deletedWorkingHoursId]
             ];
         } catch(Exception $e) {
             AppController::createMessage($e->getMessage(), $e->getCode());

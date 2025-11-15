@@ -8,7 +8,8 @@ const initialState: BarberSliceType = {
         id: 0,
         username: '',
         file: '',
-        role: ''
+        role: '',
+        suspended: 0
     },
     actionBarberId: undefined
 };

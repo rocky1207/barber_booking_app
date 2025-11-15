@@ -10,22 +10,25 @@ class GetAppointmentController {
         $formatedDate = normalizeDateDMY($data['date']);
         $validateUserId = integerValidator((int)$data['userId']);
         $validateDate = dateValidator($formatedDate);
-        if($data['action'] === 'RESERVED_APPOINTMENTS' || $data['action'] === 'BARBER_APPOINTMENTS') {
+        if($data['action'] === 'GET_RESERVED_APPOINTMENTS' || $data['action'] === 'GET_BARBER_APPOINTMENTS') {
             $data = ['action' => $data['action'], 'userId' => $validateUserId['id'], 'date' => $validateDate['date']];
         } else {
-            AppController::createMessage('Nepoznata akcija', 422);
+            throw new Exception('Nepoznata akcija', 422);
+            //AppController::createMessage('Nepoznata akcija', 422);
         }
         
         try {
             $getAppointmentModel = new GetAppointmentModel();
             $result = $getAppointmentModel->getReservedAndBarberAppointments($data);
-            if($data['action'] === 'RESERVED_APPOINTMENTS') {
+            $msg = 'Termini za izabranog frizera su uspešno dobavljeni.';
+            if($data['action'] === 'GET_RESERVED_APPOINTMENTS') {
                // $data = ['action' => $data['action'], 'userId' => $validateUserId['id'], 'date' => $validateDate['date']];
                 //$result = $getAppointmentModel->getReservedAppointments($validateUserId['id'], $validateDate['date']);
                 //$result = $getAppointmentModel->getUniversal($data);
                 // Extract just the time values for backward compatibility
                 $appointmentTimes = array_column($result, 'time');
                 $result = $appointmentTimes;
+                $msg = 'Rezervisani termini za izabranog frizera su uspešno dobavljeni.';
                 /*
                 return [
                     "success" => true,
@@ -53,10 +56,11 @@ class GetAppointmentController {
             ];
             */
             }
+
             return [
                 "success" => true,
                 "status" => 200,
-                "message" => 'Zakazani termini su uspešno dobavljeni',
+                "message" => $msg,
                 "data" => $result // $appointmentTimes,
                // "detailedData" => $result // Include full appointment details for future use
             ];

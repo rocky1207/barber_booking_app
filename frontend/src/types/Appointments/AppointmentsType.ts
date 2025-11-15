@@ -1,3 +1,5 @@
+import { BasicApiReturnType } from "../Api/ApiReturnType";
+
 export interface BasicAppointmentsType {
     userId: number;
     name: string;
@@ -22,6 +24,9 @@ export interface ClientAppointmentsSliceType extends ClientAppointmentsType {
     userId: number;
     barber: string;
 };
+export interface InsertAppointmentApiReturnType extends BasicApiReturnType {
+    data: {date: string, startAppointment: string};
+}
 export interface AppointmentsSliceType  {
     terms: string[];
     selectedTerm: {date: string, time: string};

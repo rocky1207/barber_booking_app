@@ -8,8 +8,11 @@ import BarberButtons from "@/components/UI/Barbers/BarberButtons";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { logOut } from "@/lib/api/user/logOut";
 import ConfirmModal from "../../ConfirmModal/ConfirmModal";
-import { deleteBarberBtn } from '@/datas/ButttonObjects';
-import { manageBarber } from "@/lib/api/user/manageBarber";
+
+//import { deleteBarberBtn } from '@/datas/ButttonObjects';
+//import { deleteBarber } from "@/lib/api/user/deleteBarber";
+import { deleteBtn } from "@/datas/ButttonObjects";
+import { deleteItemsById } from "@/lib/api/deleteItemsById";
 import { useRouter } from "next/navigation";
 import { barberActions } from "@/store/slices/barberSlice";
 
@@ -63,21 +66,22 @@ const Home: React.FC = () => {
      setIsLoadingState(true, dispatch);
         router.push('/');
      };
-  const updatedDeleteBarberBtn = {
-    ...deleteBarberBtn,
+  const updatedDeleteBtn = {
+    ...deleteBtn,
+    action: 'DELETE_BARBER',
     id: actionBarberId,
-    head: 'Da li ste sigurni?',
-    onAction: manageBarber
+    //head: 'Da li ste sigurni?',
+    onAction: deleteItemsById
+   // onAction: deleteBarber
   }
   const hoursHandler = () => {
-         dispatch(barberActions.setActionBarberId(loggedBarber?.id));
-
+    dispatch(barberActions.setActionBarberId(loggedBarber?.id));
     router.push('/login/dashboard/working-hours');
   }
   
     return (
       <>
-      <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}  />
+      <ConfirmModal ref={dialog} {...updatedDeleteBtn}  />
       {loggedBarber.suspended !== 0 ? <p>Nemate više pristup aplikaciji</p> : <section>
         <nav>
           <ul className="flexed">

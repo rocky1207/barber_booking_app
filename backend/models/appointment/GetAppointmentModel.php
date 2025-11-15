@@ -16,7 +16,7 @@ class GetAppointmentModel {
         }
     }
     public function getReservedAndBarberAppointments($data) { 
-        if($data['action'] === 'RESERVED_APPOINTMENTS') {
+        if($data['action'] === 'GET_RESERVED_APPOINTMENTS') {
             $query = "
             SELECT a.time
             FROM appointment a
@@ -24,7 +24,7 @@ class GetAppointmentModel {
             WHERE s.userId = :userId
               AND a.date = :date
             ";
-        } else if ($data['action'] === 'BARBER_APPOINTMENTS') {
+        } else if ($data['action'] === 'GET_BARBER_APPOINTMENTS') {
             $query = "
             SELECT 
                 a.id AS appointmentId,

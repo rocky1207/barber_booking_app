@@ -1,21 +1,19 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { workingHoursApi } from '@/lib/api/working_hours/workingHoursApi';
-import { WorkingHoursType } from '@/types/WorkingHours/WorkingHoursType';
 import UpdateWorkingHoursForm from '@/components/Forms/WorkingHours/UpdateWorkingHoursForm/UpdateWorkingHoursForm';
-import { getWorkingHoursByUserId } from '@/lib/api/working_hours/getWorkingHoursByUserId';
+import { getItemsByUserId } from '@/lib/api/getItemsByUserId';
 import { useAppSelector, useAppDispatch } from '@/store/hooks/typizedHooks';
 import { workingHoursActions } from '@/store/slices/workingHoursSlice';
 import { workingHoursActiondispatcher } from '@/lib/utils/workingHoursActionDispatcher';
+import { WorkingHoursApiReturnType } from '@/types/WorkingHours/WorkingHoursType';
 import { RootState } from '@/store/store';
-import styles from './WorkingHoursList.module.css';
-
 import ConfirmModal from '../../ConfirmModal/ConfirmModal';
 import { modalActionBtn } from '@/datas/ButttonObjects';
-import { deleteBarberBtn } from '@/datas/ButttonObjects';
+import { deleteBtn } from '@/datas/ButttonObjects';
 import NavigateButton from '@/components/Button/NavigateButton';
-import { deleteWorkingHours } from '@/lib/api/working_hours/deleteWorkingHours';
+import { deleteItemsById } from '@/lib/api/deleteItemsById';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
+import styles from './WorkingHoursList.module.css';
 
 interface WorkingHoursListProps {
     loggedBarberId: number;
@@ -23,8 +21,6 @@ interface WorkingHoursListProps {
 }
 
 const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onWorkingHoursChange }) => {
-   // const [workingHours, setWorkingHours] = useState<WorkingHoursType[]>([]);
-    //const [loading, setLoading] = useState<boolean>(true);
     const [message, setMessage] = useState<string>('');
     const [editingId, setEditingId] = useState<number | null>(null);
     const {userWorkingHours, actionWorkingHoursId} = useAppSelector((state: RootState) => state.workingHours);
@@ -39,52 +35,18 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
     }, [loggedBarberId]);
 
     const fetchWorkingHours = async () => {
-        try {
-            //setLoading(true);
-            //const response = await workingHoursApi.getWorkingHoursByUserId(userId);
-            const response = await getWorkingHoursByUserId(loggedBarberId);
-            console.log(response);
-            if (response.success && response.data) {
-               // setWorkingHours(Array.isArray(response.data) ? response.data : []);
-                workingHoursActiondispatcher(response.data ?? [], 'GET_USER_WORKING_HOURS', dispatch);
-                
-            } else {
-                setMessage(response.message || 'Greška pri učitavanju radnih sati.');
-            }
-        } catch (error) {
-            setMessage('Greška pri učitavanju radnih sati.');
-        } finally {
-            //setLoading(false);
+        const responseData = await getItemsByUserId({userId: loggedBarberId, date: ''}, 'GET_WORKING_HOURS_BY_USER_ID');
+        const {success, data, message, actionDone} = responseData as WorkingHoursApiReturnType;
+        if(!success) {
+            setMessage(message || 'Greška pri učitavanju radnih sati.');
             setIsLoadingState(false, dispatch);
-        }
-    };
-    /*
-    const handleDelete = async (id: number) => {
-       
-        
-        if (!confirm('Da li ste sigurni da želite da obrišete ove radne sate?')) {
             return;
-        }
-
-        try {
-            const response = await workingHoursApi.deleteWorkingHours(id);
-            
-            if (response.success) {
-                setMessage('Radni sati su uspešno obrisani.');
-                fetchWorkingHours();
-                if (onWorkingHoursChange) {
-                    onWorkingHoursChange();
-                }
-            } else {
-                setMessage(response.message || 'Greška pri brisanju radnih sati.');
-            }
-        } catch (error) {
-            setMessage('Greška pri brisanju radnih sati.');
-        }
+        };
+        actionDone && workingHoursActiondispatcher(data ?? [], actionDone, dispatch);
+        setIsLoadingState(false, dispatch);
     };
-*/
     const handleEdit = (id: number) => {
-        setEditingId(id);
+    setEditingId(id);
     };
 
     const handleUpdateSuccess = () => {
@@ -107,29 +69,16 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
     const formatTime = (timeString: string) => {
         return timeString.substring(0, 5); // Remove seconds if present
     };
-/*
-    if (loading) {
-        return <div className={styles.loading}>Učitavanje radnih sati...</div>;
-    }
-*/
-
-    
     const handleDelete = (id: number) => {
         dispatch(workingHoursActions.setActionWorkingHoursId(id));
         if(dialog && typeof dialog !== "function" && dialog.current) dialog.current.showModal();
     }
-
-    
     const updatedDeleteBarberBtn = {
-        ...deleteBarberBtn,
+        ...deleteBtn,
         id: actionWorkingHoursId,
-        head: 'DA LI STE SIGURNI??',
-        action: 'DELETE_WORKING_HOURS_BY_ID',
-        onAction: deleteWorkingHours
+       action: 'DELETE_WORKING_HOURS_BY_ID',
+       onAction: deleteItemsById
     }
-
-
-
     return (
         <>
         <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}/>
@@ -174,21 +123,7 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
                                     </div>
                                     <div className={styles.actions}>
                                         <NavigateButton {...editModalActionBtn}/>
-                                        {/*
-                                        <button 
-                                            onClick={() => handleEdit(wh.id)}
-                                            className={styles.editBtn}
-                                        >
-                                            Izmeni
-                                        </button>
-                                        
-                                        <button 
-                                            onClick={() => handleDelete(wh.id)}
-                                            className={styles.deleteBtn}
-                                        >
-                                            Obriši
-                                        </button>*/}
-                                       <NavigateButton {...deleteModalActionBtn}/>
+                                        <NavigateButton {...deleteModalActionBtn}/>
                                     </div>
                                 </div>
                             )}

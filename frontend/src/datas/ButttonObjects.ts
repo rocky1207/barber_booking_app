@@ -81,12 +81,13 @@ export const continueBtn: NavigateBtnType = {
     //divClass: '',
     onAction: () => {}
 };
-export const deleteBarberBtn: ApiBtnType = {
+export const deleteBtn: ApiBtnType = {
         validate: 'api',
         type: 'button',
         className: 'deleteBtn',
         text: 'DA',
-        action: 'DELETE',
+        //action: 'DELETE',
+        head: 'DA LI STE SIGURNI?',
         //divClass: '',
     };
 

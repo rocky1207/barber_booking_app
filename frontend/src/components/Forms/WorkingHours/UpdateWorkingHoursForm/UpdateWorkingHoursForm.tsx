@@ -9,7 +9,8 @@ import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { workingHoursValidationSchema } from "@/lib/validators/validationSchema";
 //import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
-import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
+//import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
+import { updateItems } from "@/lib/api/updateItems";
 import { WorkingHoursType } from "@/types/WorkingHours/WorkingHoursType";
 import styles from './UpdateWorkingHoursForm.module.css';
 
@@ -33,8 +34,7 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsLoadingState(true, dispatch);
-        
+       
         const form = e.currentTarget;
         const formData = createFormData(e);
         const newFormData = {
@@ -46,43 +46,44 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         
         if(!validateInputs.status) {
             setMessage(validateInputs.message);
-            setIsLoadingState(false, dispatch);
+           // setIsLoadingState(false, dispatch);
             return;
         }
 
         // Validate date range
         if (new Date(formData.start_date) > new Date(formData.end_date)) {
             setMessage('Datum početka mora biti pre datuma završetka.');
-            setIsLoadingState(false, dispatch);
+           // setIsLoadingState(false, dispatch);
             return;
         }
 
         // Validate time range
         if (formData.start_time >= formData.end_time) {
             setMessage('Vreme početka mora biti pre vremena završetka.');
-            setIsLoadingState(false, dispatch);
+           // setIsLoadingState(false, dispatch);
             return;
         }
 
-        const data = {
+        const updateData = {
             id: workingHours.id,
             start_date: formData.start_date,
             end_date: formData.end_date,
             start_time: formData.start_time.substring(0, 5), 
             end_time: formData.end_time.substring(0, 5)
         };
-        
+         setIsLoadingState(true, dispatch);
         //const response = await workingHoursApi.updateWorkingHours(workingHours.id, data);
-        const response = await insertUpdateWorkingHours(data, 'PUT');
-        if(!response.success) {
-            setMessage(response.message);
+       // const response = await insertUpdateWorkingHours(data, 'PUT');
+       const responseData = await updateItems(updateData, 'UPDATE_WORKING_HOURS');
+       const {success, message, data, actionDone} = responseData;
+        if(!success) {
+            setMessage(message);
+            
             setIsLoadingState(false, dispatch);
             return;
         }
-        
-        setMessage(response.data.message || 'Radni sati su uspešno ažurirani.');
+        setMessage(message || 'Radni sati su uspešno ažurirani.');
         setIsLoadingState(false, dispatch);
-        
         if(onSuccess) {
             onSuccess();
         }

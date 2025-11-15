@@ -30,7 +30,8 @@ class DeleteUserModel {
             }
             
             DatabaseModel::$pdo->commit();
-            return true;
+            //return true;
+            return $id;
         } catch(Exception $e) {
             if(DatabaseModel::$pdo->inTransaction()) DatabaseModel::$pdo->rollBack();
             throw $e;

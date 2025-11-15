@@ -15,7 +15,8 @@ class DeleteServiceModel {
                 $isDeleted = $stmt->execute(["id" => $id]);
                 $stmt->rowCount() === 0 && throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
                 DatabaseModel::$pdo->commit();
-                return $isDeleted;
+               // return $isDeleted;
+               return $id;
             } else {
                 throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             }

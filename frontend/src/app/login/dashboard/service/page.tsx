@@ -8,8 +8,10 @@ import ServiceItem from "@/components/UI/Services/ServiceItem";
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { useSearchParams } from "next/navigation";
 import ConfirmModal from "@/components/UI/ConfirmModal/ConfirmModal";
-import { deleteBarberBtn } from "@/datas/ButttonObjects";
-import { manageService } from "@/lib/api/service/manageService";
+//import { deleteBarberBtn } from "@/datas/ButttonObjects";
+import { deleteBtn } from "@/datas/ButttonObjects";
+//import { manageService } from "@/lib/api/service/manageService";
+import { deleteItemsById } from "@/lib/api/deleteItemsById";
 
 const ServicePage: React.FC = () => {
     const {services, serviceActionId } = useAppSelector((state: RootState) => state?.service);
@@ -39,19 +41,21 @@ const ServicePage: React.FC = () => {
     } else {
        showResult = <p className="textCenter">Nema unetih usluga za izabranog frizera.</p>;
     }
-    const updatedBarberBtn = {
-        ...deleteBarberBtn,
+    const deleteServiceBtn = {
+        //...deleteBarberBtn,
+        ...deleteBtn,
         action: 'DELETE_SERVICE',
         //id: deleteServiceId,
         id: serviceActionId,
-        head: 'Da li ste sigurni?',
-        onAction: manageService
+       // head: 'Da li ste sigurni?',
+        //onAction: manageService
+        onAction: deleteItemsById
     };
-    console.log(updatedBarberBtn);
+    console.log(deleteServiceBtn);
     
     return (
         <>
-        <ConfirmModal ref={dialog} {...updatedBarberBtn}/>
+        <ConfirmModal ref={dialog} {...deleteServiceBtn}/>
         <Header />
         <nav className="wrapp">
             <ul className="flexed">

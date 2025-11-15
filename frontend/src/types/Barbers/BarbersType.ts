@@ -7,7 +7,12 @@ export interface BasicBarberType {
   role: string;
   suspended: number;
 }
-
+export interface UpdateBarberDataType {
+    id: string;
+    suspended: number;
+    role: string;
+    file: string;
+}
 export interface ExtendedBarberType extends BasicBarberType {
   index: number;
   children?: ReactNode;

@@ -5,6 +5,6 @@ require_once (__DIR__ . '/../../../controllers/appointment/DeleteClientAppointme
 header('Content-Type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
 $deleteClientAppointmentController = new DeleteClientAppointmentController();
-$response = $deleteClientAppointmentController->deleteClientAppointment($data['id']);
+$response = $deleteClientAppointmentController->deleteClientAppointment($data);
 echo json_encode($response);
 ?>

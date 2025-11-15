@@ -54,7 +54,7 @@ export const updateValidationSchema: ValidationSchemaType = {
     role: {
         required: true,
         pattern: /^(admin|user|student)$/,
-        errorMessage: 'Unesite "admin" ili "user".'
+        errorMessage: 'Unesite "admin" ili "user" ili "student".'
     },
     suspended: {
         required: true,
