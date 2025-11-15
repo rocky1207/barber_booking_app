@@ -6,7 +6,7 @@ export const workingHoursActiondispatcher = (data: WorkingHoursType[] | WorkingH
     const state: RootState = store.getState();
     const currentUserWorkingHours: WorkingHoursType[] = state.workingHours.userWorkingHours;
     const {id} = data as {id: number};
-    if(actionDone === 'GET_USER_WORKING_HOURS') {
+    if(actionDone === 'GET_WORKING_HOURS_BY_USER_ID') {
         const userWorkingHours = Array.isArray(data) ? data : [];
         dispatch(workingHoursActions.setUserWorkingHours(userWorkingHours));
     }

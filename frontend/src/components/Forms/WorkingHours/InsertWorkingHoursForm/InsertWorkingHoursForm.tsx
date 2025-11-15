@@ -3,14 +3,11 @@ import { useState, useEffect } from "react";
 import Input from "../../Input/Input";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
-//import { workingHoursInputs } from "@/datas/Form/WorkingHoursInputObjects";
 import { workingHoursInputs } from "@/datas/Form/lnputObjects";
 import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { workingHoursValidationSchema } from "@/lib/validators/validationSchema";
-//import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
 import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
-//import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
 import { insertItems } from "@/lib/api/insertItems";
 import { InsertUpdateWorkingHoursApiReturnType } from "@/types/WorkingHours/WorkingHoursType";
 import styles from './InsertWorkingHoursForm.module.css';
@@ -36,22 +33,19 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         
         if(!validateInputs.status) {
             setMessage(validateInputs.message);
-           // setIsLoadingState(false, dispatch);
             return;
         }
 
         // Validate date range
         if (new Date(formData.start_date) > new Date(formData.end_date)) {
             setMessage('Datum početka mora biti pre datuma završetka.');
-           // setIsLoadingState(false, dispatch);
-            return;
+           return;
         }
 
         // Validate time range
         if (formData.start_time >= formData.end_time) {
             setMessage('Vreme početka mora biti pre vremena završetka.');
-            //setIsLoadingState(false, dispatch);
-            return;
+             return;
         }
 
         const insertData = {
@@ -62,12 +56,9 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
             end_time: formData.end_time
         };
         
-        // const response = await workingHoursApi.insertWorkingHours(data);
         setIsLoadingState(true, dispatch);
-       // const responseData = await insertUpdateWorkingHours(data, 'POST');
         const responseData = await insertItems(insertData, 'INSERT_WORKING_HOURS');
         const {success, data, message} = responseData as InsertUpdateWorkingHoursApiReturnType;
-       // console.log(response);
         if(!success) {
             setMessage(message);
             setIsLoadingState(false, dispatch);

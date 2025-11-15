@@ -1,11 +1,5 @@
 import { BasicApiReturnType } from "./ApiReturnType";
-/*
-export interface BasicServicesDataReturnType {
-    success: boolean;
-    message?: string;
-    actionDone?: string;
-}
-    */
+
 export interface SingleServiceType {
     id: number;
     userId: number;

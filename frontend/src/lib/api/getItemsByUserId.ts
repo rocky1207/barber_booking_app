@@ -13,10 +13,10 @@ type PromiseReturnDataType =
 
 export const getItemsByUserId = async (data: {userId: number, date: string}, action: string): Promise<PromiseReturnDataType> => {
     const {userId, date} = data;
-    let url = '';
+    let url: string = '';
     let answer;
     let apiRequest;
-    let actionDone = action;
+    const actionDone: string = action;
     if(action === 'GET_USER_SERVICES') {
         url = apiRoutes.GET_USER_SERVICES;
         apiRequest = api.get(url, {params: {id: userId}});

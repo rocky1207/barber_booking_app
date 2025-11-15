@@ -30,11 +30,7 @@ export interface WorkingHoursFormData {
     start_time: string;
     end_time: string;
 }
-/*
-export interface WorkingHoursApiResponse extends BasicApiReturnType {
-    data?: WorkingHoursType | WorkingHoursType[] | WorkingHoursWithUserType[];
-}
-    */
+
 export interface WorkingHoursApiReturnType extends BasicApiReturnType {
     data?: WorkingHoursType[];
 }
@@ -45,14 +41,7 @@ export interface InsertUpdateWorkingHoursApiReturnType extends BasicApiReturnTyp
 export interface WorkingHoursWithUserApiReturnType extends BasicApiReturnType {
     data: WorkingHoursWithUserType;
 }
-/*
-export interface WorkingHoursApiResponse {
-    success: boolean;
-    status: number;
-    message: string;
-    data?: WorkingHoursType | WorkingHoursType[] | WorkingHoursWithUserType[];
-}
-    */
+
 
 
 

@@ -1,8 +1,7 @@
 import { WorkingHoursFormData } from '@/types/WorkingHours/WorkingHoursType';
-import { UpdateServiceReturnType } from '@/types/Api/ReturnServiceType';
+import { InsertUpdateServiceReturnType } from '@/types/Api/ReturnServiceType';
 import { SingleBarberReturnType } from '@/types/Api/ReturnBarberType';
-//import { WorkingHoursWithUserApiReturnType } from '@/types/WorkingHours/WorkingHoursType';
-import { UpdateWorkingHoursApiReturnType } from '@/types/WorkingHours/WorkingHoursType';
+import { WorkingHoursApiReturnType } from '@/types/WorkingHours/WorkingHoursType';
 import { UpdateServiceDataType } from '@/types/Services/ServicesType';
 import { UpdateBarberDataType } from '@/types/Barbers/BarbersType';
 import api from '@/lib/axios';
@@ -14,14 +13,12 @@ type UpdateDataType =
     WorkingHoursFormData;
 type UpdatePromiseType = 
     SingleBarberReturnType |
-    UpdateServiceReturnType |
-    UpdateWorkingHoursApiReturnType;
+    InsertUpdateServiceReturnType |
+    WorkingHoursApiReturnType;
 export const updateItems = async (data: UpdateDataType, action: string): Promise<UpdatePromiseType> => {
-    console.log(data);
-    let actionDone: string = '';
     let url: string = '';
     let apiRequest;
-    actionDone = action;
+    const actionDone: string = action;
     if(action === 'UPDATE_BARBER') {
         url = apiRoutes.UPDATE_USER;
         apiRequest = api.patch(url, data);
