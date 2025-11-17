@@ -21,11 +21,13 @@ interface WorkingHoursListProps {
 }
 
 const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onWorkingHoursChange }) => {
+    
+    
     const [message, setMessage] = useState<string>('');
     const [editingId, setEditingId] = useState<number | null>(null);
     const {userWorkingHours, actionWorkingHoursId} = useAppSelector((state: RootState) => state.workingHours);
     const dialog = useRef<HTMLDialogElement | null>(null);
-    console.log(userWorkingHours);
+    //console.log(userWorkingHours);
     
     const dispatch = useAppDispatch();
     

@@ -1,4 +1,40 @@
 .form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+}
+/*
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+  */
+
+.datePickerInput {
+  padding: 10px;
+  font-size: 1.1rem; /* veći font */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submitBtn {
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+.message {
+  color: red;
+  font-weight: 500;
+}
+
+.form {
     display: flex;
     flex-direction: column;
     gap: 1rem;

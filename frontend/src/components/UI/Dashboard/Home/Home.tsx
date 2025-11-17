@@ -8,7 +8,7 @@ import BarberButtons from "@/components/UI/Barbers/BarberButtons";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { logOut } from "@/lib/api/user/logOut";
 import ConfirmModal from "../../ConfirmModal/ConfirmModal";
-
+import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
 //import { deleteBarberBtn } from '@/datas/ButttonObjects';
 //import { deleteBarber } from "@/lib/api/user/deleteBarber";
 import { deleteBtn } from "@/datas/ButttonObjects";
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
-    
+   // workingHoursActiondispatcher([], 'GET_WORKING_HOURS_BY_USER_ID', dispatch);
   useEffect(() => {
     setIsLoadingState(false, dispatch);
   }, []);

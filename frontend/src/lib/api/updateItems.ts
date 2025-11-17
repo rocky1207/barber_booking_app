@@ -32,7 +32,6 @@ export const updateItems = async (data: UpdateDataType, action: string): Promise
     if(action === 'UPDATE_WORKING_HOURS') {
         url = apiRoutes.UPDATE_WORKING_HOURS;
         apiRequest = api.put(url, data);
-        
     };
     let answer;
     try {

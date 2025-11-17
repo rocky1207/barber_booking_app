@@ -31,16 +31,6 @@ class InsertWorkingHoursModel {
             $workingHours = $getWorkingHoursModel->getWorkingHoursById($workingHoursId);
             DatabaseModel::$pdo->commit();
             return $workingHours;
-            /*
-            return [
-                "id" => $workingHoursId,
-                "userId" => $data['userId'],
-                "start_date" => $data['start_date'],
-                "end_date" => $data['end_date'],
-                "start_time" => $data['start_time'],
-                "end_time" => $data['end_time']
-            ];
-            */
         } catch(Exception $e) {
             DatabaseModel::$pdo->inTransaction() && DatabaseModel::$pdo->rollBack();
             throw $e;
@@ -68,7 +58,9 @@ class InsertWorkingHoursModel {
         ]);
         
         $overlaps = $stmt->fetchAll();
+        
         if(!empty($overlaps)) {
+            
             throw new Exception("Postojeći radni sati se preklapaju sa unetim periodom.", 400);
         }
     }
