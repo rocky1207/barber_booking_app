@@ -1,10 +1,7 @@
 import { forwardRef} from 'react';
 import ApiButton from '@/components/Button/ApiButton';
 import { ApiBtnType } from '@/types/Button/BtnType';
-
-import styles from './ConfirmModal.module.css';
-
-
+import styles from '../Modals.module.css';
 
 const ConfirmModal = forwardRef<HTMLDialogElement, ApiBtnType>(({ ...btn }, ref) => {
     const clickHandler = () => {

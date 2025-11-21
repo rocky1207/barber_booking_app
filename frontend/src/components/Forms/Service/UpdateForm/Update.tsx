@@ -13,8 +13,6 @@ import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { InsertUpdateServiceReturnType } from "@/types/Api/ReturnServiceType";
 import styles from '../../Form.module.css';
 
-
-
 const Update: React.FC = () => {
     const [message, setMessage] = useState<string>('');
     const {services} = useAppSelector((state: RootState) => state?.service);

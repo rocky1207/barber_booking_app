@@ -3,7 +3,6 @@ type UploadImageResponse =
   | { success: true; fileName: string }
   | { success: false; message: string }
 
-
 export const uploadImage = async (url: string, file: FormData): Promise<UploadImageResponse> => {
     
     try {

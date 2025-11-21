@@ -3,16 +3,21 @@ import Update from "@/components/Forms/Service/UpdateForm/Update";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import Link from "next/link";
+import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import { forgotPasswordPageNav } from "@/datas/NavigationObjects";
+
 const UpdatePage = () => {
-    const id = useAppSelector((state: RootState) => state?.barber?.actionBarberId)
+    const id = useAppSelector((state: RootState) => state?.barber?.actionBarberId);
+    const updatePageNav = {
+        ...forgotPasswordPageNav,
+        liItem: [
+            {...forgotPasswordPageNav.liItem[0], text: 'dashboard', link: '/login/dashboard'},
+            {...forgotPasswordPageNav.liItem[1], text: 'services', link: `/login/dashboard/service?barberId=${id}`}
+        ]
+    };
     return (
         <>
-        <nav className="wrapp">
-            <ul className="flexed">
-                <li><Link href="/login/dashboard">dashboard</Link></li>
-                <li><Link href={`/login/dashboard/service?barberId=${id}`}>services</Link></li>
-            </ul>
-        </nav>
+        <PageNavigation {...updatePageNav} />
         <main className="wrapp center">
             <h1>IZMENITE PODATKE</h1>
             <Update />

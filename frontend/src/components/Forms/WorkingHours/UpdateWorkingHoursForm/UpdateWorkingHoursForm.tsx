@@ -1,10 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
-import Input from "../../Input/Input";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
-import { workingHoursInputs } from "@/datas/Form/lnputObjects";
-import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { workingHoursValidationSchema } from "@/lib/validators/validationSchema";
 import { updateItems } from "@/lib/api/updateItems";
@@ -13,10 +10,7 @@ import { convertFormDateType } from "@/lib/utils/convertFormDateType";
 import { convertStringToDateType } from "@/lib/utils/convertStringToDateType";
 import dynamic from 'next/dynamic';
 import type { ComponentType } from 'react';
-import { parseISO, parse } from "date-fns";
 import 'react-datepicker/dist/react-datepicker.css';
-
-
 import styles from './UpdateWorkingHoursForm.module.css';
 
 const ReactDatePicker = dynamic(
@@ -63,21 +57,14 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         return;
     }
     const {start_date, end_date, start_time, end_time} = convertStringToDateType(formDataObj);
-    
-    // Validate date range
     if (new Date(start_date as Date) > new Date(end_date as Date)) {
         setMessage('Datum početka mora biti pre datuma završetka.');
-        // setIsLoadingState(false s=, dispatch);
         return;
     }
-
-    // Validate time range
     if ((start_time && end_time) && start_time >= end_time) {
         setMessage('Vreme početka mora biti pre vremena završetka.');
-        // setIsLoadingState(false, dispatch);
-        return;
+         return;
     }
-
     const updateData = {
         id: workingHours.id,
         start_date: formDataObj.start_date as string,
@@ -85,7 +72,6 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         start_time: formDataObj.start_time as string, 
         end_time: formDataObj.end_time as string
     };
-    console.log(updateData),
     setIsLoadingState(true, dispatch);
     const responseData = await updateItems(updateData, 'UPDATE_WORKING_HOURS');
     const {success, message, data, actionDone} = responseData;
@@ -100,36 +86,30 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         onSuccess();
     }
   };
-
-    // Pre-populate form with existing data
-    
-    return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <h3>Izmeni radno vreme</h3>
-            {/*<Input inputs={populatedInputs} />*/}
-            <label>Datum od</label>
-      <ReactDatePicker
-        name='start_date'
-        selected={changeWorkingHours.start_date as Date | null}
-        onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, start_date: d}))}
-        dateFormat="yyyy-MM-dd"
-        placeholderText="Datum od"
-        className={styles.datePickerInput}
-      />
-
-      <label>Datum do</label>
-      <ReactDatePicker
-      name='end_date'
+  return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h3>Izmeni radno vreme</h3>
+       <label>Datum od</label>
+        <ReactDatePicker
+          name='start_date'
+          selected={changeWorkingHours.start_date as Date | null}
+          onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, start_date: d}))}
+          dateFormat="yyyy-MM-dd"
+          placeholderText="Datum od"
+          className={styles.datePickerInput}
+        />
+       <label>Datum do</label>
+       <ReactDatePicker
+        name='end_date'
         selected={changeWorkingHours.end_date as Date | null}
         onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, end_date: d}))}
         dateFormat="yyyy-MM-dd"
         placeholderText="Datum do"
         className={styles.datePickerInput}
-      />
-
+       />
       <label>Početno vreme</label>
       <ReactDatePicker
-      name='start_time'
+        name='start_time'
         selected={changeWorkingHours.start_time as Date | null}
         onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, start_time: d}))}
         showTimeSelect
@@ -140,10 +120,9 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         placeholderText="Izaberi vreme"
         className={styles.datePickerInput}
       />
-
       <label>Završno vreme</label>
       <ReactDatePicker
-      name='end_time'
+       name='end_time'
         selected={changeWorkingHours.end_time as Date | null}
         onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, end_time: d}))}
         showTimeSelect
@@ -154,20 +133,18 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         placeholderText="Izaberi vreme"
         className={styles.datePickerInput}
       />
-
-            <p className={message ? styles.message : ''}>{message}</p>
-            <div className={styles.buttonGroup}>
-                <button type="submit" className={styles.submitBtn}>AŽURIRAJ</button>
-                {onCancel && (
-                    <button type="button" onClick={onCancel} className={styles.cancelBtn}>
-                        OTKAŽI
-                    </button>
-                )}
-            </div>
-        </form>
+      <p className={message ? styles.message : ''}>{message}</p>
+      <div className={styles.buttonGroup}>
+        <button type="submit" className={styles.submitBtn}>AŽURIRAJ</button>
+        {onCancel && (
+            <button type="button" onClick={onCancel} className={styles.cancelBtn}>
+                OTKAŽI
+            </button>
+        )}
+      </div>
+    </form>
     );
 };
-
 export default UpdateWorkingHoursForm;
 
 

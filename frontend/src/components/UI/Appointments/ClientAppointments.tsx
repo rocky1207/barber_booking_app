@@ -5,25 +5,18 @@ import { RootState } from "@/store/store";
 import { formatDate } from "@/lib/utils/formatDate";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import ClientAppointment from "./ClientAppointment";
-//import { deleteBarberBtn} from "@/datas/ButttonObjects";
 import { deleteBtn } from "@/datas/ButttonObjects";
-import ConfirmModal from "../ConfirmModal/ConfirmModal";
-//import { deleteClientAppointment } from "@/lib/api/appointments/deleteClientAppointment";
+import ConfirmModal from "../Modals/ConfirmModal/ConfirmModal";
 import { deleteItemsById } from "@/lib/api/deleteItemsById";
 import styles from './Appointments.module.css';
+
 const ClientAppointments: React.FC = () => {
     const {clientTerms, actionAppointmentId} = useAppSelector((state: RootState) => state.appointment);
-    console.log(clientTerms);
     const dialog = useRef<HTMLDialogElement | null>(null);
-    
-    
     const deleteAppointmentBtn = {
-        //...deleteBarberBtn,
-        ...deleteBtn,
-        //head: 'DA LI STE SIGURNI?',
+         ...deleteBtn,
         id: actionAppointmentId,
         action: 'DELETE_CLIENT_APPOINTMENT',
-        //onAction: deleteClientAppointment
         onAction: deleteItemsById
     }
     

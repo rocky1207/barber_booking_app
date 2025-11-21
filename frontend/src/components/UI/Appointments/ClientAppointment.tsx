@@ -4,7 +4,8 @@ import { modalActionBtn} from "@/datas/ButttonObjects";
 import { ClientAppointmentsSliceType } from "@/types/Appointments/AppointmentsType";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { appointmentActions } from "@/store/slices/appointmentSlice";
-import styles from './Appointments.module.css'
+import styles from './Appointments.module.css';
+
 const ClientAppointment = forwardRef<HTMLDialogElement, {termData: ClientAppointmentsSliceType}>(({termData}, ref) => {
     const {appointmentId, barber, date, time, serviceName, servicePrice} = termData;
     const dispatch = useAppDispatch();

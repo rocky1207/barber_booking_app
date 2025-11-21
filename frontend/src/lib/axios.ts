@@ -3,24 +3,14 @@ import { CustomAxiosErrorType } from "@/types/Api/CustomAxiosErrorType";
 
 
 const URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-// Kreiraj instancu
 const api = axios.create({
   baseURL: URL, // izmeni po potrebi
- /*headers: {
-  "Content-Type": "application/json",
- },*/
- // withCredentials: false, // true ako koristiš cookie-session autentikaciju
- withCredentials: true,
+  withCredentials: true,
 });
 
-// Dodavanje tokena ako postoji u localStorage (ili sessionStorage)
 api.interceptors.request.use(
   (config) => {
     if (typeof window !== "undefined") {
-     /* const token = localStorage.getItem("token");
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }*/
     }
     return config;
   },
@@ -44,10 +34,6 @@ api.interceptors.response.use(
     } else {
       message = error.message;
     }
-
-    // Prikaz poruke korisniku (zameni sa toast/alert/modal po želji)
-    //alert(message);
-
     const customError: CustomAxiosErrorType = {
         message, 
         status: statusCode ? statusCode : error.response?.status,
@@ -56,5 +42,4 @@ api.interceptors.response.use(
 return Promise.reject(customError);
   }
 );
-
 export default api;

@@ -15,22 +15,16 @@ export const workingHoursActiondispatcher = (data: WorkingHoursType[] | WorkingH
             ...currentUserWorkingHours,
             data as WorkingHoursType
         ].sort((a, b) => {
-    // poređenje datuma: želimo start_date DESC
-    if (a.start_date > b.start_date) return 1;
-    if (a.start_date < b.start_date) return -1;
-
-    // ako su datumi isti, poređenje vremena: start_time ASC
-    if (a.start_time < b.start_time) return 1;
-    if (a.start_time > b.start_time) return -1;
-
-    return 0;
-  });
-        console.log(addedUserWorkingHours);
+        if (a.start_date > b.start_date) return 1;
+        if (a.start_date < b.start_date) return -1;
+        if (a.start_time < b.start_time) return 1;
+        if (a.start_time > b.start_time) return -1;
+        return 0;
+    });
         dispatch(workingHoursActions.setUserWorkingHours(addedUserWorkingHours));
     };
     if(actionDone === 'DELETE_WORKING_HOURS_BY_ID') {
         const updatedUserWorkingHours = currentUserWorkingHours.filter(hours => hours.id !== id);
         dispatch(workingHoursActions.setUserWorkingHours(updatedUserWorkingHours));
     };
-    
 }

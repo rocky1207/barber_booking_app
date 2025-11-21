@@ -2,18 +2,22 @@
 import Service from '@/components/Forms/Service/ServiceForm/Service';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import PageNavigation from '@/components/UI/PageNavigation/PageNavigation';
+import { forgotPasswordPageNav } from '@/datas/NavigationObjects';
 
 const InsertService: React.FC = () => {
     const params = useSearchParams();
     const barberId = params.get('barberId');
+    const insertServicePageNav = {
+        ...forgotPasswordPageNav,
+        liItem: [
+            {...forgotPasswordPageNav.liItem[0], text: 'dashboard', link: '/login/dashboard'},
+            {...forgotPasswordPageNav.liItem[0], text: 'usluge', link: `/login/dashboard/service?barberId=${barberId}`}
+        ]
+    }
     return (
         <>
-        <nav className="wrapp">
-            <ul className='flexed'>
-                <li><Link href="/login/dashboard">dashboard</Link></li>
-                <li><Link href={`/login/dashboard/service?barberId=${barberId}`}>services</Link></li>
-            </ul>
-        </nav>
+        <PageNavigation {...insertServicePageNav} />
         <main className="wrapp center">
             <h1>UNESITE USLUGU</h1>
             <Service />

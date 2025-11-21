@@ -3,7 +3,7 @@ import { ValidationSchemaType } from "@/types/Form/ValidationSchemaType";
 export const loginValidationSchema: ValidationSchemaType = {
     username: {
         required: true,
-        pattern: /^[\p{L}0-9._]{3,20}$/u, // /^[A-Za-z0-9]{3,20}$/,
+        pattern: /^[\p{L}0-9._]{3,20}$/u,
         errorMessage: 'Pogrešan username'
     },
     password: {
@@ -16,7 +16,7 @@ export const loginValidationSchema: ValidationSchemaType = {
 export const registerValidationSchema: ValidationSchemaType = {
     username: {
         required: true,
-        pattern: /^[\p{L}0-9._]{3,20}$/u, // /^[A-Za-z0-9]{3,20}$/,
+        pattern: /^[\p{L}0-9._]{3,20}$/u,
         errorMessage: 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.'
     },
     password: {
@@ -26,13 +26,9 @@ export const registerValidationSchema: ValidationSchemaType = {
     },
     user_email: {
         required: true,
-        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/ /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/,
+        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/,
         errorMessage: 'Neispravan format email adrese.'
     },
-    /*confirmPassword: {
-        required: true,
-        errorMessage: 'Lozinke moraju biti identične.'
-    },*/
     role: {
         required: true,
         pattern: /^(admin|user|student)$/,
@@ -48,7 +44,7 @@ export const registerValidationSchema: ValidationSchemaType = {
 export const updateValidationSchema: ValidationSchemaType = {
     username: {
         required: true,
-        pattern: /^[\p{L}0-9._]{3,20}$/u, // /^[A-Za-z0-9]{3,20}$/,
+        pattern: /^[\p{L}0-9._]{3,20}$/u,
         errorMessage: 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.'
     },
     role: {
@@ -101,7 +97,7 @@ export const resetPasswordValidationSchema: ValidationSchemaType = {
 export const serviceValidationSchema: ValidationSchemaType = {
     service: {
         required: true,
-        pattern: /^[\p{L}0-9 .,!?()\-:;'"\/\\@+%&]{1,255}$/u, // /^[A-Za-z0-9]{3,20}$/,
+        pattern: /^[\p{L}0-9 .,!?()\-:;'"\/\\@+%&]{1,255}$/u,
         errorMessage: 'U polje "Usluga" uneli ste nedozvoljene karaktere, poput <, > i slično.'
     },
     price: {
@@ -111,7 +107,7 @@ export const serviceValidationSchema: ValidationSchemaType = {
     },
     description: {
         required: false,
-        pattern: /^[^<>]*$/ /* /^[\p{L}0-9.,!?'"@+%&()\/\\\- \n]{3,1000}$/u*/,
+        pattern: /^[^<>]*$/,
         errorMessage: 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.'
     }
 };
@@ -134,7 +130,7 @@ export const appointmentValidationSchema: ValidationSchemaType = {
     },
     email: {
         required: false,
-        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/ /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/,
+        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/,
         errorMessage: 'Neispravan format email adrese.'
     }
 };
@@ -165,7 +161,7 @@ export const workingHoursValidationSchema: ValidationSchemaType = {
 export const emailValidationSchema: ValidationSchemaType = {
     email: {
         required: true,
-        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/ /*/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/*/,
+        pattern: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$/,
         errorMessage: 'Neispravan format email adrese.'
     },
 };

@@ -1,15 +1,12 @@
 "user client";
-import Link from "next/link";
 import Register from "@/components/Forms/Barber/RegisterForm/Register";
+import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import { appointmentsPageNav } from "@/datas/NavigationObjects";
 
 const RegisterPage: React.FC = () => {
     return (
         <>
-        <nav className="wrapp">
-            <ul>
-                <li><Link href="/login/dashboard">dashboard</Link></li>
-            </ul>
-        </nav>
+        <PageNavigation {...appointmentsPageNav} />
         <main className="wrapp center">
             <h1>UNESITE KORISNIKA</h1>
             <Register/>

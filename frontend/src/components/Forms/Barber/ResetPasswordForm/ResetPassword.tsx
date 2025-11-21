@@ -1,30 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import Input from "../../Input/Input";
-import { barberActionDispatcher } from "@/lib/utils/barberActionDispatcher";
 import { resetPasswordInputs } from "@/datas/Form/lnputObjects";
 import { formValidator } from "@/lib/validators/formValidator";
 import { resetPasswordValidationSchema } from "@/lib/validators/validationSchema";
 import { createFormData } from "@/lib/utils/createFormData";
 import { loginRegisterUser } from "@/lib/api/user/loginRegisterUser";
-//import { useAppSelector } from "@/store/hooks/typizedHooks";
-//import { RootState } from "@/store/store";
+import ResetPasswordModal from "@/components/UI/Modals/ResetPasswordModal.tsx/ResetPasswordmodal";
 import { useSearchParams } from "next/navigation";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from '../../Form.module.css';
 
 const ResetPassword: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>('');
-    // const {barbers} = useAppSelector((state: RootState) => state?.barber);
     const dispatch = useAppDispatch();
+    const dialog = useRef<HTMLDialogElement | null>(null);
     const params = useSearchParams();
     const id = params.get('user_id') ?? '';
     const userId = id !== '' ? parseInt(id, 10) : '';
     const token = params.get('token') ?? '';
-   // const userId = id ? parseInt(id, 10) : undefined;
-    //.log(userId);
-    //console.log(token);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
@@ -47,19 +42,21 @@ const ResetPassword: React.FC = () => {
             setIsLoadingState(false, dispatch);
             return;
         };
-       // const user = result.data.data;
-       // barberActionDispatcher(user, 'INSERT', dispatch);
         form.reset();
         setErrorMessage(response.message);
         setIsLoadingState(false, dispatch);
+        if(dialog && typeof dialog !== 'function' && dialog.current) dialog.current.showModal();
     };
 
 return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <Input inputs={resetPasswordInputs} />
-            <p>{errorMessage}</p>
-            <button type="submit" className={styles.submitBtn}>POŠALJI</button>
-        </form>
+    <>
+    <ResetPasswordModal ref={dialog} />
+    <form className={styles.form} onSubmit={handleSubmit}>
+        <Input inputs={resetPasswordInputs} />
+        <p>{errorMessage}</p>
+        <button type="submit" className={styles.submitBtn}>POŠALJI</button>
+    </form>
+    </>
     );
 };
 export default ResetPassword;

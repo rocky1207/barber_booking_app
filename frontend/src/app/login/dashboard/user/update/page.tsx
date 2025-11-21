@@ -1,18 +1,12 @@
 "use client";
-import Link from "next/link";
 import Update from "@/components/Forms/Barber/UpdateForm/Update"
-import { useSearchParams } from "next/navigation";
+import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import { appointmentsPageNav } from "@/datas/NavigationObjects";
+
 const UpdatePage: React.FC = () => {
-    const params = useSearchParams();
-    const id = params.get('id');
-    console.log(id);
     return (
         <>
-        <nav className="wrapp">
-            <ul>
-                <li><Link href="/login/dashboard">dashboard</Link></li>
-            </ul>
-        </nav>
+        <PageNavigation {...appointmentsPageNav} />
         <main className="wrapp center">
             <h1>IZMENITE PODATKE</h1>
             <Update />

@@ -15,7 +15,6 @@ export const apiRoutes = {
     DELETE_SERVICE: 'service/deleteService.php',
     UPDATE_SERVICE: 'service/updateService.php',
     INSERT_APPOINTMENT: 'appointment/insertAppointment.php',
-    //GET_RESERVED_APPOINTMENTS: 'appointment/getReservedAppointments.php',
     GET_RESERVED_AND_BARBER_APPOINTMENTS: 'appointment/getReservedAndBarberAppointments.php',
     GET_CLIENT_APPOINTMENTS: 'appointment/getClientAppointments.php',
     DELETE_CLIENT_APPOINTMENT: 'appointment/deleteClientAppointment.php',

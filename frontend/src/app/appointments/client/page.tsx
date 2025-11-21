@@ -1,4 +1,4 @@
-import ClientAppointmentForm from "@/components/Forms/Appointments/ClientAppointmentForm/ClientAppointmentForm";
+import ClientAppointmentForm from "@/components/Forms/Appointments/ClientAppointmentForm/ClientAppointment";
 import ClientAppointments from "@/components/UI/Appointments/ClientAppointments";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import { homePageNav } from "@/datas/NavigationObjects";

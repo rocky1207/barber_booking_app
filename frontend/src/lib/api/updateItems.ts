@@ -22,12 +22,10 @@ export const updateItems = async (data: UpdateDataType, action: string): Promise
     if(action === 'UPDATE_BARBER') {
         url = apiRoutes.UPDATE_USER;
         apiRequest = api.patch(url, data);
-     
     };
     if(action === 'UPDATE_SERVICE') {
         url = apiRoutes.UPDATE_SERVICE;
         apiRequest = api.patch(url, data);
-     
     };
     if(action === 'UPDATE_WORKING_HOURS') {
         url = apiRoutes.UPDATE_WORKING_HOURS;
@@ -36,7 +34,6 @@ export const updateItems = async (data: UpdateDataType, action: string): Promise
     let answer;
     try {
         const response = await apiRequest;
-        console.log(response);
         if(response?.data.status === 200) {
             answer = {
                 success: true,
@@ -50,7 +47,6 @@ export const updateItems = async (data: UpdateDataType, action: string): Promise
     } catch (error: any) {
         answer = {success: false, message: error.message};
     }
-        
     return answer
-    };
+};
     

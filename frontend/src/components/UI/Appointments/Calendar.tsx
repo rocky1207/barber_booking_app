@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { appointmentActions } from "@/store/slices/appointmentSlice";
@@ -8,8 +7,6 @@ import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { DayPicker} from "react-day-picker";
 import { formatDate } from "@/lib/utils/formatDate";
 import 'react-day-picker/dist/style.css';
-import styles from './Appointments.module.css';
-
 
 const Calendar: React.FC = () => {
     const [selected, setSelected] = useState<Date>(new Date());
@@ -26,7 +23,6 @@ const Calendar: React.FC = () => {
     }, [fullDate]);
     console.log(selected);
     return (
-        
         <DayPicker
             mode="single"
             selected={selected}

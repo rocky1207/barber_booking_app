@@ -7,10 +7,8 @@ import { useAppDispatch } from '@/store/hooks/typizedHooks';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
-//import { getReservedAppointments } from '@/lib/api/appointments/getReservedAppointments';
 import { getItemsByUserId } from '@/lib/api/getItemsByUserId';
 import { GetReservedAppointmentsReturnDataType } from '@/types/Api/ReturnAppointmentType';
-
 import { calculateAvailableTimeSlotsWithWorkingHours } from '@/lib/utils/calculateAvailableAppointments';
 import { normalizeTimeString, filterAvailableTimeSlots } from '@/lib/utils/timeUtils';
 import styles from './Appointments.module.css';
@@ -20,26 +18,17 @@ const AvailableAppointments: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     const {choosenServices} = useAppSelector((state: RootState) => state?.service);
-    
     const dispatch = useAppDispatch();
     const router = useRouter();
     const queryString = useSearchParams().toString();
-    
     useEffect(() => {
         const fetchAvailableSlots = async () => {
-            // Don't fetch if no date selected or no services chosen
             if (!selectedTerm.date || choosenServices.length === 0) {
                 setAvailableSlots([]);
                 return;
             }
             setIsLoading(true);
             try {
-                /*
-                const reservedAppointments = await getReservedAppointments({
-                    userId: choosenServices[0].userId, 
-                    date: selectedTerm.date
-                });
-                */
                 const data = await getItemsByUserId({
                     userId: choosenServices[0].userId, 
                     date: selectedTerm.date
@@ -57,8 +46,6 @@ const AvailableAppointments: React.FC = () => {
                         choosenServices[0].userId,
                         selectedTerm.date
                     );
-                    
-                    // Filter out slots that are in the past or too close to current time
                     const filteredSlots = filterAvailableTimeSlots(slots, selectedTerm.date, 60);
                     setAvailableSlots(filteredSlots);
                 } else {
@@ -72,10 +59,8 @@ const AvailableAppointments: React.FC = () => {
                 setIsLoading(false);
             }
         };
-        
         fetchAvailableSlots();
     }, [selectedTerm.date, choosenServices]);
-    
     const handleSlotClick = (timeSlot: string) => {
         setIsLoadingState(true, dispatch);
         dispatch(appointmentActions.setSelectedTerm({

@@ -7,20 +7,21 @@ import { RootState } from '@/store/store';
 import { appointmentActions } from '@/store/slices/appointmentSlice';
 import { forwardRef } from 'react';
 import styles from './Appointments.module.css';
+
 const BarberAppointment = forwardRef<HTMLDialogElement, {appointment: BarberAppointmentsType}>(({appointment}, ref) => {
     const {loggedBarber, actionBarberId} = useAppSelector((state: RootState) => state.barber);
     const updatedPrice = formatPrice(appointment.price);
     const dispatch = useAppDispatch();
-        const openModal = () => {
-            console.log('open');
-            dispatch(appointmentActions.setActionAppointmentId(appointment.appointmentId));
-            if(ref && typeof ref !== 'function' && ref.current) ref.current.showModal();
-        }
+    const openModal = () => {
+        console.log('open');
+        dispatch(appointmentActions.setActionAppointmentId(appointment.appointmentId));
+        if(ref && typeof ref !== 'function' && ref.current) ref.current.showModal();
+    }
     const updatedModalActionBtn = {
-            ...modalActionBtn,
-            text: 'OTKAŽI TERMIN',
-            onAction: openModal
-        }
+        ...modalActionBtn,
+        text: 'OTKAŽI TERMIN',
+        onAction: openModal
+    }
     return (
         <li className="flexed">
             <div className={styles.info}>

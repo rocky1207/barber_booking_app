@@ -11,13 +11,9 @@ import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from './Barbers.module.css';
 
 const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
-  console.log(allBarbers);
   const {choosenServices} = useAppSelector((state: RootState) => state?.service);
-  //const {clientTerm} = useAppSelector((state: RootState) => state?.appointment);
-  console.log(choosenServices); 
   const dispatch = useAppDispatch();
   const barbers = allBarbers.filter(barberItem => barberItem.role !== 'owner');
-  console.log(barbers);
   useEffect(() => {
     choosenServices.length > 0 && dispatch(serviceActions.setChoosenServices([]));
     dispatch(appointmentActions.setSelectedTerm({date: '', time: ''}));
@@ -27,21 +23,20 @@ const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
   useEffect(() => {
    dispatch(barberActions.setBarbers(barbers));
   }, [barbers]);
-  
     return (
-        <section className={styles.barbers}>
-          <h1>IZABERI SVOG FRIZERA</h1>
-          <nav aria-label="Choose barber navigation">
-            <ul>
-              {barbers.map((barberItem, index) => {
-                const barber = {...barberItem, index: index};
-                return (
-                  barberItem.suspended !== 1 && <BarberItem  key={barber.id} {...barber} />
-                )
-              })}
-            </ul>
-          </nav>
-        </section>
+      <section className={styles.barbers}>
+        <h1>IZABERI SVOG FRIZERA</h1>
+        <nav aria-label="Choose barber navigation">
+          <ul>
+            {barbers.map((barberItem, index) => {
+              const barber = {...barberItem, index: index};
+              return (
+                barberItem.suspended !== 1 && <BarberItem  key={barber.id} {...barber} />
+              )
+            })}
+          </ul>
+        </nav>
+      </section>
     );
 };
 export default Barbers;

@@ -11,7 +11,6 @@ interface Props {
     service: SingleServiceType;
     index: number;
     showBtns: boolean;
-   // setDeleteServiceId: React.Dispatch<React.SetStateAction<number>>
 }
 const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBtns},  ref) => {
     const {role} = useAppSelector((state: RootState) => state?.barber?.loggedBarber);
@@ -26,7 +25,6 @@ const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBt
     
     let isActive;
     const handleClick = () => {
-        // router.push(`/booking?barberId=${service.userId}&serviceId=${service.id}`);
         const exists = choosenServices.some(s => s.id === service.id);
         let updated: SingleServiceType[];
         if(exists) {

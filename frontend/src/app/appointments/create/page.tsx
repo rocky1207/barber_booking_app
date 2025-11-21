@@ -1,4 +1,4 @@
-import CreateAppointment from "@/components/Forms/Appointments/CreateAppointmentForm/CreateAppointmentForm";
+import CreateAppointment from "@/components/Forms/Appointments/CreateAppointmentForm/CreateAppointment";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 const CreateAppointmentPage = () => {
     return (

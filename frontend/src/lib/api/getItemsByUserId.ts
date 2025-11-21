@@ -37,7 +37,6 @@ export const getItemsByUserId = async (data: {userId: number, date: string}, act
     };
     try {
         const response = await apiRequest;
-        console.log(response);
         if(response?.status === 200) {
             if(action === 'GET_USER_SERVICES') {
                 if(response.data.data.length === 0) answer = {

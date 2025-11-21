@@ -10,8 +10,9 @@ import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { RootState } from "@/store/store";
 import styles from "../../Form.module.css";
 
-const ChangePasswordForm: React.FC = () => {
+const ChangePassword: React.FC = () => {
     const {id} = useAppSelector((state: RootState) => state.barber?.loggedBarber);
+    console.log(id);
     const [message, setMessage] = useState<string>('');
     const dispatch = useAppDispatch();
     const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,4 +49,4 @@ const ChangePasswordForm: React.FC = () => {
         </form>
     );
 };
-export default ChangePasswordForm;
+export default ChangePassword;

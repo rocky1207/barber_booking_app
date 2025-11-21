@@ -8,28 +8,26 @@ import { useAppDispatch } from '@/store/hooks/typizedHooks';
 import { uiActions } from '@/store/slices/uiSlice';
 import styles from './Barbers.module.css';
 
-
 const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, index, children}) => {
     const router = useRouter();
     const pathName = usePathname();
     const imageUrl = 'http://barber_booking_app.local/images/';
     const dispatch = useAppDispatch();
     const handleClick = ():void => {
-            dispatch(uiActions.setIsLoading(true));
-            router.push(`/services?barberId=${id}`);
-        }
+        dispatch(uiActions.setIsLoading(true));
+        router.push(`/services?barberId=${id}`);
+    }
     const newBookBtn = {
         ...bookBtn,
         onAction: handleClick
     }
     const showButton = pathName === '/' ? true : false;
-    //const showItem = role !== 'owner' ? false : true;
     const defaultAvatar = "/images/avatar.png"; ;
     const src = file && file.trim() !== '' ? `${imageUrl}${file}` : defaultAvatar;
     
     return (
         <li key={id} className={styles.barberItem}
-        style={{ animationDelay: `${index * 0.2}s` }} /*dinamičko kašnjenje*/>
+        style={{ animationDelay: `${index * 0.2}s` }} >
             <div className={styles.customerVew}>
                 <div className='profileImageDiv'>
                     <img src={src} alt="Barber image" />

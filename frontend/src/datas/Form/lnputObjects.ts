@@ -39,8 +39,8 @@ export const clientAppointmentInputs: LoginInputType[] = [
     {type: 'text', name: 'phone', defaultValue: '', placeholder: "Broj telefona"},
 ];
 export const workingHoursInputs: LoginInputType[] = [
-    {type: 'date', name: 'start_date', defaultValue: '', placeholder: "Datum od",  /*required: true*/},
-    {type: 'date', name: 'end_date', defaultValue: '', placeholder: "Datum do",  /*required: true*/},
-    {type: 'time', name: 'start_time', defaultValue: '', placeholder: "Vreme od", /*required: true*/},
-    {type: 'time', name: 'end_time', defaultValue: '', placeholder: "Vreme do", /*required: true*/},
+    {type: 'date', name: 'start_date', defaultValue: '', placeholder: "Datum od"},
+    {type: 'date', name: 'end_date', defaultValue: '', placeholder: "Datum do"},
+    {type: 'time', name: 'start_time', defaultValue: '', placeholder: "Vreme od"},
+    {type: 'time', name: 'end_time', defaultValue: '', placeholder: "Vreme do"},
 ];

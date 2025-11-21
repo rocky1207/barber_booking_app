@@ -7,7 +7,7 @@ import { workingHoursActions } from '@/store/slices/workingHoursSlice';
 import { workingHoursActiondispatcher } from '@/lib/utils/workingHoursActionDispatcher';
 import { WorkingHoursApiReturnType } from '@/types/WorkingHours/WorkingHoursType';
 import { RootState } from '@/store/store';
-import ConfirmModal from '../../ConfirmModal/ConfirmModal';
+import ConfirmModal from '../../Modals/ConfirmModal/ConfirmModal';
 import { modalActionBtn } from '@/datas/ButttonObjects';
 import { deleteBtn } from '@/datas/ButttonObjects';
 import NavigateButton from '@/components/Button/NavigateButton';
@@ -17,20 +17,14 @@ import styles from './WorkingHoursList.module.css';
 
 interface WorkingHoursListProps {
     loggedBarberId: number;
-    onWorkingHoursChange?: () => void;
 }
 
-const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onWorkingHoursChange }) => {
-    
-    
+const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId}) => {
     const [message, setMessage] = useState<string>('');
     const [editingId, setEditingId] = useState<number | null>(null);
     const {userWorkingHours, actionWorkingHoursId} = useAppSelector((state: RootState) => state.workingHours);
     const dialog = useRef<HTMLDialogElement | null>(null);
-    //console.log(userWorkingHours);
-    
     const dispatch = useAppDispatch();
-    
     useEffect(() => {
         fetchWorkingHours();
         setIsLoadingState(true, dispatch);
@@ -54,9 +48,6 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
     const handleUpdateSuccess = () => {
         setEditingId(null);
         fetchWorkingHours();
-        if (onWorkingHoursChange) {
-            onWorkingHoursChange();
-        }
     };
 
     const handleCancelEdit = () => {
@@ -69,7 +60,7 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
     };
 
     const formatTime = (timeString: string) => {
-        return timeString.substring(0, 5); // Remove seconds if present
+        return timeString.substring(0, 5);
     };
     const handleDelete = (id: number) => {
         dispatch(workingHoursActions.setActionWorkingHoursId(id));
