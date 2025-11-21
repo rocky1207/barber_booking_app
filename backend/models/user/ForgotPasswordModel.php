@@ -300,20 +300,24 @@ class ForgotPasswordModel {
         } catch (Throwable $e) {$saved = false;}
 
         try {
-            $logDir = __DIR__ . '/../../tmp/reset_password_email_error_log';
+           // $logDir = __DIR__ . '/../../tmp/reset_password_email_error_log';
+            $logDir = __DIR__ . '/../../tmp/reset_password_log';
             if(!is_dir($logDir)) {@mkdir($logDir, 0777, true);};
-            $logFile = $logDir . '/email_error_log.log';
+           // $logFile = $logDir . '/email_error_log.log';
+           $fileCreationDate = (new DateTime())->format('Y-m-d');
+           $dateTimeAction = (new DateTime())->format('Y-m-d H:i:s');
+            $logFile = $logDir . '/email_error_log_' . $fileCreationDate . '.log';
            // $time = (new DateTime('now', new DateTimeZone('UTC')))->format('Y-m-d H:i:s');
-            $time = (new DateTime())->format('Y-m-d H:i:s');
+            
             $payload = [
-                'time' => $time,
+                'time' => $dateTimeAction,
                 'level' => $level,
                 'context' => $context,
                 'message' => $message,
                 'user_id' => $userId,
                 'email' => $email
             ];
-            file_put_contents($logFile, '['.$time.'] '.json_encode($payload, JSON_UNESCAPED_UNICODE). PHP_EOL, FILE_APPEND);
+            file_put_contents($logFile, '['.$dateTimeAction.'] '.json_encode($payload, JSON_UNESCAPED_UNICODE). PHP_EOL, FILE_APPEND);
         } catch (Throwable $_) {
 
         };

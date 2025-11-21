@@ -8,7 +8,7 @@ export interface MultiBarberReturnType extends BasicApiReturnType {
     data: BasicBarberType[];
 }
 
-export interface ManageBarberReturnType extends BasicApiReturnType {
+export interface RegisterUpdateBarberReturnType extends BasicApiReturnType {
     data?: SingleBarberReturnType;
 }
 export interface DeleteBarberReturnType {

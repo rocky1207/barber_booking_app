@@ -7,7 +7,7 @@ import { resetPasswordInputs } from "@/datas/Form/lnputObjects";
 import { formValidator } from "@/lib/validators/formValidator";
 import { resetPasswordValidationSchema } from "@/lib/validators/validationSchema";
 import { createFormData } from "@/lib/utils/createFormData";
-import { loginRegisterUpdate } from "@/lib/api/loginRegisterUpdate";
+import { loginRegisterUser } from "@/lib/api/user/loginRegisterUser";
 //import { useAppSelector } from "@/store/hooks/typizedHooks";
 //import { RootState } from "@/store/store";
 import { useSearchParams } from "next/navigation";
@@ -40,7 +40,7 @@ const ResetPassword: React.FC = () => {
             token
         };
         setIsLoadingState(true, dispatch);
-        const response = await loginRegisterUpdate('user/resetPassword.php', data, 'PATCH');
+        const response = await loginRegisterUser(data, 'RESET_PASSWORD');
         console.log(response);
         if(!response.success/* || !response.data*/) {
             setErrorMessage(response.message || "Greška prilikom izvršenja upita");

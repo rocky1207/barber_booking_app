@@ -29,7 +29,7 @@ const NewAppointmentModal = forwardRef<HTMLDialogElement, Props>(({...dialogData
                 <p>Vreme: <span>{dialogData.time}</span></p>
             </div>
             <div className={styles.buttonDiv}>
-              <button  onClick={clickHandler}>OK</button>
+              <button onClick={clickHandler}>OK</button>
             </div>
         </div>
       </dialog>

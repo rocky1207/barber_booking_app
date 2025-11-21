@@ -1,0 +1,2 @@
+[2025-11-21 01:06:54] {"time":"2025-11-21 01:06:54","level":"error","context":"forgot_password_flow","message":"Ukoliko postoji korisnik sa unetim emailom, primićete email sa uputstvom.","user_id":null,"email":"sdf@gmail.com"}
+[2025-11-21 01:07:26] {"time":"2025-11-21 01:07:26","level":"error","context":"forgot_password_flow","message":"Ukoliko postoji korisnik sa unetim emailom, primićete email sa uputstvom.","user_id":null,"email":"sdgf@gmail.com"}

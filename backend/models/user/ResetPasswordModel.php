@@ -32,8 +32,8 @@ class ResetPasswordModel {
             $updatePasswordStmt->execute([
                 'id' => (int)$data['userId'], 
                 'password' => $newPassword]);
-            $bla = $updatePasswordStmt->rowCount();
-            $bla === 0 && throw new Exception('Greška prilikom izvršenja upita.', 500);
+            $rowCount = $updatePasswordStmt->rowCount();
+            $rowCount === 0 && throw new Exception('Greška prilikom izvršenja upita.', 500);
             DatabaseModel::$pdo->commit();
             return ['success' => true];
         } catch (Exception $e) {
