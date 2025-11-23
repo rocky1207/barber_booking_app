@@ -7,16 +7,29 @@ import { RootState } from "@/store/store";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import { appointmentActionDispatcher } from "@/lib/utils/appointmentActionDispatcher";
 import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
+import { uiActions } from "@/store/slices/uiSlice";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 
 const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
     const {className, text, type, validate, action, onAction, id, ...buttonProps} = btnData;
     const loggedBarrberId = useAppSelector((state: RootState) => state.barber?.loggedBarber.id);
+    const deleteItemErrorMessage = useAppSelector((state: RootState) => state.ui.deleteItemErrorMessage);
     const dispatch = useAppDispatch();
     const router = useRouter();
     const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!onAction || !id || !action) return;
-        let {actionDone} = await onAction(action, id);
+        let {success, actionDone, message} = await onAction(action, id);
+        if(!success) {
+            const actionKey = action.toLowerCase();
+            const updateDeleteErrorMessage = {
+                ...deleteItemErrorMessage,
+                [actionKey]: message
+            }
+            dispatch(uiActions.setDeleteItemErrorMessage(updateDeleteErrorMessage));
+            dialogRef?.current?.close();
+            return;
+        }
         const data = {id};
         actionDone === 'DELETE_BARBER' && barberActionDispatcher(data, actionDone, dispatch);
         actionDone === 'DELETE_BARBER' && loggedBarrberId === id && router.push('/');

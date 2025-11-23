@@ -1,6 +1,5 @@
 "use client";
 import { useRef } from "react";
-import Header from "@/components/UI/Header/Header";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import ServiceItem from "@/components/UI/Services/ServiceItem";
@@ -21,7 +20,7 @@ const ServicePage: React.FC = () => {
     const userServices = services.filter(service => service.userId === barberId);
     const barber = barberId !== null && barbers.find((barber) => barber.id === barberId!);
     const dialog = useRef<HTMLDialogElement | null>(null);
-     const barberUsername: string = barber ? barber.username.toUpperCase() : 'NULL';
+    const barberUsername: string = barber ? barber.username.toUpperCase() : 'NULL';
     let showResult;
     if(!barberId) showResult = <p className="textCenter">Nije prosleđen pravilan ID frizera.</p>;
     if(userServices.length > 0) {
@@ -52,7 +51,6 @@ const ServicePage: React.FC = () => {
     return (
         <>
         <ConfirmModal ref={dialog} {...deleteServiceBtn}/>
-        <Header />
         <PageNavigation {...servicePageNav} />
         <main className="wrapp">
             <h1>USLUGE: <span>{barberUsername}</span></h1>

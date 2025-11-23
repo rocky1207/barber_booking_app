@@ -14,6 +14,7 @@ import NavigateButton from '@/components/Button/NavigateButton';
 import { deleteItemsById } from '@/lib/api/deleteItemsById';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 import styles from './WorkingHoursList.module.css';
+import { uiActions } from '@/store/slices/uiSlice';
 
 interface WorkingHoursListProps {
     loggedBarberId: number;
@@ -21,14 +22,24 @@ interface WorkingHoursListProps {
 
 const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId}) => {
     const [message, setMessage] = useState<string>('');
+    const [deleteWorkingHoursErrMsg, setDeleteWorkingHoursErrMsg] = useState<string>('');
     const [editingId, setEditingId] = useState<number | null>(null);
-    const {userWorkingHours, actionWorkingHoursId} = useAppSelector((state: RootState) => state.workingHours);
+    const {userWorkingHours, actionWorkingHoursId} = useAppSelector((state: RootState) => state?.workingHours);
+    const {deleteItemErrorMessage} = useAppSelector((state: RootState) => state?.ui);
+    const {delete_working_hours_by_id} = deleteItemErrorMessage;
+    console.log(delete_working_hours_by_id);
     const dialog = useRef<HTMLDialogElement | null>(null);
     const dispatch = useAppDispatch();
     useEffect(() => {
         fetchWorkingHours();
         setIsLoadingState(true, dispatch);
     }, [loggedBarberId]);
+    useEffect(() => {
+        if(delete_working_hours_by_id !== '') {
+            setDeleteWorkingHoursErrMsg(delete_working_hours_by_id);
+            dispatch(uiActions.setDeleteItemErrorMessage({...deleteItemErrorMessage, delete_working_hours_by_id: ''}));
+        }
+    }, [delete_working_hours_by_id]);
 
     const fetchWorkingHours = async () => {
         const responseData = await getItemsByUserId({userId: loggedBarberId, date: ''}, 'GET_WORKING_HOURS_BY_USER_ID');
@@ -118,6 +129,7 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId}) =>
                                         <NavigateButton {...editModalActionBtn}/>
                                         <NavigateButton {...deleteModalActionBtn}/>
                                     </div>
+                                    {actionWorkingHoursId === wh.id && <p>{deleteWorkingHoursErrMsg}</p>}
                                 </div>
                             )}
                         </div>

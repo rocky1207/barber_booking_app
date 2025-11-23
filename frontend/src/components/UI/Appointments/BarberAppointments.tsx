@@ -9,7 +9,7 @@ import { deleteItemsById } from '@/lib/api/deleteItemsById';
 import styles from './Appointments.module.css';
 
 const BarberAppointments: React.FC<{appointments: BarberAppointmentsType[]}> = ({appointments}) => {
-    const {actionAppointmentId} = useAppSelector((state: RootState) => state.appointment);
+    const {actionAppointmentId} = useAppSelector((state: RootState) => state?.appointment);
     const dialog = useRef<HTMLDialogElement | null>(null);
     const deleteAppointmentBtn = {
         ...deleteBtn,

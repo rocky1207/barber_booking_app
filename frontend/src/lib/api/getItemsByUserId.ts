@@ -23,6 +23,7 @@ export const getItemsByUserId = async (data: {userId: number, date: string}, act
     };
     if(action === 'GET_BARBER_APPOINTMENTS' || action === 'GET_RESERVED_APPOINTMENTS') {
         const updatedData = {...data, action};
+        console.log(updatedData);
         url = apiRoutes.GET_RESERVED_AND_BARBER_APPOINTMENTS;
         apiRequest = api.post(url, updatedData);
     };

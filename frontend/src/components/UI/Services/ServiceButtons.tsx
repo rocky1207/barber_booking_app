@@ -10,7 +10,6 @@ interface Props {
     serviceId: number;
 }
 const ServiceButtons = forwardRef<HTMLDialogElement, Props>(({serviceId}, ref) => {
-    console.log(ref);
     const router = useRouter();
     const dispatch = useAppDispatch();
     const openModal = () => {
