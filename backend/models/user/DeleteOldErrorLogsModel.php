@@ -4,7 +4,6 @@ require_once (__DIR__ . '/../../controllers/AppController.php');
 class DeleteOldErrorLogsModel {
     private const INTERVAL = 1/*30*/;
     public function deleteOldErrorLogs() {
-        
         $deleteEmailErrorLogQuery = "DELETE FROM email_error_log WHERE 
         created_at < (NOW() - INTERVAL :days DAY)";
         $deletePasswordResetRequestsQuery = "DELETE FROM password_reset_requests WHERE 

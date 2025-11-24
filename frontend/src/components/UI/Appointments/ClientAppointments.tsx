@@ -18,7 +18,8 @@ const ClientAppointments: React.FC = () => {
         id: actionAppointmentId,
         action: 'DELETE_CLIENT_APPOINTMENT',
         onAction: deleteItemsById
-    }
+    };
+    console.log('tu sam');
     
     return (
         <>

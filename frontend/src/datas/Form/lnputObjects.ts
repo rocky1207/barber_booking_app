@@ -1,5 +1,4 @@
 import { LoginInputType } from "@/types/Form/LoginInputType";
-//import { WorkingHoursInputType } from "@/types/Form/WorkingHoursInputType";
 export const loginInputs: LoginInputType[] = [
     {type: 'text', name: 'username', defaultValue: '', placeholder: "Korisničko ime"},
     {type: 'text', name: 'password', defaultValue: '', placeholder: "Lozinka"},

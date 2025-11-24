@@ -27,7 +27,6 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId}) =>
     const {userWorkingHours, actionWorkingHoursId} = useAppSelector((state: RootState) => state?.workingHours);
     const {deleteItemErrorMessage} = useAppSelector((state: RootState) => state?.ui);
     const {delete_working_hours_by_id} = deleteItemErrorMessage;
-    console.log(delete_working_hours_by_id);
     const dialog = useRef<HTMLDialogElement | null>(null);
     const dispatch = useAppDispatch();
     useEffect(() => {

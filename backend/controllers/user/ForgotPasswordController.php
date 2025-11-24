@@ -21,7 +21,7 @@ class ForgotPasswordController {
         
         try {
             $forgotPasswordModel = new ForgotPasswordModel();
-        $response = $forgotPasswordModel->forgotPassword($validateInputs/*$validateEmail*/);
+            $response = $forgotPasswordModel->forgotPassword($validateInputs/*$validateEmail*/);
             if(!$response['success']) {
                 throw new Exception($response['message'], $response['status']);
             }

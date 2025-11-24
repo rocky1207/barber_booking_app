@@ -21,6 +21,8 @@ const AvailableAppointments: React.FC = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
     const queryString = useSearchParams().toString();
+
+    console.log(selectedTerm);
     useEffect(() => {
         const fetchAvailableSlots = async () => {
             if (!selectedTerm.date || choosenServices.length === 0) {
