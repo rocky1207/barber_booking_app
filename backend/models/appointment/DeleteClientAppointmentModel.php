@@ -11,7 +11,7 @@ class DeleteClientAppointmentModel {
             DatabaseModel::$pdo->beginTransaction();
             $getAppointmentModel = new GetAppointmentModel();
             $appointment = $getAppointmentModel->getAppointment($id);
-             $costumerId = $appointment[0]['costumerId'];
+            $costumerId = $appointment[0]['costumerId'];
             if(!empty($appointment)) {
                 $stmt = DatabaseModel::$pdo->prepare($query);
                 $stmt->execute(['id' => $id]);

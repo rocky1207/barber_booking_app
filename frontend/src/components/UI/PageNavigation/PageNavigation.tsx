@@ -8,11 +8,9 @@ const PageNavigation: React.FC<NavigationPropsType> = ({...navigationData}) => {
     const {navClass, ulClass, liItem} = navigationData;
     const router = useRouter();
     const dispatch = useAppDispatch();
-    
     const handleClick = (link: string) => {
         router.push(link);
         if(link === '/') setIsLoadingState(true, dispatch);
-        
     }
     return (
         <nav className={navClass}>

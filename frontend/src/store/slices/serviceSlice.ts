@@ -12,8 +12,6 @@ const initialState: ServiceState = {
     serviceActionId: 0,
     choosenServices: []
 };
-
-
 const serviceSlice = createSlice({
     name: 'service',
     initialState,

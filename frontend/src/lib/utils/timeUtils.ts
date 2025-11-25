@@ -29,7 +29,6 @@ export const isValidTimeSlot = (time: string): boolean => {
  * @returns Minutes since midnight
  */
 export const timeToMinutes = (timeStr: string): number => {
-    console.log(timeStr);
     const [hours, minutes] = timeStr.split(':').map(Number);
     return hours * 60 + minutes;
 };
@@ -44,9 +43,6 @@ export const minutesToTime = (minutes: number): string => {
     const mins = minutes % 60;
     return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
 };
-
-
-
 /**
  * Default working hours for barber shop
  */
@@ -96,7 +92,6 @@ export const isTimeSlotAvailable = (
     if (selectedDate !== currentDate) {
         return true;
     }
-    
     const currentTime = getCurrentTime();
     const currentTimeMinutes = timeToMinutes(currentTime);
     const slotTimeMinutes = timeToMinutes(timeSlot);

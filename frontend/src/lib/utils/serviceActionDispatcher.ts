@@ -4,7 +4,6 @@ import { serviceActions } from "@/store/slices/serviceSlice";
 import store, { RootState } from "@/store/store";
 import { formatPrice } from "./formatPrice";
 
-
 export const serviceActionDispatcher = ( data: {id: number} | SingleServiceType, actionDone: string, dispatch: AppDispatch): void => {
     const state: RootState = store.getState();
     const services = state.service.services;

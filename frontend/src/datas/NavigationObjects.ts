@@ -11,13 +11,7 @@ export const choosenAppointmentsNav = {
         {text: 'RADNO VRENE', itemClass: '', link: '/login/dashboard/working-hours'}
     ]
 };
-/*
-export const homePageNav = {
-    navClass: 'wrapp',
-    ulClass: '',
-    liItem: [{text: 'POČETNA', itemClass: '', link: '/'}]
-};
-*/
+
 export const servicesPageNav = {
     navClass: 'wrapp',
     ulClass: '',

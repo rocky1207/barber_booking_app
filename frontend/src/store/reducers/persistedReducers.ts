@@ -23,12 +23,6 @@ const workingHoursConfig = {
   storage
 }
 
-/*
-const uiPersistConfig = {
-  key: 'ui',
-  storage,
-};
-*/
 export const reducers = {
   barber: persistReducer(barberPersistConfig, barberReducer),
   service: persistReducer(servicePersistConfig, serviceReducer),

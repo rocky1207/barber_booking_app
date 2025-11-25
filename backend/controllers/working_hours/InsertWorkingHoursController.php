@@ -7,6 +7,7 @@ require_once (__DIR__ . '/../../validators/timeValidator.php');
 
 class InsertWorkingHoursController {
     public function insertWorkingHours($data) {
+        
         $validateUserId = integerValidator($data['userId']);
         $validateStartDate = dateValidator($data['start_date']);
         $validateEndDate = dateValidator($data['end_date']);
@@ -20,6 +21,7 @@ class InsertWorkingHoursController {
             'start_time' => $validateStartTime['time'],
             'end_time' => $validateEndTime['time']
         ];
+        
         try {
             $insertWorkingHoursModel = new InsertWorkingHoursModel();
             $workingHoursData = $insertWorkingHoursModel->insertWorkingHours($insertWorkingHoursData);

@@ -1,18 +1,23 @@
 'use client';
 import { useState, useEffect } from "react";
-import Input from "../../Input/Input";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
-//import { workingHoursInputs } from "@/datas/Form/WorkingHoursInputObjects";
-import { workingHoursInputs } from "@/datas/Form/lnputObjects";
-import { createFormData } from "@/lib/utils/createFormData";
 import { formValidator } from "@/lib/validators/formValidator";
 import { workingHoursValidationSchema } from "@/lib/validators/validationSchema";
-//import { workingHoursApi } from "@/lib/api/working_hours/workingHoursApi";
-//import { insertUpdateWorkingHours } from "@/lib/api/working_hours/insertUpdateWorkingHours";
 import { updateItems } from "@/lib/api/updateItems";
 import { WorkingHoursType } from "@/types/WorkingHours/WorkingHoursType";
+import { convertFormDateType } from "@/lib/utils/convertFormDateType";
+import { convertStringToDateType } from "@/lib/utils/convertStringToDateType";
+import dynamic from 'next/dynamic';
+import type { ComponentType } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 import styles from './UpdateWorkingHoursForm.module.css';
+
+const ReactDatePicker = dynamic(
+  () =>
+    import('react-datepicker').then((mod) => (mod.default as unknown) as ComponentType<any>),
+  { ssr: false }
+);
 
 interface UpdateWorkingHoursFormProps {
     workingHours: WorkingHoursType;
@@ -25,93 +30,121 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
     onSuccess, 
     onCancel 
 }) => {
-    const [message, setMessage] = useState<string>('');
+  
+  const dataToConvert = {
+    start_date: workingHours.start_date, 
+    end_date: workingHours.end_date, 
+    start_time: workingHours.start_time, 
+    end_time: workingHours.end_time,
+  }
+  const dateTypeObj = convertStringToDateType(dataToConvert);
+  const [changeWorkingHours, setChangeWorkingHours] = useState<Record<string, Date | null>>(dateTypeObj);
+  const [message, setMessage] = useState<string>('');
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         setIsLoadingState(false, dispatch);
     }, []);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-       
-        const form = e.currentTarget;
-        const formData = createFormData(e);
-        const newFormData = {
-            ...formData,
-            start_time: formData.start_time.substring(0, 5), 
-            end_time: formData.end_time.substring(0, 5)
-        }
-        const validateInputs = formValidator(newFormData, workingHoursValidationSchema);
-        
-        if(!validateInputs.status) {
-            setMessage(validateInputs.message);
-           // setIsLoadingState(false, dispatch);
-            return;
-        }
-
-        // Validate date range
-        if (new Date(formData.start_date) > new Date(formData.end_date)) {
-            setMessage('Datum početka mora biti pre datuma završetka.');
-           // setIsLoadingState(false, dispatch);
-            return;
-        }
-
-        // Validate time range
-        if (formData.start_time >= formData.end_time) {
-            setMessage('Vreme početka mora biti pre vremena završetka.');
-           // setIsLoadingState(false, dispatch);
-            return;
-        }
-
-        const updateData = {
-            id: workingHours.id,
-            start_date: formData.start_date,
-            end_date: formData.end_date,
-            start_time: formData.start_time.substring(0, 5), 
-            end_time: formData.end_time.substring(0, 5)
-        };
-         setIsLoadingState(true, dispatch);
-        //const response = await workingHoursApi.updateWorkingHours(workingHours.id, data);
-       // const response = await insertUpdateWorkingHours(data, 'PUT');
-       const responseData = await updateItems(updateData, 'UPDATE_WORKING_HOURS');
-       const {success, message, data, actionDone} = responseData;
-        if(!success) {
-            setMessage(message);
-            
-            setIsLoadingState(false, dispatch);
-            return;
-        }
-        setMessage(message || 'Radni sati su uspešno ažurirani.');
-        setIsLoadingState(false, dispatch);
-        if(onSuccess) {
-            onSuccess();
-        }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formDataObj = convertFormDateType(form);
+    const validateInputs = formValidator(formDataObj, workingHoursValidationSchema);
+      
+    if(!validateInputs.status) {
+        setMessage(validateInputs.message);
+        return;
+    }
+    const {start_date, end_date, start_time, end_time} = convertStringToDateType(formDataObj);
+    if (new Date(start_date as Date) > new Date(end_date as Date)) {
+        setMessage('Datum početka mora biti pre datuma završetka.');
+        return;
+    }
+    if ((start_time && end_time) && start_time >= end_time) {
+        setMessage('Vreme početka mora biti pre vremena završetka.');
+         return;
+    }
+    const updateData = {
+        id: workingHours.id,
+        start_date: formDataObj.start_date as string,
+        end_date: formDataObj.end_date as string,
+        start_time: formDataObj.start_time as string, 
+        end_time: formDataObj.end_time as string
     };
-
-    // Pre-populate form with existing data
-    const populatedInputs = workingHoursInputs.map(input => ({
-        ...input,
-        defaultValue: workingHours[input.name as keyof WorkingHoursType] as string || ''
-    }));
-
-    return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <h3>Izmeni radno vreme</h3>
-            <Input inputs={populatedInputs} />
-            <p className={message ? styles.message : ''}>{message}</p>
-            <div className={styles.buttonGroup}>
-                <button type="submit" className={styles.submitBtn}>AŽURIRAJ</button>
-                {onCancel && (
-                    <button type="button" onClick={onCancel} className={styles.cancelBtn}>
-                        OTKAŽI
-                    </button>
-                )}
-            </div>
-        </form>
+    setIsLoadingState(true, dispatch);
+    const responseData = await updateItems(updateData, 'UPDATE_WORKING_HOURS');
+    const {success, message, data, actionDone} = responseData;
+    if(!success) {
+        setMessage(message);
+        setIsLoadingState(false, dispatch);
+        return;
+    }
+    setMessage(message || 'Radni sati su uspešno ažurirani.');
+    setIsLoadingState(false, dispatch);
+    if(onSuccess) {
+        onSuccess();
+    }
+  };
+  return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h3>Izmeni radno vreme</h3>
+       <label>Datum od</label>
+        <ReactDatePicker
+          name='start_date'
+          selected={changeWorkingHours.start_date as Date | null}
+          onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, start_date: d}))}
+          dateFormat="yyyy-MM-dd"
+          placeholderText="Datum od"
+          className={styles.datePickerInput}
+        />
+       <label>Datum do</label>
+       <ReactDatePicker
+        name='end_date'
+        selected={changeWorkingHours.end_date as Date | null}
+        onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, end_date: d}))}
+        dateFormat="yyyy-MM-dd"
+        placeholderText="Datum do"
+        className={styles.datePickerInput}
+       />
+      <label>Početno vreme</label>
+      <ReactDatePicker
+        name='start_time'
+        selected={changeWorkingHours.start_time as Date | null}
+        onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, start_time: d}))}
+        showTimeSelect
+        showTimeSelectOnly
+        timeIntervals={15}
+        timeCaption="Vreme"
+        dateFormat="HH:mm"
+        placeholderText="Izaberi vreme"
+        className={styles.datePickerInput}
+      />
+      <label>Završno vreme</label>
+      <ReactDatePicker
+       name='end_time'
+        selected={changeWorkingHours.end_time as Date | null}
+        onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, end_time: d}))}
+        showTimeSelect
+        showTimeSelectOnly
+        timeIntervals={15}
+        timeCaption="Vreme"
+        dateFormat="HH:mm"
+        placeholderText="Izaberi vreme"
+        className={styles.datePickerInput}
+      />
+      <p className={message ? styles.message : ''}>{message}</p>
+      <div className={styles.buttonGroup}>
+        <button type="submit" className={styles.submitBtn}>AŽURIRAJ</button>
+        {onCancel && (
+            <button type="button" onClick={onCancel} className={styles.cancelBtn}>
+                OTKAŽI
+            </button>
+        )}
+      </div>
+    </form>
     );
 };
-
 export default UpdateWorkingHoursForm;
 
 

@@ -8,17 +8,13 @@ export interface TimeSlot {
 }
 
 export const formatTime = (selectedTime: string, num: number): TimeSlot[] => {
-    console.log('Formatting time:', selectedTime, 'for', num, 'services');
-    
     const startMinutes = timeToMinutes(selectedTime);
     const duration = 30; // 30 minutes per service
     const timeSlots: TimeSlot[] = [];
-    
     for (let i = 0; i < num; i++) {
         const slotMinutes = startMinutes + (i * duration);
         const timeString = minutesToTime(slotMinutes);
         const [hour, minutes] = timeString.split(':').map(Number);
-        
         timeSlots.push({
             index: i + 1,
             hour,
@@ -26,7 +22,5 @@ export const formatTime = (selectedTime: string, num: number): TimeSlot[] => {
             timeString
         });
     }
-    
-    console.log('Generated time slots:', timeSlots);
     return timeSlots;
 }

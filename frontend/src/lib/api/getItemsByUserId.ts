@@ -23,6 +23,7 @@ export const getItemsByUserId = async (data: {userId: number, date: string}, act
     };
     if(action === 'GET_BARBER_APPOINTMENTS' || action === 'GET_RESERVED_APPOINTMENTS') {
         const updatedData = {...data, action};
+        console.log(updatedData);
         url = apiRoutes.GET_RESERVED_AND_BARBER_APPOINTMENTS;
         apiRequest = api.post(url, updatedData);
     };
@@ -37,7 +38,6 @@ export const getItemsByUserId = async (data: {userId: number, date: string}, act
     };
     try {
         const response = await apiRequest;
-        console.log(response);
         if(response?.status === 200) {
             if(action === 'GET_USER_SERVICES') {
                 if(response.data.data.length === 0) answer = {

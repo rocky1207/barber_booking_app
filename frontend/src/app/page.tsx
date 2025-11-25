@@ -4,11 +4,9 @@ import Footer from "@/components/UI/Footer/Footer";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import { choosenAppointmentsNav } from "@/datas/NavigationObjects";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
-//import { getBarbers } from "@/lib/api/user/getBarbers";
 import { getUsersAndServices } from "@/lib/api/getUsersAndServices";
 
 export default async function Home() {
-  //const {success, message, data} = await getBarbers('user/getUser.php');
   const {success, message, data} = await getUsersAndServices('GET_ALL_BARBERS');
   return (
     <>

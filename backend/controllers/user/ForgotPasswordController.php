@@ -2,6 +2,7 @@
 require_once (__DIR__ . '/../AppController.php');
 require_once (__DIR__ . '/../../validators/emailValidator.php');
 require_once (__DIR__ . '/../../models/user/ForgotPasswordModel.php');
+require_once (__DIR__ . '/../../validators/emailValidator.php');
 class ForgotPasswordController {
     public function forgotPassword($data) {
         // Proveri email format pre validacije da bismo mogli da logujemo grešku
@@ -20,7 +21,7 @@ class ForgotPasswordController {
         
         try {
             $forgotPasswordModel = new ForgotPasswordModel();
-            $response = $forgotPasswordModel->forgotPassword($validateInputs);
+            $response = $forgotPasswordModel->forgotPassword($validateInputs/*$validateEmail*/);
             if(!$response['success']) {
                 throw new Exception($response['message'], $response['status']);
             }

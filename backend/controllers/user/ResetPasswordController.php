@@ -11,6 +11,7 @@ class ResetPasswordController {
         $response = $resetPasswordModel->resetPassword($data);
         return [
             'success' => true,
+            'status' => 200,
             'message' => 'Lozinka je uspešno resetovana.',
             'data' => $response
         ];

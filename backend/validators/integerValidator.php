@@ -11,6 +11,7 @@ function integerValidator($id) {
         "id" => AppController::INT_ERROR_MESSAGE,
     ];
     $validateInputs = AppController::validateInputs($inputs, $regex,$messages, 422);
+    
     if(!empty($validateInputs)) {
         return $validateInputs;
     } else {

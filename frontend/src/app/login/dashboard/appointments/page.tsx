@@ -7,10 +7,8 @@ import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { appointmentActions } from "@/store/slices/appointmentSlice";
-//import { getBarberAppointments } from "@/lib/api/appointments/getBarberAppointments";
 import { getItemsByUserId } from "@/lib/api/getItemsByUserId";
 import { GetBarberAppointmentsReturnDataType } from "@/types/Api/ReturnAppointmentType";
-//import { BarberAppointmentsType } from "@/types/Appointments/AppointmentsType";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { appointmentsPageNav } from "@/datas/NavigationObjects";
 import styles from '@/components/UI/Appointments/Appointments.module.css';
@@ -18,7 +16,6 @@ import 'react-day-picker/dist/style.css';
 
 
 const AppointmentsPage: React.FC =  () => {
-    //const [appointments, setAppointments] = useState<BarberAppointmentsType[]>([]);
     const [message, setMessage] = useState<string>('Nema retultata za navedeni datum.');
     const {barberTerms, selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     const {actionBarberId, barbers} = useAppSelector((state: RootState) => state?.barber);
@@ -31,7 +28,6 @@ const AppointmentsPage: React.FC =  () => {
         const getApp = async () => {
             setIsLoadingState(true, dispatch);
             try {
-                //const response = await getBarberAppointments(data);
                 const responseData = await getItemsByUserId(data, 'GET_BARBER_APPOINTMENTS');
                 const response = responseData as GetBarberAppointmentsReturnDataType;
                 if(!response.success) {
@@ -41,11 +37,9 @@ const AppointmentsPage: React.FC =  () => {
                 } 
                 const dataArr = response.data ?? [];
                 if(dataArr.length === 0) {
-                   //setAppointments([]);
                     dispatch(appointmentActions.setBarberTerms([]));
                     setMessage('Nema rezultata za izabrani datum.');
                 } else {
-                   // setAppointments(dataArr);
                     dispatch(appointmentActions.setBarberTerms(dataArr));
                     setMessage('');
                 }

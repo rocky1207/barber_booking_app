@@ -9,18 +9,22 @@ export const workingHoursActiondispatcher = (data: WorkingHoursType[] | WorkingH
     if(actionDone === 'GET_WORKING_HOURS_BY_USER_ID') {
         const userWorkingHours = Array.isArray(data) ? data : [];
         dispatch(workingHoursActions.setUserWorkingHours(userWorkingHours));
-    }
+    };
     if(actionDone === 'INSERT_WORKING_HOURS') {
         const addedUserWorkingHours = [
             ...currentUserWorkingHours,
             data as WorkingHoursType
-        ];
-        console.log(addedUserWorkingHours);
+        ].sort((a, b) => {
+        if (a.start_date > b.start_date) return 1;
+        if (a.start_date < b.start_date) return -1;
+        if (a.start_time < b.start_time) return 1;
+        if (a.start_time > b.start_time) return -1;
+        return 0;
+    });
         dispatch(workingHoursActions.setUserWorkingHours(addedUserWorkingHours));
-    }
+    };
     if(actionDone === 'DELETE_WORKING_HOURS_BY_ID') {
         const updatedUserWorkingHours = currentUserWorkingHours.filter(hours => hours.id !== id);
         dispatch(workingHoursActions.setUserWorkingHours(updatedUserWorkingHours));
-    }
-    
+    };
 }

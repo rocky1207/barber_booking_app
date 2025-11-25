@@ -5,8 +5,6 @@ import {
 } from './timeUtils';
 import { AppointmentConfig } from '@/types/Appointments/AppointmentsType';
 import { BasicApiReturnType } from '@/types/Api/ApiReturnType';
-//import { workingHoursApi } from '@/lib/api/working_hours/workingHoursApi';
-//import { getWorkingHoursForDate } from '../api/working_hours/getWorkingHoursForDate';
 import { getItemsByUserId } from '../api/getItemsByUserId';
 import { WorkingHoursType } from '@/types/WorkingHours/WorkingHoursType';
 
@@ -83,8 +81,6 @@ export const calculateAvailableTimeSlotsWithWorkingHours = async (
     const apiDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
     
     // Get barber's working hours for the selected date
-    //const response = await workingHoursApi.getWorkingHoursForDate(userId, apiDate);
-    //const response = await getWorkingHoursForDate(userId, apiDate);
     const responseData = await getItemsByUserId({userId, date: apiDate}, 'GET_WORKING_HOURS_FOR_DATE');
     const response = responseData as ResponseType;
     console.log(response);
@@ -95,7 +91,6 @@ export const calculateAvailableTimeSlotsWithWorkingHours = async (
     
     // Use the first working hours entry (assuming one per day for now)
     const workingHours = response.data;
-    console.log(workingHours);
     const workStartTime = workingHours.start_time.substring(0, 5); // Remove seconds
     const workEndTime = workingHours.end_time.substring(0, 5);
     

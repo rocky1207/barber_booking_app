@@ -13,7 +13,7 @@ class UpdateWorkingHoursModel {
             // Check if working hours exist
             $getModel = new GetWorkingHoursModel();
             //$existingWorkingHours = $getModel->getWorkingHoursById($id);
-            $existingWorkingHours = $getModel->getWorkingHoursById($data['id']);
+            $existingWorkingHours = $getModel->getWorkingHoursById((int)$data['id']);
             
             // Check for overlaps excluding current record
             //$this->checkForOverlapsExcludingId($existingWorkingHours['userId'], $data['start_date'], $data['end_date'], $id);
@@ -29,15 +29,14 @@ class UpdateWorkingHoursModel {
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute([
                 //'id' => $id,
-                'id' => $data['id'],
+                'id' => (int)$data['id'],
                 'start_date' => $data['start_date'],
                 'end_date' => $data['end_date'],
                 'start_time' => $data['start_time'],
                 'end_time' => $data['end_time']
             ]);
-            
             if($stmt->rowCount() === 0) {
-                throw new Exception("Greška prilikom ažuriranja radnih sati.", 500);
+                throw new Exception("Unos za ovaj period nije pronađen u bazi ili su uneti podaci ostali isti.", 404);
             }
             
             DatabaseModel::$pdo->commit();

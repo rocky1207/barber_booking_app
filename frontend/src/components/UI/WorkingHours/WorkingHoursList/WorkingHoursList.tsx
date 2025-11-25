@@ -7,32 +7,38 @@ import { workingHoursActions } from '@/store/slices/workingHoursSlice';
 import { workingHoursActiondispatcher } from '@/lib/utils/workingHoursActionDispatcher';
 import { WorkingHoursApiReturnType } from '@/types/WorkingHours/WorkingHoursType';
 import { RootState } from '@/store/store';
-import ConfirmModal from '../../ConfirmModal/ConfirmModal';
+import ConfirmModal from '../../Modals/ConfirmModal/ConfirmModal';
 import { modalActionBtn } from '@/datas/ButttonObjects';
 import { deleteBtn } from '@/datas/ButttonObjects';
 import NavigateButton from '@/components/Button/NavigateButton';
 import { deleteItemsById } from '@/lib/api/deleteItemsById';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
 import styles from './WorkingHoursList.module.css';
+import { uiActions } from '@/store/slices/uiSlice';
 
 interface WorkingHoursListProps {
     loggedBarberId: number;
-    onWorkingHoursChange?: () => void;
 }
 
-const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onWorkingHoursChange }) => {
+const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId}) => {
     const [message, setMessage] = useState<string>('');
+    const [deleteWorkingHoursErrMsg, setDeleteWorkingHoursErrMsg] = useState<string>('');
     const [editingId, setEditingId] = useState<number | null>(null);
-    const {userWorkingHours, actionWorkingHoursId} = useAppSelector((state: RootState) => state.workingHours);
+    const {userWorkingHours, actionWorkingHoursId} = useAppSelector((state: RootState) => state?.workingHours);
+    const {deleteItemErrorMessage} = useAppSelector((state: RootState) => state?.ui);
+    const {delete_working_hours_by_id} = deleteItemErrorMessage;
     const dialog = useRef<HTMLDialogElement | null>(null);
-    console.log(userWorkingHours);
-    
     const dispatch = useAppDispatch();
-    
     useEffect(() => {
         fetchWorkingHours();
         setIsLoadingState(true, dispatch);
     }, [loggedBarberId]);
+    useEffect(() => {
+        if(delete_working_hours_by_id !== '') {
+            setDeleteWorkingHoursErrMsg(delete_working_hours_by_id);
+            dispatch(uiActions.setDeleteItemErrorMessage({...deleteItemErrorMessage, delete_working_hours_by_id: ''}));
+        }
+    }, [delete_working_hours_by_id]);
 
     const fetchWorkingHours = async () => {
         const responseData = await getItemsByUserId({userId: loggedBarberId, date: ''}, 'GET_WORKING_HOURS_BY_USER_ID');
@@ -52,9 +58,6 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
     const handleUpdateSuccess = () => {
         setEditingId(null);
         fetchWorkingHours();
-        if (onWorkingHoursChange) {
-            onWorkingHoursChange();
-        }
     };
 
     const handleCancelEdit = () => {
@@ -67,7 +70,7 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
     };
 
     const formatTime = (timeString: string) => {
-        return timeString.substring(0, 5); // Remove seconds if present
+        return timeString.substring(0, 5);
     };
     const handleDelete = (id: number) => {
         dispatch(workingHoursActions.setActionWorkingHoursId(id));
@@ -125,6 +128,7 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId, onW
                                         <NavigateButton {...editModalActionBtn}/>
                                         <NavigateButton {...deleteModalActionBtn}/>
                                     </div>
+                                    {actionWorkingHoursId === wh.id && <p>{deleteWorkingHoursErrMsg}</p>}
                                 </div>
                             )}
                         </div>

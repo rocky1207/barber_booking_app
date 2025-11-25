@@ -4,14 +4,26 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/GetServiceModel.php");
 class UpdateServiceModel {
     public function updateService($execData) {
-         $query = 'UPDATE service SET userService = :userService, price = :price WHERE id = :id';
+         $updateServiceQuery = 'UPDATE service SET userService = :userService, price = :price WHERE id = :id';
+         $updateAppointmentQuery = 'UPDATE appointment SET userService = :appService, price = :appPrice WHERE serviceId = :serviceId';
+         $updateAppoiontmentData = [
+            "appService" => $execData["userService"],
+            "appPrice" => $execData["price"],
+            "serviceId" => (int)$execData["id"]
+         ];
         try {
             AppController::databaseConnect();
             DatabaseModel::$pdo->beginTransaction();
-            $stmt = DatabaseModel::$pdo->prepare($query);
-            $isUpdated = $stmt->execute($execData);
-            if(!$isUpdated) {
-                throw new Exception('Ažuriranje nije uspelo', 404);
+            $serviceStmt = DatabaseModel::$pdo->prepare($updateServiceQuery );
+            $serviceStmt->execute($execData);
+            $isServiceUpdated = $serviceStmt->rowCount();
+            
+            $appointmentStmt = DatabaseModel::$pdo->prepare($updateAppointmentQuery);
+            $appointmentStmt->execute($updateAppoiontmentData);
+            $isAppointmentUpdated = $appointmentStmt->rowCount();
+            
+            if($isAppointmentUpdated === 0 || $isServiceUpdated === 0) {
+                throw new Exception('Usluga ne postoji u bazi ili su uneti podaci ostali isti.', 404);
             }
             $getServiceModel = new GetServiceModel();
             $service = $getServiceModel->getServiceById($execData['id']);

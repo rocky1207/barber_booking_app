@@ -4,7 +4,9 @@ require_once (__DIR__ . "/../AppController.php");
 require_once (__DIR__ . "/../../models/service/DeleteServiceModel.php");
 class DeleteServiceController {
     public function deleteService($data) {
+        
         $validateInputs = integerValidator($data);
+        
         try {
             $deleteServiceModel = new DeleteServiceModel();
             //$response = $deleteServiceModel->deleteService($validateInputs['id']);

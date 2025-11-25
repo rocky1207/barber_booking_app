@@ -25,33 +25,57 @@ class InsertAppointmentModel {
                 $costumerId = (int)DatabaseModel::$pdo->lastInsertId();
                 $serviceIds = array_column($appointment, 'serviceId');
                 $in = str_repeat('?,', count($serviceIds)-1) . '?';
-                $selectServicesQuery = "SELECT id FROM service WHERE id IN ($in)";
+                //$selectServicesQuery = "SELECT id FROM service WHERE id IN ($in)";
+                $selectServicesQuery = "SELECT * FROM service WHERE id IN ($in)";
                 $stmt = DatabaseModel::$pdo->prepare($selectServicesQuery);
                 $stmt->execute($serviceIds);
-                $serviceIdsData = $stmt->fetchAll();
+                //$serviceIdsData = $stmt->fetchAll();
+                $servicesData = $stmt->fetchAll();
+                
                 $validServiceIds = [];
+                $costumerServices = [];
+                $costumerServicesPrice = [];
                 $i=0;
+                /*
                 foreach ($serviceIdsData as $id) {
                     $validServiceIds[$i] = $id['id'];
                     $i++;
                 }
+                    */
+                foreach ($servicesData as $data) {
+                    $validServiceIds[$i] = $data['id'];
+                    //$costumerServices[$i] = $data['userService'];
+                    //$costumerServicesPrice[$i] = $data['price'];
+                    $appointment[$i]['userId'] = $costumer['userId'];
+                    $appointment[$i]['userService'] = $data['userService'];
+                    $appointment[$i]['price'] = $data['price'];
+                    $i++;
+                }
+                
                 $validServiceIds = array_flip($validServiceIds);
+                
                 $values = [];
                 $params = [];
+                
                 foreach($appointment as $item) {
                     $serviceId = (int)$item['serviceId'];
+                    $userId = (int)$item['userId'];
+                    $service = $item['userService'];
+                    $price = $item['price'];
                     if(!isset($validServiceIds[$serviceId])) {
                         throw new Exception("Usluga sa ID {$serviceId} ne postoji", 400);
                     }
                     
                     $dateDb = normalizeDateDMY($item['date']);
                     $timeDb = normalizeTimeHI($item['time']);
-                    $values[] = "(?, ?, ?, ?)";
-                    array_push($params, $costumerId, $serviceId, $dateDb, $timeDb);
+                   // $values[] = "(?, ?, ?, ?)";
+                   // array_push($params, $costumerId, $serviceId, $dateDb, $timeDb);
+                   $values[] = "(?, ?, ?, ?, ?, ?, ?)";
+                   array_push($params, $costumerId, $serviceId, $userId, $service, $price, $dateDb, $timeDb);
                 };
                 
-                
-                $insertServicesQuery = "INSERT INTO appointment (costumerId, serviceId, date, time) VALUES" . implode(',', $values);
+               // $insertServicesQuery = "INSERT INTO appointment (costumerId, serviceId, date, time) VALUES" . implode(',', $values);
+                $insertServicesQuery = "INSERT INTO appointment (costumerId, serviceId, userId, userService, price, date, time) VALUES" . implode(',', $values);
                 $insertStmt = DatabaseModel::$pdo->prepare($insertServicesQuery);
                 $insertStmt->execute($params);
 

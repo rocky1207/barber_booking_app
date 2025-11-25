@@ -16,17 +16,15 @@ const eslintConfig = [
       import: pluginImport,
     },
     rules: {
-      "import/no-unresolved": "error", // error za loše alias import puteve
-      // Dodaj još pravila po želji
+      "import/no-unresolved": "error",
     },
     settings: {
       "import/resolver": {
         typescript: {
-          project: "./tsconfig.json", // koristi tvoj tsconfig za alias
+          project: "./tsconfig.json",
         },
       },
     },
   },
 ];
-
 export default eslintConfig;

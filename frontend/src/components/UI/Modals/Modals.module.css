@@ -16,6 +16,9 @@
   text-align: center;
   margin-bottom: 10px;
 }
+
+
+/*confirm modal*/
 .buttonsDiv {
   display: flex;
   justify-content: center;
@@ -43,3 +46,7 @@
   background-color: rgb(45, 147, 45);
   
 }
+
+/* new appointment modal */
+
+/* reset password modal */

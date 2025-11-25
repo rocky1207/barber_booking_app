@@ -5,11 +5,8 @@ import { BasicBarberType } from "@/types/Barbers/BarbersType";
 import { apiRoutes } from "../api/apiRoutes/apiRoutes";
 
 export const barberActionDispatcher = (data: {id: number} | BasicBarberType, actionDone: string, dispatch: AppDispatch): void => {
-    console.log(data);
-    console.log(actionDone);
     const state: RootState = store.getState();
     const barbers = state.barber.barbers;
-    const actionId = state.barber.actionBarberId;
     const loggedBarber = state.barber.loggedBarber;
     if(actionDone === 'LOGIN_BARBER') dispatch(barberActions.setLoggedBarber(data as BasicBarberType));
     if(actionDone === 'DELETE_BARBER') {

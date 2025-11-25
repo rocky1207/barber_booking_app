@@ -1,14 +1,16 @@
-"use client";
-import Link from "next/link";
+/*"use client";
 import Service from "@/components/Forms/Service/ServiceForm/Service";
+import PageNavigation from "../../PageNavigation/PageNavigation";
+import { resetPasswordPageNav } from "@/datas/NavigationObjects";
+
 const InsertService: React.FC = () => {
+    const insertServiceNav = {
+        ...resetPasswordPageNav,
+        liItem: [{...resetPasswordPageNav.liItem[0], link: '/login/dashboard'}]
+    }
     return (
         <>
-        <nav className="wrapp">
-            <ul>
-                <li><Link href="/login/dashboard">back</Link></li>
-            </ul>
-        </nav>
+        <PageNavigation {...insertServiceNav} />
         <main className="wrapp center">
             <h1>UNESITE USLUGU</h1>
             <Service />
@@ -17,3 +19,4 @@ const InsertService: React.FC = () => {
     );
 };
 export default InsertService;
+*/

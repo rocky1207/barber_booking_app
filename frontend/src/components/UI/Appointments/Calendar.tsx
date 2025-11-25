@@ -1,52 +1,44 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { appointmentActions } from "@/store/slices/appointmentSlice";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { DayPicker} from "react-day-picker";
 import { formatDate } from "@/lib/utils/formatDate";
+import { convertStringToDateType } from "@/lib/utils/convertStringToDateType";
 import 'react-day-picker/dist/style.css';
-import styles from './Appointments.module.css';
-
 
 const Calendar: React.FC = () => {
-    const [selected, setSelected] = useState<Date>(new Date());
-    //const {services, choosenServices} = useAppSelector((state: RootState) => state?.service);
     const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
-    //console.log(services);
-    //console.log(selected);
-    const dispatch = useAppDispatch();
+    let initialState: Date;
+    if(!selectedTerm.date) {
+        initialState = new Date();
+    } else {
+        const dateToParse = selectedTerm?.date ? selectedTerm.date.split('/').reverse().join('-') : null;
+        const {date} = dateToParse ? convertStringToDateType({date: dateToParse}) : {date: new Date()};
+        initialState = date as Date;
+    }
+    const [selected, setSelected] = useState<Date>(initialState); 
+    const [visibleMonth, setVisibleMonth] = useState<Date>(new Date(initialState.getFullYear(), initialState.getMonth(), 1));
+    const dispatch = useAppDispatch();  
     useEffect(() => {
         setIsLoadingState(false, dispatch);
-      //  dispatch(appointmentActions.setBarberTerms([]));
     }, []);
-    /*
-    const params = useSearchParams();
-    const strBarberId = params.get('barberId');
-    const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
-    */
-   // const service = services.find(service => service.id === serviceId);
-   /*
-    const selectedServices = services.map((service) => {
-    return choosenServices.find((item) => item.id === service.id);
-
-    });
-    */
-    //const fullDate = selected && `${selected.getDate().toString().padStart(2, '0')}/${(selected.getMonth() + 1).toString().padStart(2, '0')}/${selected.getFullYear()}`;
-    const fullDate = formatDate(selected);
-    console.log(fullDate);
+   
+    const fullDate = formatDate(selected as Date);
+    
     useEffect(() => {
         fullDate && dispatch(appointmentActions.setSelectedTerm({...selectedTerm, date: fullDate}));
     }, [fullDate]);
-    console.log(selected);
+    
     return (
-        
         <DayPicker
             mode="single"
-            selected={selected}
+            selected={selected as Date}
             onSelect={setSelected}
+            month={visibleMonth}
+            onMonthChange={(m) =>setVisibleMonth(m)}
             required
             captionLayout="label"
             hidden={{

@@ -4,32 +4,43 @@ import { ExtendedBarberType } from '@/types/Barbers/BarbersType';
 import { bookBtn } from '@/datas/ButttonObjects';
 import { useRouter } from "next/navigation";
 import { usePathname } from 'next/navigation';
-import { useAppDispatch } from '@/store/hooks/typizedHooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks/typizedHooks';
+import { RootState } from '@/store/store';
 import { uiActions } from '@/store/slices/uiSlice';
 import styles from './Barbers.module.css';
-
+import { useEffect, useState } from 'react';
 
 const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, index, children}) => {
+    const [deleteBarberErrorMsg, setDeleteBarberErrorMsg] = useState('');
+    const {actionBarberId} = useAppSelector((state: RootState) => state?.barber);
+    const {deleteItemErrorMessage} = useAppSelector((state: RootState) => state?.ui);
+    
     const router = useRouter();
     const pathName = usePathname();
     const imageUrl = 'http://barber_booking_app.local/images/';
     const dispatch = useAppDispatch();
-    const handleClick = ():void => {
-            dispatch(uiActions.setIsLoading(true));
-            router.push(`/services?barberId=${id}`);
+   
+    useEffect(() => {
+        if(deleteItemErrorMessage.delete_barber !== '') {
+        setDeleteBarberErrorMsg(deleteItemErrorMessage.delete_barber);
+        dispatch(uiActions.setDeleteItemErrorMessage({...deleteItemErrorMessage, delete_barber: ''}));
         }
+    }, [deleteItemErrorMessage.delete_barber]);
+    const handleClick = ():void => {
+        dispatch(uiActions.setIsLoading(true));
+        router.push(`/services?barberId=${id}`);
+    }
     const newBookBtn = {
         ...bookBtn,
         onAction: handleClick
     }
     const showButton = pathName === '/' ? true : false;
-    //const showItem = role !== 'owner' ? false : true;
     const defaultAvatar = "/images/avatar.png"; ;
     const src = file && file.trim() !== '' ? `${imageUrl}${file}` : defaultAvatar;
     
     return (
         <li key={id} className={styles.barberItem}
-        style={{ animationDelay: `${index * 0.2}s` }} /*dinamičko kašnjenje*/>
+        style={{ animationDelay: `${index * 0.2}s` }} >
             <div className={styles.customerVew}>
                 <div className='profileImageDiv'>
                     <img src={src} alt="Barber image" />
@@ -38,8 +49,10 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, username, role, file, inde
                     <p>{username}</p>
                     {showButton && <div><NavigateButton {...newBookBtn} /></div>}
                 </div>
+                
             </div>
             {children}
+            {!showButton && actionBarberId === id &&<p>{deleteBarberErrorMsg}</p>}
         </li>
     );
 };

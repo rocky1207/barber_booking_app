@@ -57,7 +57,6 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barbe
     } else {
         showButton = false;
     }
-     
     return (
         <>
         <nav className={styles.itemButtonsNav}>

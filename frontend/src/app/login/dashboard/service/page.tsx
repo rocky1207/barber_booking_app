@@ -1,31 +1,25 @@
 "use client";
-import { useState, useRef } from "react";
-import Link from "next/link";
-import Header from "@/components/UI/Header/Header";
+import { useRef } from "react";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import ServiceItem from "@/components/UI/Services/ServiceItem";
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { useSearchParams } from "next/navigation";
-import ConfirmModal from "@/components/UI/ConfirmModal/ConfirmModal";
-//import { deleteBarberBtn } from "@/datas/ButttonObjects";
+import ConfirmModal from "@/components/UI/Modals/ConfirmModal/ConfirmModal";
 import { deleteBtn } from "@/datas/ButttonObjects";
-//import { manageService } from "@/lib/api/service/manageService";
 import { deleteItemsById } from "@/lib/api/deleteItemsById";
+import { forgotPasswordPageNav } from "@/datas/NavigationObjects";
+import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 
 const ServicePage: React.FC = () => {
     const {services, serviceActionId } = useAppSelector((state: RootState) => state?.service);
     const {barbers} = useAppSelector((state: RootState) => state?.barber);
-    //const [deleteServiceId, setDeleteServiceId] = useState<number>(0);
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
     const userServices = services.filter(service => service.userId === barberId);
     const barber = barberId !== null && barbers.find((barber) => barber.id === barberId!);
     const dialog = useRef<HTMLDialogElement | null>(null);
-    console.log(services);
-    console.log(serviceActionId);
-    
     const barberUsername: string = barber ? barber.username.toUpperCase() : 'NULL';
     let showResult;
     if(!barberId) showResult = <p className="textCenter">Nije prosleđen pravilan ID frizera.</p>;
@@ -42,27 +36,22 @@ const ServicePage: React.FC = () => {
        showResult = <p className="textCenter">Nema unetih usluga za izabranog frizera.</p>;
     }
     const deleteServiceBtn = {
-        //...deleteBarberBtn,
         ...deleteBtn,
         action: 'DELETE_SERVICE',
-        //id: deleteServiceId,
         id: serviceActionId,
-       // head: 'Da li ste sigurni?',
-        //onAction: manageService
         onAction: deleteItemsById
     };
-    console.log(deleteServiceBtn);
-    
+    const servicePageNav = {
+            ...forgotPasswordPageNav,
+            liItem: [
+                {...forgotPasswordPageNav.liItem[0], text: 'dashboard', link: '/login/dashboard'},
+                {...forgotPasswordPageNav.liItem[1], text: 'UNESITE USLUGU', link: `/login/dashboard/service/insert?barberId=${barberId}`}
+            ]
+        };
     return (
         <>
         <ConfirmModal ref={dialog} {...deleteServiceBtn}/>
-        <Header />
-        <nav className="wrapp">
-            <ul className="flexed">
-                <li><Link href="/login/dashboard">dashboard</Link></li>
-                <li><Link href={`/login/dashboard/service/insert?barberId=${barberId}`}>UNESITE USLUGU</Link></li>
-            </ul>
-        </nav>
+        <PageNavigation {...servicePageNav} />
         <main className="wrapp">
             <h1>USLUGE: <span>{barberUsername}</span></h1>
             {showResult}

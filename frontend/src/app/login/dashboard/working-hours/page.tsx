@@ -1,30 +1,20 @@
 'use client';
-//import { useEffect } from 'react';
-//import { useRouter } from 'next/navigation';
 import WorkingHoursManager from '@/components/UI/WorkingHours/WorkingHoursManager/WorkingHoursManager';
+import PageNavigation from '@/components/UI/PageNavigation/PageNavigation';
+import { resetPasswordPageNav } from '@/datas/NavigationObjects';
 
 const WorkingHoursPage = () => {
-   // const router = useRouter();
-    
-    
-/*
-    useEffect(() => {
-        if (!barber || barber.role !== 'user') {
-            router.push('/login');
-        }
-    }, [barber, router]);
-
-    if (!barber || barber.role !== 'user') {
-        return <div>Pristup odbijen. Molimo prijavite se.</div>;
+    const workingHoursPageNav = {
+        ...resetPasswordPageNav,
+        liItem: [{...resetPasswordPageNav.liItem[0],link: '/login/dashboard'}]
     }
-*/
-    return (
-        <div>
+         return (
+            <>
+            <PageNavigation {...workingHoursPageNav}/>
             <WorkingHoursManager />
-        </div>
-    );
-};
-
+            </>
+        );
+    };
 export default WorkingHoursPage;
 
 

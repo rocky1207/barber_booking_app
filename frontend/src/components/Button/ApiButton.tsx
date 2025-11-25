@@ -1,4 +1,3 @@
-//import { apiRoutes } from "@/lib/api/apiRoutes/apiRoutes";
 import { ApiBtnRefType } from "@/types/Button/BtnType";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { useRouter } from "next/navigation";
@@ -8,64 +7,30 @@ import { RootState } from "@/store/store";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import { appointmentActionDispatcher } from "@/lib/utils/appointmentActionDispatcher";
 import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
+import { uiActions } from "@/store/slices/uiSlice";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 
 const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
     const {className, text, type, validate, action, onAction, id, ...buttonProps} = btnData;
     const loggedBarrberId = useAppSelector((state: RootState) => state.barber?.loggedBarber.id);
+    const deleteItemErrorMessage = useAppSelector((state: RootState) => state.ui.deleteItemErrorMessage);
     const dispatch = useAppDispatch();
     const router = useRouter();
     const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!onAction || !id || !action) return;
-        let url: string = '';
-        let slice: string = '';
-       // if(action === 'GET_CLIENTS') {
-         //   url = apiRoutes.GET_CLIENTS;
-          //  slice = 'BARBER';
-        //} 
-       // if(action === 'UPDATE') url = apiRoutes.UPDATE_USER;
-       /* if(action === 'DELETE') {
-            url = apiRoutes.DELETE_USER;
-            slice = 'BARBER';
-        } */
-
-            /*
-        if(action === 'DELETE_BARBER') {
-            url = apiRoutes.DELETE_USER;
-            slice = 'BARBER';
-        } 
-        */
-       /*
-        if(action === 'DELETE_SERVICE') {
-            url = apiRoutes.DELETE_SERVICE;
-            slice = 'SERVICE';
-        } 
-            */
-           /*
-        if(action === 'DELETE_APPOINTMENT' || action === 'DELETE_BARBER_APPOINTMENT') {
-            url = apiRoutes.DELETE_CLIENT_APPOINTMENT;
-            slice = 'APPOINTMENT';
+        let {success, actionDone, message} = await onAction(action, id);
+        if(!success) {
+            const actionKey = action.toLowerCase();
+            const updateDeleteErrorMessage = {
+                ...deleteItemErrorMessage,
+                [actionKey]: message
+            }
+            dispatch(uiActions.setDeleteItemErrorMessage(updateDeleteErrorMessage));
+            dialogRef?.current?.close();
+            return;
         }
-            */
-           /*
-        if(action === 'DELETE_WORKING_HOURS_BY_ID') {
-            url = apiRoutes.DELETE_WORKING_HOURS_BY_ID;
-            slice = 'WORKING_HOURS';
-            
-        }
-        */
-       // let {actionDone} = await onAction(url, id);
-       let {actionDone} = await onAction(action, id);
         const data = {id};
-        //console.log(deletedId);
-        //if(action === 'DELETE_APPOINTMENT') actionDone = 'DELETE_APPOINTMENT';
-        //if(action === 'DELETE_BARBER_APPOINTMENT') actionDone = 'DELETE_BARBER_APPOINTMENT';
-       // actionDone && slice === 'BARBER' && barberActionDispatcher(data, actionDone.toUpperCase(), dispatch);
-       // actionDone?.toUpperCase() === 'DELETE' && loggedBarrberId === id && router.push('/');
-        //actionDone && slice === 'SERVICE' && serviceActionDispatcher(data, actionDone.toUpperCase(), dispatch);
-       // actionDone && slice === 'APPOINTMENT' && appointmentActionDispatcher(data, actionDone.toUpperCase(), dispatch);
-        //actionDone && slice === 'WORKING_HOURS' && workingHoursActiondispatcher(data, actionDone.toUpperCase(), dispatch);
-
         actionDone === 'DELETE_BARBER' && barberActionDispatcher(data, actionDone, dispatch);
         actionDone === 'DELETE_BARBER' && loggedBarrberId === id && router.push('/');
         actionDone === 'DELETE_SERVICE' && serviceActionDispatcher(data, actionDone, dispatch);
