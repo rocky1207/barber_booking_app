@@ -12,7 +12,6 @@ class DeleteWorkingHoursModel {
             $working_hours_data = $getWorkingHoursModel->getWorkingHoursById($id);
             if(!empty($working_hours_data)) {
                 $deleteStmt = DatabaseModel::$pdo->prepare($deleteQuery);
-               // $isDeleted = $deleteStmt->execute(['id' => (int)$id]);
                 $deleteStmt->execute(['id' => (int)$id]);
                 $deleteStmt->rowCount() === 0 && throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
             } else {

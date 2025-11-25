@@ -13,16 +13,18 @@ class UpdateUserModel {
             }
             DatabaseModel::$pdo->beginTransaction();
             $stmt = DatabaseModel::$pdo->prepare($query);
-            $isUpdated = $stmt->execute($execData);
-            DatabaseModel::$pdo->commit();
-            if(!$isUpdated) {
-                throw new Exception("Ažuriranje nije uspelo", 404);
-            } 
+            $stmt->execute($execData);
+            $isUpdated = $stmt->rowCount();
+            //DatabaseModel::$pdo->commit();
+            if($isUpdated === 0 ) {
+                throw new Exception("Korisnik ne postoji u bazi ili su uneti podaci ostali isti.", 404);
+            }
             $getUserModel = new GetUserModel();
             $user = $getUserModel->getUserById($execData["id"]);
             if(empty($user)) {
-                throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
+                throw new Exception('Korisnik nije pronađen u bazi.', 404);
             }
+            DatabaseModel::$pdo->commit();
             return $user;
         } catch(Exception $e) {
              if (isset(DatabaseModel::$pdo) && DatabaseModel::$pdo->inTransaction()) {

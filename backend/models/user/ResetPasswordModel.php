@@ -14,8 +14,7 @@ class ResetPasswordModel {
             AppController::databaseConnect();
             DatabaseModel::$pdo->beginTransaction();
             $selectUseStmt = DatabaseModel::$pdo->prepare($selectUserQuery);
-            $selectUseStmt->execute([
-                'user_id' => (int)$data['userId']]);
+            $selectUseStmt->execute(['user_id' => (int)$data['userId']]);
             $user = $selectUseStmt->fetch();
             
             if(!$user) throw new Exception('Nevalidan ID.', 422);
@@ -33,7 +32,7 @@ class ResetPasswordModel {
                 'id' => (int)$data['userId'], 
                 'password' => $newPassword]);
             $rowCount = $updatePasswordStmt->rowCount();
-            $rowCount === 0 && throw new Exception('Greška prilikom izvršenja upita.', 500);
+            $rowCount === 0 && throw new Exception(AppController::QUERY_ERROR_MESSAGE, 500);
             DatabaseModel::$pdo->commit();
             return ['success' => true];
         } catch (Exception $e) {
