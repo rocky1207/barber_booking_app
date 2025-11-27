@@ -1,0 +1,76 @@
+.infoSection {
+    margin-top: var(--space-8);
+    font-size: var(--font-sm);
+}
+.infoFlex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+
+.workingHoursDiv {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: var(--space-1);
+}
+.workingHoursPharaph {
+    
+    margin-right: var(--space-1);
+}
+.iconWrap {
+  display: inline-flex; /* inline-flex da se ponaša kao inline element unutar teksta */
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2; /* sprečava dodatne baseline pomeraje */
+}
+.iconWrap :hover {
+    cursor: pointer;
+
+}
+/* opcionalno: direktno stilizuj SVG veličinu preko klase */
+.iconWrap svg {
+  display: block; /* duplikat zaštite, ali bezbedno ga ostaviti */
+}
+.dlWrap { /* wrapper za animaciju */
+  overflow: hidden;
+  transform-origin: top center;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+  transform: scaleY(0);
+  opacity: 0;
+}
+.dlWrapOpen {
+  transform: scaleY(1);
+  opacity: 1;
+}
+.dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--space-1) var(--space-3);
+    font-size: var(--font-xs);
+    margin-top: var(--space-1);
+}
+
+.dlOpen {
+  max-height: 500px; /* dovoljno veliko da sve stane */
+  opacity: 1;
+  transform: translateY(0);
+}
+.dl dt {
+    font-weight: 300;
+}
+.dl dd {
+    font-weight: 500;
+}
+.addressMapDiv {
+    margin-top: var(--space-3);
+}
+.addressHolderDiv span {
+    
+    margin-left: var(--space-1);
+}
+.addressHolderDiv span {
+    display: block;
+   
+}

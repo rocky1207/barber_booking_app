@@ -1,17 +1,100 @@
+/*
+Font weights:
+Light: 300 (sekundarni tekst)
+Regular: 400 (body text)
+Medium: 500 (dugmad, labels)
+Semibold: 600 (podnaslovi)
+Bold: 700 (naslovi, CTA)
+*/
+/*
+Line heights:
+Naslovi: 1.2
+Body: 1.6
+Dugmad: 1.4
+*/
+/*
+Padding unutar dugmića: 16px 24px
+Razmak između elemenata: 24px
+Razmak sekcija: 64px (mobile), 96px (desktop)
+*/
+/*
+//shadows
+Kartice (barbers, services): box-shadow: var(--shadow-md)
+Dugmići na hover: box-shadow: var(--shadow-gold)
+Modali: box-shadow: var(--shadow-xl)
+Bottom navigation/sheets: box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5)
+*/
+
+
 :root {
-  --background: rgba(10,10,10,1);
+  --background: #0a0a0a; /*rgba(10,10,10,1)*/
   --foreground: #171717;
   --logoColor: rgb(238, 186, 64);
-  
+  --mainGold: #D4AF37; /*zlatna, manje žuta od trenutne rgb(238, 186, 64)*/
+  --lightGold: #F4E5B1;/*za hover efekte, disabled states*/
+  --darkGold: #B8941F; /*za borders, suptilne akcente*/
+  --darkGrey: #1a1a1a; /*pozadina kartice, umesto trenutne rgb(10,10,10), za karticu*/
+  --middleDarkGrey: #2a2a2a; /*za hover states*/
+  --secondaryTextGrey: #a0a0a0; /*sekundarni tekst*/
+  --lightGrey: #e5e5e5; /*za disabled tekst*/
+/*Accent boje (samo gde je neophodno)*/
+  --succesGreen: #10b981; /*moderan emerald green*/
+  --errorRed: #ef4444; /*moderna crvena*/
+  --warningAmber: #f59e0b; /*amber nijansa*/
+  /* Mobile */
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-base: 16px;
+  --font-lg: 18px;
+  --font-xl: 24px;
+  --font-2xl: 32px;
+  --font-3xl: 40px;
+
+  /* Desktop (min-width: 768px) */
+  --font-xl: 28px;
+  --font-2xl: 36px;
+  --font-3xl: 48px;
+  /*spacing*/
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  /*border radius*/
+  --radius-sm: 8px;   /* Mali elementi, tagovi */
+  --radius-md: 12px;  /* Inputi, mali dugmići */
+  --radius-lg: 16px;  /* Kartice, glavni dugmići */
+  --radius-xl: 24px;  /* Modali, velike sekcije */
+  --radius-2xl: 32px; /* Bottom sheets (kao selectedServiceSection) */
+  --radius-full: 9999px; /* Avatar, badges */
+  /*shadows*/
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+
+  /* Zlatna senka za hover efekte */
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.2);
 }
 .rdp-root {
   --rdp-nav-height: 60px !important;
   --rdp-accent-background-color: rgb(41, 41, 41) !important;
 }
 body {
-  color: var(--logoColor);
+  /*color: var(--logoColor);*/
+  color: var(--mainGold);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /*font-family: Arial, Helvetica, sans-serif;*/
+  /* Primarni font - elegantna sans-serif */
+  /*font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;*/
+  font-family: var(--font-inter);
+  font-weight: 400;
+  --font-base: 16px;
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -44,7 +127,6 @@ body {
     display: flex;
     justify-content: space-between; /* centriranje po vertikali */
     align-items: center;
-      
 }
 
 .textCenter {
@@ -60,6 +142,13 @@ h1 {
   font-size: 30px;
   margin-bottom: 60px;
   text-align: center;
+  
+  
+}
+h1, h2, h3, h4 {
+/*font-family: 'Playfair Display', 'Cormorant', 'Georgia', serif;*/
+/* Za logo i naslove (ako želiš serif kao na logu) */
+  font-family: var(--font-playfair);
 }
 .logOutDiv {
   margin-bottom: 20px;
@@ -151,6 +240,21 @@ dialog::backdrop {
 }
 }
 
+/* Header, modali, cards */
+.glass-effect {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Zlatni glass efekat za CTA sekcije */
+.glass-gold {
+  background: linear-gradient(135deg, 
+    rgba(212, 175, 55, 0.1), 
+    rgba(184, 148, 31, 0.05));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
 /*
  Preporuka:
 Za početak, ako želiš minimum:

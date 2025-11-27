@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import Menu from '../SvgIcons/Menu';
 import styles from './Header.module.css';
-import logo from '@/assets/images/logo.png';
+
 
 const Header:React.FC = () => {
   const [animate, setAnimate] = useState(false);
@@ -14,12 +14,21 @@ const Header:React.FC = () => {
 
     return () => clearTimeout(timeout);
   }, []);
+  const svgData = {
+    width: '30px',
+    height: '30px',
+    fill: "#B8941F"
+  }
   return (
+    <>
     <header className={`${styles.header} ${animate ? styles.animateLine : ''}`}>
-      <div>
-        <Image className={styles.logo} src={logo} alt="Logo" priority/>
+      <div className={`glass-effect `}>
+      <div className={`wrapp`}>
+        <Menu {...svgData} />
+      </div>
       </div>
     </header>
+    </>
   );
 };
 export default Header;
