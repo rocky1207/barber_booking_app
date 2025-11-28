@@ -12,7 +12,7 @@ const AddressMap: React.FC = () => {
     return (
         <div className={styles.addressMapDiv}>
             <Link href={address} target="_blank">
-            <div className={styles.infoFlex}>
+            <div className={`${styles.infoFlex} ${styles.hoverState}`}>
             <Pin {...svgData} />
             <div className={styles.addressHolderDiv}>
                 <span>Đerdapska 44</span>

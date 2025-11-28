@@ -1,28 +1,28 @@
-/*
-.header {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 100px;
-    
+.bla {
+  height: 40px;
+ 
 }
-    */
-.header {
+.menuOverlay {
+  position: fixed;
+  
+  height: 30vh; 
+  width: 100vW;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 0;
+  transition: height .3s ease;
+}
 
+.header {
+  padding-top: 10px;
+  height: 39px;
   position: sticky;
   top: 0;
-  z-index: 1000;
-  /*height: 56px;*/
- /* display: flex;
-  align-items: center;*/
-  padding: 0;
+  z-index: 1;
+   padding: 0;
   background: var(--background);  
-  /*background: rgba(255,255,255,0.55);         
-  backdrop-filter: blur(6px);                 
-  -webkit-backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-    */
-    margin-bottom: var(--space-8);;
+  margin-bottom: var(--space-8);
 }
 .header::after {
   position: absolute;
@@ -43,10 +43,23 @@
   opacity: 1;
   max-width: 1023px;
 }
+.menuBtn:hover svg path {
+  fill: var(--lightGold); /* svetlija nijansa zlata */
+  transition: fill 0.25s ease;
+}
 
-/*
-.header.scrolled {
-  background: rgba(10, 10, 10, 0.85);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}*/
+.menuBtn:hover {
+  cursor: pointer;
+}
+
+.btnWrappDiv {
+  padding-top: var(--space-1);
+}
+.linkWrappDiv {
+  padding-top: var(--space-2);
+}
+.linkWrappDiv nav ul li:hover,
+.linkWrappDiv a:active {
+  color: var(--lightGold); /* svetlija nijansa zlata */
+  transition: color 0.25s ease;
+}

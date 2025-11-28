@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 export interface BasicBarberType {
   id: number;
+  full_name: string;
   username: string;
   file: string;
   role: string;

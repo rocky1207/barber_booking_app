@@ -2,6 +2,7 @@
 require_once (__DIR__ . "/../../controllers/AppController.php");
 function registerUserValidator($data) {
     $inputs = [
+        "full_name" => $data["full_name"],
         "username" => $data["username"],
         "password" => $data["password"],
         "user_email" => $data["user_email"],
@@ -9,6 +10,7 @@ function registerUserValidator($data) {
         "file" => $data["file"]
     ];
     $regex = [
+        "full_name" => AppController::FULL_NAME_REGEX,
         "username" => AppController::USERNAME_REGEX,
         "password" => AppController::PASSWORD_REGEX,
         "user_email" => AppController::EMAIL_REGEX,
@@ -16,6 +18,7 @@ function registerUserValidator($data) {
         "file" => AppController::FILE_REGEX,
     ];
     $messages = [
+        "full_name" => AppController::FULL_NAME_ERROR_MESSAGE,
         "username" => AppController::USERNAME_ERROR_MESSAGE,
         "password" => AppController::PASSWORD_ERROR_MESSAGE,
         "user_email" => AppController::EMAIL_ERROR_MESSAGE,

@@ -4,7 +4,7 @@ require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/GetUserModel.php");
 class UserRegisterModel {
     public function userRegister($data) {
-        $registerQuery = "INSERT INTO user (username, password, user_email, role, file, suspended) VALUES (:username, :password, :user_email, :role, :file, :suspended)";
+        $registerQuery = "INSERT INTO user (full_name, username, password, user_email, role, file, suspended) VALUES (:full_name, :username, :password, :user_email, :role, :file, :suspended)";
         $selectEmailQuery = "SELECT user_email FROM user WHERE user_email = :user_email";
         try {
             AppController::databaseConnect();
@@ -22,6 +22,7 @@ class UserRegisterModel {
             };
             $stmt = DatabaseModel::$pdo->prepare($registerQuery);
             $stmt->execute([
+                "full_name" => $data["full_name"],
                 "username" => $data["username"],
                 "password" => password_hash($data["password"], PASSWORD_DEFAULT),
                 "user_email" => $data["user_email"],

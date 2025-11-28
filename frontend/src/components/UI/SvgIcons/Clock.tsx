@@ -9,7 +9,8 @@ const Clock: React.FC<Props> = ({...svgData}) => {
             width={svgData.width}
             height={svgData.height}
             fill={svgData.fill}
-            ria-hidden="true" 
+            style={{ transform: 'translateY(-1px)'}}
+            aria-hidden="true" 
             data-eds-component="true" 
             fillRule="evenodd" 
             focusable="false" 

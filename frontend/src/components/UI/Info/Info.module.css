@@ -1,5 +1,5 @@
 .infoSection {
-    margin-top: var(--space-8);
+    margin: var(--space-8) auto;
     font-size: var(--font-sm);
 }
 .infoFlex {
@@ -8,7 +8,6 @@
     align-items: center;
     
 }
-
 .workingHoursDiv {
     display: flex;
     justify-content: flex-start;
@@ -16,8 +15,7 @@
     margin-left: var(--space-1);
 }
 .workingHoursPharaph {
-    
-    margin-right: var(--space-1);
+     margin-right: var(--space-1);
 }
 .iconWrap {
   display: inline-flex; /* inline-flex da se ponaša kao inline element unutar teksta */
@@ -27,7 +25,10 @@
 }
 .iconWrap :hover {
     cursor: pointer;
-
+}
+.iconWrap svg:hover path {
+    stroke: var(--lightGold);
+    transition: stroke .25s ease;
 }
 /* opcionalno: direktno stilizuj SVG veličinu preko klase */
 .iconWrap svg {
@@ -58,13 +59,33 @@
   transform: translateY(0);
 }
 .dl dt {
-    font-weight: 300;
+    font-weight: 300; 
 }
 .dl dd {
     font-weight: 500;
 }
+.dtBold {
+    font-weight: 700!important;
+}
 .addressMapDiv {
     margin-top: var(--space-3);
+    width: fit-content;
+}
+c
+.hoverState:hover,
+.hoverState:active {
+    
+    color: var(--lightGold); /* svetlija nijansa zlata */
+    transition: color 0.25s ease;
+}
+.addressMapDiv:hover {
+    color: var(--lightGold); /* svetlija nijansa zlata */
+  transition: color 0.25s ease;
+}
+.addressMapDiv a:hover svg path,
+.addressMapDiv a:active svg path {
+  fill: var(--lightGold); /* svetlija nijansa zlata */
+  transition: fill 0.25s ease;
 }
 .addressHolderDiv span {
     

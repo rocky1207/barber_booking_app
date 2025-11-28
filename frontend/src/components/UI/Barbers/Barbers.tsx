@@ -14,6 +14,7 @@ const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
   const {choosenServices} = useAppSelector((state: RootState) => state?.service);
   const dispatch = useAppDispatch();
   const barbers = allBarbers.filter(barberItem => barberItem.role !== 'owner');
+  console.log(barbers);
   useEffect(() => {
     choosenServices.length > 0 && dispatch(serviceActions.setChoosenServices([]));
     dispatch(appointmentActions.setSelectedTerm({date: '', time: ''}));
@@ -25,7 +26,7 @@ const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
   }, [barbers]);
     return (
       <section className={styles.barbers}>
-        <h1>IZABERI SVOG FRIZERA</h1>
+        <h1>Frizeri</h1>
         <nav aria-label="Choose barber navigation">
           <ul>
             {barbers.map((barberItem, index) => {

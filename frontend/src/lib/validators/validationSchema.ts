@@ -14,6 +14,11 @@ export const loginValidationSchema: ValidationSchemaType = {
 };
 
 export const registerValidationSchema: ValidationSchemaType = {
+    full_name: {
+        required: true,
+        pattern: /^[A-Za-zČĆŠĐŽčćšđž ]{2,60}$/,
+        errorMessage: 'Dozvoljena su samo slova i razmak, najmanje 2 a najviše 60 karaktera.'
+    },
     username: {
         required: true,
         pattern: /^[\p{L}0-9._]{3,20}$/u,
@@ -42,6 +47,11 @@ export const registerValidationSchema: ValidationSchemaType = {
     }
 };
 export const updateValidationSchema: ValidationSchemaType = {
+    full_name: {
+        required: true,
+        pattern: /^[A-Za-zČĆŠĐŽčćšđž ]{2,60}$/,
+        errorMessage: 'Dozvoljena su samo slova i razmak, najmanje 2 a najviše 60 karaktera.'
+    },
     username: {
         required: true,
         pattern: /^[\p{L}0-9._]{3,20}$/u,

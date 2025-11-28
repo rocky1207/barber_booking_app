@@ -1,11 +1,17 @@
+import styles from './Info.module.css';
 interface Props {
     day: string; 
-    workingHours: string;  
+    workingHours: string; 
+    index: number; 
 }
-const DataListElements: React.FC<Props> = ({day, workingHours}) => {
+const DataListElements: React.FC<Props> = ({day, workingHours, index}) => {
+    const today = new Date();
+    const todayName = today.getDay();
+    console.log(index);
+    console.log(todayName);
     return (
         <>
-        <dt>{day}</dt>
+        <dt className={index === todayName ? styles.dtBold : ''}>{day}</dt>
         <dd><span>{workingHours}</span></dd>
         </>
     );

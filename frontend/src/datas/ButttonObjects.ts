@@ -15,7 +15,7 @@ export const bookBtn: NavigateBtnType  = {
     validate: 'navigacija',
     type: 'button',
     className: 'bookBtn',
-    text: 'ZAKAŽI',
+    text: '>',
     onAction: () => {}
 };
 

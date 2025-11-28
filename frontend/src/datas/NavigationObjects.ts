@@ -1,7 +1,7 @@
 export const choosenAppointmentsNav = {
-    navClass: 'wrapp',
+    navClass: '',
     ulClass: '',
-    liItem: [{text: 'IZABRANI TERMINI', itemClass: '', link: 'appointments/client'}]
+    liItem: [{text: 'PREGLED IZABRANIH TERMINA', itemClass: '', link: 'appointments/client'}]
   };
   export const homePageNav = {
     navClass: 'wrapp',

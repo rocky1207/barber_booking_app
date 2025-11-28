@@ -22,9 +22,10 @@ const Info: React.FC = () => {
         </div>
         <div className={`${styles.dlWrap} ${showDataList ? styles.dlWrapOpen : ''}`}>
         {showDataList && <dl className={`${styles.dl} ${showDataList && styles.dlOpen} : ""`} aria-label="Weekly opening hours">
-            {weeklyOpeningHours.map((day) => {
+            {weeklyOpeningHours.map((day, index) => {
+                const updatedDay = {...day, index}
                 return (
-                    <DataListElements key={day.day} {...day} />
+                    <DataListElements key={day.day} {...updatedDay} />
                 )
             })}
         </dl>}
