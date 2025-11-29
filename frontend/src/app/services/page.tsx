@@ -5,6 +5,7 @@ import { formatPrice } from "@/lib/utils/formatPrice";
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import { servicesPageNav } from "@/datas/NavigationObjects";
+import Logo from "@/components/UI/Logo/Logo";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
@@ -24,8 +25,7 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
     return (
         <>
         <Header />
-        <PageNavigation {...servicesPageNav} />
-        <main className="wrapp">
+        <main className={`wrapp`}>
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :
             <Services services={services as SingleServiceType[]} />}

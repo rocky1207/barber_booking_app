@@ -7,6 +7,7 @@ import { serviceActions } from '@/store/slices/serviceSlice';
 import { useSearchParams } from 'next/navigation';
 import { RootState } from '@/store/store';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
+import styles from './Services.module.css';
 
 interface Props {
   services: SingleServiceType[];
@@ -26,8 +27,8 @@ const Services:React.FC<Props> = ({services}) => {
         return service.userId === barberId}
     );
     return (
-        <section>
-            <h1>ODABERITE USLUGU</h1>
+        <section className={`greyBackground ${styles.service}`}>
+            <h1>Usluge</h1>
             {userServices.length > 0 ? <nav aria-label="Choose service navigation">
                 <ul>
                     {userServices.map((service: SingleServiceType, index: number) => {

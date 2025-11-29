@@ -1,0 +1,6 @@
+.clientHeaderNav {
+    padding-top: var(--space-3);
+}
+.clientHeaderLi {
+    margin-bottom: var(--space-2);
+}

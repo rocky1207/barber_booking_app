@@ -7,8 +7,6 @@ interface Props {
 const DataListElements: React.FC<Props> = ({day, workingHours, index}) => {
     const today = new Date();
     const todayName = today.getDay();
-    console.log(index);
-    console.log(todayName);
     return (
         <>
         <dt className={index === todayName ? styles.dtBold : ''}>{day}</dt>

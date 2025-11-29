@@ -1,7 +1,10 @@
-export const choosenAppointmentsNav = {
-    navClass: '',
+export const clientsHeaderNav = {
+    navClass: 'clientHeaderNav',
     ulClass: '',
-    liItem: [{text: 'PREGLED IZABRANIH TERMINA', itemClass: '', link: 'appointments/client'}]
+    liItem: [
+        {text: 'POČETNA', itemClass: 'clientHeaderLi', link: '/'},
+        {text: 'PREGLED IZABRANIH TERMINA', itemClass: 'clientHeaderLi', link: 'appointments/client'}
+    ]
   };
   export const homePageNav = {
     navClass: 'wrapp',

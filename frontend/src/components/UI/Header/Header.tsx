@@ -4,7 +4,7 @@ import Menu from '../SvgIcons/Menu';
 import Close from '../SvgIcons/Close';
 import Link from 'next/link';
 import PageNavigation from '../PageNavigation/PageNavigation';
-import { choosenAppointmentsNav } from '@/datas/NavigationObjects';
+import { clientsHeaderNav } from '@/datas/NavigationObjects';
 import styles from './Header.module.css';
 
 
@@ -36,7 +36,7 @@ const Header:React.FC = () => {
         </button>
         {openHeader && <div className={styles.linkWrappDiv}> 
          {/* <Link href={'/appointments/client'}>PREGLED REZERVISANIH TERMINA</Link>*/}
-         <PageNavigation {...choosenAppointmentsNav} />
+         <PageNavigation {...clientsHeaderNav} />
       
         </div>}
       </div>

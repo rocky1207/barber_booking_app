@@ -47,8 +47,9 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, full_name, role, file, ind
     const src = file && file.trim() !== '' ? `${imageUrl}${file}` : defaultAvatar;
     
     return (
-        <li key={id} className={`card ${styles.barberItem}`}
+        <li key={id} className={`${styles.barberItem}`}
         style={{ animationDelay: `${index * 0.2}s` }} >
+            <div className={`${showButton ? 'card' : 'cardDashboard'}`}>
             <div className={styles.customerVew}>
                 <div className='profileImageDiv'>
                     <img src={src} alt="Barber image" />
@@ -58,15 +59,17 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, full_name, role, file, ind
                     {showButton && <div><NavigateButton {...newBookBtn} /></div>}
                 </div>*/}
                 <div className={styles.barberInfoDiv}>
-                    <button onClick={handleClick }>
+                    <button className={`${!showButton && styles.removePointer}`} onClick={handleClick }>
                         <p>{full_name}</p>
-                        <ArrowRight {...svgData} />
+                        {showButton && <ArrowRight {...svgData} />}
                     </button>
                 </div>
             </div>
             {children}
             {!showButton && actionBarberId === id &&<p>{deleteBarberErrorMsg}</p>}
+            </div>
         </li>
     );
 };
 export default BarberItem;
+

@@ -1,17 +1,12 @@
-/*
+
 .barberItem {
-  border-bottom: 1px solid var(--darkGold);
-  border-bottom-left-radius: var(--space-2);
-  margin-bottom: var(--space-3);
-  padding: var(--space-4) var(--space-3);
   opacity: 0;
   animation: slideInLeft 0.3s ease forwards;
-  
 }
-  */
-  .barbers {
-    margin-bottom: var(--space-9);
-  }
+  
+.barbers {
+  margin-bottom: var(--space-9);
+}
 .customerVew {
   display: flex;
   justify-content: flex-start;
@@ -44,6 +39,7 @@
   margin-bottom: 20px;
 }
   */
+  
 @keyframes slideInLeft {
   
   from {
@@ -56,6 +52,7 @@
   }
   
 }
+  
 /*
 .barberItem:hover,
 .barberItem:active {
@@ -64,3 +61,7 @@
   background-color: rgba(34, 32, 32, 1);
 }
 */
+
+.removePointer {
+  cursor: default;
+}

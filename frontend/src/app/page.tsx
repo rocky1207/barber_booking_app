@@ -9,11 +9,11 @@ import { getUsersAndServices } from "@/lib/api/getUsersAndServices";
 
 export default async function Home() {
   const {success, message, data} = await getUsersAndServices('GET_ALL_BARBERS');
-  
+  const logoClasses = {logoDiv: 'logoDiv-1', logoImage: 'logo-1'};
   return (
     <>
       <Header />
-      <Logo />
+      <Logo {...logoClasses} />
       <Info />
       <main className="wrapp">
         {!success ? <p className="textCenter">{message}</p> : 
