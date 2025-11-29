@@ -1,0 +1,72 @@
+.footer {
+    position: relative;
+    padding-top: var(--space-5);
+    margin: var(--space-8) 0 var(--space-5);
+}
+.footer::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 1px;
+    z-index: 1;
+    background-color: var(--darkGold);
+    opacity: .2;
+}
+.socialMedia {
+    text-align: end;
+    margin-bottom: var(--space-5);
+}
+.socialMediaIcons {
+    margin-top: var(--space-3);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-4);
+    ;
+    
+}
+.socialMediaIcons svg path {
+    transition: fill .25s ease
+}
+.socialMediaIcons svg:hover path {
+    fill: var(--lightGold);
+    box-shadow: var(--shadow-gold)
+}
+.contact {
+    margin-bottom: var(--space-8);
+}
+.contact dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--space-1) var(--space-3);
+    font-size: var(--font-xs);
+    margin-top: var(--space-3);
+}
+.contactLink  {
+    text-decoration: none;
+    transition: text-decoration 0.8s ease;
+}
+.contactLink:hover,
+.contactLink:active {
+    text-decoration: underline;
+}
+.dashboard {
+    position: relative;
+    text-align: center;
+    padding-top: var(--space-5);
+    opacity: .3;
+}
+.dashboard button  {
+    cursor:default;
+}
+.dashboard::before {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: "";
+    background: var(--secondaryTextGrey);
+}

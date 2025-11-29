@@ -1,10 +1,9 @@
-.bla {
+.openMenuOverlay {
   height: 40px;
  
 }
 .menuOverlay {
   position: fixed;
-  
   height: 30vh; 
   width: 100vW;
   top: 0;
@@ -13,7 +12,9 @@
   z-index: 0;
   transition: height .3s ease;
 }
-
+.menuOverlay nav {
+  padding-top: var(--space-3);
+}
 .header {
   padding-top: 10px;
   height: 39px;

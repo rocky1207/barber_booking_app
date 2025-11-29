@@ -2,6 +2,7 @@ import Header from "@/components/UI/Header/Header";
 import Logo from "@/components/UI/Logo/Logo";
 import Info from "@/components/UI/Info/Info";
 import Barbers from "@/components/UI/Barbers/Barbers";
+import LocationMap from "@/components/UI/LocationMap/LocationMap";
 import Footer from "@/components/UI/Footer/Footer";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
 import { getUsersAndServices } from "@/lib/api/getUsersAndServices";
@@ -18,6 +19,7 @@ export default async function Home() {
         {!success ? <p className="textCenter">{message}</p> : 
         success && message && data?.length === 0 ? <p className="textCenter">{message}</p> : 
         <Barbers allBarbers={data as BasicBarberType[]} />}
+        <LocationMap/>
       </main>
       <Footer />
     </>

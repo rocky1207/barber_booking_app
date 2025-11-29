@@ -1,6 +1,6 @@
 .infoSection {
     margin: var(--space-8) auto;
-    font-size: var(--font-sm);
+    
 }
 .infoFlex {
     display: flex;

@@ -9,6 +9,9 @@
   
 }
   */
+  .barbers {
+    margin-bottom: var(--space-9);
+  }
 .customerVew {
   display: flex;
   justify-content: flex-start;

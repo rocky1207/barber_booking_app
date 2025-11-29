@@ -4,7 +4,7 @@ interface Props {
     fill: string;
     
 }
-const ArrowDown: React.FC<Props> = ({
+const ArrowRight: React.FC<Props> = ({
   width,
   height,
   fill,
@@ -22,6 +22,7 @@ const ArrowDown: React.FC<Props> = ({
       preserveAspectRatio="xMidYMid meet"
     >
       {/* jednostavna trokutasta strelica prema dole */}
+       <g transform="rotate(275 12 12)">
       <path
         d="M6 9l6 6 6-6"
         stroke={fill}
@@ -30,21 +31,8 @@ const ArrowDown: React.FC<Props> = ({
         strokeLinejoin="round"
         fill="none"
       />
-     </svg>
-        /*<svg 
-            width={svgData.width}
-            height={svgData.height}
-            fill={svgData.fill}
-            version="1.1" 
-            id="Capa_1" 
-            viewBox="0 0 199.404 120" //"0 0 199.404 199.404" 
-            >
-            <g strokeWidth="0"></g>
-            <g strokeLinecap="round" strokeLinejoin="round"></g>
-            <g> 
-                <polygon points="199.404,63.993 171.12,35.709 99.702,107.127 28.284,35.709 0,63.993 99.702,163.695 "></polygon> 
-            </g>
-        </svg>*/
+      </g>
+    </svg>
     );
 };
-export default ArrowDown; 
+export default ArrowRight; 

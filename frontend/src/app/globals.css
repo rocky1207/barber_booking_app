@@ -93,7 +93,7 @@ body {
   /* Primarni font - elegantna sans-serif */
   /*font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;*/
   font-family: var(--font-inter);
-  font-size: var(--font-sm);
+  font-size: var(--font-xs);
   font-weight: 400;
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
@@ -155,9 +155,7 @@ h1, h2, h3, h4 {
 ul {
   list-style-type: none;
 }
-footer {
-  text-align: center;
-}
+
 
 button {
   all: unset;
@@ -185,7 +183,7 @@ button {
 .changePasswordBtn,
 .servicesBtn {
   background: none;
-  border-bottom: 1px solid white;
+  /*border-bottom: 1px solid white;*/
   text-align: center;
   padding: 3px 6px;
 }

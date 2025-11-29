@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/typizedHooks';
 import { RootState } from '@/store/store';
 import { uiActions } from '@/store/slices/uiSlice';
+import ArrowRight from '../SvgIcons/ArrowRight';
 import styles from './Barbers.module.css';
 import { useEffect, useState } from 'react';
 
@@ -29,6 +30,11 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, full_name, role, file, ind
     const handleClick = ():void => {
         dispatch(uiActions.setIsLoading(true));
         router.push(`/services?barberId=${id}`);
+    }
+    const svgData = {
+        width: "16", 
+        height: "16", 
+        fill: "#B8941F"
     }
     /*
     const newBookBtn = {
@@ -54,7 +60,7 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, full_name, role, file, ind
                 <div className={styles.barberInfoDiv}>
                     <button onClick={handleClick }>
                         <p>{full_name}</p>
-                        <p>{'>'}</p>
+                        <ArrowRight {...svgData} />
                     </button>
                 </div>
             </div>

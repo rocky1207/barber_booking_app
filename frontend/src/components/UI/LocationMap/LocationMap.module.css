@@ -1,0 +1,79 @@
+.mapSection {
+    position: relative;
+    margin: var(--space-8) 0;
+    padding-top: var(--space-5);
+}
+.mapSection::before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 1px;
+    content: "";
+    background-color: var(--darkGold);
+    opacity: .2;
+    width: 100%;
+    box-shadow:  var(--shadow-sm)/*0 6px 18px rgba(0,0,0,0.06)*/;
+}
+.mapSection h4 {
+    font-size: var(--font-sm);
+}
+.mapSection a {
+    text-decoration: underline;
+}
+.mapSection span {
+    display: inline;
+}
+    
+.mapWrap {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow:  var(--shadow-sm)/*0 6px 18px rgba(0,0,0,0.06)*/;
+    transition: transform 0.3s ease;
+    margin-top: var(--space-4);
+}
+.mapWrap:hover {
+  
+  transform: scale(1.05);
+  box-shadow: var(--shadow-gold);
+  
+}
+/* iframe zauzima celu površinu wrappera */
+.mapIframe {
+    width: 100%;
+    height: 220px;
+    border: 0;
+    display: block;
+    /* onemogući interakciju sa iframe-om (pa klik ide na overlay link) 
+    pointer-events: none;*/
+}
+
+/* overlay koji hvata sve klikove i otvara mapu u novom tabu */
+.mapOverlay {
+    position: absolute;
+    inset: 0;                  /* top:0; right:0; bottom:0; left:0; */
+    display: block;
+    text-decoration: none;
+    /* transparent, ali hvata klikove */
+    cursor: pointer;
+    z-index: 3;
+    background: rgba(0,0,0, .3);
+    transition: background .3s ease;
+}
+.mapOverlay:hover {
+    background: rgba(0,0,0, .5);  
+}
+/* screen-reader only */
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}

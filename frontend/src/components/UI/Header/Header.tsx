@@ -29,7 +29,7 @@ const Header:React.FC = () => {
   return (
     <>
     <header className={`${styles.header} ${animate ? styles.animateLine : ''}`}>
-      <div className={`glass-effect ${styles.bla} ${openHeader ? styles.menuOverlay : ''}`}>
+      <div className={`glass-effect ${styles.openMenuOverlay} ${openHeader ? styles.menuOverlay : ''}`}>
       <div className={`wrapp ${styles.btnWrappDiv}`}>
         <button onClick={handleClick} className={styles.menuBtn}>
         {!openHeader ? <Menu {...svgData} /> : <Close {...svgData} />}

@@ -56,3 +56,7 @@ Delete action: [2025-11-26 20:14:04]
         [deletedEmailErrorLogs] - 0
         [deletedResetRequests] - 0
         [deletedPasswordResets] - 0
+Delete action: [2025-11-28 20:14:04] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
