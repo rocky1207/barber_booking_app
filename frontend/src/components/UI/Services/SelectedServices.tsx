@@ -44,19 +44,19 @@ const SelectedServices: React.FC = () => {
     const svgData = {
             width: '20',
             height: '25',
-            fill: '#eeba40'
+            fill: '#B8941F'
         }
     const clickHandle = () => {
         router.push(`/appointments?barberId=${barberId}&${serviceParams}`);
     }
     return (
         <>
-        {choosenServices.length > 0 && <section className={`${styles.selectedServiceSection}`}>
+        {choosenServices.length > 0 && <section className={`glass-gold ${styles.selectedServiceSection}`}>
             <div className='wrapp flexed'>
                 {serviceDivElement}
                 {!pathName.includes('appointments') && <NavigateButton {...updateContinueBtn}/>}
             </div>
-            {showServices && selectedTerm.time && selectedTerm.date && <div className={`wrapp flexed ${styles.selectedTerm}`}>
+            {showServices && selectedTerm.time && selectedTerm.date && <div className={`wrapp flexed  ${styles.selectedTerm}`}>
                 <div>
                     <p>{selectedTerm.time}</p>
                     <p>{selectedTerm.date}</p>

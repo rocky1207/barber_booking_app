@@ -10,16 +10,16 @@ const ArrowUp: React.FC<Props> = ({
  }) => {
     return (
         <svg
-      width={width}
-      height={height}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="arrow up"
-      style={{ display: "block" }} // uklanja baseline pomeranje
-      preserveAspectRatio="xMidYMid meet"
-    >
+          width={width}
+          height={height}
+          viewBox="0 0 24 24"
+          fill={fill}
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="arrow up"
+          style={{ display: "block" }} // uklanja baseline pomeranje
+          preserveAspectRatio="xMidYMid meet"
+        >
       {/* chevron/up arrow */}
       <path
         d="M6 15l6-6 6 6"

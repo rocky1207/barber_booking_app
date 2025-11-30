@@ -22,7 +22,7 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
     const svgData = {
             width: '15',
             height: '20',
-            fill: '#eeba40'
+            fill: '#B8941F'
         }
     if(choosenServices.length > 0) {
         if(choosenServices.length === 1) {
@@ -30,14 +30,15 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
         } else {
             text = `${choosenServices.length} usluge`;
         }
-        
+        console.log(showServices);
         serviceDivElement = <div className={styles.flexLeft}>
             <p className={styles.flexLeftText}>{text}</p>
             <button onClick={handleShowServices} className={styles.arrowButton}>
                     {!showServices ? <ArrowUp {...svgData} /> : <ArrowDown {...svgData} />}
                 </button>
             </div>;
-        serviceUlElement = <ul className={`${styles.selectedServices} wrapp`}>
+        serviceUlElement = <ul className={`wrapp ${styles.selectedServices}`}>
+            
                 {choosenServices.map((service) => {
                     const text = `${service.userService}: ${service.price}`;
                     return (
@@ -47,7 +48,11 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
                         </li>
                     )
                 })}
+                
             </ul>
+         
     };
+    
     return {serviceDivElement, serviceUlElement};
 }
+    

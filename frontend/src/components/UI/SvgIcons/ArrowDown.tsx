@@ -11,16 +11,16 @@ const ArrowDown: React.FC<Props> = ({
   }) => {
     return (
         <svg
-      width={width}
-      height={height}
-      viewBox="0 0 24 24"
-      fill={fill}
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="arrow down"
-      style={{ display: "block" }} // važno: uklanja baseline pomeranje
-      preserveAspectRatio="xMidYMid meet"
-    >
+          width={width}
+          height={height}
+          viewBox="0 0 24 24"
+          fill={fill}
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="arrow down"
+          style={{ display: "block" }} // važno: uklanja baseline pomeranje
+          preserveAspectRatio="xMidYMid meet"
+        >
       {/* jednostavna trokutasta strelica prema dole */}
       <path
         d="M6 9l6 6 6-6"

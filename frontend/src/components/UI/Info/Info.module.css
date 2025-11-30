@@ -35,15 +35,14 @@
   display: block; /* duplikat zaštite, ali bezbedno ga ostaviti */
 }
 .dlWrap { /* wrapper za animaciju */
-  overflow: hidden;
-  transform-origin: top center;
+  
   transition: transform 0.28s ease, opacity 0.28s ease;
   transform: scaleY(0);
-  opacity: 0;
+ /* opacity: 0;*/
 }
 .dlWrapOpen {
   transform: scaleY(1);
-  opacity: 1;
+  /*opacity: 1;*/
 }
 .dl {
     display: grid;

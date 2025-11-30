@@ -1,6 +1,6 @@
 
 .service {
-  margin-top: var(--space-8);
+  margin: var(--space-8) 0 var(--space-9);
 }
 .service ul {
   margin-top: var(--space-2);
@@ -8,7 +8,7 @@
 
 .serviceItem {
   opacity: 0;
-   animation: slideInLeft .3s ease forwards;
+  animation: slideInLeft .3s ease forwards; 
 }
 
 /*
@@ -34,6 +34,7 @@
   height: 60px;
   
 }
+
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -44,17 +45,19 @@
     transform: translateX(0);
   }
 }
+  
 
 .selectedServiceSection {
+
   position: fixed;
   bottom: 0;
-  background: black;
+  /*background: black;*/
   width: 100%;
   max-width: 1023px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 20px 0;
-  border-radius: 30px 30px 0 0;
+  padding: var(--space-4) 0 var(--space-6);
+  border-radius: var(--space-3) var(--space-3) 0 0;
 }
   
 .showServicesDiv {
@@ -70,14 +73,24 @@
   left: 0;
   height: 1px;
   width: 100%;
-  background-color: var(--logoColor);
+  background-color: var(--darkGold);
 }
-
 
 .selectedTerm {
   position: relative;
-  padding-bottom: 15px;
+  padding: var(--space-3) 0;
 }
+.selectedTerm div p {
+  margin-right: 10px;
+}
+.selectedTerm svg path {
+  transition: fill .25s ease;
+}
+.selectedTerm svg:hover path, 
+.selectedTerm svg:active path {
+  fill: var(--lightGold);
+}
+
 .selectedTerm::after {
   content: "";
   position: absolute;
@@ -85,10 +98,9 @@
   left: 0;
   height: 1px;
   width: 100%;
-  background-color: var(--logoColor);
+  background-color: black;
 }
   
-
 .selectedServiceSection div {
   display: flex;
   justify-content: space-between;
@@ -109,13 +121,27 @@
   flex: 1;
   min-width: 0;
 }
+.flexLeft svg path {
+  transition: stroke, .25s ease;
+}
+.flexLeft svg:hover path,
+.flexLeft svg:active path {
+  stroke: var(--lightGold);
+}
 .continueButton {
-  background-color: var(--logoColor);
+  background-color: var(--darkGold);
   color: black;
   font-weight: 600;
   padding: 8px 10px;
   border-radius: 10px;
   flex-shrink: 0;
+
+  transition: background .25s ease;
+}
+.continueButton:hover,
+.continueButton:active {
+  background-color: var(--lightGold);
+  box-shadow: var(--shadow-gold);
 }
 .continueButtonEmpty {
   background-color: rgb(57, 57, 57) !important;
@@ -126,14 +152,28 @@
   align-items: center;
   flex-shrink: 0;
 }
+
 .selectedServices {
+  margin-top: var(--space-5);
+  animation: open .3s ease;
   
-  margin-top: 20px;
 }
+
 .selectedServices li {
   margin-top: 10px;
 }
 
 .selectedServices li p:last-child {
   color: rgba(238, 186, 64, .5);
+}
+
+@keyframes open {
+  from {
+    max-height: 0;
+    transform: translateY(0);
+  }
+  to {
+    max-height: 1000px;
+    transform: translateY(1);
+  }
 }
