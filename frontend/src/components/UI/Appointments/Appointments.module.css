@@ -48,26 +48,90 @@ opacity: .5;
   cursor: default;
   background: rgb(28, 28, 28);
 }
-/*
+
 
 .root {
     position: relative;
-  background-color: rgb(62, 62, 62);
-  color: var(--logoColor);
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 50px;
-  width: 80%;
+    background-color: var(--darkGrey);
+    font-size: var(--font-sm);
+    color: var(--mainGOld);
+    padding: var(--space-3);
+    border-radius: var(--space-2);
+    margin-bottom: var(--space-8);
+    width: 260px;
 }
-.month {
-padding: 20px 0 0 0;
-width: 100%;
+.months {
+  width: 100%;
 }
-.caption {
-  font-weight: bold;
-  color: gold;
-  margin-bottom: 10px;
+.nav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0;
 }
+
+.nav button svg {
+  fill: var(--lightGold)
+}
+.nav button:hover svg {
+  fill: var(--secondaryTextGrey);
+}
+.month_caption {
+  font-size: var(--font-base);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+  width: 100%;
+}
+.month table {
+ width: 100%;
+}
+.month thead th {
+  padding-bottom: 10px;
+}
+.month thead tr {
+ text-align: center;
+}
+.month tbody td {
+  padding: 5px;
+}
+.month tbody td button {
+  width: 100%;
+  text-align: center;
+}
+.selected {
+  color: var(--lightGold);
+  border: 1px solid var(--lightGold);
+  border-radius: 50px;
+}
+.selected button {
+  color: var(--lightGold);
+  
+}
+.footer {
+  margin-top: 20px;
+  font-size: var(--font-base);
+  background: var(--middleDarkGrey);
+  padding: var(--space-2);
+  box-shadow: var(--shadow-lg);
+  border-radius: 3px;
+  color: var(--lightGold);
+}
+.footer span {
+  
+  color: var(--lightGold);
+}
+/*
+.week td {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+  */
+/*
+
+
 
 .day {
   padding: 6px;
@@ -78,16 +142,15 @@ width: 100%;
   background-color: gold;
   color: black;
 }
-.nav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0;
-}
+
 .grid {
     width: 200px;
 }
     */
+
+  .caption_label {
+    z-index: 0;
+  }
 .clientAppointment {
   margin: 50px 0;
   

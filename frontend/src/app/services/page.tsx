@@ -3,6 +3,7 @@ import Services from "@/components/UI/Services/Services";
 import { getUsersAndServices } from "@/lib/api/getUsersAndServices";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import { servicesPageNav } from "@/datas/NavigationObjects";
 import Logo from "@/components/UI/Logo/Logo";
@@ -24,7 +25,7 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
     
     return (
         <>
-        <Header />
+        <Header {...clientsHeaderNav} />
         <main className={`wrapp`}>
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :

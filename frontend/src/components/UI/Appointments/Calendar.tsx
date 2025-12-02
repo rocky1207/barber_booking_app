@@ -7,6 +7,7 @@ import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { DayPicker} from "react-day-picker";
 import { formatDate } from "@/lib/utils/formatDate";
 import { convertStringToDateType } from "@/lib/utils/convertStringToDateType";
+import styles from './Appointments.module.css';
 import 'react-day-picker/dist/style.css';
 
 const Calendar: React.FC = () => {
@@ -31,6 +32,7 @@ const Calendar: React.FC = () => {
     useEffect(() => {
         fullDate && dispatch(appointmentActions.setSelectedTerm({...selectedTerm, date: fullDate}));
     }, [fullDate]);
+    const spanDate = <span>{fullDate}</span>
     
     return (
         <DayPicker
@@ -49,13 +51,24 @@ const Calendar: React.FC = () => {
                 selected ? `Izabrani datum: ${fullDate}` : "Izaberite datum."
             }
             classNames={{
-               /* root: styles.root,
-                month: styles.month,
+               /* 
+                
                 caption: styles.caption,
                 day: styles.day,
                 day_selected: styles.day_selected,
-                nav: styles.nav,
+                
                 month_grid: styles.grid*/
+                root: styles.root,
+                months: styles.months,
+                nav: styles.nav,
+                month: styles.month,
+                month_caption: styles.month_caption,
+                caption_label: styles.caption_label,
+                weekdays: styles.weekdays,
+                week: styles.week,
+                today: styles.today,
+                selected: styles.selected,
+                footer: styles.footer
             }}
         />
         

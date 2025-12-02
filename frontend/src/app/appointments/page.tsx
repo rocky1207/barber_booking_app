@@ -1,21 +1,21 @@
+import Header from "@/components/UI/Header/Header";
 import Calendar from "@/components/UI/Appointments/Calendar";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import AvailableAppointments from "@/components/UI/Appointments/AvailableAppointments";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
 interface Props {
     searchParams: Promise<{barberId: string; serviceId: string}>
 }
     
 const BookingPage = async ({searchParams}: Props) => {
     const params = await searchParams;
-    const navigationData = {
-        navClass: 'wrapp',
-        ulClass: 'flexed',
-        liItem: [{link: `/services?barberId=${params.barberId}`, text: '<<', itemClass: ''}, {link: "/", text: 'početna', itemClass: ''}]
+    const updatedClientHeaderNav = {
+        ...clientsHeaderNav,
+        liItem: [...clientsHeaderNav.liItem, {link: `/services?barberId=${params.barberId}`, text: '<<', itemClass: 'separateLi'}]
     }
     return (
         <>
-        <PageNavigation {...navigationData} />
+        <Header {...updatedClientHeaderNav} />
         <main className="middle">
             <Calendar />
             <AvailableAppointments />

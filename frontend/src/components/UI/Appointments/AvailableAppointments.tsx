@@ -29,7 +29,7 @@ const AvailableAppointments: React.FC = () => {
                 setAvailableSlots([]);
                 return;
             }
-            setIsLoading(true);
+            setIsLoadingState(true, dispatch);
             try {
                 const data = await getItemsByUserId({
                     userId: choosenServices[0].userId, 
@@ -50,21 +50,23 @@ const AvailableAppointments: React.FC = () => {
                     );
                     const filteredSlots = filterAvailableTimeSlots(slots, selectedTerm.date, 60);
                     setAvailableSlots(filteredSlots);
+                    setIsLoadingState(false, dispatch);
                 } else {
                     console.error('Failed to fetch reserved appointments:', reservedAppointments.message);
                     setAvailableSlots([]);
+                    setIsLoadingState(false, dispatch);
                 }
             } catch (error) {
                 console.error('Error fetching available slots:', error);
                 setAvailableSlots([]);
-            } finally {
-                setIsLoading(false);
-            }
+                setIsLoadingState(false, dispatch);
+            } 
+            
         };
         fetchAvailableSlots();
     }, [selectedTerm.date, choosenServices]);
     const handleSlotClick = (timeSlot: string) => {
-        setIsLoadingState(true, dispatch);
+        //setIsLoadingState(true, dispatch);
         dispatch(appointmentActions.setSelectedTerm({
             ...selectedTerm, 
             time: normalizeTimeString(timeSlot)
@@ -73,11 +75,7 @@ const AvailableAppointments: React.FC = () => {
     };
     
     if (isLoading) {
-        return (
-            <div className={`${styles.appointmentsUl} wrapp`}>
-                <p>Učitavanje dostupnih termina...</p>
-            </div>
-        );
+       
     }
     
     if (availableSlots.length === 0 && selectedTerm.date) {

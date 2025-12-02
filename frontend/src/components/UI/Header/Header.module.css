@@ -23,7 +23,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
-   padding: 0;
+  padding: 0;
   background: var(--background);  
   margin-bottom: var(--space-8);
 }
@@ -58,9 +58,8 @@
 .btnWrappDiv {
   padding-top: var(--space-1);
 }
-.linkWrappDiv {
-  padding-top: var(--space-2);
-}
+
+
 .linkWrappDiv nav ul li:hover,
 .linkWrappDiv a:active {
   color: var(--lightGold); /* svetlija nijansa zlata */
