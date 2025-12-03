@@ -66,7 +66,6 @@ const AvailableAppointments: React.FC = () => {
         fetchAvailableSlots();
     }, [selectedTerm.date, choosenServices]);
     const handleSlotClick = (timeSlot: string) => {
-        //setIsLoadingState(true, dispatch);
         dispatch(appointmentActions.setSelectedTerm({
             ...selectedTerm, 
             time: normalizeTimeString(timeSlot)
@@ -80,19 +79,19 @@ const AvailableAppointments: React.FC = () => {
     
     if (availableSlots.length === 0 && selectedTerm.date) {
         return (
-            <div className={`${styles.appointmentsUl} wrapp`}>
+            <div className={`${styles.appointmentsUl}`}>
                 <p>Nema dostupnih termina za izabrani datum.</p>
             </div>
         );
     }
     
     return (
-        <ul className={`${styles.appointmentsUl} wrapp`}>
+        <ul className={`${styles.appointmentsUl}`}>
             {availableSlots?.map((slot) => (
                 <li key={slot}>
                     <button 
                         onClick={() => handleSlotClick(slot)}
-                        className={styles.availableSlot}
+                        className=''
                     >
                         {normalizeTimeString(slot)}
                     </button>

@@ -1,33 +1,33 @@
+
 .appointmentsUl {
-    margin: 50px 0;
-    gap: 3px 10px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
+    margin: var(--space-8) 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: var(--space-3)
 }
 .appointmentsUl li {
+  
+    background: var(--darkGrey);
     border: 1px solid var(--logoColor);
-    border-radius: 8px;
-    margin-bottom: 15px;
+    border-radius: var(--space-2);
     text-align: center; 
-    background: rgb(41, 41, 41);
+    transition: transform .25s ease, background .25s ease;
 }
 .appointmentsUl li:hover,
 .appointmentsUl li:active {
     cursor: pointer;
-    background: rgb(28, 28, 28);
+    background: var(--middleDarkGrey);
+    transform: translateY(-2px);
 }
 .appointmentsUl button {
-  width: 130px;
-  padding: 15px 0;
+  padding: var(--space-4) var(--space-6);
   border: none;
   background: transparent;
   color: var(--logoColor);
   font-size: 16px;
-  transition: all 0.3s ease;
+  
 }
-
+/*
 .availableSlot {
   background: linear-gradient(135deg, #4CAF50, #45a049) !important;
   color: white !important;
@@ -40,9 +40,9 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
+*/
 .liDisabled {
-opacity: .5;
+  opacity: .5;
 }
 .buttonDisabled {
   cursor: default;
@@ -51,13 +51,13 @@ opacity: .5;
 
 
 .root {
-    position: relative;
+  position: relative;
     background-color: var(--darkGrey);
     font-size: var(--font-sm);
-    color: var(--mainGOld);
+    color: var(--mainGold);
     padding: var(--space-3);
     border-radius: var(--space-2);
-    margin-bottom: var(--space-8);
+   
     width: 260px;
 }
 .months {
@@ -86,7 +86,7 @@ opacity: .5;
  width: 100%;
 }
 .month thead th {
-  padding-bottom: 10px;
+  padding-bottom: 10px;  
 }
 .month thead tr {
  text-align: center;
@@ -120,6 +120,35 @@ opacity: .5;
   
   color: var(--lightGold);
 }
+.disabledDay {
+  opacity: 0.4;
+  color: var(--secondaryTextGrey) !important;
+  text-decoration: line-through;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.disabledDay button {
+  text-decoration: line-through;
+  color: var(--secondaryTextGrey) !important;
+}
+.selected {
+  color: var(--lightGold);
+  border: 1px solid var(--lightGold);
+  border-radius: 50px;
+}
+
+.selected button {
+  color: var(--lightGold);
+}
+
+/* Spreči da se selected stil primeni na disabled datume ili prazne ćelije */
+.disabledDay.selected,
+.day_outside.selected {
+  border: none !important;
+  color: var(--secondaryTextGrey) !important;
+}
+
 /*
 .week td {
   padding: 5px;

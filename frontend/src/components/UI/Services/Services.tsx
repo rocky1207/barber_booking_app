@@ -4,6 +4,7 @@ import ServiceItem from './ServiceItem';
 import { SingleServiceType } from '@/types/Api/ReturnServiceType';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/typizedHooks';
 import { serviceActions } from '@/store/slices/serviceSlice';
+import { barberActions } from '@/store/slices/barberSlice';
 import { useSearchParams } from 'next/navigation';
 import { RootState } from '@/store/store';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
@@ -17,8 +18,13 @@ const Services:React.FC<Props> = ({services}) => {
     const params = useSearchParams();
     const strBarberId = params.get('barberId');
     const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
+    console.log(barberId);
     const dispatch = useAppDispatch();
-    
+    useEffect(() => {
+        if(barberId) {
+            dispatch(barberActions.setActionBarberId(barberId));
+        }
+    }, [barberId]);
     useEffect(() => {
         setIsLoadingState(false, dispatch);
         dispatch(serviceActions.setServiceSlice(services));
