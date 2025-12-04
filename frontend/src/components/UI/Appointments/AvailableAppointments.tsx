@@ -23,6 +23,7 @@ const AvailableAppointments: React.FC = () => {
     const queryString = useSearchParams().toString();
 
     console.log(selectedTerm);
+    console.log(availableSlots);
     useEffect(() => {
         const fetchAvailableSlots = async () => {
             if (!selectedTerm.date || choosenServices.length === 0) {

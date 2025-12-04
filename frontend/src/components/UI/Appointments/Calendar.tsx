@@ -43,7 +43,7 @@ const Calendar: React.FC = () => {
   // raw items from API (period definitions the barber set as non-working or working, depending on your backend)
   const [rawItems, setRawItems] = useState<any[]>([]);
   // realDays = array of { start_date: Date, end_date: Date } that represent working periods (or non-working depending on your API)
-  const [realDays, setRealDays] = useState<{ start_date: Date; end_date: Date }[]>([]);
+  const [workingPeriods, setWorkingPeriods] = useState<{ start_date: Date; end_date: Date }[]>([]);
 
   // Optionally, fully booked dates (days on which all slots are booked). Fill this from API if you have it.
   const [fullyBookedDates, setFullyBookedDates] = useState<Date[]>([]);
@@ -56,10 +56,10 @@ const Calendar: React.FC = () => {
 
   // load periods and optionally fullyBookedDates
   useEffect(() => {
-    const getHours = async () => {
+    const getWorkingPeriods = async () => {
       if (!actionBarberId) {
         setRawItems([]);
-        setRealDays([]);
+        setWorkingPeriods([]);
         return;
       }
 
@@ -76,7 +76,7 @@ const Calendar: React.FC = () => {
         return [];
       });
 
-      setRealDays(periods);
+      setWorkingPeriods(periods);
 
       // --- OPTIONAL: load fullyBookedDates here if you have endpoint ---
       // Example:
@@ -86,14 +86,14 @@ const Calendar: React.FC = () => {
 
     };
 
-    getHours();
+    getWorkingPeriods();
     setIsLoadingState(false, dispatch);
   }, [actionBarberId]);
 
   // Build a Set of available dates (strings 'YYYY-MM-DD' or ISO) for O(1) lookup
   const availableSet = useMemo(() => {
     const s = new Set<string>();
-    for (const interval of realDays) {
+    for (const interval of workingPeriods) {
       let cur = resetToMidnight(interval.start_date);
       const end = resetToMidnight(interval.end_date);
       while (cur.getTime() <= end.getTime()) {
@@ -102,7 +102,7 @@ const Calendar: React.FC = () => {
       }
     }
     return s;
-  }, [realDays]);
+  }, [workingPeriods]);
 
   // Set of fully booked strings for lookup
   const fullyBookedSet = useMemo(() => {
