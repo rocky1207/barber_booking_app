@@ -22,7 +22,8 @@ export const apiRoutes = {
     GET_WORKING_HOURS_FOR_DATE: 'working_hours/getWorkingHoursForDate.php',
     DELETE_WORKING_HOURS_BY_ID:'working_hours/deleteWorkingHours.php',
     INSERT_WORKING_HOURS: 'working_hours/insertWorkingHours.php',
-    UPDATE_WORKING_HOURS: 'working_hours/updateWorkingHours.php'
+    UPDATE_WORKING_HOURS: 'working_hours/updateWorkingHours.php',
+    GET_RESERVED_DATES: 'reserved_dates/getReservedDates.php'
 
 } as const;
 export type ApiRoute = typeof apiRoutes[keyof typeof apiRoutes];

@@ -1,6 +1,5 @@
 import { parseISO, parse } from "date-fns";
 export const convertStringToDateType = (data: Record<string, string>): Record<string, Date | null> => {
-    console.log(data);
     let dateTypeObj: Record<string, Date | null> = {};
     for(const key in data) {
         if(key.includes('date') || key.includes('start_date') || key.includes('end_date')) dateTypeObj[key] = parseISO(data[key]);

@@ -14,6 +14,7 @@ class GetAppointmentModel {
             ]);
             $times = $stmt->fetchAll();
            // if(empty($times)) throw new Exception("Nema rezultata", 404);
+           
             return $times;
         } catch (Exception $e) {
             throw $e;

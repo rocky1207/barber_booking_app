@@ -1,6 +1,7 @@
 import { WorkingHoursWithUserApiReturnType, WorkingHoursFormData } from '@/types/WorkingHours/WorkingHoursType';
 import { GetServicesReturnType } from '@/types/Api/ReturnServiceType';
 import { GetBarberAppointmentsReturnDataType, GetReservedAppointmentsReturnDataType } from '@/types/Api/ReturnAppointmentType';
+import { ReturnReservedDatesType } from '@/types/Api/ReturnReservedDatesType';
 import api from '@/lib/axios';
 import { apiRoutes } from './apiRoutes/apiRoutes';
 
@@ -9,7 +10,8 @@ type PromiseReturnDataType =
     GetReservedAppointmentsReturnDataType | 
     GetBarberAppointmentsReturnDataType | 
     WorkingHoursWithUserApiReturnType | 
-    WorkingHoursFormData;
+    WorkingHoursFormData |
+    ReturnReservedDatesType;
 
 export const getItemsByUserId = async (data: {userId: number, date: string}, action: string): Promise<PromiseReturnDataType> => {
     const {userId, date} = data;
@@ -34,6 +36,10 @@ export const getItemsByUserId = async (data: {userId: number, date: string}, act
     };
     if(action === 'GET_WORKING_HOURS_FOR_DATE') {
         url = `${apiRoutes.GET_WORKING_HOURS_FOR_DATE}?userId=${userId}&date=${date}`;
+        apiRequest = api.get(url);
+    };
+    if(action === 'GET_RESERVED_DATES') {
+        url = `${apiRoutes.GET_RESERVED_DATES}?userId=${userId}}`;
         apiRequest = api.get(url);
     };
     try {

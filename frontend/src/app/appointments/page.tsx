@@ -1,5 +1,5 @@
 import Header from "@/components/UI/Header/Header";
-import Calendar from "@/components/UI/Appointments/Calendar";
+import CalendarClient from "@/components/UI/Appointments/CalendarClient";
 import AvailableAppointments from "@/components/UI/Appointments/AvailableAppointments";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
@@ -18,7 +18,7 @@ const BookingPage = async ({searchParams}: Props) => {
         <>
         <Header {...updatedClientHeaderNav} />
         <main className="wrapp middle">
-            <Calendar />
+            <CalendarClient />
             <AvailableAppointments />
         </main>
         <SelectedServices />

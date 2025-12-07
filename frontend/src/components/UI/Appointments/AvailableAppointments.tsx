@@ -11,10 +11,13 @@ import { getItemsByUserId } from '@/lib/api/getItemsByUserId';
 import { GetReservedAppointmentsReturnDataType } from '@/types/Api/ReturnAppointmentType';
 import { calculateAvailableTimeSlotsWithWorkingHours } from '@/lib/utils/calculateAvailableAppointments';
 import { normalizeTimeString, filterAvailableTimeSlots } from '@/lib/utils/timeUtils';
+
+
 import styles from './Appointments.module.css';
 
 const AvailableAppointments: React.FC = () => {
     const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+    
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     const {choosenServices} = useAppSelector((state: RootState) => state?.service);
@@ -22,8 +25,9 @@ const AvailableAppointments: React.FC = () => {
     const router = useRouter();
     const queryString = useSearchParams().toString();
 
-    console.log(selectedTerm);
-    console.log(availableSlots);
+   
+    
+    
     useEffect(() => {
         const fetchAvailableSlots = async () => {
             if (!selectedTerm.date || choosenServices.length === 0) {
@@ -31,6 +35,7 @@ const AvailableAppointments: React.FC = () => {
                 return;
             }
             setIsLoadingState(true, dispatch);
+            
             try {
                 const data = await getItemsByUserId({
                     userId: choosenServices[0].userId, 

@@ -109,7 +109,7 @@ class InsertAppointmentModel {
             }
             
             if($reservedTerms === $workingHoursSlots) {
-                $insertReservedDateQuery = 'INSERT INTO reserved_date (user_id, reserved_date) VALUES (:user_id, :reserved_date)';
+                $insertReservedDateQuery = 'INSERT INTO reserved_dates (user_id, reserved_date) VALUES (:user_id, :reserved_date)';
                 $insertReservedDateStmt = DatabaseModel::$pdo->prepare($insertReservedDateQuery);
                 $insertReservedDateStmt->execute([
                     'user_id' => (int)$user['id'],
