@@ -223,5 +223,22 @@ class GetAppointmentModel {
         
     }
     
+public function getAppointmentDatesByRange($userId, $startDate, $endDate) {   
+    $query = "SELECT DISTINCT a.date FROM appointment a 
+    JOIN user u ON a.userId = u.id WHERE u.id = :userId       
+    AND a.date >= :startDate        
+    AND a.date <= :endDate        
+    ORDER BY a.date ASC    ";        
+    try {    
+        AppController::databaseConnect();        
+        $stmt = DatabaseModel::$pdo->prepare($query);        
+        $stmt->execute([            "userId" => (int)$userId,            
+        "startDate" => $startDate,            "endDate" => $endDate        
+    ]);        
+    $dates = $stmt->fetchAll(PDO::FETCH_COLUMN);        
+    return $dates;    
+    } catch (Exception $e) { 
+        throw $e;    
+    }}
 };
 ?>

@@ -16,6 +16,7 @@ export const apiRoutes = {
     UPDATE_SERVICE: 'service/updateService.php',
     INSERT_APPOINTMENT: 'appointment/insertAppointment.php',
     GET_RESERVED_AND_BARBER_APPOINTMENTS: 'appointment/getReservedAndBarberAppointments.php',
+    GET_APPOINTMENT_DATES_BY_RANGE: 'appointment/getAppointmentDatesByRange.php',
     GET_CLIENT_APPOINTMENTS: 'appointment/getClientAppointments.php',
     DELETE_CLIENT_APPOINTMENT: 'appointment/deleteClientAppointment.php',
     GET_WORKING_HOURS_BY_USER_ID: 'working_hours/getWorkingHoursByUserId.php',
