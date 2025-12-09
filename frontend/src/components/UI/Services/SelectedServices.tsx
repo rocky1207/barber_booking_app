@@ -52,7 +52,7 @@ const SelectedServices: React.FC = () => {
     return (
         <>
         {choosenServices.length > 0 && <section className={`glass-gold ${styles.selectedServiceSection}`}>
-            <div className='wrapp flexed'>
+            <div className={`wrapp flexed ${styles.showServicesDiv}`}>
                 {serviceDivElement}
                 {!pathName.includes('appointments') && <NavigateButton {...updateContinueBtn}/>}
             </div>

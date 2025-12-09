@@ -12,7 +12,10 @@ const BookingPage = async ({searchParams}: Props) => {
     const params = await searchParams;
     const updatedClientHeaderNav = {
         ...clientsHeaderNav,
-        liItem: [...clientsHeaderNav.liItem, {link: `/services?barberId=${params.barberId}`, text: '<<', itemClass: 'separateLi'}]
+        liItem: [
+            {...clientsHeaderNav.liItem[0]}, 
+            {link: `/services?barberId=${params.barberId}`, text: '<<', itemClass: 'separateLi'}
+        ]
     }
     return (
         <>

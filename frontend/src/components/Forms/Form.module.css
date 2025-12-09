@@ -11,9 +11,11 @@
     border: 1px solid var(--mainGold);
     padding: var(--space-4) var(--space-3);
     width: 100%;
-    color: var(--mainGold);
+    color: var(--lightGrey);
     border-radius: 4px;
     box-shadow: var(--shadow-gold);
+    letter-spacing: 1px;
+    font-weight: 300;
 }
 .form input[type="file"] {
     display: none;
@@ -28,8 +30,9 @@
     margin-right: var(--space-4);
     border-radius: 4px;
 }
-.form label {
-    font-size: var(--fontBase);
+.form .labelMark {
+    font-size: var(--font-sm);
+    color: var(--lightGrey);
 }
 .fileBtn {
     font-size: 16px;
@@ -75,15 +78,15 @@
 .form textarea:-webkit-autofill:hover {
   -webkit-box-shadow: 0 0 0 1000px var(--middleDarkGrey) inset !important;
   box-shadow: 0 0 0 1000px var(--middleDarkGrey) inset !important;
-  -webkit-text-fill-color: var(--mainGold) !important;
-  color: var(--mainGold) !important;
-  caret-color: var(--mainGold) !important;
+  -webkit-text-fill-color: var(--lightGrey) !important;
+  color: var(--lightGrey) !important;
+  caret-color: var(--lightGrey) !important;
   border-color: var(--mainGold) !important;
   transition: background-color 5000s ease-in-out 0s !important;  
 }
 .form input:-moz-autofill,
 .form textarea:-moz-autofill {
   background-color: var(--middleDarkGrey) !important;
-  color: var(--mainGold) !important;
+  color: var(--lightGrey) !important;
   border-color: var(--mainGold) !important;
 }

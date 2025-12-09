@@ -22,11 +22,15 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
             price: formatPrice(service.price)
         }
     });
-    
+    const updatedClientHeaderNav = {
+        ...clientsHeaderNav,
+        liItem: [{...clientsHeaderNav.liItem[0]}]
+    }
     return (
         <>
-        <Header {...clientsHeaderNav} />
+        <Header {...updatedClientHeaderNav} />
         <main className={`wrapp`}>
+            <h1>Usluge</h1>
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :
             <Services services={services as SingleServiceType[]} />}

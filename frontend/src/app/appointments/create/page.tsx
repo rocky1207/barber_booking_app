@@ -12,7 +12,7 @@ const CreateAppointmentPage = async ({searchParams}: Props) => {
     const updatedClientHeaderNav = {
         ...clientsHeaderNav,
         liItem: [
-            ...clientsHeaderNav.liItem,
+            {...clientsHeaderNav.liItem[0]},
             {link: `/services?barberId=${params.barberId}`, text: 'USLUGE', itemClass: 'clientHeaderLi'},
             {link: `/appointments?barberId=${params.barberId}&serviceId1=${params.serviceId}`, text: '<<', itemClass: 'separateLi'}
         ]

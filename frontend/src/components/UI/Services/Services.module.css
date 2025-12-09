@@ -1,6 +1,6 @@
 
 .service {
-  margin: var(--space-8) 0 var(--space-9);
+  margin: var(--space-4) 0 var(--space-9);
 }
 .service ul {
   margin-top: var(--space-2);
@@ -73,7 +73,7 @@
   left: 0;
   height: 1px;
   width: 100%;
-  background-color: var(--darkGold);
+  background: #444444;
 }
 
 .selectedTerm {

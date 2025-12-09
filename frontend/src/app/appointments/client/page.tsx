@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 const ClientPage = () => {
     const choosenTermsNav = {
         ...clientsHeaderNav,
-        liItem: [{text: 'POČETNA', itemClass: 'clientHeaderLi', link: '/'},]
+        liItem: [
+            {text: 'POČETNA', itemClass: 'clientHeaderLi', link: '/'}
+        ]
     }
     return (
         <>

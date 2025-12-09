@@ -140,9 +140,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center; /* centriranje po vertikali */
-    margin-top: -100px;
+    /*margin-top: -100px;*/
     align-items: center;
     height: 100vh; 
+    max-width: 90%;
+    margin: -200px auto 0 auto;
 }
 .middle {
     display: flex;
@@ -280,15 +282,18 @@ Glavni dizajn optimizuj za 375–425px,
 
 Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 */
-.greyBackground {
-  background: var(--darkGrey);
   /*
+.greyBackground {
+
+  background: var(--darkGrey);
+  
   border-radius: 0 var(--radius-sm) 0 var(--radius-sm);
   padding: var(--space-5) var(--space-3);
   box-shadow: var(--shadow-gold-1);
-  */
+
   border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
+  */
 .card {
   background: linear-gradient(135deg, 
     rgba(26, 26, 26, 0.8), 
