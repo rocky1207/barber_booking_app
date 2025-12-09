@@ -33,6 +33,7 @@ const Home: React.FC = () => {
     }
     dispatch(barberActions.setLoggedBarber({
       id: 0,
+      full_name: '',
       username: '',
       file: '',
       role: '',

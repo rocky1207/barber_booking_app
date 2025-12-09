@@ -1,4 +1,74 @@
-Delete action: [2025-11-24 20:14:01] 
+Delete action: [2025-11-25 23:57:46] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-11-25 23:58:43] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-11-25 23:58:44] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-11-25 23:58:44] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-11-25 23:59:21] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-11-26 00:08:22] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+D:\laragon\www\projects\barber_booking_app\backend\cron/../tmp/reset_password_log/email_error_log_2025-11-24.logDelete action: [2025-11-26 00:09:45] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+D:\laragon\www\projects\barber_booking_app\backend\cron/../tmp/reset_password_log/email_error_log_2025-11-24.log1764080213Delete action: [2025-11-26 00:13:45] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+D:\laragon\www\projects\barber_booking_app\backend\cron/../tmp/reset_password_log/email_error_log_2025-11-24.logChecking: D:\laragon\www\projects\barber_booking_app\backend\cron/../tmp/reset_password_log/email_error_log_2025-11-24.log
+filemtime: 1764080213
+1764080213Delete action: [2025-11-26 00:24:46] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+D:\laragon\www\projects\barber_booking_app\backend\cron/../tmp/reset_password_log/email_error_log_2025-11-24.logChecking file: D:\laragon\www\projects\barber_booking_app\backend\cron/../tmp/reset_password_log/email_error_log_2025-11-24.log
+ - exists: yes
+ - readable: yes
+ - dir writable: dir writable
+ - filemtime: 1764080213 (2025-11-25 15:16:53)
+ - expireTime: 1764026686 (2025-11-25 00:24:46)
+ - not old enough, skipping
+1764080213Delete action: [2025-11-26 00:35:46] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+now: 1764113746 (2025-11-26 00:35:46)
+file: D:\laragon\www\projects\barber_booking_app\backend\cron/../tmp/reset_password_log/email_error_log_2025-11-24.log
+filemtime: 1764080213 (2025-11-25 15:16:53)
+expireTime: 1764027346 (2025-11-25 00:35:46)
+
+Delete action: [2025-11-26 20:14:04] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-11-28 20:14:04] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-12-01 20:14:02] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-12-02 20:14:05] 
+        [deletedEmailErrorLogs] - 0
+        [deletedResetRequests] - 0
+        [deletedPasswordResets] - 0
+Delete action: [2025-12-03 20:14:02] 
         [deletedEmailErrorLogs] - 0
         [deletedResetRequests] - 0
         [deletedPasswordResets] - 0

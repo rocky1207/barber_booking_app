@@ -15,7 +15,7 @@ export const bookBtn: NavigateBtnType  = {
     validate: 'navigacija',
     type: 'button',
     className: 'bookBtn',
-    text: 'ZAKAŽI',
+    text: '>',
     onAction: () => {}
 };
 
@@ -73,7 +73,7 @@ export const continueBtn: NavigateBtnType = {
 export const deleteBtn: ApiBtnType = {
     validate: 'api',
     type: 'button',
-    className: 'deleteBtn',
+    className: '',
     text: 'DA',
     head: 'DA LI STE SIGURNI?',
  };

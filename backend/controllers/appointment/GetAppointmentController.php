@@ -136,5 +136,30 @@ class GetAppointmentController {
             AppController::createMessage($e->getMessage(), $e->getCode());
         }
     }
+    public function getAppointmentDatesByRange($data) {
+    $validateUserId = integerValidator((int)$data['userId']);
+    $formatedStartDate = normalizeDateDMY($data['startDate']);
+    $formatedEndDate = normalizeDateDMY($data['endDate']);
+    $validateStartDate = dateValidator($formatedStartDate);
+    $validateEndDate = dateValidator($formatedEndDate);
+    
+    try {
+        $getAppointmentModel = new GetAppointmentModel();
+        $dates = $getAppointmentModel->getAppointmentDatesByRange(
+            $validateUserId['id'],
+            $validateStartDate['date'],
+            $validateEndDate['date']
+        );
+        
+        return [
+            "success" => true,
+            "status" => 200,
+            "message" => 'Datumi sa appointments su uspešno dobavljeni',
+            "data" => $dates
+        ];
+    } catch (Exception $e) {
+        AppController::createMessage($e->getMessage(), $e->getCode());
+    }
+}
 }
 ?>

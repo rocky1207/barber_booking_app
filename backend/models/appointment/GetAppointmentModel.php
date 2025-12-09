@@ -2,6 +2,24 @@
 require_once (__DIR__ . '/../../controllers/AppController.php');
 require_once (__DIR__ . '/../DatabaseModel.php');
 class GetAppointmentModel {
+    public function getAppointmentTimes($userId, $date) {
+        
+        $query = "SELECT time FROM appointment WHERE userId = :userId AND date = :date";
+        try {
+            //AppController::databaseConnect();
+            $stmt = DatabaseModel::$pdo->prepare($query);
+            $stmt->execute([
+                'userId' => (int)$userId,
+                'date' => $date
+            ]);
+            $times = $stmt->fetchAll();
+           // if(empty($times)) throw new Exception("Nema rezultata", 404);
+           
+            return $times;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
     public function getAppointment($id) {
         $query = "SELECT * FROM appointment WHERE id = :id";
         try {
@@ -204,5 +222,23 @@ class GetAppointmentModel {
     }
         
     }
+    
+public function getAppointmentDatesByRange($userId, $startDate, $endDate) {   
+    $query = "SELECT DISTINCT a.date FROM appointment a 
+    JOIN user u ON a.userId = u.id WHERE u.id = :userId       
+    AND a.date >= :startDate        
+    AND a.date <= :endDate        
+    ORDER BY a.date ASC    ";        
+    try {    
+        AppController::databaseConnect();        
+        $stmt = DatabaseModel::$pdo->prepare($query);        
+        $stmt->execute([            "userId" => (int)$userId,            
+        "startDate" => $startDate,            "endDate" => $endDate        
+    ]);        
+    $dates = $stmt->fetchAll(PDO::FETCH_COLUMN);        
+    return $dates;    
+    } catch (Exception $e) { 
+        throw $e;    
+    }}
 };
 ?>

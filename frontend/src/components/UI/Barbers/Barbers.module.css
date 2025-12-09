@@ -1,31 +1,45 @@
+
 .barberItem {
-  border: 1px solid var(--logoColor);
-  border-radius: 20px;
-  margin-bottom: 20px;
-  padding: 20px 15px;
   opacity: 0;
   animation: slideInLeft 0.3s ease forwards;
+}
   
+.barbers {
+  margin-bottom: var(--space-9);
 }
 .customerVew {
   display: flex;
   justify-content: flex-start;
   gap: 20px;
   align-items: center;
+  
 }
 .barberInfoDiv {
+  height: 85px;
+  width: 100%;
+  flex-shrink: 1; 
+}
+.barberInfoDiv button {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 100%;
   width: 100%;
   max-width: 450px;
   gap: 20px;
 }
+.barberInfoDiv:hover {
+  cursor: pointer;
+}
+/*
 .itemButtonsNav {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
   margin-bottom: 20px;
 }
+  */
+  
 @keyframes slideInLeft {
   
   from {
@@ -38,11 +52,16 @@
   }
   
 }
+  
+/*
 .barberItem:hover,
 .barberItem:active {
   cursor: pointer;
-  /*margin-top: -10px;*/
- 
-  border-color: rgb(203, 188, 151);
+ border-color: rgb(203, 188, 151);
   background-color: rgba(34, 32, 32, 1);
+}
+*/
+
+.removePointer {
+  cursor: default;
 }

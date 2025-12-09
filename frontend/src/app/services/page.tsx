@@ -3,8 +3,10 @@ import Services from "@/components/UI/Services/Services";
 import { getUsersAndServices } from "@/lib/api/getUsersAndServices";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import { servicesPageNav } from "@/datas/NavigationObjects";
+import Logo from "@/components/UI/Logo/Logo";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
@@ -20,12 +22,15 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
             price: formatPrice(service.price)
         }
     });
-    
+    const updatedClientHeaderNav = {
+        ...clientsHeaderNav,
+        liItem: [{...clientsHeaderNav.liItem[0]}]
+    }
     return (
         <>
-        <Header />
-        <PageNavigation {...servicesPageNav} />
-        <main className="wrapp">
+        <Header {...updatedClientHeaderNav} />
+        <main className={`wrapp`}>
+            <h1>Usluge</h1>
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :
             <Services services={services as SingleServiceType[]} />}

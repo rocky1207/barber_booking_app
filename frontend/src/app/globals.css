@@ -1,17 +1,125 @@
+.logoDiv-1 {
+  display: flex;
+  justify-content: center;
+}
+.logo-1 {
+  width: 100%;
+  max-width: 70px;     /* širina 100% roditeljskog elementa */
+  height: auto;      /* visina se automatski računa */
+ /* aspect-ratio: 16 / 9;  /* ili prave proporcije tvoje slike */
+  object-fit: contain; 
+}
+.logoDiv-2 {
+  display: block;
+  margin: 0!important;
+}
+.logo-2 {
+  
+  border-radius: 50%;
+  width: 100%;
+  max-width: 30px;     /* širina 100% roditeljskog elementa */
+  height: auto;      /* visina se automatski računa */
+ /* aspect-ratio: 16 / 9;  /* ili prave proporcije tvoje slike */
+  object-fit: contain; 
+}
+/*
+Font weights:
+Light: 300 (sekundarni tekst)
+Regular: 400 (body text)
+Medium: 500 (dugmad, labels)
+Semibold: 600 (podnaslovi)
+Bold: 700 (naslovi, CTA)
+*/
+/*
+Line heights:
+Naslovi: 1.2
+Body: 1.6
+Dugmad: 1.4
+*/
+/*
+Padding unutar dugmića: 16px 24px
+Razmak između elemenata: 24px
+Razmak sekcija: 64px (mobile), 96px (desktop)
+*/
+/*
+//shadows
+Kartice (barbers, services): box-shadow: var(--shadow-md)
+Dugmići na hover: box-shadow: var(--shadow-gold)
+Modali: box-shadow: var(--shadow-xl)
+Bottom navigation/sheets: box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5)
+*/
+
+
 :root {
-  --background: rgba(10,10,10,1);
+  --background: #0a0a0a; /*rgba(10,10,10,1)*/
   --foreground: #171717;
   --logoColor: rgb(238, 186, 64);
-  
+  --mainGold: #D4AF37; /*zlatna, manje žuta od trenutne rgb(238, 186, 64)*/
+  --lightGold: #F4E5B1;/*za hover efekte, disabled states*/
+  --darkGold: #B8941F; /*za borders, suptilne akcente*/
+  --darkGrey: #1a1a1a; /*pozadina kartice, umesto trenutne rgb(10,10,10), za karticu*/
+  --middleDarkGrey: #2a2a2a; /*za hover states*/
+  --secondaryTextGrey: #a0a0a0; /*sekundarni tekst*/
+  --lightGrey: #e5e5e5; /*za disabled tekst*/
+/*Accent boje (samo gde je neophodno)*/
+  --succesGreen: #10b981; /*moderan emerald green*/
+  --errorRed: #ef4444; /*moderna crvena*/
+  --warningAmber: #f59e0b; /*amber nijansa*/
+  /* Mobile */
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-base: 16px;
+  --font-lg: 18px;
+  --font-xl: 24px;
+  --font-2xl: 32px;
+  --font-3xl: 40px;
+
+  /* Desktop (min-width: 768px) */
+  --font-xl: 28px;
+  --font-2xl: 36px;
+  --font-3xl: 48px;
+  /*spacing*/
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  /*border radius*/
+  --radius-sm: 8px;   /* Mali elementi, tagovi */
+  --radius-md: 12px;  /* Inputi, mali dugmići */
+  --radius-lg: 16px;  /* Kartice, glavni dugmići */
+  --radius-xl: 24px;  /* Modali, velike sekcije */
+  --radius-2xl: 32px; /* Bottom sheets (kao selectedServiceSection) */
+  --radius-full: 9999px; /* Avatar, badges */
+  /*shadows*/
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+
+  /* Zlatna senka za hover efekte */
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.2);
+  --shadow-gold-1: 0 1px 4px rgba(212, 175, 55, 0.2);
 }
-.rdp-root {
-  --rdp-nav-height: 60px !important;
-  --rdp-accent-background-color: rgb(41, 41, 41) !important;
-}
+html {
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
 body {
-  color: var(--logoColor);
+  /*color: var(--logoColor);*/
+  color: var(--mainGold);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /*font-family: Arial, Helvetica, sans-serif;*/
+  /* Primarni font - elegantna sans-serif */
+  /*font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;*/
+  font-family: var(--font-inter);
+  font-size: var(--font-xs);
+  font-weight: 400;
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -26,13 +134,17 @@ body {
   max-width: 600px;
   margin: 0 auto;
 }
+
+
 .center {
     display: flex;
     flex-direction: column;
     justify-content: center; /* centriranje po vertikali */
-    margin-top: -100px;
+    /*margin-top: -100px;*/
     align-items: center;
     height: 100vh; 
+    max-width: 90%;
+    margin: -200px auto 0 auto;
 }
 .middle {
     display: flex;
@@ -44,7 +156,6 @@ body {
     display: flex;
     justify-content: space-between; /* centriranje po vertikali */
     align-items: center;
-      
 }
 
 .textCenter {
@@ -56,23 +167,32 @@ a {
 }
 
 h1 {
-  font-weight: 700;
-  font-size: 30px;
-  margin-bottom: 60px;
+  text-align: end;
+  font-size: var(--font-lg);
+  /*margin-bottom: var(--space-2);*/
+  }
+  /*
+h1, h2, h3, h4 {
+font-family: 'Playfair Display', 'Cormorant', 'Georgia', serif;*/
+/* Za logo i naslove (ako želiš serif kao na logu) */
+/*  font-family: var(--font-playfair);
+}
+*/
+.choosenTermsh1 {
+  
+  margin: var(--space-3) 0;
   text-align: center;
+  text-transform: uppercase;
 }
 .logOutDiv {
   margin-bottom: 20px;
 }
+
 ul {
   list-style-type: none;
 }
-footer {
-  text-align: center;
-}
-nav {
-  padding: 30px 0;
-}
+
+
 button {
   all: unset;
   cursor: pointer;
@@ -80,7 +200,12 @@ button {
 .profileImageDiv {
   width: 50px;
 }
+.profileImageDiv {
+  flex-shrink: 0; 
+  
+}
 .profileImageDiv img {
+  
   width: 100%;
   height: 50px;
   object-fit: cover;
@@ -94,63 +219,59 @@ button {
 .changePasswordBtn,
 .servicesBtn {
   background: none;
-  border-bottom: 1px solid white;
+  /*border-bottom: 1px solid white;*/
   text-align: center;
-  padding: 3px 6px;
+  /*padding: 3px 6px;*/
 }
 .terminBtn {
   color: white;
 }
 .servicesBtn {
   color: var(--logoColor);
+  transition: color .25s ease;
 }
 .updateBtn {
-  color: green;
+  color: var(--succesGreen);
+}
+.updateBtn:hover {
+  color: #21c68f;
 }
 .deleteBtn {
-  color: red;
+  color: var(--errorRed);
+  transition: color .25s ease;
+}
+.deleteBtn:hover {
+  color: #f35959;
 }
 .changePasswordBtn {
-  color: red;
+  color: var(--errorRed);
   text-align: left;
+  transition: color .25s ease;
 }
-.loading {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999
-}
-.spinner {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid gold;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
+.changePasswordBtn:hover {
+  color: #f35959;
 }
 
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.85);
 }
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-@media screen and (min-width: 766px) {
-  h1 {
-    font-size: 40px;
-  }
-  ul {
-  font-size: 22px;
-}
+
+
+/* Header, modali, cards */
+.glass-effect {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
+/* Zlatni glass efekat za CTA sekcije */
+.glass-gold {
+  background: linear-gradient(135deg, 
+    rgba(212, 175, 55, 0.1), 
+    rgba(184, 148, 31, 0.05));
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
 /*
  Preporuka:
 Za početak, ako želiš minimum:
@@ -161,3 +282,107 @@ Glavni dizajn optimizuj za 375–425px,
 
 Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 */
+  /*
+.greyBackground {
+
+  background: var(--darkGrey);
+  
+  border-radius: 0 var(--radius-sm) 0 var(--radius-sm);
+  padding: var(--space-5) var(--space-3);
+  box-shadow: var(--shadow-gold-1);
+
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+  */
+.card {
+  background: linear-gradient(135deg, 
+    rgba(26, 26, 26, 0.8), 
+    rgba(20, 20, 20, 0.9));
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom-left-radius: var(--space-3);
+  border-top-right-radius: var(--space-3);
+ /*padding: var(--space-4);*/
+ padding: 0 var(--space-6) 0 var(--space-4);
+ transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+/* Zlatni glow efekat na hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #D4AF37, #B8941F);
+  /*border-radius: 16px;*/
+  border-bottom-left-radius: var(--space-3);
+  border-top-right-radius: var(--space-3);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover,
+.card:active {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4),
+              0 0 40px rgba(212, 175, 55, 0.15);
+}
+
+.card:hover::before,
+.card:active::before {
+  opacity: 0.3;
+}
+.cardDashboard {
+  background: linear-gradient(135deg, 
+    rgba(26, 26, 26, 0.8), 
+    rgba(20, 20, 20, 0.9));
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom-left-radius: var(--space-3);
+  border-top-right-radius: var(--space-3);
+ /*padding: var(--space-4);*/
+ padding: 0 var(--space-6) 0 var(--space-4);
+  /*
+  position: relative;
+  overflow: hidden;
+  */
+  margin-bottom: var(--space-4);
+  cursor: default!important;
+}
+
+/* Zlatni glow efekat na hover */
+/*
+.cardDashboard::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #D4AF37, #B8941F);
+  border-radius: 16px;
+  border-bottom-left-radius: var(--space-3);
+  border-top-right-radius: var(--space-3);
+  
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+  cursor: default!important;
+}
+*/
+.activeService {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4),
+              0 0 40px rgba(212, 175, 55, 0.15);
+}
+.activeService::before  {
+  opacity: 0.3;
+}
+
+
+.cursorDefault {
+  cursor: default;
+}

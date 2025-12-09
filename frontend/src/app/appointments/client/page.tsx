@@ -1,7 +1,10 @@
 import ClientAppointmentForm from "@/components/Forms/Appointments/ClientAppointmentForm/ClientAppointment";
 import ClientAppointments from "@/components/UI/Appointments/ClientAppointments";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
-import { adminPageNav } from "@/datas/NavigationObjects";
+import Header from "@/components/UI/Header/Header";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
+import LocationMap from "@/components/UI/LocationMap/LocationMap";
+import Footer from "@/components/UI/Footer/Footer";
+import styles from '@/components/UI/Appointments/Appointments.module.css';
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,15 +12,23 @@ export const metadata: Metadata = {
   description: "Check and manage your appointments",
 };
 const ClientPage = () => {
-    
+    const choosenTermsNav = {
+        ...clientsHeaderNav,
+        liItem: [
+            {text: 'POČETNA', itemClass: 'clientHeaderLi', link: '/'}
+        ]
+    }
     return (
         <>
-        <PageNavigation {...adminPageNav} />
+        <Header {...choosenTermsNav} />
         <main className="wrapp">
-            <h1>IZABRANI TERMINI</h1>
-            <h2>Unesite podatke da biste videli vaše termine</h2>
+            <h1 className="choosenTermsh1">PREGLED ZAKAZANIH TERMINA</h1>
             <ClientAppointmentForm />
             <ClientAppointments />
+            <div className={styles.separateDiv}>
+             <LocationMap />
+            <Footer />
+            </div>
         </main>
         </>
     );

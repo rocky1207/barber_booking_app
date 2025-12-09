@@ -61,14 +61,12 @@ const CreateAppointment: React.FC = () => {
         setIsLoadingState(true, dispatch);
         const responseData = await insertItems(newData, 'INSERT_CLIENT_APPOINTMENT');
         const {success, data, message, actionDone } = responseData as InsertAppointmentApiReturnType;
-        console.log(data);
         if(!success) {
             setMessage(message);
             setIsLoadingState(false, dispatch);
             return;
         }
         if(actionDone === 'INSERT_CLIENT_APPOINTMENT') {
-            
             const insertData = data as { date: string; startAppointment: string };
             setDialogData({
                 date: insertData.date,
@@ -89,7 +87,7 @@ const CreateAppointment: React.FC = () => {
         <form className={styles.form} onSubmit={handleSubmmit}> 
             <Input inputs={appointmentInputs} />
             <p>{message}</p>
-            <button type="submit">POTVRDI</button>
+            <button className={styles.submitBtn} type="submit">POTVRDI</button>
         </form>
         </>
  );

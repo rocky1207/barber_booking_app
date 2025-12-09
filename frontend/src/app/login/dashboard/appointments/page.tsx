@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Calendar from "@/components/UI/Appointments/Calendar";
+import CalendarBarber from "@/components/UI/Appointments/CalendarBarber";
 import BarberAppointments from "@/components/UI/Appointments/BarberAppointments";
 import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
@@ -57,7 +57,7 @@ const AppointmentsPage: React.FC =  () => {
         <main className="wrapp">
             <h1>ZAKAZANI TERMINI</h1>
             <section className="middle">
-                <Calendar />
+                <CalendarBarber />
             </section>
             <div className={styles.barberAppointmentsHeadDiv}>
                 <h3>Frizer: <span>{selectedBarber[0].username}</span></h3>

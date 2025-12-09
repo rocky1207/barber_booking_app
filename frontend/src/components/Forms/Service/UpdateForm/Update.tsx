@@ -59,7 +59,7 @@ const Update: React.FC = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
              <p>{message}</p>
-            <button type='submit'>POŠALJI</button>
+            <button type='submit' className={styles.submitBtn}>POŠALJI</button>
         </form>
     );
 };

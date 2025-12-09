@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/../models/DatabaseModel.php");
 class AppController {
+    public const FULL_NAME_REGEX = "/^[A-Za-zČĆŠĐŽčćšđž ]{2,60}$/";
     public const USERNAME_REGEX = "/^[\p{L}0-9._]{3,20}$/u";
     public const PASSWORD_REGEX = "/^(?=\p{Lu})(?=.*\d)[\p{L}\d!]{4,}$/u";
     public const ROLE_REGEX = "/^(admin|user|student)$/";
@@ -16,6 +17,7 @@ class AppController {
     public const DATE_REGEX = "/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/";
     public const TIME_REGEX = "/^(?:[01]\d|2[0-3]):[0-5]\d$/";
 
+    public const FULL_NAME_ERROR_MESSAGE = 'Dozvoljena su samo slova i razmak, najmanje 2 a najviše 60 karaktera.';
     public const INT_ERROR_MESSAGE = 'Prosleđeni parametar mora biti broj.';
     public const USERNAME_ERROR_MESSAGE = 'Dozvoljena su slova i brojevi, bez razmaka, najmanje 3 a najviše 20 kakraktera.';
     public const PASSWORD_ERROR_MESSAGE = 'Lozinka počinje velikim slovom, sadrži najmanje jednu cifru, dozvoljava slova i znak !, i ima minimalnu dužinu od 4 karaktera.';

@@ -11,10 +11,13 @@ import { getItemsByUserId } from '@/lib/api/getItemsByUserId';
 import { GetReservedAppointmentsReturnDataType } from '@/types/Api/ReturnAppointmentType';
 import { calculateAvailableTimeSlotsWithWorkingHours } from '@/lib/utils/calculateAvailableAppointments';
 import { normalizeTimeString, filterAvailableTimeSlots } from '@/lib/utils/timeUtils';
+
+
 import styles from './Appointments.module.css';
 
 const AvailableAppointments: React.FC = () => {
     const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+    
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const {selectedTerm} = useAppSelector((state: RootState) => state?.appointment);
     const {choosenServices} = useAppSelector((state: RootState) => state?.service);
@@ -22,14 +25,17 @@ const AvailableAppointments: React.FC = () => {
     const router = useRouter();
     const queryString = useSearchParams().toString();
 
-    console.log(selectedTerm);
+   
+    
+    
     useEffect(() => {
         const fetchAvailableSlots = async () => {
             if (!selectedTerm.date || choosenServices.length === 0) {
                 setAvailableSlots([]);
                 return;
             }
-            setIsLoading(true);
+            setIsLoadingState(true, dispatch);
+            
             try {
                 const data = await getItemsByUserId({
                     userId: choosenServices[0].userId, 
@@ -50,16 +56,18 @@ const AvailableAppointments: React.FC = () => {
                     );
                     const filteredSlots = filterAvailableTimeSlots(slots, selectedTerm.date, 60);
                     setAvailableSlots(filteredSlots);
+                    setIsLoadingState(false, dispatch);
                 } else {
                     console.error('Failed to fetch reserved appointments:', reservedAppointments.message);
                     setAvailableSlots([]);
+                    setIsLoadingState(false, dispatch);
                 }
             } catch (error) {
                 console.error('Error fetching available slots:', error);
                 setAvailableSlots([]);
-            } finally {
-                setIsLoading(false);
-            }
+                setIsLoadingState(false, dispatch);
+            } 
+            
         };
         fetchAvailableSlots();
     }, [selectedTerm.date, choosenServices]);
@@ -73,28 +81,24 @@ const AvailableAppointments: React.FC = () => {
     };
     
     if (isLoading) {
-        return (
-            <div className={`${styles.appointmentsUl} wrapp`}>
-                <p>Učitavanje dostupnih termina...</p>
-            </div>
-        );
+       
     }
     
     if (availableSlots.length === 0 && selectedTerm.date) {
         return (
-            <div className={`${styles.appointmentsUl} wrapp`}>
+            <div className={`${styles.appointmentsUl}`}>
                 <p>Nema dostupnih termina za izabrani datum.</p>
             </div>
         );
     }
     
     return (
-        <ul className={`${styles.appointmentsUl} wrapp`}>
+        <ul className={`${styles.appointmentsUl}`}>
             {availableSlots?.map((slot) => (
                 <li key={slot}>
                     <button 
                         onClick={() => handleSlotClick(slot)}
-                        className={styles.availableSlot}
+                        className=''
                     >
                         {normalizeTimeString(slot)}
                     </button>

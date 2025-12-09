@@ -1,49 +1,92 @@
 .form {
     width: 100%;
-    max-width: 500px;
-    
+    max-width: 450px;
+    margin: 0 auto;
 }
 .form div {
     margin-bottom: 20px;    
 }
 .form input {
-    font-size: 16px;
-    background-color: rgba(255, 255, 255, 0.1); /* vrlo svetla providna boja */
-    border: 1px solid var(--logoColor);
-    padding: 20px 15px;
+    background: var(--middleDarkGrey); /* vrlo svetla providna boja */
+    border: 1px solid var(--mainGold);
+    padding: var(--space-4) var(--space-3);
     width: 100%;
-    color: white;
+    color: var(--lightGrey);
+    border-radius: 4px;
+    box-shadow: var(--shadow-gold);
+    letter-spacing: 1px;
+    font-weight: 300;
 }
 .form input[type="file"] {
     display: none;
     width: 100%;
+    border-radius: 4px;
 }
 .form input[type="checkbox"] {
     width: 30px;
     transform: scale(2.5);
     cursor: pointer;
     accent-color: #000; /* opciono — menja boju kvadratića kad je čekiran */
-    margin-right: 20px;
+    margin-right: var(--space-4);
+    border-radius: 4px;
 }
-.form label {
-    font-size: 20px;
+.form .labelMark {
+    font-size: var(--font-sm);
+    color: var(--lightGrey);
 }
 .fileBtn {
     font-size: 16px;
-    background-color: rgba(255, 255, 255, 0.1); /* vrlo svetla providna boja */
-    border: 1px solid var(--logoColor);
+    background: var(--middleDarkGrey); /* vrlo svetla providna boja */
+    border: 1px solid var(--mainGold);
     padding: 20px 15px;
     width: 150px;
-    color: white;
+    color: var(--mainGold);
 }
 
 .form textarea {
     font-size: 16px;
-    background-color: rgba(255, 255, 255, 0.1); /* vrlo svetla providna boja */
+    background: var(--middleDarkGrey); /* vrlo svetla providna boja */
     border: 1px solid var(--logoColor);
-    padding: 20px 15px;
+    padding: var(--space-4) var(--space-3);
     width: 100%;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--mainGold);
+    /*font-family: Arial, Helvetica, sans-serif;*/
     min-height: 150px;
+}
+
+.submitBtn {
+   background: var(--mainGold); 
+   color: var(--middleDarkGrey);
+   font-weight: 600;
+   padding: var(--space-2) var(--space-3);
+   box-shadow: var(--shadow-gold);
+   border-radius: 4px;
+   letter-spacing: 1px;
+   transition: background .25s ease;
+}
+.submitBtn:hover,
+.submitBtn:active {
+   background: var(--lightGold); 
+   
+}
+
+.form input:-webkit-autofill,
+.form input:-webkit-autofill:focus,
+.form input:-webkit-autofill:hover,
+.form textarea:-webkit-autofill,
+.form textarea:-webkit-autofill:focus,
+.form textarea:-webkit-autofill:hover {
+  -webkit-box-shadow: 0 0 0 1000px var(--middleDarkGrey) inset !important;
+  box-shadow: 0 0 0 1000px var(--middleDarkGrey) inset !important;
+  -webkit-text-fill-color: var(--lightGrey) !important;
+  color: var(--lightGrey) !important;
+  caret-color: var(--lightGrey) !important;
+  border-color: var(--mainGold) !important;
+  transition: background-color 5000s ease-in-out 0s !important;  
+}
+.form input:-moz-autofill,
+.form textarea:-moz-autofill {
+  background-color: var(--middleDarkGrey) !important;
+  color: var(--lightGrey) !important;
+  border-color: var(--mainGold) !important;
 }

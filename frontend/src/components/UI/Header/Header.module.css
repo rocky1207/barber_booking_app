@@ -1,9 +1,31 @@
+.openMenuOverlay {
+  height: 40px;
+ 
+}
+.menuOverlay {
+  position: fixed;
+  height: 30vh; 
+  width: 100vW;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 0;
+  transition: height .3s ease;
+}
+/*
+.menuOverlay nav {
+  padding-top: var(--space-3);
+}*/
+
 .header {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 100px;
-    
+  padding-top: 10px;
+  height: 39px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0;
+  background: var(--background);  
+  margin-bottom: var(--space-8);
 }
 .header::after {
   position: absolute;
@@ -13,19 +35,33 @@
   content: '';
   width: 0;
   height: 1px;
-  background-color: rgb(218, 191, 38);
+  /*background-color: rgb(218, 191, 38);*/
+  background-color: var(--darkGold);
   opacity: 0;
   transition: width .3s ease-out, opacity 0.3s ease-out;
 }
 
 .animateLine::after {
-  width: 90%;
+ width: 100%;
   opacity: 1;
   max-width: 1023px;
 }
-.logo {
-width:100%;        /* širina 100% roditeljskog elementa */
-  height: auto;      /* visina se automatski računa */
-  aspect-ratio: 16 / 9;  /* ili prave proporcije tvoje slike */
-  object-fit: contain; 
+.menuBtn:hover svg path {
+  fill: var(--lightGold); /* svetlija nijansa zlata */
+  transition: fill 0.25s ease;
+}
+
+.menuBtn:hover {
+  cursor: pointer;
+}
+
+.btnWrappDiv {
+  padding-top: var(--space-1);
+}
+
+
+.linkWrappDiv nav ul li:hover,
+.linkWrappDiv a:active {
+  color: var(--lightGold); /* svetlija nijansa zlata */
+  transition: color 0.25s ease;
 }

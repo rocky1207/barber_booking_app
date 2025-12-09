@@ -42,7 +42,10 @@ class GetWorkingHoursModel {
                   */
                   ORDER BY start_time ASC";
         try {
-            AppController::databaseConnect();
+            if (!isset(DatabaseModel::$pdo) && !DatabaseModel::$pdo instanceof PDO) { 
+                AppController::databaseConnect();
+            }
+            
             $stmt = DatabaseModel::$pdo->prepare($query);
             $stmt->execute([
                 'userId' => $userId,
