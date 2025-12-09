@@ -1,12 +1,14 @@
 
+.separateDiv {
+  margin-top: 100px;
+}
 .appointmentsUl {
-    margin: var(--space-8) 0;
+    margin: var(--space-8) 0 500px;
     display: grid;
     grid-template-columns: auto auto;
     gap: var(--space-3)
 }
 .appointmentsUl li {
-  
     background: var(--darkGrey);
     border: 1px solid var(--logoColor);
     border-radius: var(--space-2);
@@ -177,26 +179,35 @@
 }
     */
 
-  .caption_label {
+.caption_label {
     z-index: 0;
-  }
+}
 .clientAppointment {
-  margin: 50px 0;
-  
+  margin: var(--space-8) auto;
+  max-width: 450px;
 }
 .clientAppointment h2 {
   margin-bottom: 10px;
+  text-align: end;
 }
 .clientAppointment ul {
-  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
 }
 .clientAppointment li {
+ 
   flex-wrap: wrap;
   gap: 30px;
+   /*
   border: 1px solid var(--logoColor);
   border-radius: 20px;
-  padding: 10px 15px;
-  margin-bottom: 20px;
+  */
+  padding: var(--space-2);
+  margin-bottom: var(--space-4);
+  
+}
+.info {
+  margin-bottom: var(--space-2);
 }
 .clientAppointment li .action {
   flex: 1 1 40%;

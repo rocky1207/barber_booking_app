@@ -134,12 +134,8 @@ body {
   max-width: 600px;
   margin: 0 auto;
 }
-.greyBackground {
-  background: var(--darkGrey);
-  border-radius: 0 var(--radius-sm) 0 var(--radius-sm);
-  padding: var(--space-5) var(--space-3);
-  box-shadow: var(--shadow-gold-1);
-}
+
+
 .center {
     display: flex;
     flex-direction: column;
@@ -173,10 +169,18 @@ h1 {
   font-size: var(--font-lg);
   /*margin-bottom: var(--space-2);*/
   }
+  /*
 h1, h2, h3, h4 {
-/*font-family: 'Playfair Display', 'Cormorant', 'Georgia', serif;*/
+font-family: 'Playfair Display', 'Cormorant', 'Georgia', serif;*/
 /* Za logo i naslove (ako želiš serif kao na logu) */
-  font-family: var(--font-playfair);
+/*  font-family: var(--font-playfair);
+}
+*/
+.choosenTermsh1 {
+  
+  margin: var(--space-3) 0;
+  text-align: center;
+  text-transform: uppercase;
 }
 .logOutDiv {
   margin-bottom: 20px;
@@ -215,23 +219,35 @@ button {
   background: none;
   /*border-bottom: 1px solid white;*/
   text-align: center;
-  padding: 3px 6px;
+  /*padding: 3px 6px;*/
 }
 .terminBtn {
   color: white;
 }
 .servicesBtn {
   color: var(--logoColor);
+  transition: color .25s ease;
 }
 .updateBtn {
-  color: green;
+  color: var(--succesGreen);
+}
+.updateBtn:hover {
+  color: #21c68f;
 }
 .deleteBtn {
-  color: red;
+  color: var(--errorRed);
+  transition: color .25s ease;
+}
+.deleteBtn:hover {
+  color: #f35959;
 }
 .changePasswordBtn {
-  color: red;
+  color: var(--errorRed);
   text-align: left;
+  transition: color .25s ease;
+}
+.changePasswordBtn:hover {
+  color: #f35959;
 }
 
 dialog::backdrop {
@@ -264,6 +280,15 @@ Glavni dizajn optimizuj za 375–425px,
 
 Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 */
+.greyBackground {
+  background: var(--darkGrey);
+  /*
+  border-radius: 0 var(--radius-sm) 0 var(--radius-sm);
+  padding: var(--space-5) var(--space-3);
+  box-shadow: var(--shadow-gold-1);
+  */
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
 .card {
   background: linear-gradient(135deg, 
     rgba(26, 26, 26, 0.8), 
@@ -278,7 +303,6 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   overflow: hidden;
   margin-bottom: var(--space-4);
 }
-
 /* Zlatni glow efekat na hover */
 .card::before {
   content: '';
@@ -307,16 +331,6 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 .card:active::before {
   opacity: 0.3;
 }
-
-.activeService {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4),
-              0 0 40px rgba(212, 175, 55, 0.15);
-}
-.activeService::before  {
-  opacity: 0.3;
-}
-
 .cardDashboard {
   background: linear-gradient(135deg, 
     rgba(26, 26, 26, 0.8), 
@@ -326,14 +340,16 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   border-top-right-radius: var(--space-3);
  /*padding: var(--space-4);*/
  padding: 0 var(--space-6) 0 var(--space-4);
-  
+  /*
   position: relative;
   overflow: hidden;
+  */
   margin-bottom: var(--space-4);
-  
+  cursor: default!important;
 }
 
 /* Zlatni glow efekat na hover */
+/*
 .cardDashboard::before {
   content: '';
   position: absolute;
@@ -342,14 +358,26 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   right: -2px;
   bottom: -2px;
   background: linear-gradient(135deg, #D4AF37, #B8941F);
-  /*border-radius: 16px;*/
+  border-radius: 16px;
   border-bottom-left-radius: var(--space-3);
   border-top-right-radius: var(--space-3);
+  
   opacity: 0;
   z-index: -1;
   transition: opacity 0.4s ease;
   cursor: default!important;
 }
+*/
+.activeService {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4),
+              0 0 40px rgba(212, 175, 55, 0.15);
+}
+.activeService::before  {
+  opacity: 0.3;
+}
+
+
 .cursorDefault {
   cursor: default;
 }

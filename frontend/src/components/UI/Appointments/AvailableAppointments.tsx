@@ -72,6 +72,7 @@ const AvailableAppointments: React.FC = () => {
         fetchAvailableSlots();
     }, [selectedTerm.date, choosenServices]);
     const handleSlotClick = (timeSlot: string) => {
+        setIsLoadingState(true, dispatch);
         dispatch(appointmentActions.setSelectedTerm({
             ...selectedTerm, 
             time: normalizeTimeString(timeSlot)

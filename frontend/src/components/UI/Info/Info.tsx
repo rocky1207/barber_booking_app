@@ -3,7 +3,6 @@ import { useState } from "react";
 import Clock from "../SvgIcons/Clock";
 import WorkingHoursInfo from "./WorkingHoursInfo";
 import DataListElements from "./DataListElements";
-import AddressMap from "./AddresMap";
 import { weeklyOpeningHours } from "@/datas/DataListObjects";
 import styles from './Info.module.css';
 
@@ -30,7 +29,6 @@ const Info: React.FC = () => {
             })}
         </dl>}
         </div>
-        <AddressMap />
     </section>
     );
 };

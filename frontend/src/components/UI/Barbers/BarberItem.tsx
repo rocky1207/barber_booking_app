@@ -59,7 +59,7 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, full_name, role, file, ind
                     {showButton && <div><NavigateButton {...newBookBtn} /></div>}
                 </div>*/}
                 <div className={styles.barberInfoDiv}>
-                    <button className={`${!showButton && styles.removePointer}`} onClick={handleClick }>
+                    <button className={`${!showButton && styles.removePointer}`} onClick={showButton ? handleClick : undefined}>
                         <p>{full_name}</p>
                         {showButton && <ArrowRight {...svgData} />}
                     </button>

@@ -9,8 +9,8 @@ import { formValidator } from "@/lib/validators/formValidator";
 import { appointmentValidationSchema } from "@/lib/validators/validationSchema";
 import { getClientAppointments } from "@/lib/api/appointments/getClientAppointments";
 import { appointmentActions } from "@/store/slices/appointmentSlice";
-
 import styles from '../../Form.module.css';
+
 const ClientAppointment = () => {
     const [message, setMessage] = useState<string>('');
     const dispatch = useAppDispatch();
@@ -45,7 +45,7 @@ const ClientAppointment = () => {
         <form className={styles.form} onSubmit={handleSubmmit}>
             <Input inputs={clientAppointmentInputs} />
             <p>{message}</p>
-            <button type="submit">POTVRDI</button>
+            <button type="submit" className={styles.submitBtn}>POTVRDI</button>
         </form>
     )
 };

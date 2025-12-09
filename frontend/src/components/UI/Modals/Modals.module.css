@@ -3,14 +3,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 2rem;
-  background: white;
+  padding: var(--space-4);
+  background: var(--darkGrey);
   border: none;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   z-index: 1000;
   width: 90%;
   max-width: 400px;
+  color: var(--mainGold);
 }
 .dialog h2 {
   text-align: center;
@@ -25,28 +26,41 @@
   gap: 30px;
 }
 .buttonsDiv button {
-  
-  padding: 8px 15px;
-  color: black;
+  padding: var(--space-2) var(--space-3);
+  color: var(--darkGrey);
+  transition: background .25s ease;
+  font-weight: 600;
 }
+
 .buttonsDiv div:first-child  {
-  background-color: red;
-  
-}
-.buttonsDiv div:last-child  {
-  background-color: green;
-  
+  background-color: var(--errorRed);
 }
 .buttonsDiv div:first-child:hover,
-.buttonsDiv div:first-child:active {
-  background-color: rgb(255, 96, 96);
+.buttonsDiv div:first-child:active{
+  background: #f35959;
+}
+.buttonsDiv div:last-child  {
+  background-color: var(--succesGreen);
 }
 .buttonsDiv div:last-child:hover,
 .buttonsDiv div:last-child:active {
-  background-color: rgb(45, 147, 45);
-  
+  background-color: #21c68f;
 }
-
+.confirmAppointmentBtn {
+  margin-top: var(--space-3);
+}
+.confirmAppointmentBtn button {
+  background-color: var(--mainGold);
+  padding: var(--space-2) var(--space-3);
+  color: var(--darkGrey);
+  font-weight: 600;
+  border-radius: var(--space-2);
+  transition: background .25s ease;
+}
+.confirmAppointmentBtn button:hover,
+.confirmAppointmentBtn button:active {
+  background: var(--lightGold);
+}
 /* new appointment modal */
 
 /* reset password modal */

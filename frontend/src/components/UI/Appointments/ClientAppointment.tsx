@@ -31,8 +31,8 @@ const ClientAppointment = forwardRef<HTMLDialogElement, {termData: ClientAppoint
         onAction: openModal
     }
     return (
-        <li>
-            <div className="flexed">
+        <li className={`cardDashboard`}>
+            <div>
             <div className={styles.info}>
                 <h3>Frizer: {barber}</h3>
                 <p>Datum: {date}</p>
