@@ -2,7 +2,6 @@ import { InputFieldsType } from "@/types/Form/InputFieldsType";
 import styles from '@/components/Forms/Form.module.css';
 
 const Input:React.FC<{inputs: InputFieldsType[]}> = ({inputs}) => {
-  console.log(inputs);
    return (
     <>
       {inputs.map((input) => {
@@ -10,9 +9,9 @@ const Input:React.FC<{inputs: InputFieldsType[]}> = ({inputs}) => {
         return (
           <div key={input.name}>
             <label htmlFor={input.name} className={styles.labelMark}>{/*input.required ? '*' : ''*/}</label>
-            <input
+            <input id={input.name}
               {...input}
-              defaultValue={input.defaultValue || ''}
+              defaultValue={input.defaultValue/* || ''*/}
             />{labelText}
           </div>
         );

@@ -11,6 +11,7 @@ class UpdateServiceController {
             "price" => $validateInputs["price"],
             "id" => $validateInputs["id"]
         ];
+        
         /*
         if(!isset($validateInputs['description'])) {
             $execData["description"] = '';

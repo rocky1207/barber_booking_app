@@ -2,9 +2,11 @@
 require_once (__DIR__ . "/../../controllers/AppController.php");
 require_once (__DIR__ . "/../DatabaseModel.php");
 require_once (__DIR__ . "/GetServiceModel.php");
+require_once ((__DIR__ . '/../appointment/GetAppointmentModel.php'));
 class UpdateServiceModel {
     public function updateService($execData) {
          $updateServiceQuery = 'UPDATE service SET userService = :userService, price = :price WHERE id = :id';
+         $selectAppQuery = 'SELECT * FROM appointment WHERE serviceId = :appServiceId';
          $updateAppointmentQuery = 'UPDATE appointment SET userService = :appService, price = :appPrice WHERE serviceId = :serviceId';
          $updateAppoiontmentData = [
             "appService" => $execData["userService"],
@@ -14,20 +16,25 @@ class UpdateServiceModel {
         try {
             AppController::databaseConnect();
             DatabaseModel::$pdo->beginTransaction();
-            $serviceStmt = DatabaseModel::$pdo->prepare($updateServiceQuery );
+
+            $serviceStmt = DatabaseModel::$pdo->prepare($updateServiceQuery);
             $serviceStmt->execute($execData);
             $isServiceUpdated = $serviceStmt->rowCount();
+            if($isServiceUpdated === 0) {
+                throw new Exception('Uneti podaci su ostali isti ili usluga ne postoji u bazi.', 404);
+            }
+
+            $selectAppStmt = DatabaseModel::$pdo->prepare($selectAppQuery);
+            $selectAppStmt->execute(['appServiceId' => (int)$execData["id"]]);
+            $appointments = $selectAppStmt->fetchAll();
             
-            $appointmentStmt = DatabaseModel::$pdo->prepare($updateAppointmentQuery);
-            $appointmentStmt->execute($updateAppoiontmentData);
-            $isAppointmentUpdated = $appointmentStmt->rowCount();
-            
-            if($isAppointmentUpdated === 0 || $isServiceUpdated === 0) {
-                throw new Exception('Usluga ne postoji u bazi ili su uneti podaci ostali isti.', 404);
+            if(!empty($appointments)) {
+                $appointmentStmt = DatabaseModel::$pdo->prepare($updateAppointmentQuery);
+                $appointmentStmt->execute($updateAppoiontmentData);
             }
             $getServiceModel = new GetServiceModel();
             $service = $getServiceModel->getServiceById($execData['id']);
-            empty($service) && throw new Exception(AppController::QUERY_ERROR_MESSAGE, 404);
+            empty($service) && throw new Exception("Usluga sa ID {$execData['id']} ne postoji u bazi", 404);
             DatabaseModel::$pdo->commit();
             return $service;
         } catch(Exception $e) {

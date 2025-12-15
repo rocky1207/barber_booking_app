@@ -161,11 +161,15 @@ body {
 .textCenter {
     text-align: center; 
 }
+
 a {
   color: inherit;
   text-decoration: none;
 }
-
+.link:hover,
+.link:active {
+  text-decoration: underline;
+}
 h1 {
   text-align: end;
   font-size: var(--font-lg);

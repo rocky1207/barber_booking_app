@@ -34,14 +34,14 @@ const Update: React.FC = () => {
     if(barberState?.loggedBarber.role === 'admin' || barberState?.loggedBarber.role === 'owner') {
     const checked = barber?.suspended === 1 ? true : false;
     updateInputs = [
-        {type: 'text', name: 'full_name', defaultValue: barber?.full_name, placeholder: "Ime i prezime"},
-        {type: 'text', name: 'username', defaultValue: barber?.username, placeholder: "Korisničko ime"},
-        {type: 'text', name: 'role', defaultValue: barber?.role, placeholder: "Uloga"},
-        {type: 'checkbox', name: 'suspended', defaultValue: barber?.suspended.toString(), defaultChecked:checked},
+        {type: 'text', name: 'full_name', defaultValue: barber?.full_name, placeholder: "Ime i prezime", required: false},
+        {type: 'text', name: 'username', defaultValue: barber?.username, placeholder: "Korisničko ime", required: false},
+        {type: 'text', name: 'role', defaultValue: barber?.role, placeholder: "Uloga", required: false},
+        {type: 'checkbox', name: 'suspended', defaultValue: barber?.suspended.toString(), defaultChecked:checked, required: false},
     ];
     } else {
         updateInputs = [
-            {type: 'text', name: 'username', defaultValue: barber?.username, placeholder: "Korisničko ime"},
+            {type: 'text', name: 'username', defaultValue: barber?.username, placeholder: "Korisničko ime", required: false},
         ];
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
