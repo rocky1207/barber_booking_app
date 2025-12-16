@@ -71,7 +71,6 @@
 .submitBtn:hover,
 .submitBtn:active {
    background: var(--lightGold); 
-   
 }
 
 .form input:-webkit-autofill,

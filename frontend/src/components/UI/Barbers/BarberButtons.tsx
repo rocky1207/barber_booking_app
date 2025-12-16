@@ -1,4 +1,4 @@
-import { terminsBtn, modalActionBtn, updateActionBtn, servicesActionBtn } from "@/datas/ButttonObjects";
+import { termsBtn, modalActionBtn, updateActionBtn, servicesActionBtn } from "@/datas/ButttonObjects";
 import NavigateButton from "@/components/Button/NavigateButton";
 import { forwardRef } from "react";
 import { barberActions } from "@/store/slices/barberSlice";
@@ -29,8 +29,8 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barbe
         dispatch(barberActions.setActionBarberId(barberId));
         router.push(`/login/dashboard/service?barberId=${barberId}`);
     };
-    const newTerminsBtn = {
-        ...terminsBtn,
+    const newTermsBtn = {
+        ...termsBtn,
         id: barberId,
         onAction: appointmentsPage
     }
@@ -59,12 +59,17 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barbe
     }
     return (
         <>
-        <nav className={styles.itemButtonsNav}>
-            <NavigateButton {...newTerminsBtn}/>
-            {showButton && <NavigateButton {...newUpdateActionBtn}/>}
-            {showButton && <NavigateButton {...newServicesActionBtn}/>} 
+        <nav>
+            <div className={styles.itemButtonsNav}>
+                <NavigateButton {...newTermsBtn}/>
+                {showButton && <NavigateButton {...newUpdateActionBtn}/>}
+                {showButton && <NavigateButton {...newServicesActionBtn}/>} 
+            </div>
+            {showButton &&
+            <div className="marginBottom">
+             <NavigateButton {...newModalActionBtn}/>
+            </div>} 
         </nav>
-        {showButton && <NavigateButton {...newModalActionBtn}/>} 
         </>
     );
 });

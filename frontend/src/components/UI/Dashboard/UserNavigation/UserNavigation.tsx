@@ -14,7 +14,7 @@ const UserNavigation: React.FC<{setErrorMessage: React.Dispatch<SetStateAction<s
     const dispatch = useAppDispatch();
     let showLink = false;
     if(loggedBarber.role === 'admin' ||  loggedBarber.role === 'owner') showLink = true;
-    const handleClick = () => {
+    const toHomeClick= () => {
         setIsLoadingState(true, dispatch);
         router.push('/');
     }
@@ -36,17 +36,19 @@ const UserNavigation: React.FC<{setErrorMessage: React.Dispatch<SetStateAction<s
         router.push('/');
       };
      const hoursHandler = () => {
+      setIsLoadingState(true, dispatch);
       dispatch(barberActions.setActionBarberId(loggedBarber?.id));
       router.push('/login/dashboard/working-hours');
     }
-    const handleTwoClick = () => {
+    const toUserClick = () => {
+      setIsLoadingState(true, dispatch);
       router.push('/login/dashboard/user/register');
     }
     return (
         <nav className={styles.clientHeaderNav}>
         <ul className={styles.userNavigation}>
-            <li className={styles.clientHeaderLi}><button onClick={handleClick}>POČETNA</button></li>
-            {showLink && <li className={styles.clientHeaderLi}><button onClick={handleTwoClick}>NOVI KORISNIK</button></li>}
+            <li className={styles.clientHeaderLi}><button onClick={toHomeClick}>POČETNA</button></li>
+            {showLink && <li className={styles.clientHeaderLi}><button onClick={toUserClick}>NOVI KORISNIK</button></li>}
             <li className={styles.clientHeaderLi}><button onClick={hoursHandler}>RADNO VREME</button></li>
             <li className={styles.separateLi}><button onClick={logOutHandler}>LOG OUT</button></li>
         </ul>

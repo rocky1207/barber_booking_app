@@ -26,19 +26,19 @@
   height: 100%;
   width: 100%;
   max-width: 450px;
-  gap: 20px;
+  gap: var(--space-5);
 }
 .barberInfoDiv:hover {
   cursor: pointer;
 }
-/*
+
 .itemButtonsNav {
   display: flex;
   justify-content: flex-end;
-  gap: 15px;
+  gap: var(--space-4);
   margin-bottom: 20px;
 }
-  */
+  
   
 @keyframes slideInLeft {
   

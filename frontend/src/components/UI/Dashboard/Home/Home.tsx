@@ -30,7 +30,6 @@ const Home: React.FC<{barbers: BasicBarberType[], actionBarberId: number | undef
     <>
     <ConfirmModal ref={dialog} {...updatedDeleteBtn}  />
     <section>
-      <nav aria-label="Manage barber navigation">
       <ul>
         {barbers?.map((barber, index) => {
           return (
@@ -40,7 +39,6 @@ const Home: React.FC<{barbers: BasicBarberType[], actionBarberId: number | undef
           )
         })}
       </ul>
-    </nav>
     </section>
     </>  
   );
