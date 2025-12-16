@@ -4,9 +4,7 @@ import { getUsersAndServices } from "@/lib/api/getUsersAndServices";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
-import { servicesPageNav } from "@/datas/NavigationObjects";
-import Logo from "@/components/UI/Logo/Logo";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
@@ -28,7 +26,9 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
     }
     return (
         <>
-        <Header {...updatedClientHeaderNav} />
+        <Header>
+            <ClientNavigation {...updatedClientHeaderNav} />
+        </Header>
         <main className={`wrapp`}>
             <h1>Usluge</h1>
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  

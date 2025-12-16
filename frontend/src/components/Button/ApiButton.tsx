@@ -8,7 +8,6 @@ import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
 import { appointmentActionDispatcher } from "@/lib/utils/appointmentActionDispatcher";
 import { workingHoursActiondispatcher } from "@/lib/utils/workingHoursActionDispatcher";
 import { uiActions } from "@/store/slices/uiSlice";
-import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 
 const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
     const {className, text, type, validate, action, onAction, id, ...buttonProps} = btnData;

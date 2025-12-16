@@ -4,10 +4,9 @@ import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { NavigationPropsType } from "@/types/Navigation/NavigationPropsType";
 import { usePathname } from "next/navigation";
-import styles from './PageNavigation.module.css';
-import { link } from "fs";
+import styles from './ClientNavigation.module.css';
 
-const PageNavigation: React.FC<NavigationPropsType> = ({...navigationData}) => {
+const ClientNavigation: React.FC<NavigationPropsType> = ({...navigationData}) => {
     const {navClass, ulClass, liItem} = navigationData;
     const pathName = usePathname();
     
@@ -15,7 +14,6 @@ const PageNavigation: React.FC<NavigationPropsType> = ({...navigationData}) => {
     const dispatch = useAppDispatch();
 
     const handleClick = (link: string) => {
-        console.log(link);
         router.push(link);
         if(pathName !== '/' && link === '/') setIsLoadingState(true, dispatch);
         if(link === 'appointments/client') setIsLoadingState(true, dispatch);
@@ -32,4 +30,4 @@ const PageNavigation: React.FC<NavigationPropsType> = ({...navigationData}) => {
         </nav>
     );
 };
-export default PageNavigation;
+export default ClientNavigation;

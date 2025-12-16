@@ -2,6 +2,7 @@ import CreateAppointment from "@/components/Forms/Appointments/CreateAppointment
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 import Header from "@/components/UI/Header/Header";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 
 interface Props {
     searchParams: Promise<{barberId: string; serviceId: string}>
@@ -19,7 +20,9 @@ const CreateAppointmentPage = async ({searchParams}: Props) => {
     };
     return (
         <>
-        <Header {...updatedClientHeaderNav} />
+        <Header>
+            <ClientNavigation {...updatedClientHeaderNav} />
+        </Header>
         <main className="center">
             <CreateAppointment />
         </main>

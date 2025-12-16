@@ -2,6 +2,7 @@
 import LogIn from "@/components/Forms/Barber/LoginForm/Login";
 import Header from "@/components/UI/Header/Header";
 import Link from "next/link";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
 
 const LogInPage:React.FC = () => {
@@ -11,7 +12,9 @@ const LogInPage:React.FC = () => {
     }
     return (
         <>
-        <Header {...loginHeaderNav} />
+        <Header>
+            <ClientNavigation {...loginHeaderNav} />
+        </Header>
         <main className="wrapp center">
             <h1>UNESITE VAŠE PODATKE</h1>
             <LogIn/>

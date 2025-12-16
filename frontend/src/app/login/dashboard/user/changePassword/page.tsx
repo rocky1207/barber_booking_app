@@ -1,6 +1,6 @@
 "use client";
 import ChangePassword from "@/components/Forms/Barber/ChangePasswordForm/ChangePassword";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import { forgotPasswordPageNav } from "@/datas/NavigationObjects";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";

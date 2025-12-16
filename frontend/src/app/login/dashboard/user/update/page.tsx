@@ -1,6 +1,6 @@
 "use client";
 import Update from "@/components/Forms/Barber/UpdateForm/Update"
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import { appointmentsPageNav } from "@/datas/NavigationObjects";
 
 const UpdatePage: React.FC = () => {

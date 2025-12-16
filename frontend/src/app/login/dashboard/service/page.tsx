@@ -9,7 +9,7 @@ import ConfirmModal from "@/components/UI/Modals/ConfirmModal/ConfirmModal";
 import { deleteBtn } from "@/datas/ButttonObjects";
 import { deleteItemsById } from "@/lib/api/deleteItemsById";
 import { forgotPasswordPageNav } from "@/datas/NavigationObjects";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 
 const ServicePage: React.FC = () => {
     const {services, serviceActionId } = useAppSelector((state: RootState) => state?.service);

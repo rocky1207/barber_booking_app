@@ -3,7 +3,7 @@ import Update from "@/components/Forms/Service/UpdateForm/Update";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import Link from "next/link";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import { forgotPasswordPageNav } from "@/datas/NavigationObjects";
 
 const UpdatePage = () => {

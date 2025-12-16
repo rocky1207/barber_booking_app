@@ -189,7 +189,7 @@ font-family: 'Playfair Display', 'Cormorant', 'Georgia', serif;*/
   text-transform: uppercase;
 }
 .logOutDiv {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 
 ul {
@@ -389,4 +389,7 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 
 .cursorDefault {
   cursor: default;
+}
+.marginBottom {
+  margin-bottom: var(--space-2);
 }

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import CalendarBarber from "@/components/UI/Appointments/CalendarBarber";
 import BarberAppointments from "@/components/UI/Appointments/BarberAppointments";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";

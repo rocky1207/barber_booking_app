@@ -1,6 +1,6 @@
 'use client';
 import WorkingHoursManager from '@/components/UI/WorkingHours/WorkingHoursManager/WorkingHoursManager';
-import PageNavigation from '@/components/UI/PageNavigation/PageNavigation';
+import PageNavigation from '@/components/UI/ClientNavigation/ClientNavigation';
 import { resetPasswordPageNav } from '@/datas/NavigationObjects';
 
 const WorkingHoursPage = () => {

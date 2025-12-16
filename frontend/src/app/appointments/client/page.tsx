@@ -4,6 +4,7 @@ import Header from "@/components/UI/Header/Header";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import LocationMap from "@/components/UI/LocationMap/LocationMap";
 import Footer from "@/components/UI/Footer/Footer";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import styles from '@/components/UI/Appointments/Appointments.module.css';
 import type { Metadata } from "next";
 
@@ -20,7 +21,9 @@ const ClientPage = () => {
     }
     return (
         <>
-        <Header {...choosenTermsNav} />
+        <Header>
+            <ClientNavigation {...choosenTermsNav } />
+        </Header>
         <main className="wrapp">
             <h1 className="choosenTermsh1">PREGLED ZAKAZANIH TERMINA</h1>
             <ClientAppointmentForm />

@@ -1,6 +1,6 @@
 "user client";
 import Register from "@/components/Forms/Barber/RegisterForm/Register";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
+import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import { appointmentsPageNav } from "@/datas/NavigationObjects";
 
 const RegisterPage: React.FC = () => {

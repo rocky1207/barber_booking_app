@@ -2,7 +2,7 @@
 import Service from '@/components/Forms/Service/ServiceForm/Service';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import PageNavigation from '@/components/UI/PageNavigation/PageNavigation';
+import PageNavigation from '@/components/UI/ClientNavigation/ClientNavigation';
 import { forgotPasswordPageNav } from '@/datas/NavigationObjects';
 
 const InsertService: React.FC = () => {

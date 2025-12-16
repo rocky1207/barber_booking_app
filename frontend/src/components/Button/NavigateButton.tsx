@@ -3,8 +3,7 @@ import { NavigateBtnType } from "@/types/Button/BtnType";
 const NavigateButton:React.FC<NavigateBtnType> = ({...btnData}) => {
     const {className, text, type, validate, onAction, ...buttonProps} = btnData;
     const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log('eto ga');
-        e.preventDefault();
+         e.preventDefault();
         if (!onAction) return; // 🔒 zaštita od undefined
         onAction();
     }
