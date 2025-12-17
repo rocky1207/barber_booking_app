@@ -28,6 +28,7 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
                 return {
                     ...barber,
                     username: data.username,
+                    full_name: data.full_name,
                     file: data.file,
                     suspended: data.suspended,
                     ...(data.role && {role: data.role})
@@ -39,6 +40,7 @@ export const barberActionDispatcher = (data: {id: number} | BasicBarberType, act
             if(loggedBarber.id === data.id) dispatch(barberActions.setLoggedBarber({
                 ...loggedBarber,
                 username: data.username,
+                full_name: data.full_name,
                 file: data.file,
                 ...(data.role && {role: data.role})
             }));

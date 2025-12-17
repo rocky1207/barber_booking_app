@@ -228,6 +228,7 @@ button {
   /*padding: 3px 6px;*/
   transition: color .25s ease;
 }
+.dashboardBtn,
 .termsBtn {
   color: var(--lightGrey);
 }

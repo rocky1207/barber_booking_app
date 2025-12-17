@@ -3,26 +3,29 @@ import { useRef } from "react";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import ServiceItem from "@/components/UI/Services/ServiceItem";
+import Header from "@/components/UI/Header/Header";
 import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { useSearchParams } from "next/navigation";
 import ConfirmModal from "@/components/UI/Modals/ConfirmModal/ConfirmModal";
 import { deleteBtn } from "@/datas/ButttonObjects";
 import { deleteItemsById } from "@/lib/api/deleteItemsById";
-import { forgotPasswordPageNav } from "@/datas/NavigationObjects";
-import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 
 const ServicePage: React.FC = () => {
     const {services, serviceActionId } = useAppSelector((state: RootState) => state?.service);
-    const {barbers} = useAppSelector((state: RootState) => state?.barber);
-    const params = useSearchParams();
-    const strBarberId = params.get('barberId');
-    const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
-    const userServices = services.filter(service => service.userId === barberId);
-    const barber = barberId !== null && barbers.find((barber) => barber.id === barberId!);
+    const {barbers, actionBarberId} = useAppSelector((state: RootState) => state?.barber);
+    
+    // const params = useSearchParams();
+   // const strBarberId = params.get('barberId');
+    //const barberId = strBarberId ? parseInt(strBarberId, 10) : null;
+    const userServices = services.filter(service => service.userId === /*barberId*/actionBarberId);
+    const barber = /*barberId !== null &&*/ barbers?.find((barber) => barber.id === /*barberId*/actionBarberId);
     const dialog = useRef<HTMLDialogElement | null>(null);
     const barberUsername: string = barber ? barber.username.toUpperCase() : 'NULL';
+    
     let showResult;
-    if(!barberId) showResult = <p className="textCenter">Nije prosleđen pravilan ID frizera.</p>;
+    if(/*!barberId*/actionBarberId) showResult = <p className="textCenter">Nije prosleđen pravilan ID frizera.</p>;
     if(userServices.length > 0) {
         showResult = <nav aria-label="Choose service navigation">
                 <ul>
@@ -38,22 +41,25 @@ const ServicePage: React.FC = () => {
     const deleteServiceBtn = {
         ...deleteBtn,
         action: 'DELETE_SERVICE',
-        id: serviceActionId,
+        id: 10000,
         onAction: deleteItemsById
     };
     const servicePageNav = {
-            ...forgotPasswordPageNav,
+            ...clientsHeaderNav,
             liItem: [
-                {...forgotPasswordPageNav.liItem[0], text: 'dashboard', link: '/login/dashboard'},
-                {...forgotPasswordPageNav.liItem[1], text: 'UNESITE USLUGU', link: `/login/dashboard/service/insert?barberId=${barberId}`}
+                {...clientsHeaderNav.liItem[0]},
+                {...clientsHeaderNav.liItem[0], text: 'UNESITE USLUGU', link: `/login/dashboard/service/insert?barberId=${/*barberId*/actionBarberId}`},
+                {text: '<<', link: '/login/dashboard', itemClass: 'separateLi'}
             ]
         };
     return (
         <>
         <ConfirmModal ref={dialog} {...deleteServiceBtn}/>
-        <PageNavigation {...servicePageNav} />
+        <Header>
+            <ClientNavigation {...servicePageNav} />
+        </Header>
         <main className="wrapp">
-            <h1>USLUGE: <span>{barberUsername}</span></h1>
+            <h1 className="marginBottom">USLUGE: <span>{barberUsername}</span></h1>
             {showResult}
         </main>
         </>

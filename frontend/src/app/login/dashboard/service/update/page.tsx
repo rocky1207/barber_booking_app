@@ -2,22 +2,26 @@
 import Update from "@/components/Forms/Service/UpdateForm/Update";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
-import Link from "next/link";
-import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
-import { forgotPasswordPageNav } from "@/datas/NavigationObjects";
+import Header from "@/components/UI/Header/Header";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
 
 const UpdatePage = () => {
     const id = useAppSelector((state: RootState) => state?.barber?.actionBarberId);
-    const updatePageNav = {
-        ...forgotPasswordPageNav,
+    
+    const updateServiceNav = {
+        ...clientsHeaderNav,
         liItem: [
-            {...forgotPasswordPageNav.liItem[0], text: 'dashboard', link: '/login/dashboard'},
-            {...forgotPasswordPageNav.liItem[1], text: 'services', link: `/login/dashboard/service?barberId=${id}`}
+            {...clientsHeaderNav.liItem[0]},
+            {...clientsHeaderNav.liItem[0], text: 'MENADŽERSKA TABLA', link: '/login/dashboard'},
+            {itemClass: 'separateLi', text: '<<', link: `/login/dashboard/service?barberId=${id}`}
         ]
     };
     return (
         <>
-        <PageNavigation {...updatePageNav} />
+        <Header>
+            <ClientNavigation {...updateServiceNav} />
+        </Header>
         <main className="wrapp center">
             <h1>IZMENITE PODATKE</h1>
             <Update />

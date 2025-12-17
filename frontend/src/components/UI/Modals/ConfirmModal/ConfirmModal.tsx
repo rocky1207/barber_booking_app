@@ -9,8 +9,8 @@ const ConfirmModal = forwardRef<HTMLDialogElement, ApiBtnType>(({ ...btn }, ref)
     }
     const safeRef = (ref && typeof ref !== 'function') ? ref : undefined;
     return (
-      <dialog ref={ref} className={styles.dialog}>
-        <div>
+      <dialog ref={ref} className={styles.overlay}>
+      <div   className={styles.dialog}>
           <h2>{btn.head}</h2>
             <div className={styles.buttonsDiv}>
               <ApiButton {...btn} dialogRef={safeRef} />

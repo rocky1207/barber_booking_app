@@ -44,7 +44,7 @@ export const servicesActionBtn: NavigateBtnType = {
 export const dashboardBtn: NavigateBtnType = {
     validate: 'navigacija',
     type: 'button',
-    className: 'termsBtn',
+    className: 'dashboardBtn',
     text: 'copyright@rocky2025',
         onAction: () => {}
 };

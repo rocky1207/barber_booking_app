@@ -11,7 +11,8 @@ const ChangePasswordPage: React.FC = () => {
     const changePasswordNav = {
     ...clientsHeaderNav,
     liItem: [
-        {...clientsHeaderNav.liItem[1], text: 'MENADŽERSKA TABLA', link: '/login/dashboard'},
+        {...clientsHeaderNav.liItem[0]},
+        {...clientsHeaderNav.liItem[0], text: 'MENADŽERSKA TABLA', link: '/login/dashboard'},
         {...clientsHeaderNav.liItem[0], text: '<<', itemClass: 'separateLi', link:`/login/dashboard/user/update?barberId=${actionBarberId}`}
     ]
 };

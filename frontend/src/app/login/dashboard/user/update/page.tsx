@@ -22,7 +22,9 @@ const UpdatePage: React.FC = () => {
     if(showButton) {
         updateUserHeaderNav = {
         ...clientsHeaderNav,
-        liItem: [{text: 'MENADŽERSKA TABLA', itemClass: 'clientHeaderLi', link: '/login/dashboard'},
+        liItem: [
+            {...clientsHeaderNav.liItem[0]},
+            {text: 'MENADŽERSKA TABLA', itemClass: 'clientHeaderLi', link: '/login/dashboard'},
             {text: 'PROMENI LOZINKU', itemClass: 'changePasswordLi', link: `/login/dashboard/user/changePassword?id=${actionBarberId}`}
         ]
     } 

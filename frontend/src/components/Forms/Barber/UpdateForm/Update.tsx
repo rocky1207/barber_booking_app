@@ -28,7 +28,6 @@ const Update: React.FC<Props> = ({barbers, loggedBarber, actionBarberId}) => {
     const [fileName, setFileName] = useState<string>(barber?.file ?? '');
     const dispatch = useAppDispatch();
     let updateInputs;
-   
     if(loggedBarber?.role === 'admin' || loggedBarber?.role === 'owner') {
     const checked = barber?.suspended === 1 ? true : false;
     updateInputs = [
@@ -49,12 +48,15 @@ const Update: React.FC<Props> = ({barbers, loggedBarber, actionBarberId}) => {
         const formData = createFormData(e);
         const suspendedInput = form.elements.namedItem('suspended') as HTMLInputElement | null;
         const suspendedValue = suspendedInput ? (suspendedInput.checked ? '1' : '0') : '0';
+        
         const validateData = {
             ...formData,
+            full_name: formData.full_name,
             role: formData.role,
             file: fileName,
             suspended: suspendedValue 
         }
+        console.log(validateData);
         const validateInputs = formValidator(validateData, updateValidationSchema);
         if(!validateInputs.status) {
             setMessage(validateInputs.message);
@@ -73,7 +75,7 @@ const Update: React.FC<Props> = ({barbers, loggedBarber, actionBarberId}) => {
             setIsLoadingState(false, dispatch);
             return;
         }
-        setMessage(message)
+        setMessage(message);
         data && actionDone && barberActionDispatcher(data, actionDone, dispatch);
         setIsLoadingState(false, dispatch);
     };
