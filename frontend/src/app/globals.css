@@ -144,7 +144,7 @@ body {
     align-items: center;
     height: 100vh; 
     max-width: 90%;
-    margin: -200px auto 0 auto;
+    margin: -100px auto 0 auto;
 }
 .middle {
     display: flex;

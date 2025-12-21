@@ -1,14 +1,19 @@
 "use client";
+import { useEffect } from "react";
 import Update from "@/components/Forms/Barber/UpdateForm/Update"
 import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import Header from "@/components/UI/Header/Header";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import { RootState } from "@/store/store";
 import { useAppDispatch, useAppSelector } from "@/store/hooks/typizedHooks";
+//import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+
 
 const UpdatePage: React.FC = () => {
     const {barbers, actionBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
-     let showButton: boolean;
+   // const dispatch = useAppDispatch();
+    //useEffect(() => {}, [setIsLoadingState(false, dispatch)]);
+    let showButton: boolean;
     if(loggedBarber?.role === 'owner') {
         showButton = true;
     } else if(loggedBarber?.role === 'user' && loggedBarber?.id === actionBarberId) {

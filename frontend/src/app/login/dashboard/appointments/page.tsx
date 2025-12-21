@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import CalendarBarber from "@/components/UI/Appointments/CalendarBarber";
 import BarberAppointments from "@/components/UI/Appointments/BarberAppointments";
-import PageNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
+import Header from "@/components/UI/Header/Header";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
@@ -10,7 +11,7 @@ import { appointmentActions } from "@/store/slices/appointmentSlice";
 import { getItemsByUserId } from "@/lib/api/getItemsByUserId";
 import { GetBarberAppointmentsReturnDataType } from "@/types/Api/ReturnAppointmentType";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
-import { appointmentsPageNav } from "@/datas/NavigationObjects";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import styles from '@/components/UI/Appointments/Appointments.module.css';
 import 'react-day-picker/dist/style.css';
 
@@ -50,10 +51,16 @@ const AppointmentsPage: React.FC =  () => {
         }
         getApp();
     }, [selectedTerm.date, actionBarberId]);
+    const appointmentsPageNav = {
+        ...clientsHeaderNav,
+        liItem: [{...clientsHeaderNav.liItem[0], text: 'MENADŽERSKA TABLA', link: '/login/dashboard'}]
+    }
     
     return (
         <>
-        <PageNavigation {...appointmentsPageNav} />
+        <Header>
+            <ClientNavigation {...appointmentsPageNav} />
+        </Header>
         <main className="wrapp">
             <h1>ZAKAZANI TERMINI</h1>
             <section className="middle">

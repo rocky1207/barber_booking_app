@@ -6,6 +6,7 @@ import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from './Barbers.module.css';
 
 
@@ -18,14 +19,17 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barbe
         if(ref && typeof ref !== "function" && ref.current) ref.current.showModal();
     }
     const updatePage = () => {
+        //setIsLoadingState(true, dispatch);
         dispatch(barberActions.setActionBarberId(barberId));
         router.push(`/login/dashboard/user/update?barberId=${barberId}`);
     };
     const appointmentsPage = () => {
+        setIsLoadingState(true, dispatch);
         dispatch(barberActions.setActionBarberId(barberId));
         router.push(`/login/dashboard/appointments?barberId=${barberId}`);
     };
     const servicesPage = () => {
+        //setIsLoadingState(true, dispatch);
         dispatch(barberActions.setActionBarberId(barberId));
         router.push(`/login/dashboard/service?barberId=${barberId}`);
     };

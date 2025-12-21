@@ -36,7 +36,7 @@ const BarberAppointment = forwardRef<HTMLDialogElement, {appointment: BarberAppo
     }
     return (
         <li>
-            <div className="flexed">
+            <div className="cardDashboard">
             <div className={styles.info}>
                 <p>Klijent : <span>{`${name} ${surname}`}</span></p>
                 <p>Telefon: <span>{phone}</span></p>

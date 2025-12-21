@@ -41,7 +41,7 @@ const UserNavigation: React.FC<{setErrorMessage: React.Dispatch<SetStateAction<s
       router.push('/login/dashboard/working-hours');
     }
     const toUserClick = () => {
-      setIsLoadingState(true, dispatch);
+     // setIsLoadingState(true, dispatch);
       router.push('/login/dashboard/user/register');
     }
     return (
