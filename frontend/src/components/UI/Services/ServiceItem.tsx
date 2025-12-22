@@ -18,7 +18,7 @@ const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBt
     //const {role} = useAppSelector((state: RootState) => state?.barber?.loggedBarber);
     const [deleteServiceErrorMsg, setDeleteServiceErrorMsg] = useState('');
     const {choosenServices, serviceActionId} = useAppSelector((state: RootState) => state?.service);
-    const {deleteItemErrorMessage} = useAppSelector((state: RootState) => state?.ui);
+    const {deleteItemErrorMessage } = useAppSelector((state: RootState) => state?.ui);
     const dispatch = useAppDispatch();
     const servicePrice = service.price;
     useEffect(() => {

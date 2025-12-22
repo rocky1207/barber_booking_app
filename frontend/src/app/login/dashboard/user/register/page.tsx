@@ -1,12 +1,19 @@
 "user client";
 import Register from "@/components/Forms/Barber/RegisterForm/Register";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
-import { appointmentsPageNav } from "@/datas/NavigationObjects";
+import Header from "@/components/UI/Header/Header";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
 
 const RegisterPage: React.FC = () => {
+    const appointmentsNav = {
+        ...clientsHeaderNav,
+        liItem: [{text: 'MENADŽERSKA TABLA', itemClass: '', link: '/login/dashboard'}]
+    } 
     return (
         <>
-        <PageNavigation {...appointmentsPageNav} />
+        <Header>
+            <ClientNavigation {...appointmentsNav} />
+        </Header>
         <main className="wrapp center">
             <h1>UNESITE KORISNIKA</h1>
             <Register/>

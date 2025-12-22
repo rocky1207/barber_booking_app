@@ -19,6 +19,7 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
     const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!onAction || !id || !action) return;
+        setIsLoadingState(true, dispatch);
         let {success, actionDone, message} = await onAction(action, id);
         if(!success) {
             const actionKey = action.toLowerCase();
@@ -28,6 +29,7 @@ const ApiButton:React.FC<ApiBtnRefType> = ({dialogRef, ...btnData}) => {
             }
             dispatch(uiActions.setDeleteItemErrorMessage(updateDeleteErrorMessage));
             dialogRef?.current?.close();
+            setIsLoadingState(false, dispatch);
             return;
         }
         const data = {id};

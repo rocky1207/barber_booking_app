@@ -3,6 +3,7 @@ import CalendarClient from "@/components/UI/Appointments/CalendarClient";
 import AvailableAppointments from "@/components/UI/Appointments/AvailableAppointments";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 
 interface Props {
     searchParams: Promise<{barberId: string; serviceId: string}>
@@ -19,7 +20,9 @@ const BookingPage = async ({searchParams}: Props) => {
     }
     return (
         <>
-        <Header {...updatedClientHeaderNav} />
+         <Header>
+            <ClientNavigation {...updatedClientHeaderNav}/>
+         </Header>
         <main className="wrapp middle">
             <CalendarClient />
             <AvailableAppointments />

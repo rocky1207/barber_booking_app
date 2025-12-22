@@ -1,8 +1,15 @@
+
+.overlay::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
 .dialog {
+  
   position: fixed;
   top: 50%;
   left: 50%;
+  
   transform: translate(-50%, -50%);
+  
   padding: var(--space-4);
   background: var(--darkGrey);
   border: none;

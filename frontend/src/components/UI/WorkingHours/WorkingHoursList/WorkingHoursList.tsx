@@ -85,7 +85,7 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId}) =>
     return (
         <>
         <ConfirmModal ref={dialog} {...updatedDeleteBarberBtn}/>
-        <div className={styles.container}>
+        <div className={`${styles.container}`}>
             <h3>Moji radni sati</h3>
             {message && <p className={styles.message}>{message}</p>}
             
@@ -100,11 +100,12 @@ const WorkingHoursList: React.FC<WorkingHoursListProps> = ({ loggedBarberId}) =>
                     }
                     const editModalActionBtn = {
                         ...modalActionBtn,
+                        className: 'updateBtn',
                         text: 'IZMENI',
                         onAction: () => handleEdit(wh.id)
                     }
                        return (
-                        <div key={wh.id} className={styles.item}>
+                        <div key={wh.id} className={`cardDashboard ${styles.item}`}>
                             {editingId === wh.id ? (
                                 <UpdateWorkingHoursForm
                                     workingHours={wh}

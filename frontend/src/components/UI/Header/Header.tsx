@@ -1,16 +1,12 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import Menu from '../SvgIcons/Menu';
 import Close from '../SvgIcons/Close';
-import Link from 'next/link';
 import Spinner from '../LoadingOverlay/Spinner';
-import PageNavigation from '../PageNavigation/PageNavigation';
-import { clientsHeaderNav } from '@/datas/NavigationObjects';
-import { NavigationPropsType } from '@/types/Navigation/NavigationPropsType';
 import styles from './Header.module.css';
 
 
-const Header:React.FC<NavigationPropsType> = ({...navigation}) => {
+const Header:React.FC<{children: ReactNode}> = ({/*...navigation*/children}) => {
   const [animate, setAnimate] = useState(false);
   const [openHeader, setOpenHeader] = useState<boolean>(false);
   useEffect(() => {
@@ -38,8 +34,7 @@ const Header:React.FC<NavigationPropsType> = ({...navigation}) => {
         {!openHeader ? <Menu {...svgData} /> : <Close {...svgData} />}
         </button>
         {openHeader && <div className={styles.linkWrappDiv}> 
-         {/* <Link href={'/appointments/client'}>PREGLED REZERVISANIH TERMINA</Link>*/}
-         <PageNavigation {...navigation} />
+         {children}
         </div>}
       </div>
       </div>

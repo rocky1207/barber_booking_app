@@ -61,10 +61,10 @@ label {
 
 .buttonGroup {
     display: flex;
-    gap: 1rem;
+    gap: var(--spa);
     justify-content: center;
 }
-
+/*
 .submitBtn {
     background: #27ae60;
     color: white;
@@ -101,7 +101,7 @@ label {
     cursor: not-allowed;
 }
 
-
+*/
 
 
 

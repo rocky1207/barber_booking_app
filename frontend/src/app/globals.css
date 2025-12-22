@@ -144,7 +144,7 @@ body {
     align-items: center;
     height: 100vh; 
     max-width: 90%;
-    margin: -200px auto 0 auto;
+    margin: -100px auto 0 auto;
 }
 .middle {
     display: flex;
@@ -161,11 +161,15 @@ body {
 .textCenter {
     text-align: center; 
 }
+
 a {
   color: inherit;
   text-decoration: none;
 }
-
+.link:hover,
+.link:active {
+  text-decoration: underline;
+}
 h1 {
   text-align: end;
   font-size: var(--font-lg);
@@ -185,7 +189,7 @@ font-family: 'Playfair Display', 'Cormorant', 'Georgia', serif;*/
   text-transform: uppercase;
 }
 .logOutDiv {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 
 ul {
@@ -212,45 +216,57 @@ button {
   border-radius: 50%;
 }
 
-.terminBtn,
+.termsBtn,
 .updateBtn,
 .deleteBtn,
 .navigateBtn,
-.changePasswordBtn,
+/*.changePasswordBtn,*/
 .servicesBtn {
   background: none;
   /*border-bottom: 1px solid white;*/
   text-align: center;
   /*padding: 3px 6px;*/
+  transition: color .25s ease;
 }
-.terminBtn {
-  color: white;
+.dashboardBtn,
+.termsBtn {
+  color: var(--lightGrey);
+}
+.termsBtn:hover,
+.termsBtn:active {
+  color: var(--secondaryTextGrey);
 }
 .servicesBtn {
   color: var(--logoColor);
-  transition: color .25s ease;
+}
+.servicesBtn:hover,
+.servicesBtn:active {
+  color: var(--lightGold);
 }
 .updateBtn {
   color: var(--succesGreen);
 }
-.updateBtn:hover {
+.updateBtn:hover,
+.updateBtn:active {
   color: #21c68f;
 }
 .deleteBtn {
   color: var(--errorRed);
-  transition: color .25s ease;
 }
-.deleteBtn:hover {
-  color: #f35959;
+.deleteBtn:hover,
+.deleteBtn:active {
+  color: #f57070;
 }
+/*
 .changePasswordBtn {
   color: var(--errorRed);
   text-align: left;
-  transition: color .25s ease;
 }
-.changePasswordBtn:hover {
-  color: #f35959;
+.changePasswordBtn:hover,
+.changePasswordBtn:active {
+  color: #f57070;
 }
+  /*
 
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.85);
@@ -385,4 +401,7 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 
 .cursorDefault {
   cursor: default;
+}
+.marginBottom {
+  margin-bottom: var(--space-2);
 }

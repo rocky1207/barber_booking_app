@@ -1,4 +1,4 @@
-import { terminsBtn, modalActionBtn, updateActionBtn, servicesActionBtn } from "@/datas/ButttonObjects";
+import { termsBtn, modalActionBtn, updateActionBtn, servicesActionBtn } from "@/datas/ButttonObjects";
 import NavigateButton from "@/components/Button/NavigateButton";
 import { forwardRef } from "react";
 import { barberActions } from "@/store/slices/barberSlice";
@@ -6,6 +6,7 @@ import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import styles from './Barbers.module.css';
 
 
@@ -18,19 +19,22 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barbe
         if(ref && typeof ref !== "function" && ref.current) ref.current.showModal();
     }
     const updatePage = () => {
+        //setIsLoadingState(true, dispatch);
         dispatch(barberActions.setActionBarberId(barberId));
         router.push(`/login/dashboard/user/update?barberId=${barberId}`);
     };
     const appointmentsPage = () => {
+        setIsLoadingState(true, dispatch);
         dispatch(barberActions.setActionBarberId(barberId));
         router.push(`/login/dashboard/appointments?barberId=${barberId}`);
     };
     const servicesPage = () => {
+        //setIsLoadingState(true, dispatch);
         dispatch(barberActions.setActionBarberId(barberId));
         router.push(`/login/dashboard/service?barberId=${barberId}`);
     };
-    const newTerminsBtn = {
-        ...terminsBtn,
+    const newTermsBtn = {
+        ...termsBtn,
         id: barberId,
         onAction: appointmentsPage
     }
@@ -59,12 +63,17 @@ const BarberButtons = forwardRef<HTMLDialogElement, {barberId: number;}>(({barbe
     }
     return (
         <>
-        <nav className={styles.itemButtonsNav}>
-            <NavigateButton {...newTerminsBtn}/>
-            {showButton && <NavigateButton {...newUpdateActionBtn}/>}
-            {showButton && <NavigateButton {...newServicesActionBtn}/>} 
+        <nav>
+            <div className={styles.itemButtonsNav}>
+                <NavigateButton {...newTermsBtn}/>
+                {showButton && <NavigateButton {...newUpdateActionBtn}/>}
+                {showButton && <NavigateButton {...newServicesActionBtn}/>} 
+            </div>
+            {showButton &&
+            <div className="marginBottom">
+             <NavigateButton {...newModalActionBtn}/>
+            </div>} 
         </nav>
-        {showButton && <NavigateButton {...newModalActionBtn}/>} 
         </>
     );
 });

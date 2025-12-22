@@ -14,13 +14,13 @@ const NewAppointmentModal = forwardRef<HTMLDialogElement, Props>(({...dialogData
   const dispatch = useAppDispatch();
   const clickHandler = () => {
     setIsLoadingState(true, dispatch);
+    router.push('/');
     localStorage.removeItem('appointmentSuccess');
     if(ref && typeof ref !== 'function' && ref.current) ref.current.close();
-    router.push('/');
   }
   return (
-    <dialog ref={ref}  className={styles.dialog}>
-      <div>
+    <dialog ref={ref} className={styles.overlay}>
+      <div className={styles.dialog} >
           <h2>Uspešno ste zakazali termin</h2>
           <div>
               <p>Datum: <span>{dialogData.date}</span></p>

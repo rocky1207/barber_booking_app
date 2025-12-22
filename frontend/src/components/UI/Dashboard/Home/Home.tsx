@@ -1,72 +1,35 @@
 "use client";
-import {useState, useEffect, useRef } from "react";
-import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
-import { RootState } from "@/store/store";
-import UserNavigation from "../UserNavigation/UserNavigation";
+import {useEffect, useRef} from "react";
+import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import BarberItem from "@/components/UI/Barbers/BarberItem";
 import BarberButtons from "@/components/UI/Barbers/BarberButtons";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
-import { logOut } from "@/lib/api/user/logOut";
-import ConfirmModal from "../../Modals/ConfirmModal/ConfirmModal";
+import ConfirmModal from "@/components/UI/Modals/ConfirmModal/ConfirmModal";
 import { deleteBtn } from "@/datas/ButttonObjects";
 import { deleteItemsById } from "@/lib/api/deleteItemsById";
-import { useRouter } from "next/navigation";
-import { barberActions } from "@/store/slices/barberSlice";
+import { BasicBarberType } from "@/types/Barbers/BarbersType";
 
-const Home: React.FC = () => {
+
+const Home: React.FC<{barbers: BasicBarberType[], actionBarberId: number | undefined}> = ({barbers, actionBarberId}) => {
   const dialog = useRef<HTMLDialogElement | null>(null);
-  const {barbers, actionBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
-  console.log(barbers);
-  console.log(loggedBarber);
+  
   const dispatch = useAppDispatch();
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const router = useRouter();
   
   useEffect(() => {
     setIsLoadingState(false, dispatch);
   }, []);
   
- const logOutHandler = async () => {
-    const result = await logOut('auth/logout.php', {});
-    if(!result.success) {
-        setErrorMessage(result.message);
-    }
-    dispatch(barberActions.setLoggedBarber({
-      id: 0,
-      full_name: '',
-      username: '',
-      file: '',
-      role: '',
-      suspended: 0
-  }));
-  setIsLoadingState(true, dispatch);
-    router.push('/');
-  };
   const updatedDeleteBtn = {
     ...deleteBtn,
     action: 'DELETE_BARBER',
     id: actionBarberId,
     onAction: deleteItemsById
   }
-  const hoursHandler = () => {
-    dispatch(barberActions.setActionBarberId(loggedBarber?.id));
-    router.push('/login/dashboard/working-hours');
-  }
-  
+    
   return (
     <>
     <ConfirmModal ref={dialog} {...updatedDeleteBtn}  />
-    {loggedBarber.suspended !== 0 ? <p>Nemate više pristup aplikaciji</p> : <section>
-      <nav>
-        <ul className="flexed">
-          <li><button onClick={logOutHandler}>LOG OUT</button></li>
-          <li className=''><button onClick={hoursHandler}>RADNO VREME</button></li>
-        </ul>
-      </nav>
-    <h1>MENADŽERSKA TABLA</h1>
-    <UserNavigation />
-    <nav aria-label="Manage barber navigation">
-      {errorMessage && <p>{errorMessage}</p>}
+    <section>
       <ul>
         {barbers?.map((barber, index) => {
           return (
@@ -76,8 +39,7 @@ const Home: React.FC = () => {
           )
         })}
       </ul>
-    </nav>
-    </section>}
+    </section>
     </>  
   );
 };

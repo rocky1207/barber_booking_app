@@ -25,8 +25,8 @@ const Update: React.FC = () => {
     const servicePrice = service?.price.replace(/\./g, '').replace(/,\d{2}$/, '');
     console.log(servicePrice);
     const serviceInputs = [
-        {type: 'text', name: 'service', defaultValue: service?.userService, placeholder: "Usluga"},
-        {type: 'text', name: 'price', defaultValue: servicePrice, placeholder: "Cena"},
+        {type: 'text', name: 'service', defaultValue: service?.userService, placeholder: "Usluga", required: false},
+        {type: 'text', name: 'price', defaultValue: servicePrice, placeholder: "Cena", required: false},
     ]
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -44,7 +44,9 @@ const Update: React.FC = () => {
         
         setIsLoadingState(true, dispatch);
         const responseData = await updateItems(updateData, 'UPDATE_SERVICE');
+        console.log(responseData);
         const {success, data, message, actionDone} = responseData as InsertUpdateServiceReturnType;
+
         console.log(data);
         if(!success) {
             setMessage(message);

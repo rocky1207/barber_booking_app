@@ -203,16 +203,19 @@
   border-radius: 20px;
   */
   padding: var(--space-2);
-  margin-bottom: var(--space-4);
+ /* margin-bottom: var(--space-4);*/
   
 }
 .info {
-  margin-bottom: var(--space-2);
+ /* margin: var(--space-2) 0 var(--space-2) 0;*/
+ padding: var(--space-2) 0 var(--space-2) 0;
 }
 .clientAppointment li .action {
+  
   flex: 1 1 40%;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: var(--space-2);
 }
 
 .barberAppointmentsHeadDiv {

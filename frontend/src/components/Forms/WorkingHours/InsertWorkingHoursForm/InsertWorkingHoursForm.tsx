@@ -12,7 +12,8 @@ import { formatWorkingHours, formatWorkingDate } from "@/lib/utils/formatWorking
 import dynamic from 'next/dynamic';
 import type { ComponentType } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import styles from './InsertWorkingHoursForm.module.css';
+//import styles from './InsertWorkingHoursForm.module.css';
+import styles from '../../Form.module.css';
 
 const ReactDatePicker = dynamic(
   () =>
@@ -27,8 +28,14 @@ interface InsertWorkingHoursFormProps {
 const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedBarberId, onSuccess }) => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const [startTime, setStartTime] = useState<Date | null>(new Date());
-  const [endTime, setEndTime] = useState<Date | null>(new Date());
+  const minWorkingTime = new Date();
+  minWorkingTime.setHours(7, 0, 0, 0);
+  const lastTermTime = new Date();
+  lastTermTime.setHours(21, 30, 0, 0);
+  const maxWorkingTime = new Date();
+  maxWorkingTime.setHours(22, 0, 0, 0);
+  const [startTime, setStartTime] = useState<Date | null>(minWorkingTime);
+  const [endTime, setEndTime] = useState<Date | null>(maxWorkingTime);
   const [message, setMessage] = useState<string>('');
   const dispatch = useAppDispatch();
 
@@ -85,7 +92,7 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={`${styles.form} ${styles.workingHoursForm}`} onSubmit={handleSubmit}>
       <h3>Dodaj radno vreme</h3>
       <label>Datum od</label>
       <ReactDatePicker
@@ -94,6 +101,8 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         dateFormat="yyyy-MM-dd"
         placeholderText="Datum od"
         className={styles.datePickerInput}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.preventDefault()}
+       // onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => e.preventDefault()}
       />
       <label>Datum do</label>
       <ReactDatePicker
@@ -102,6 +111,7 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         dateFormat="yyyy-MM-dd"
         placeholderText="Datum do"
         className={styles.datePickerInput}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.preventDefault()}
       />
       <label>Početno vreme</label>
       <ReactDatePicker
@@ -109,11 +119,14 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         onChange={(d: Date | null) => setStartTime(d)}
         showTimeSelect
         showTimeSelectOnly
-        timeIntervals={15}
+        timeIntervals={30}
         timeCaption="Vreme"
         dateFormat="HH:mm"
         placeholderText="Izaberi vreme"
         className={styles.datePickerInput}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.preventDefault()}
+        minTime={minWorkingTime}
+        maxTime={lastTermTime}
       />
       <label>Završno vreme</label>
       <ReactDatePicker
@@ -121,17 +134,20 @@ const InsertWorkingHoursForm: React.FC<InsertWorkingHoursFormProps> = ({ loggedB
         onChange={(d: Date | null) => setEndTime(d)}
         showTimeSelect
         showTimeSelectOnly
-        timeIntervals={15}
+        timeIntervals={30}
         timeCaption="Vreme"
         dateFormat="HH:mm"
         placeholderText="Izaberi vreme"
         className={styles.datePickerInput}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.preventDefault()}
+        minTime={minWorkingTime}
+        maxTime={lastTermTime}
       />
       <p className={message ? styles.message : ''}>{message}</p>
       <div>
-        Izabrano: {formatWorkingHours(startTime)} — {formatWorkingHours(endTime)}
+        Izabrano: {formatWorkingHours(startTime)} - {formatWorkingHours(endTime)}
       </div>
-      <button type="submit" className={styles.submitBtn}>DODAJ RADNO VREME</button>
+      <button type="submit" className={styles.submitBtn}>POTVRDI</button>
     </form>
   );
 };

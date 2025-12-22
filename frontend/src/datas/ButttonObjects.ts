@@ -44,7 +44,7 @@ export const servicesActionBtn: NavigateBtnType = {
 export const dashboardBtn: NavigateBtnType = {
     validate: 'navigacija',
     type: 'button',
-    className: 'terminBtn',
+    className: 'dashboardBtn',
     text: 'copyright@rocky2025',
         onAction: () => {}
 };
@@ -56,10 +56,10 @@ export const changePasswordBtn: NavigateBtnType = {
     onAction: () => {}
 };
 
-export const terminsBtn: NavigateBtnType = {
+export const termsBtn: NavigateBtnType = {
     validate: 'navigacija',
     type: 'button',
-    className: 'terminBtn',
+    className: 'termsBtn',
     text: 'TERMINI',
     onAction: () => {}
 };

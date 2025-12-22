@@ -9,7 +9,7 @@ class AppController {
     public const FILE_REGEX = "/^$|^.+\.(jpg|jpeg|png|webp)$/i";
     public const INT_REGEX = "/^[1-9][0-9]*$/";
     public const SERVICE_REGEX = '/^[\p{L}0-9 .,!?()\-:;\'"\/\\\\@+%&]{3,255}$/u';
-    public const PRICE_REGEX = "/^[0-9]{1,6}$/";
+    public const PRICE_REGEX = "/^[0-9]{1,8}$/";
     public const DESCRIPTION_REGEX = "/^[^<>]*$/"/*"/^[\p{L}0-9.,!?\"'@+%&()-:;\/\\\\\- \n]{3,1000}$/u"*/;
     public const NAME_REGEX = "/^[A-Za-zŠĐČĆŽšđčćž ]+$/";
     public const PHONE_REGEX = "/^\d+$/";
@@ -31,7 +31,7 @@ class AppController {
     public const NO_RESULT_MESSAGE =  'Nema rezultata za navedeni upit';
 
     public const SERVICE_ERROR_MESSAGE = 'U polje "Usluga" uneli ste nedozvoljene karaktere, poput <, > i slično.';
-    public const SERVICE_PRICE_ERROR_MESSAGE = 'U polje "Cena" dozvoljeno je uneti samo cele brojeve.';
+    public const SERVICE_PRICE_ERROR_MESSAGE = 'U polje "Cena" dozvoljeno je uneti samo cele brojeve, do 8 karaktera.';
     public const SERVICE_DESCRIPTION_ERROR_MESSAGE = 'U polje "Opis" uneli ste nedozvoljene karaktere, poput <, > i slično.';
 
     public const NAME_ERROR_MESSAGE = 'U polje za ime i prezime dozvoljeni su samo slovni kakrakteri.';

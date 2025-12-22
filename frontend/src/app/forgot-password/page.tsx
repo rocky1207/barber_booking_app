@@ -1,11 +1,22 @@
 "use client";
 import ForgotPassword from "@/components/Forms/Barber/ForgotPasswordForm/ForgotPassword";
-import PageNavigation from "@/components/UI/PageNavigation/PageNavigation";
-import { forgotPasswordPageNav } from "@/datas/NavigationObjects";
+import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
+import { clientsHeaderNav } from "@/datas/NavigationObjects";
+import Header from "@/components/UI/Header/Header";
+
 const ForgotPasswordPage: React.FC = () => {
+    const forgotPasswordNav = {
+        ...clientsHeaderNav,
+        liItem: [
+            {...clientsHeaderNav.liItem[0]},
+            {text: '<<', itemClass: 'separateLi', link: '/login'}
+        ]
+    };
     return (
         <>
-        <PageNavigation {...forgotPasswordPageNav}/>
+        <Header>
+            <ClientNavigation {...forgotPasswordNav} />
+        </Header>
         <main className="wrapp center">
         <h1>Unesite svoj Email</h1>
         <ForgotPassword />
