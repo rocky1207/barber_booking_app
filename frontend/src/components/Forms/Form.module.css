@@ -4,7 +4,7 @@
     margin: 0 auto var(--space-4);
 }
 .form div {
-    margin-bottom: 20px;    
+      margin-bottom: var(--space-4);  
 }
 .form input {
     background: var(--middleDarkGrey); /* vrlo svetla providna boja */
@@ -58,20 +58,7 @@
     min-height: 150px;
 }
 */
-.submitBtn {
-   background: var(--mainGold); 
-   color: var(--middleDarkGrey);
-   font-weight: 600;
-   padding: var(--space-2) var(--space-3);
-   box-shadow: var(--shadow-gold);
-   border-radius: 4px;
-   letter-spacing: 1px;
-   transition: background .25s ease;
-}
-.submitBtn:hover,
-.submitBtn:active {
-   background: var(--lightGold); 
-}
+
 
 .form input:-webkit-autofill,
 .form input:-webkit-autofill:focus,
@@ -92,4 +79,66 @@
   background-color: var(--middleDarkGrey) !important;
   color: var(--lightGrey) !important;
   border-color: var(--mainGold) !important;
+}
+
+.form label {
+    display: inline-block;
+}
+/*working hours */
+
+.workingHoursForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 1.5rem;
+    /*
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    */
+    max-width: 500px;
+    margin: 0 auto;
+}
+.workingHoursForm div {
+    margin-bottom: 0 !important;
+}
+.submitBtn {
+    background: var(--mainGold); 
+    color: var(--middleDarkGrey);
+    font-weight: 600;
+    padding: var(--space-2) var(--space-3);
+    box-shadow: var(--shadow-gold);
+    border-radius: 4px;
+    letter-spacing: 1px;
+    transition: background .25s ease;
+    text-align: center;
+}
+.submitBtn:hover,
+.submitBtn:active {
+   background: var(--lightGold); 
+}
+
+.submitBtn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+.message {
+    color: var(--errorRed);
+    font-size: var(--font-sm);
+    margin: var(--space-1) 0;
+    text-align: center;
+}
+
+
+.updateWorkingHoursForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: 1.5rem;
+   
+}
+.buttonGroup {
+    display: flex;
+    gap: 30%;
+    justify-content: center;
 }

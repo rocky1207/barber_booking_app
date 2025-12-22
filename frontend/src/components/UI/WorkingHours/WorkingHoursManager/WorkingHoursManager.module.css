@@ -1,7 +1,8 @@
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 1rem;
+   /* padding: 1rem;*/
+    padding: var(--space-2);
 }
 
 .header {
@@ -10,35 +11,56 @@
     align-items: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--mainGold);/*#eee*/
 }
 
 .header h2 {
     margin: 0;
-    color: #333;
+    /*color: #333;*/
+    color: var(--mainGold);
+    opacity: .3;
 }
 
 .toggleBtn {
-    background: #3498db;
-    color: white;
+   /* background: #3498db;
+   color: white;
+   cursor: pointer;
+   border-radius: 4px;
+   padding: 0.75rem 1.5rem;
+   font-size: 1rem;*/
+    background: var(--mainGold);
+    color: var(--darkGrey);
+    border-radius: var(--space-1);
+    padding: var(--space-3) var(--space-4);
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+    font-size: var(--font-base);
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: background 0.3s;
 }
-
+.formSpace {
+    padding: 0 var(--space-2);
+    margin-bottom: var(--space-8);
+}
 .toggleBtn:hover {
-    background: #2980b9;
+   /* background: #2980b9;*/
+   background: var(--lightGold);
 }
 
 .formContainer {
+    /*
     margin-bottom: 2rem;
     padding: 1rem;
     background: #f8f9fa;
     border-radius: 8px;
     border: 1px solid #dee2e6;
+    
+    margin-bottom: var(--space-5);
+    padding: var(--space-4);
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    */
 }
 
 .listContainer {
@@ -58,7 +80,10 @@
         text-align: center;
     }
 }
-
+.listContainerSpace {
+    padding: 0;
+    margin-bottom: var(--space-8);
+}
 
 
 

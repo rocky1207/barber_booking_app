@@ -11,7 +11,8 @@ import { convertStringToDateType } from "@/lib/utils/convertStringToDateType";
 import dynamic from 'next/dynamic';
 import type { ComponentType } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import styles from './UpdateWorkingHoursForm.module.css';
+//import styles from './UpdateWorkingHoursForm.module.css';
+import styles from '../../Form.module.css';
 
 const ReactDatePicker = dynamic(
   () =>
@@ -30,7 +31,10 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
     onSuccess, 
     onCancel 
 }) => {
-  
+  const minWorkingTime = new Date();
+  minWorkingTime.setHours(7, 0, 0, 0);
+  const maxWorkingTime = new Date();
+  maxWorkingTime.setHours(22, 0, 0, 0);
   const dataToConvert = {
     start_date: workingHours.start_date, 
     end_date: workingHours.end_date, 
@@ -87,7 +91,7 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
     }
   };
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={`${styles.updateWorkingHoursForm} ${styles.form}`} onSubmit={handleSubmit}>
       <h3>Izmeni radno vreme</h3>
        <label>Datum od</label>
         <ReactDatePicker
@@ -97,6 +101,7 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
           dateFormat="yyyy-MM-dd"
           placeholderText="Datum od"
           className={styles.datePickerInput}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.preventDefault()}
         />
        <label>Datum do</label>
        <ReactDatePicker
@@ -106,6 +111,7 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         dateFormat="yyyy-MM-dd"
         placeholderText="Datum do"
         className={styles.datePickerInput}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.preventDefault()}
        />
       <label>Početno vreme</label>
       <ReactDatePicker
@@ -114,11 +120,14 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, start_time: d}))}
         showTimeSelect
         showTimeSelectOnly
-        timeIntervals={15}
+        timeIntervals={30}
         timeCaption="Vreme"
         dateFormat="HH:mm"
         placeholderText="Izaberi vreme"
         className={styles.datePickerInput}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.preventDefault()}
+        minTime={minWorkingTime}
+        maxTime={maxWorkingTime}
       />
       <label>Završno vreme</label>
       <ReactDatePicker
@@ -127,17 +136,20 @@ const UpdateWorkingHoursForm: React.FC<UpdateWorkingHoursFormProps> = ({
         onChange={(d: Date | null) => setChangeWorkingHours((prev: any) => ({...prev, end_time: d}))}
         showTimeSelect
         showTimeSelectOnly
-        timeIntervals={15}
+        timeIntervals={30}
         timeCaption="Vreme"
         dateFormat="HH:mm"
         placeholderText="Izaberi vreme"
         className={styles.datePickerInput}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.preventDefault()}
+        minTime={minWorkingTime}
+        maxTime={maxWorkingTime}
       />
       <p className={message ? styles.message : ''}>{message}</p>
       <div className={styles.buttonGroup}>
-        <button type="submit" className={styles.submitBtn}>AŽURIRAJ</button>
+        <button type="submit" className={`deleteBtn`}>AŽURIRAJ</button>
         {onCancel && (
-            <button type="button" onClick={onCancel} className={styles.cancelBtn}>
+            <button type="button" onClick={onCancel} className={`updateBtn`}>
                 OTKAŽI
             </button>
         )}

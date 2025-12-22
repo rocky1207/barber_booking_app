@@ -6,6 +6,7 @@ import InsertWorkingHoursForm from '@/components/Forms/WorkingHours/InsertWorkin
 import WorkingHoursList from '@/components/UI/WorkingHours/WorkingHoursList/WorkingHoursList';
 import styles from './WorkingHoursManager.module.css';
 
+
 const WorkingHoursManager: React.FC = () => {
     const [showInsertForm, setShowInsertForm] = useState<boolean>(false);
     const { loggedBarber } = useAppSelector((state: RootState) => state?.barber);
@@ -19,7 +20,7 @@ const WorkingHoursManager: React.FC = () => {
     };
 
     return (
-        <div className={styles.container}>
+        <div className={`wrapp`}>
             <div className={styles.header}>
                 <h2>Upravljanje radnim satima</h2>
                 <button 
@@ -30,14 +31,14 @@ const WorkingHoursManager: React.FC = () => {
                 </button>
             </div>
             {showInsertForm && (
-                <div className={styles.formContainer}>
+                <div className={`cardDashboard ${styles.formSpace}`}>
                     <InsertWorkingHoursForm 
                         loggedBarberId={loggedBarberId} 
                         onSuccess={handleInsertSuccess}
                     />
                 </div>
             )}
-            <div className={styles.listContainer}>
+            <div className={`cardDashboard ${styles.listContainerSpace}`}>
                 <WorkingHoursList 
                     key={loggedBarberId}
                     loggedBarberId={loggedBarberId} 
