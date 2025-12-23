@@ -1,15 +1,9 @@
-interface Props {
-    width: string;
-    height: string; 
-    fill: string;
-}
-const Email: React.FC<Props> = ({width, height, fill}) => {
+
+const Email: React.FC<{fill: string;}> = ({fill}) => {
     return (
         <svg 
             viewBox="0 0 512 512"
-             aria-hidden="true" 
-            height={height} 
-            width={width}
+            aria-hidden="true" 
             version="1.1" 
             id="_x32_"
             fill={fill}>

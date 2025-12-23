@@ -1,14 +1,8 @@
-interface Props {
-    width: string;
-    height: string; 
-    fill: string;
-}
-const Instagram: React.FC<Props> = ({width, height, fill}) => {
+
+const Instagram: React.FC<{fill: string;}> = ({fill}) => {
     return (
         <svg 
             fill={fill} 
-            height={height}
-            width={width}
             viewBox="0 0 256 256" 
             version="1.1" 
             

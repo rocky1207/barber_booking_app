@@ -25,15 +25,12 @@ const Footer:React.FC = () => {
         onAction: handleClick
     }
     const svgData = {
-        width: "16", 
-        height: "16", 
         fill: "#B8941F"
     }
     const phone: string = process.env.NEXT_PUBLIC_BUSINESS_PHONE as string;
     const email: string = process.env.NEXT_PUBLIC_BUSINESS_EMAIL as string;
 
     const callOrCopy = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-        console.log(navigator);
         const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
         if(!isMobile) {
             e.preventDefault();
@@ -56,13 +53,13 @@ const Footer:React.FC = () => {
                 <div className={styles.contact}>
                     <h3>Kontakt</h3>
                     <dl>
-                        <dt><Phone {...svgData} /></dt>
+                        <dt className={styles.socialMediaIcons}><Phone {...svgData} /></dt>
                         <dd>
                             <a href={`tel:${phone}`} onClick={callOrCopy} className={styles.contactLink}>
                                 0642443190
                             </a>
                         </dd>
-                        <dt><Email {...svgData} /></dt>
+                        <dt className={styles.socialMediaIcons}><Email {...svgData} /></dt>
                         <dd>
                             <a href={`mailto:${email}`} className={styles.contactLink}>
                                 djordjeakademija@gmail.com

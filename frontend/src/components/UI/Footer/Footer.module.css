@@ -18,13 +18,18 @@
     text-align: end;
     margin-bottom: var(--space-5);
 }
+.contact h3,
+.socialMedia h3 {
+     margin-bottom: var(--space-3);
+}
 .socialMediaIcons {
-    margin-top: var(--space-3);
     display: flex;
     justify-content: flex-end;
     gap: var(--space-4);
-    ;
-    
+}
+.socialMediaIcons svg {
+    width: 16px; 
+    height: 16px; 
 }
 .socialMediaIcons svg path {
     transition: fill .25s ease
@@ -39,10 +44,10 @@
 .contact dl {
     display: grid;
     grid-template-columns: max-content 1fr;
-    gap: var(--space-1) var(--space-3);
+    gap: var(--space-2) var(--space-3);
     font-size: var(--font-xs);
-    margin-top: var(--space-3);
 }
+
 .contactLink  {
     text-decoration: none;
     transition: text-decoration 0.8s ease;
@@ -69,4 +74,31 @@
     height: 1px;
     content: "";
     background: var(--secondaryTextGrey);
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+    .footer {
+        margin: var(--space-8) 0 var(--space-6);
+    }
+    .contact h3,
+    .socialMedia h3 {
+        margin-bottom: var(--space-4);
+    }
+    .contact dl {
+        gap: var(--space-3) var(--space-3);
+        font-size: var(--font-sm);
+    }
+    .socialMedia {
+        margin-bottom: var(--space-7);
+    }
+    .socialMediaIcons {
+        gap: var(--space-5);
+    }
+    .socialMediaIcons svg {
+        width: 20px; 
+        height: 20px;
+    }
+    .dashboard {
+        padding-top: var(--space-6);
+    }
 }

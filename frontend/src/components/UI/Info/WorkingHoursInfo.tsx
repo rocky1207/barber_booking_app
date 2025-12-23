@@ -8,9 +8,7 @@ interface Props {
 }
 const WorkingHoursInfo: React.FC<Props> = ({showDataList, setShowDataList}) => {
     const svgArrowData = {
-        width: "20", 
-        height: "16", 
-        fill: "#B8941F"
+         fill: "#B8941F"
     }
     const handleArrowChange = () => {
         setShowDataList(!showDataList);

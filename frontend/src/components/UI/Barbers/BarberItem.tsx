@@ -32,8 +32,6 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, full_name, role, file, ind
         router.push(`/services?barberId=${id}`);
     }
     const svgData = {
-        width: "16", 
-        height: "16", 
         fill: "#B8941F"
     }
     /*
@@ -50,14 +48,10 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, full_name, role, file, ind
         <li key={id} className={`${styles.barberItem}`}
         style={{ animationDelay: `${index * 0.2}s` }} >
             <div className={`${showButton ? 'card' : 'cardDashboard'}`}>
-            <div className={styles.customerVew}>
+            <div className={styles.customerView}>
                 <div className='profileImageDiv'>
                     <img src={src} alt="Barber image" />
                 </div>
-                {/*<div className={styles.barberInfoDiv}>
-                    <p>{username}</p>
-                    {showButton && <div><NavigateButton {...newBookBtn} /></div>}
-                </div>*/}
                 <div className={styles.barberInfoDiv}>
                     <button className={`${!showButton && styles.removePointer}`} onClick={showButton ? handleClick : undefined}>
                         <p>{full_name}</p>

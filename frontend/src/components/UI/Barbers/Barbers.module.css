@@ -7,7 +7,7 @@
 .barbers {
   margin-bottom: var(--space-9);
 }
-.customerVew {
+.customerView {
   display: flex;
   justify-content: flex-start;
   gap: 20px;
@@ -28,6 +28,10 @@
   max-width: 450px;
   gap: var(--space-5);
 }
+.barberInfoDiv svg {
+    height: 16px;
+    width: 16px;
+  }
 .barberInfoDiv:hover {
   cursor: pointer;
 }
@@ -64,4 +68,22 @@
 
 .removePointer {
   cursor: default;
+}
+@media (min-width: 375px) and (max-width: 767px) {
+  .barbers {
+  margin-bottom: 110px;
+}
+  .customerView {
+    gap: var(--space-5);
+  }
+  .barberInfoDiv {
+    height: 95px;
+  }
+  .barberInfoDiv svg {
+    height: 20px;
+    width: 20px;
+  }
+  .barberInfoDiv button {
+    gap: var(--space-6);
+  }
 }

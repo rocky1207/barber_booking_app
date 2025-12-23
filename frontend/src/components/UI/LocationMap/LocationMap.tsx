@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import AddressMap from '../Info/AddresMap';
+import AddressMap from './AddresMap'
 import styles from './LocationMap.module.css';
 
 
@@ -34,7 +34,7 @@ const LocationMap: React.FC= () => {
   return (
     <section className={styles.mapSection}>
       <h4>Adresa</h4>
-      <AddressMap />
+        <AddressMap />
       <div className={styles.mapWrap}>
       <iframe
         className={styles.mapIframe}
