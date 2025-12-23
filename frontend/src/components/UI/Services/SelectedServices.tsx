@@ -42,8 +42,6 @@ const SelectedServices: React.FC = () => {
         onAction: handleClick
     }
     const svgData = {
-            width: '20',
-            height: '25',
             fill: '#B8941F'
         }
     const clickHandle = () => {

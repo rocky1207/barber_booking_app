@@ -49,7 +49,6 @@
   
 
 .selectedServiceSection {
-
   position: fixed;
   bottom: 0;
   /*background: black;*/
@@ -83,6 +82,10 @@
 }
 .selectedTerm div p {
   margin-right: 10px;
+}
+.arrowButton svg {
+  width: 16px;
+  height: 16px;
 }
 .selectedTerm svg path {
   transition: fill .25s ease;
@@ -176,5 +179,19 @@
   to {
     max-height: 1000px;
     transform: translateY(1);
+  }
+}
+
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .selectedServiceSection {
+      padding: var(--space-5) 0 var(--space-7);
+  }
+  .showServicesDiv {
+    padding-bottom: 15px;
+  }
+  .arrowButton svg {
+    width: 20px;
+    height: 20px;
   }
 }
