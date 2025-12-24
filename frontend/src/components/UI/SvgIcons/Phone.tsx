@@ -1,15 +1,9 @@
-interface Props {
-    width: string;
-    height: string; 
-    fill: string;
-}
-const Phone: React.FC<Props> = ({width, height, fill}) => {
+
+const Phone: React.FC<{fill: string;}> = ({fill}) => {
     return (
         <svg 
             aria-hidden="true" 
             viewBox="0 0 24 24" 
-            width={width}
-            height={height}
             fill={fill}>
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

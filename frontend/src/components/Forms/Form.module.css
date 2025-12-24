@@ -4,7 +4,7 @@
     margin: 0 auto var(--space-4);
 }
 .form div {
-      margin-bottom: var(--space-4);  
+    margin-bottom: var(--space-4);  
 }
 .form input {
     background: var(--middleDarkGrey); /* vrlo svetla providna boja */
@@ -141,4 +141,22 @@
     display: flex;
     gap: 30%;
     justify-content: center;
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+    .form {
+        margin: 0 auto var(--space-5);
+    }
+    .choosenTermsh1 {
+        margin: var(--space-5) 0;
+    }
+    .form div {
+        margin-bottom: var(--space-5);  
+    }
+    .form input {
+        font-size: var(--font-sm);
+    }
+    .submitBtn {
+        font-size: var(--font-sm);
+    }
 }

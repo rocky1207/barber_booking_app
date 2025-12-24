@@ -21,12 +21,10 @@ const Update: React.FC = () => {
     const strId = params.get('serviceId');
     const serviceId = strId ? parseInt(strId, 10) : null;
     const service = services.find(item => item.id === serviceId);
-    console.log(service);
     const servicePrice = service?.price.replace(/\./g, '').replace(/,\d{2}$/, '');
-    console.log(servicePrice);
     const serviceInputs = [
-        {type: 'text', name: 'service', defaultValue: service?.userService, placeholder: "Usluga", required: false},
-        {type: 'text', name: 'price', defaultValue: servicePrice, placeholder: "Cena", required: false},
+        {type: 'text', name: 'service', defaultValue: service?.userService, placeholder: "Usluga *", required: true},
+        {type: 'text', name: 'price', defaultValue: servicePrice, placeholder: "Cena *", required: true},
     ]
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -61,7 +59,7 @@ const Update: React.FC = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
              <p>{message}</p>
-            <button type='submit' className={styles.submitBtn}>POŠALJI</button>
+            <button type='submit' className={styles.submitBtn}>POTVRDI</button>
         </form>
     );
 };

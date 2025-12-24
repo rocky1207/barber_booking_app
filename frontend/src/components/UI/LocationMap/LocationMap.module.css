@@ -24,11 +24,46 @@
 .mapSection span {
     display: inline;
 }
-    
+.addressMapDiv {
+    margin-top: var(--space-3);
+    width: fit-content;
+}
+.infoFlex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.infoFlex svg {
+    width: 16px;
+    height: 16px;
+}
+.hoverState:hover,
+.hoverState:active {
+    color: var(--lightGold); /* svetlija nijansa zlata */
+    transition: color 0.25s ease;
+}
+.addressMapDiv:hover {
+    color: var(--lightGold); /* svetlija nijansa zlata */
+    transition: color 0.25s ease;
+}
+.addressMapDiv a:hover svg path,
+.addressMapDiv a:active svg path {
+  fill: var(--lightGold); /* svetlija nijansa zlata */
+  transition: fill 0.25s ease;
+}
+.addressHolderDiv {
+    display: flex;
+    margin-left: var(--space-1);
+}
+
+.addressHolderDiv span {
+    display: block;    
+}     
+
 .mapWrap {
     position: relative;
     width: 100%;
-    border-radius: 8px;
+    border-radius: var(--space-2);
     overflow: hidden;
     box-shadow:  var(--shadow-sm)/*0 6px 18px rgba(0,0,0,0.06)*/;
     transition: transform 0.3s ease;
@@ -76,4 +111,46 @@
     clip: rect(0,0,0,0);
     white-space: nowrap;
     border: 0;
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+    .mapSection {
+        margin: var(--space-9) 0;
+        padding-top: var(--space-7);
+    }
+    
+    .mapSection h4 {
+        font-size: var(--font-lg);
+    }
+    .addressMapDiv {
+    margin-top: var(--space-4);
+    width: fit-content;
+}
+    .infoFlex  svg {
+        width: 20px;
+        height: 20px;
+    }
+    .mapWrap {
+        margin-top: var(--space-5);
+    }
+    .addressHolderDiv {
+        margin-left: var(--space-2);
+    } 
+    .mapIframe {
+        height: 300px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .mapSection::before {
+        box-shadow:  var(--shadow-md)/*0 6px 18px rgba(0,0,0,0.06)*/;
+    }
+    .mapSection h4 {
+        font-size: var(--font-lg);
+    }
+    .mapWrap {
+        box-shadow:  var(--shadow-md)/*0 6px 18px rgba(0,0,0,0.06)*/;
+       /* margin-top: var(--space-5);*/
+    }
+    
 }

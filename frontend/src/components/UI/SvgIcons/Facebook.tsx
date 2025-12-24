@@ -1,14 +1,8 @@
-interface Props {
-    width: string;
-    height: string; 
-    fill: string;
-}
-const Facebook: React.FC<Props> = ({width, height, fill}) => {
+
+const Facebook: React.FC<{fill: string;}> = ({fill}) => {
     return (
         <svg 
             viewBox="0 0 24 24" 
-            height={height}
-            width= {width}
             fill={fill}>
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

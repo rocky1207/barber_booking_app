@@ -23,8 +23,8 @@ export const resetPasswordInputs: InputFieldsType[] = [
     {type: 'text', name: 'confirmPassword', defaultValue: '', placeholder: "Potvrdite novu lozinku *", required: true},
 ];
 export const serviceInputs: InputFieldsType[] = [
-    {type: 'text', name: 'service', defaultValue: '', placeholder: "Usluga", required: false},
-    {type: 'text', name: 'price', defaultValue: '', placeholder: "Cena", required: false},
+    {type: 'text', name: 'service', defaultValue: '', placeholder: "Usluga *", required: true},
+    {type: 'text', name: 'price', defaultValue: '', placeholder: "Cena *", required: true},
 ];
 export const appointmentInputs: InputFieldsType[] = [
     {type: 'text', name: 'name', defaultValue: '', placeholder: "Ime *", required: true},

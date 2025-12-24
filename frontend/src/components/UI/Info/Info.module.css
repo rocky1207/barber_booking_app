@@ -1,13 +1,7 @@
 .infoSection {
     margin: var(--space-8) auto;
-    
 }
-.infoFlex {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    
-}
+
 .workingHoursDiv {
     display: flex;
     justify-content: flex-start;
@@ -18,21 +12,24 @@
      margin-right: var(--space-1);
 }
 .iconWrap {
-  display: inline-flex; /* inline-flex da se ponaša kao inline element unutar teksta */
-  align-items: center;
-  justify-content: center;
-  line-height: 1.2; /* sprečava dodatne baseline pomeraje */
+    display: inline-flex; /* inline-flex da se ponaša kao inline element unutar teksta */
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2; /* sprečava dodatne baseline pomeraje */
 }
 .iconWrap :hover {
     cursor: pointer;
 }
+
 .iconWrap svg:hover path {
     stroke: var(--lightGold);
     transition: stroke .25s ease;
 }
 /* opcionalno: direktno stilizuj SVG veličinu preko klase */
 .iconWrap svg {
-  display: block; /* duplikat zaštite, ali bezbedno ga ostaviti */
+    width: 20; 
+    height: 16px;
+    display: block; /* duplikat zaštite, ali bezbedno ga ostaviti */
 }
 .dlWrap { /* wrapper za animaciju */
   
@@ -66,31 +63,45 @@
 .dtBold {
     font-weight: 700!important;
 }
+
+
 .addressMapDiv {
     margin-top: var(--space-3);
     width: fit-content;
 }
-c
+.infoFlex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
 .hoverState:hover,
 .hoverState:active {
-    
     color: var(--lightGold); /* svetlija nijansa zlata */
     transition: color 0.25s ease;
 }
 .addressMapDiv:hover {
     color: var(--lightGold); /* svetlija nijansa zlata */
-  transition: color 0.25s ease;
+    transition: color 0.25s ease;
 }
 .addressMapDiv a:hover svg path,
 .addressMapDiv a:active svg path {
   fill: var(--lightGold); /* svetlija nijansa zlata */
   transition: fill 0.25s ease;
 }
-.addressHolderDiv span {
-    
-    margin-left: var(--space-1);
-}
+
 .addressHolderDiv span {
     display: block;
-   
+    margin-left: var(--space-1);
+}  
+
+
+@media (min-width: 375px) and (max-width: 767px) {
+    .infoSection {
+        margin: 75px auto;
+    }
+    .infoFlex svg {
+        width: 22px; 
+        height: 18px;
+    }
 }

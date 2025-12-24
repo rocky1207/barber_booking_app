@@ -9,13 +9,19 @@ import { insertItems } from "@/lib/api/insertItems";
 import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import { serviceActionDispatcher } from "@/lib/utils/serviceActionDispatcher";
-import styles from '../../Form.module.css';
 import { InsertUpdateServiceReturnType } from "@/types/Api/ReturnServiceType";
+import { useAppSelector } from "@/store/hooks/typizedHooks";
+import { RootState } from "@/store/store";
+import styles from '../../Form.module.css';
+
 
 const Service: React.FC = () => {
+    const {actionBarberId} = useAppSelector((state: RootState) => state?.barber);
+    console.log(actionBarberId);
     const [message, setMessage] = useState<string>('');
     const params = useSearchParams();
     const userStrId = params.get('barberId');
+    console.log(userStrId);
     const dispatch = useAppDispatch();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,7 +62,7 @@ const Service: React.FC = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={serviceInputs} />
             <p>{message}</p>
-            <button type="submit" className={styles.submitBtn}>POŠALJI</button>
+            <button type="submit" className={styles.submitBtn}>POTVRDI</button>
         </form>
     );
 }
