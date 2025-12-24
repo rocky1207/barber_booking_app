@@ -96,7 +96,7 @@
 }  
 
 
-@media (min-width: 375px) and (max-width: 767px) {
+@media (min-width: 375px) and (max-width: 1023px) {
     .infoSection {
         margin: 75px auto;
     }

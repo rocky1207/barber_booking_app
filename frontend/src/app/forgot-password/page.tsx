@@ -18,7 +18,7 @@ const ForgotPasswordPage: React.FC = () => {
             <ClientNavigation {...forgotPasswordNav} />
         </Header>
         <main className="wrapp center">
-        <h1>Unesite svoj Email</h1>
+        <h1 className="margin-bottom">Unesite svoj Email</h1>
         <ForgotPassword />
         </main>
         </>

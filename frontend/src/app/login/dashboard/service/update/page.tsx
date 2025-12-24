@@ -23,7 +23,7 @@ const UpdatePage = () => {
             <ClientNavigation {...updateServiceNav} />
         </Header>
         <main className="wrapp center">
-            <h1>IZMENITE PODATKE</h1>
+            <h1 className="margin-bottom">IZMENITE PODATKE</h1>
             <Update />
         </main>
         </>

@@ -113,7 +113,8 @@
     border: 0;
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
+
+@media (min-width: 768px) and (max-width: 1023px) {
     .mapSection {
         margin: var(--space-9) 0;
         padding-top: var(--space-7);
@@ -139,9 +140,6 @@
     .mapIframe {
         height: 300px;
     }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
     .mapSection::before {
         box-shadow:  var(--shadow-md)/*0 6px 18px rgba(0,0,0,0.06)*/;
     }

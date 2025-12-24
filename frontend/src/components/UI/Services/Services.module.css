@@ -183,7 +183,7 @@
 }
 
 
-@media (min-width: 375px) and (max-width: 767px) {
+@media (min-width: 375px) and (max-width: 1023px) {
   .selectedServiceSection {
       padding: var(--space-5) 0 var(--space-7);
   }

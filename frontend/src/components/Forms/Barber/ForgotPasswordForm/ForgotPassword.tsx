@@ -35,7 +35,7 @@ const ForgotPassword: React.FC = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input inputs={forgotPasswordInputs} />
             <p>{message}</p>
-            <button type="submit" className={styles.submitBtn}>Pošalji</button>
+            <button type="submit" className={styles.submitBtn}>POTVRDI</button>
         </form>
     );
 };

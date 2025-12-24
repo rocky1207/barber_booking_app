@@ -45,7 +45,7 @@ const ChangePassword: React.FC = () => {
         <form className={styles.form} onSubmit={handleClick}>
             <Input inputs={changePasswordInputs} />
             <p>{message}</p>
-            <button type="submit" className={styles.submitBtn}>POŠALJI</button>
+            <button type="submit" className={styles.submitBtn}>POTVRDI</button>
         </form>
     );
 };

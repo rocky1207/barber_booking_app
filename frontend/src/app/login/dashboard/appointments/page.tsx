@@ -62,7 +62,7 @@ const AppointmentsPage: React.FC =  () => {
             <ClientNavigation {...appointmentsPageNav} />
         </Header>
         <main className="wrapp">
-            <h1>ZAKAZANI TERMINI</h1>
+            <h1 className={`margin-bottom ${styles.elH1}`}>ZAKAZANI TERMINI</h1>
             <section className="middle">
                 <CalendarBarber />
             </section>
