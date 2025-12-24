@@ -47,7 +47,7 @@ const Register:React.FC = () => {
                 <Input inputs={registerInputs} />
                 <FileInput setFileName={setFileName} fileName={fileName} />
                 <p>{message}</p>
-                <button type="submit" className={styles.submitBtn}>POŠALJI</button>
+                <button type="submit" className={styles.submitBtn}>POTVRDI</button>
             </form>
         );
     };

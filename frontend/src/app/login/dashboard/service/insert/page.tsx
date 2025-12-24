@@ -21,7 +21,7 @@ const InsertService: React.FC = () => {
             <ClientNavigation {...insertServiceNav} />
         </Header>
         <main className="wrapp center">
-            <h1>UNESITE USLUGU</h1>
+            <h1 className="margin-bottom">UNESITE USLUGU</h1>
             <Service />
         </main>
         </>

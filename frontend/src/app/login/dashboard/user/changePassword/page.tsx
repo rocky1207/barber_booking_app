@@ -22,7 +22,7 @@ const ChangePasswordPage: React.FC = () => {
             <ClientNavigation {...changePasswordNav} />
         </Header>
         <main className="wrapp center">
-            <h1>PROMENI LOZINKU</h1>
+            <h1 className="margin-bottom">PROMENI LOZINKU</h1>
         <ChangePassword />
         </main>
         

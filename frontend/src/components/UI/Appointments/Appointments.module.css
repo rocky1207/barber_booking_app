@@ -1,4 +1,8 @@
-
+.elH1 {
+  margin: 0 auto var(--space-2) auto;
+  width: 260px;
+  text-align: end;
+}
 .separateDiv {
   margin-top: 100px;
 }
@@ -225,8 +229,11 @@
   margin-bottom: 10px;
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
-  
+@media (min-width: 375px) and (max-width: 1023px) {
+  .elH1 {
+    margin: 0 auto var(--space-4) auto;
+    width: 320px;
+  }
   .root {
     padding: var(--space-4);
     width: 320px;
@@ -251,7 +258,8 @@
     padding: var(--space-3);
   }
 }
-@media (min-width: 450px) and (max-width: 767px) {
+@media (min-width: 450px) and (max-width: 1023px) {
+  
   .appointmentsUl {
       grid-template-columns: auto auto auto;
       gap: var(--space-4)

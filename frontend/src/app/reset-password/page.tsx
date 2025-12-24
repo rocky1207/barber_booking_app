@@ -11,7 +11,7 @@ const ResetPasswordPage:React.FC = () => {
             <ClientNavigation {...resetPasswordPageNav} />
         </Header>
         <main className="wrapp center">
-        <ResetPassword  />
+            <ResetPassword  />
         </main>
         </>
     );

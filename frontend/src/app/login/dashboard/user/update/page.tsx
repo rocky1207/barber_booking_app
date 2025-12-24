@@ -46,7 +46,7 @@ const UpdatePage: React.FC = () => {
             <ClientNavigation  {...updateUserHeaderNav} />
         </Header>
         <main className="wrapp center">
-            <h1>IZMENITE PODATKE</h1>
+            <h1 className="margin-bottom">IZMENITE PODATKE</h1>
             <Update barbers={barbers} loggedBarber={loggedBarber} actionBarberId={actionBarberId} />
         </main>
         </>

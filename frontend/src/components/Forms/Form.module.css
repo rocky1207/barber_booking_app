@@ -143,7 +143,7 @@
     justify-content: center;
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
+@media (min-width: 375px) and (max-width: 1023px) {
     .form {
         margin: 0 auto var(--space-5);
     }

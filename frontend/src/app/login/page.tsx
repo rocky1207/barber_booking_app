@@ -21,7 +21,7 @@ const LogInPage:React.FC = () => {
             <ClientNavigation {...loginHeaderNav} />
         </Header>
         <main className="wrapp center">
-            <h1>UNESITE VAŠE PODATKE</h1>
+            <h1 className="margin-bottom">UNESITE VAŠE PODATKE</h1>
             <LogIn/>
             <p className="link"><Link href='/forgot-password'>Zaboravljena lozinka?</Link></p>
         </main>

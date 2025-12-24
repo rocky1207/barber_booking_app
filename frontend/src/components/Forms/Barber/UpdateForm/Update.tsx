@@ -87,7 +87,7 @@ const Update: React.FC<Props> = ({barbers, loggedBarber, actionBarberId}) => {
             <Input inputs={updateInputs} />
             <FileInput setFileName={setFileName} fileName={fileName} />
             <p>{message}</p>
-            <button type="submit" className={styles.submitBtn}>POŠALJI</button>
+            <button type="submit" className={styles.submitBtn}>POTVRDI</button>
         </form>
         {/*<div className={extraStyles.changePasswordDiv}>
             {showButton &&<NavigateButton {...newChangePasswordBtn} />}

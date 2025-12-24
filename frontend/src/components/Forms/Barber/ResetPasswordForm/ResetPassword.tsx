@@ -54,7 +54,7 @@ return (
     <form className={styles.form} onSubmit={handleSubmit}>
         <Input inputs={resetPasswordInputs} />
         <p>{errorMessage}</p>
-        <button type="submit" className={styles.submitBtn}>POŠALJI</button>
+        <button type="submit" className={styles.submitBtn}>POTVRDI</button>
     </form>
     </>
     );
