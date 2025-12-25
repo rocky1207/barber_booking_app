@@ -1,15 +1,9 @@
-interface Props {
-    width: string;
-    height: string; 
-    fill: string;
-}
-const Close: React.FC<Props> = ({width, height, fill}) => {
+
+const Close: React.FC<{fill: string;}> = ({fill}) => {
     return (
         <svg 
         strokeWidth="0.0051111"
             fill={fill} 
-            height={height}
-            width= {width}
             version="1.1" 
             id="Capa_1" 
             viewBox="0 0 460.775 460.775">

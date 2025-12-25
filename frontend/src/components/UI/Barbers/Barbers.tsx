@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import BarberItem from "./BarberItem";
+import Aside from "../Aside.tsx/Aside";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
@@ -26,7 +27,8 @@ const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
   }, [barbers]);
     return (
       <section className={styles.barbers}>
-        <h1>Frizeri</h1>
+        <div className={styles.barbersContainer}>
+          <h1>Frizeri</h1>
         <nav aria-label="Choose barber navigation">
           <ul>
             {barbers.map((barberItem, index) => {
@@ -37,6 +39,8 @@ const Barbers:React.FC<{allBarbers:BasicBarberType[]}> = ({allBarbers}) => {
             })}
           </ul>
         </nav>
+        </div>
+        <Aside />
       </section>
     );
 };

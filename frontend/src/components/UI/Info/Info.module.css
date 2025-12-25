@@ -105,3 +105,9 @@
         height: 18px;
     }
 }
+@media (min-width: 1023px) {
+    .infoSection {
+    margin: 30vh auto var(--space-8) auto;
+}
+    
+}

@@ -1,11 +1,10 @@
 .openMenuOverlay {
   height: 40px;
- 
 }
 .menuOverlay {
   position: fixed;
   height: 30vh; 
-  width: 100vW;
+  width: 100%;
   top: 0;
   left: 0;
   overflow: hidden;
@@ -17,7 +16,7 @@
   padding-top: var(--space-3);
 }*/
 
-.header {
+.headerMobile  {
   padding-top: 10px;
   height: 39px;
   position: sticky;
@@ -27,7 +26,10 @@
   background: var(--background);  
   margin-bottom: var(--space-8);
 }
-.header::after {
+.headerDesktop {
+  display: none;
+}
+.headerMobile ::after {
   position: absolute;
   top: 100%;
   left: 50%;
@@ -42,9 +44,13 @@
 }
 
 .animateLine::after {
- width: 100%;
+  width: 100%;
   opacity: 1;
   max-width: 1023px;
+}
+.menuBtn svg {
+  width: 30px;
+  height: 30px;
 }
 .menuBtn:hover svg path {
   fill: var(--lightGold); /* svetlija nijansa zlata */
@@ -64,4 +70,27 @@
 .linkWrappDiv a:active {
   color: var(--lightGold); /* svetlija nijansa zlata */
   transition: color 0.25s ease;
+}
+
+@media (min-width: 1023px) {
+  .headerMobile {
+    display: none;
+  }
+  .headerDesktop {
+    display: block;
+    position: fixed;
+    background: var(--darkGrey);
+    
+  }
+  .container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-2) 0 0 0;
+  }
+  .menuOverlay {
+    height: 75px; 
+    z-index: 1;
+    width: 100%;
+  }
 }
