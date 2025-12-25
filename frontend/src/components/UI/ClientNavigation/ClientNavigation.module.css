@@ -15,3 +15,24 @@
 .changePasswordLi:active {
   color: #f57070 !important;
 }
+@media (min-width: 1023px) {
+    .clientHeaderNav {
+        padding-top: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    .clientHeaderNav ul {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-4);
+    }
+    .clientHeaderLi {
+        margin-bottom: 0;
+    }
+    .separateLi {
+        margin-top: 0;
+    }
+    .changePasswordLi {
+        margin-top: 0;
+    }
+}

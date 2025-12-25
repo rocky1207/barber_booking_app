@@ -7,7 +7,7 @@
 .barbers {
   margin-bottom: var(--space-9);
 }
-.barbers h1{
+.barbers h1 {
   margin-bottom: var(--space-2);
 }
 .customerView {
@@ -72,7 +72,7 @@
 .removePointer {
   cursor: default;
 }
-@media (min-width: 375px) and (max-width: 1023px) {
+@media (min-width: 375px) and (max-width: 1440px) {
   .barbers {
     margin-bottom: 110px;
   }
@@ -91,5 +91,15 @@
   }
   .barberInfoDiv button {
     gap: var(--space-6);
+  }
+}
+@media (min-width: 1023px) {
+  .barbers {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .barbersContainer {
+    width: 500px;
   }
 }

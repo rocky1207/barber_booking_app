@@ -4,10 +4,11 @@
 }
 .logo-1 {
   width: 100%;
-  max-width: 70px;     /* širina 100% roditeljskog elementa */
+  max-width: 90px;     /* širina 100% roditeljskog elementa */
   height: auto;      /* visina se automatski računa */
  /* aspect-ratio: 16 / 9;  /* ili prave proporcije tvoje slike */
   object-fit: contain; 
+  border-radius: 50%;
 }
 .logoDiv-2 {
   display: block;
@@ -104,10 +105,12 @@ Bottom navigation/sheets: box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5)
   --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.2);
   --shadow-gold-1: 0 1px 4px rgba(212, 175, 55, 0.2);
 }
-html {
+
+  html {
     overflow-y: auto;
     scrollbar-gutter: stable;
   }
+
 body {
   /*color: var(--logoColor);*/
   color: var(--mainGold);
@@ -392,15 +395,15 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   margin-bottom: var(--space-2);
 }
 
-@media (min-width: 375px) and (max-width: 1023px) {
+@media (min-width: 375px) and (max-width: 1440px) {
   /* iPhone standard */
   body {
     font-size: var(--font-sm);
     line-height: 1.6;
   }
   .logo-1 {
-  max-width: 90px;     /* širina 100% roditeljskog elementa */
-  }
+    max-width: 60px;     /* širina 100% roditeljskog elementa */
+    }
 
   .logo-2 {
     max-width: 35px;     /* širina 100% roditeljskog elementa */
@@ -453,4 +456,23 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   .marginBottom {
     margin-bottom: var(--space-4);
   }
+}
+@media (min-width: 1023px) {
+  .logoDiv-1 {
+    display: none;
+  }
+  body {
+    font-size: var(--font-sm);
+    line-height: 1.6;
+  }
+  .wrapp {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .cardDashboard {
+    
+    
+  }
+ 
 }

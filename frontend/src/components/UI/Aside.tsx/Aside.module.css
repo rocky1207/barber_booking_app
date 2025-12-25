@@ -1,0 +1,12 @@
+.asideContainer {
+    display: none;
+}
+@media (min-width: 1023px) {
+  .asideContainer {
+    position: fixed;
+    display: block;
+    width: 250px;
+    padding: 0;
+    right: calc((100vw - min(80vw, 1200px)) / 2);
+  }
+}
