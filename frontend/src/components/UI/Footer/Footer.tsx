@@ -9,6 +9,7 @@ import Instagram from '../SvgIcons/Instagram';
 import Facebook from '../SvgIcons/Facebook';
 import Phone from '../SvgIcons/Phone';
 import Email from '../SvgIcons/Email';
+import Link from "next/link";
 
 import styles from './Footer.module.css';
 
@@ -46,8 +47,8 @@ const Footer:React.FC = () => {
                 <div className={styles.socialMedia}>
                     <h3>Društvene mreže</h3>
                     <div className={styles.socialMediaIcons}>
-                        <a href="https://www.instagram.com/mjrocky1981/" target='_blank'><Instagram {...svgData} /></a>
-                        <a href="https://www.facebook.com/milan.jovanovic.39545?locale=sr_RS" target='_blank'><Facebook {...svgData} /></a>
+                        <Link href="https://www.instagram.com/mjrocky1981/" target='_blank'><Instagram {...svgData} /></Link>
+                        <Link href="https://www.facebook.com/milan.jovanovic.39545?locale=sr_RS" target='_blank'><Facebook {...svgData} /></Link>
                     </div>
                 </div>
                 <div className={styles.contact}>
@@ -55,19 +56,17 @@ const Footer:React.FC = () => {
                     <dl>
                         <dt className={styles.socialMediaIcons}><Phone {...svgData} /></dt>
                         <dd>
-                            <a href={`tel:${phone}`} onClick={callOrCopy} className={styles.contactLink}>
+                            <Link href={`tel:${phone}`} onClick={callOrCopy} className={styles.contactLink}>
                                 0642443190
-                            </a>
+                            </Link>
                         </dd>
                         <dt className={styles.socialMediaIcons}><Email {...svgData} /></dt>
                         <dd>
-                            <a href={`mailto:${email}`} className={styles.contactLink}>
+                            <Link href={`mailto:${email}`} className={styles.contactLink}>
                                 djordjeakademija@gmail.com
-                            </a>
+                            </Link>
                         </dd>
                     </dl>
-                    
-                   
                 </div>
                 <div  className={styles.dashboard}>
                     <NavigateButton {...newDashboardBtn} />

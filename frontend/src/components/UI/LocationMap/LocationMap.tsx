@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import AddressMap from './AddresMap'
+import AddressMap from './AddressMap'
 import styles from './LocationMap.module.css';
 
 

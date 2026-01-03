@@ -68,6 +68,7 @@
     box-shadow:  var(--shadow-sm)/*0 6px 18px rgba(0,0,0,0.06)*/;
     transition: transform 0.3s ease;
     margin-top: var(--space-4);
+    z-index: 1;
 }
 .mapWrap:hover {
   
@@ -114,7 +115,7 @@
 }
 
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px)  {
     .mapSection {
         margin: var(--space-9) 0;
         padding-top: var(--space-7);
@@ -151,4 +152,9 @@
        /* margin-top: var(--space-5);*/
     }
     
+}
+@media (min-width: 1023px) {
+.hoverState {
+    text-decoration: underline;
+}
 }

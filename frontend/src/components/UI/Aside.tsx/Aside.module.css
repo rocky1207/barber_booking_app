@@ -4,9 +4,119 @@
 @media (min-width: 1023px) {
   .asideContainer {
     position: fixed;
-    display: block;
-    width: 250px;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    padding: var(--space-5) 0;
     right: calc((100vw - min(80vw, 1200px)) / 2);
+    z-index: 2;
+  }
+  .asideContainer h2 {
+    margin-bottom: var(--space-5);
+  }
+
+  .asideLogoDiv img {
+    width: 100%;
+    max-width: 100px;
+      /* širina 100% roditeljskog elementa */
+    height: auto;      /* visina se automatski računa */
+  /* aspect-ratio: 16 / 9;  /* ili prave proporcije tvoje slike */
+    object-fit: contain; 
+    border-radius: 50%;
+  }
+  .section {
+    position: relative;
+    width: 100%;
+  }
+  .section::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: .1px;
+    background: var(--mainGold);
+    opacity: .4;
+  }
+  .contact {
+    margin-top: var(--space-3);
+    
+  }
+  
+  .openIconsDiv {
+    display: flex;
+    justify-content: flex-start;
+    gap: var(--space-1);
+    align-items: center;
+    transform: scaleY(1);
+    margin-bottom: var(--space-4);
+  }
+  .arrowDiv {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.2;
+      
+  }
+  .arrowDiv svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+  .arrowDiv:hover svg path,
+  .arrowDiv:active svg path {
+    transition: stroke .3s ease;
+    stroke: var(--lightGold);
+  }
+  .phone {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--space-2);
+    border: 1px solid var(--mainGold);
+    border-radius: var(--space-2);
+    padding: var(--space-2);
+  }
+  .iconsWrappDiv svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+  .iconsWrappDiv {
+    transform: scaleY(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    height: 0;
+    
+  }
+  .showIcons {
+    transform: scaleY(1);
+    opacity: 1;
+    height: 100%;
+  }
+  .iconsDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .iconsDiv a {
+    transition: color 0.3s ease;
+  }
+  .iconsDiv a svg {
+    transition: fill 0.3s ease;
+  }
+  .iconsDiv a:hover,
+  .iconsDiv a:active {
+    color: var(--lightGold);
+  }
+  .iconsDiv a:hover svg,
+  .iconsDiv a:active svg {
+    fill: var(--lightGold);
   }
 }

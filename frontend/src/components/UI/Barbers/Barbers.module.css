@@ -72,7 +72,7 @@
 .removePointer {
   cursor: default;
 }
-@media (min-width: 375px) and (max-width: 1440px) {
+@media (min-width: 375px)/* and (max-width: 1440px)*/ {
   .barbers {
     margin-bottom: 110px;
   }
@@ -97,9 +97,31 @@
   .barbers {
     display: flex;
     justify-content: space-between;
-    
   }
   .barbersContainer {
-    width: 500px;
+    width: 450px;
+  }
+}
+@media (min-width: 1441px) {
+      
+  .barbers {
+    margin-bottom: 250px;
+  }
+  .barberInfoDiv {
+    height: 105px;
+  }
+  .barberInfoDiv svg {
+    height: 22px;
+    width: 22px;
+  }
+  
+  .barbersContainer {
+    width: 60%;
+  }
+    
+  .barbersContainer ul {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
   }
 }

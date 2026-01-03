@@ -75,6 +75,10 @@
     align-items: center;
     
 }
+.infoFlex svg {
+    width: 16px; 
+    height: 16px;  
+}
 .hoverState:hover,
 .hoverState:active {
     color: var(--lightGold); /* svetlija nijansa zlata */
@@ -95,19 +99,33 @@
     margin-left: var(--space-1);
 }  
 
-
-@media (min-width: 375px) and (max-width: 1023px) {
-    .infoSection {
-        margin: 75px auto;
-    }
+@media (min-width: 375px) {
     .infoFlex svg {
         width: 22px; 
         height: 18px;
     }
 }
+@media (min-width: 375px) and (max-width: 1023px) {
+    .infoSection {
+        margin: 75px auto;
+    }
+    
+}
 @media (min-width: 1023px) {
     .infoSection {
-    margin: 30vh auto var(--space-8) auto;
-}
-    
+         margin: 0 auto;
+    }
+     .infoFlex {
+        display: flex;
+        justify-content: center;
+        padding-bottom: var(--space-3);
+    }   
+    .dlWrap { 
+        display: flex;
+        justify-content: center;
+        
+    }
+    .dlOpen { 
+        margin-bottom: var(--space-3);
+    }
 }
