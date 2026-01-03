@@ -20,6 +20,7 @@ const ClientAppointment = forwardRef<HTMLDialogElement, {termData: ClientAppoint
             setDeleteClientApppointmentMsg(deleteItemErrorMessage.delete_client_appointment);
             dispatch(uiActions.setDeleteItemErrorMessage({...deleteItemErrorMessage, delete_client_appointment: ''}));
         }
+        
     }, [deleteItemErrorMessage.delete_client_appointment]);
     const openModal = () => {
         dispatch(appointmentActions.setActionAppointmentId(appointmentId));

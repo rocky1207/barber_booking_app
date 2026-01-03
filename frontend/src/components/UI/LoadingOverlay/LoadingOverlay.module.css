@@ -25,8 +25,13 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-@media screen and (min-width: 1023px) {
+@media screen and (min-width: 1023px) and (max-width: 1440px) {
   .spinner {
-    margin: 0 20px;
+    margin: 0 15px;
+  }
 }
+@media screen and (min-width: 1441px) {
+  .spinner {
+    margin: 0 30px;
+  }
 }

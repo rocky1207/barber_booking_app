@@ -29,7 +29,7 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
         <Header>
             <ClientNavigation {...updatedClientHeaderNav} />
         </Header>
-        <main className={`wrapp`}>
+        <main className={`wrapp wrappMargin`}>
             <h1 className="margin-bottom">Usluge</h1>
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :

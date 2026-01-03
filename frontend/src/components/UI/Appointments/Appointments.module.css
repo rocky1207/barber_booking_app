@@ -206,7 +206,7 @@
   border: 1px solid var(--logoColor);
   border-radius: 20px;
   */
-  padding: var(--space-2);
+/*  padding: var(--space-2);*/
  /* margin-bottom: var(--space-4);*/
   
 }
@@ -268,4 +268,20 @@
   .appointmentsUl li:active {
       transform: translateY(-3px);
   }
+}
+@media (min-width: 1023px) {
+  .clientAppointment {
+    max-width: 100%;
+    width: 100%;
+  }
+  .clientAppointment ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .clientAppointment ul li {
+    width: 100%;
+    margin-bottom: 0;
+  }
+  
 }
