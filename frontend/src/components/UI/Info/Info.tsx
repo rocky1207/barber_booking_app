@@ -9,12 +9,10 @@ import styles from './Info.module.css';
 const Info: React.FC = () => {
     const [showDataList, setShowDataList] = useState<boolean>(false);
     const svgData = {
-        width: "16", 
-        height: "16", 
         fill: "#B8941F"
     }
     return (
-    <section className={`wrapp ${styles.infoSection}`}>
+    <div className={`${styles.infoSection}`}>
         <div className={styles.infoFlex}>
             <Clock {...svgData} />
             <WorkingHoursInfo showDataList={showDataList} setShowDataList={setShowDataList} />
@@ -29,7 +27,7 @@ const Info: React.FC = () => {
             })}
         </dl>}
         </div>
-    </section>
+    </div>
     );
 };
 export default Info;

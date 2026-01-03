@@ -71,7 +71,13 @@
   color: var(--lightGold); /* svetlija nijansa zlata */
   transition: color 0.25s ease;
 }
-
+@media (min-width: 1023px) and (max-width: 1440px) {
+.menuOverlay {
+    height: 75px; 
+    z-index: 1;
+    width: 100%;
+  }
+}
 @media (min-width: 1023px) {
   .headerMobile {
     display: none;
@@ -88,8 +94,15 @@
     margin: 0 auto;
     padding: var(--space-2) 0 0 0;
   }
-  .menuOverlay {
-    height: 75px; 
+  .clientHeaderNav nav ul li:hover,
+.clientHeaderNav a:active {
+  color: var(--lightGold); /* svetlija nijansa zlata */
+  transition: color 0.25s ease;
+}
+}
+@media (min-width: 1440px) {
+.menuOverlay {
+    height: 105px; 
     z-index: 1;
     width: 100%;
   }

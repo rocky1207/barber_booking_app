@@ -1,14 +1,8 @@
-interface Props {
-    width: string;
-    height: string;
-    fill: string;
-}
-const Clock: React.FC<Props> = ({...svgData}) => {
+
+const Clock: React.FC<{fill: string;}> = ({fill}) => {
     return (
         <svg
-            width={svgData.width}
-            height={svgData.height}
-            fill={svgData.fill}
+            fill={fill}
             style={{ transform: 'translateY(-1px)'}}
             aria-hidden="true" 
             data-eds-component="true" 

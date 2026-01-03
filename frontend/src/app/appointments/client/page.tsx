@@ -24,15 +24,15 @@ const ClientPage = () => {
         <Header>
             <ClientNavigation {...choosenTermsNav } />
         </Header>
-        <main className="wrapp">
+        <main className="wrapp wrappMargin">
             <h1 className="choosenTermsh1">PREGLED ZAKAZANIH TERMINA</h1>
             <ClientAppointmentForm />
             <ClientAppointments />
             <div className={styles.separateDiv}>
-             <LocationMap />
-            <Footer />
+                <LocationMap />
             </div>
         </main>
+        <Footer />
         </>
     );
 };

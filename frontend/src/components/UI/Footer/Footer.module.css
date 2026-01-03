@@ -76,7 +76,7 @@
     background: var(--secondaryTextGrey);
 }
 
-@media (min-width: 375px) and (max-width: 1023px) {
+@media (min-width: 375px) {
     .footer {
         margin: var(--space-8) 0 var(--space-6);
     }

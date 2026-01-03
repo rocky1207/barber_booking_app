@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import { formatDate } from "@/lib/utils/formatDate";
@@ -8,18 +8,21 @@ import ClientAppointment from "./ClientAppointment";
 import { deleteBtn } from "@/datas/ButttonObjects";
 import ConfirmModal from "../Modals/ConfirmModal/ConfirmModal";
 import { deleteItemsById } from "@/lib/api/deleteItemsById";
+import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
+import { useAppDispatch } from "@/store/hooks/typizedHooks";
 import styles from './Appointments.module.css';
 
 const ClientAppointments: React.FC = () => {
     const {clientTerms, actionAppointmentId} = useAppSelector((state: RootState) => state.appointment);
     const dialog = useRef<HTMLDialogElement | null>(null);
+    const dispatch = useAppDispatch();
     const deleteAppointmentBtn = {
          ...deleteBtn,
         id: actionAppointmentId,
         action: 'DELETE_CLIENT_APPOINTMENT',
         onAction: deleteItemsById
     };
-    console.log('tu sam');
+    useEffect(() => {setIsLoadingState(false, dispatch)}, [clientTerms]);
     
     return (
         <>

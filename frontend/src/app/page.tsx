@@ -18,8 +18,10 @@ export default async function Home() {
         <ClientNavigation {...clientsHeaderNav}/>
       </Header>
       <Logo {...logoClasses} />
+      <section className="wrapp display">
       <Info />
-      <main className="wrapp">
+      </section>
+      <main className="wrapp wrappMargin">
         {!success ? <p className="textCenter">{message}</p> : 
         success && message && data?.length === 0 ? <p className="textCenter">{message}</p> : 
         <Barbers allBarbers={data as BasicBarberType[]} />}

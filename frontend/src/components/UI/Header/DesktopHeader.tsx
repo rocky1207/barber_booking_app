@@ -13,7 +13,7 @@ const DesktopHeader: React.FC<{children: ReactNode}> = ({/*...navigation*/childr
       <div className={`flexed ${styles.container}`}>
         <Spinner />
         <Image className="logo-1" src={logo} alt="Logo" priority />
-        <div className='flexed'>
+        <div className={`flexed ${styles.linkWrappDiv}`}>
           {children}
         </div>
       </div>
