@@ -2,6 +2,7 @@ import { SingleServiceType } from "@/types/Api/ReturnServiceType";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
 import ArrowUp from "@/components/UI/SvgIcons/ArrowUp";
 import ArrowDown from "@/components/UI/SvgIcons/ArrowDown";
+import { formatPrice } from "./formatPrice";
 import styles from '@/components/UI/Services/Services.module.css';
 
 interface Props {
@@ -13,6 +14,11 @@ interface Props {
 
 export const selectedServiceElCreator = ({ choosenServices, setShowServices, showServices, choosenBaber}: Props) => {
     
+    let sum: number = 0;
+    choosenServices.forEach((service) => {
+        sum += +service.price.replace(/\./g, '').replace(',', '.');
+    });
+    const price: string = formatPrice(sum);
     const handleShowServices = () => {
         setShowServices(prev => !prev);
     }
@@ -30,27 +36,28 @@ export const selectedServiceElCreator = ({ choosenServices, setShowServices, sho
         } else {
             text = `${choosenServices.length} usluge`;
         }
-        console.log(showServices);
+        
         serviceDivElement = <div className={styles.flexLeft}>
             <p className={styles.flexLeftText}>{text}</p>
             <button onClick={handleShowServices} className={styles.arrowButton}>
                     {!showServices ? <ArrowUp {...svgData} /> : <ArrowDown {...svgData} />}
                 </button>
             </div>;
-        serviceUlElement = <ul className={`wrapp ${styles.selectedServices}`}>
-            
+        serviceUlElement = <div className={`wrapp ${styles.selectedServicesDiv}`}>
+            <ul className={`${styles.selectedServices}`}>
                 {choosenServices.map((service) => {
                     const text = `${service.userService}: ${service.price}`;
                     return (
                         <li key={service.id}>
                             <p>{text}</p>
-                            <p>Frizer - {choosenBaber?.username}</p>
+                            <p>Frizer - {choosenBaber?.full_name}</p>
                         </li>
                     )
                 })}
                 
             </ul>
-         
+            <p className={styles.summary}>UKUPNO: <span>{price}din</span></p>
+            </div> 
     };
     
     return {serviceDivElement, serviceUlElement};
