@@ -4,6 +4,7 @@ import AvailableAppointments from "@/components/UI/Appointments/AvailableAppoint
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
+import styles from '@/components/UI/Appointments/Appointments.module.css';
 
 interface Props {
     searchParams: Promise<{barberId: string; serviceId: string}>
@@ -23,9 +24,11 @@ const BookingPage = async ({searchParams}: Props) => {
          <Header>
             <ClientNavigation {...updatedClientHeaderNav}/>
          </Header>
-        <main className="wrapp middle">
-            <CalendarClient />
-            <AvailableAppointments />
+        <main className={`wrapp wrappMargin ${styles.middle}`}>
+            <section className={`${styles.calendarSection}`}>
+                <CalendarClient />
+                <AvailableAppointments />
+            </section>
         </main>
         <SelectedServices />
         </>

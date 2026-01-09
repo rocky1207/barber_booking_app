@@ -92,7 +92,9 @@
   width: 16px;
   height: 16px;
 }
-.selectedTerm svg path {
+.selectedTerm svg {
+  width: 16px;
+  height: 16px;
   transition: fill .25s ease;
 }
 .selectedTerm svg:hover path, 
@@ -239,6 +241,11 @@
   .selectedServices {
     margin-bottom: var(--space-5);
   }
+  .selectedTerm svg {
+  width: 20px;
+  height: 20px;
+  
+}
 }
 @media (min-width: 1441px) {
   .service {
