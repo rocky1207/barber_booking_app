@@ -7,6 +7,7 @@ import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
 import SelectedServices from "@/components/UI/Services/SelectedServices";
 
+
 const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId: string }> }) => {
     const {barberId} = await searchParams;
     const id = parseInt(barberId, 10);
@@ -30,7 +31,6 @@ const ServicesPage = async ({ searchParams }: { searchParams: Promise<{ barberId
             <ClientNavigation {...updatedClientHeaderNav} />
         </Header>
         <main className={`wrapp wrappMargin`}>
-            <h1 className="margin-bottom">Usluge</h1>
             {!id ? noIdbackUp : !success ? <p className="textCenter">{message}</p> :  
             success && message ? <p className="textCenter">{message}</p> :
             <Services services={services as SingleServiceType[]} />}

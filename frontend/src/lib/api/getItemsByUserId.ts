@@ -63,5 +63,6 @@ export const getItemsByUserId = async (data: {userId: number, date: string}, act
     } catch (error: any) {
         answer = {success: false, message: error.message};
     }
+    
     return answer;   
 };

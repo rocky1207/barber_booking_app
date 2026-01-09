@@ -48,7 +48,7 @@ const ServiceItem = forwardRef<HTMLDialogElement,Props>(({index, service, showBt
     isActive = choosenServices.some(s => s.id === service.id);
     const logoClasses = {logoDiv: 'logoDiv-2', logoImage: 'logo-2'};
     return (
-        <li key={service.id} className={`${styles.serviceItem} ${isActive ? styles.serviceItemActive : ''}`} style={{ animationDelay: `${index * 0.2}s` }}>
+        <li key={service.id} className={`${styles.serviceItem} cardMargin ${isActive ? styles.serviceItemActive : ''}`} style={{ animationDelay: `${index * 0.2}s` }}>
             <div className= {`${!showBtns ? 'card' : 'cardDashboard'} ${!showBtns && isActive ? 'activeService' : ''}`}>
             <button className={`${styles.bookNavBtn} ${showBtns && 'cursorDefault'}`} onClick={handleClick}>
                 <div className='flexed'>

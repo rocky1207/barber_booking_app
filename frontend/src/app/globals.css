@@ -311,8 +311,13 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  /*margin-bottom: var(--space-4);*/
+}
+/*
+.cardMargin {
   margin-bottom: var(--space-4);
 }
+  */
 /* Zlatni glow efekat na hover */
 .card::before {
   content: '';
@@ -354,7 +359,7 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   position: relative;
   overflow: hidden;
   */
-  margin-bottom: var(--space-4);
+  /*margin-bottom: var(--space-4);*/
   cursor: default!important;
 }
 
@@ -394,11 +399,19 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 .marginBottom {
   margin-bottom: var(--space-2);
 }
+.barberMarginBottom {
+    margin-bottom: var(--space-4);
+  }
 @media (min-width: 375px) {
   .card {
     padding: 0 var(--space-6) 0 var(--space-5);
+   /*margin-bottom: var(--space-5);*/
+  }
+  /*
+  .cardMargin {
     margin-bottom: var(--space-5);
   }
+    */
 /* Zlatni glow efekat na hover */
   .card::before {
     top: -3px;
@@ -438,6 +451,9 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 
   .profileImageDiv img {
     height: 70px;
+  }
+  .barberMarginBottom {
+    margin-bottom: var(--space-5);
   }
 }
 @media (min-width: 375px) and (max-width: 1440px) {
@@ -488,6 +504,11 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   .wrappMargin {
     margin: 150px auto 0 auto;
   }
+  /*
+  .cardMargin {
+      margin-bottom: 0;
+    }
+      */
 }
 
 @media (min-width: 1440px) {
@@ -507,4 +528,10 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   .logo-1 {
     max-width: 90px;
     }
+    .barberMarginBottom {
+      margin-bottom: 0;
+    }
+    .logo-2 {
+    max-width: 45px;
+  }
 }

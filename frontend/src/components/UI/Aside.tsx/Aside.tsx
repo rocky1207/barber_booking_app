@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image"; 
 import logo from '@/assets/images/logo_croped.png';
 import Info from "../Info/Info";

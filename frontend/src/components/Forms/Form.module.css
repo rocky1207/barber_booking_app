@@ -143,7 +143,7 @@
     justify-content: center;
 }
 
-@media (min-width: 375px) and (max-width: 1023px) {
+@media (min-width: 375px) and (max-width: 1440px) {
     .form {
         margin: 0 auto var(--space-5);
     }
@@ -159,4 +159,11 @@
     .submitBtn {
         font-size: var(--font-sm);
     }
+}
+@media (min-width: 1441px) {
+    
+    .form div {
+        margin-bottom: var(--space-6);  
+    }
+    
 }

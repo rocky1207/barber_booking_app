@@ -64,6 +64,7 @@ const SelectedServices: React.FC = () => {
                 </div>
             </div>}
             {showServices && serviceUlElement}
+            
         </section>}
         </>
     )

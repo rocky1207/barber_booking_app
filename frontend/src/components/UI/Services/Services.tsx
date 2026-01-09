@@ -8,6 +8,7 @@ import { barberActions } from '@/store/slices/barberSlice';
 import { useSearchParams } from 'next/navigation';
 import { RootState } from '@/store/store';
 import { setIsLoadingState } from '@/lib/utils/setIsLoadingState';
+import Aside from "@/components/UI/Aside.tsx/Aside";
 import styles from './Services.module.css';
 
 interface Props {
@@ -35,6 +36,7 @@ const Services:React.FC<Props> = ({services}) => {
     return (
         <section className={`greyBackground ${styles.service}`}>
             {userServices.length > 0 ? <nav aria-label="Choose service navigation">
+                <h1 className="margin-bottom">Usluge</h1>
                 <ul>
                     {userServices.map((service: SingleServiceType, index: number) => {
                         return <ServiceItem key={service.id} service={service} index={index} showBtns={false} />
@@ -42,6 +44,7 @@ const Services:React.FC<Props> = ({services}) => {
                 </ul>
             </nav>:
             <p className='textCenter'>Trenutno nema unetih usluga za izabranog frizera</p>}
+            <Aside />
         </section>
     );
 };
