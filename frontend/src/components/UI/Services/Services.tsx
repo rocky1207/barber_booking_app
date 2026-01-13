@@ -37,7 +37,7 @@ const Services:React.FC<Props> = ({services}) => {
         <section className={`greyBackground ${styles.service}`}>
             {userServices.length > 0 ? <nav aria-label="Choose service navigation">
                 <h1 className="margin-bottom">Usluge</h1>
-                <ul>
+                <ul className={styles.serviceUl}>
                     {userServices.map((service: SingleServiceType, index: number) => {
                         return <ServiceItem key={service.id} service={service} index={index} showBtns={false} />
                     })}

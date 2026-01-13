@@ -71,6 +71,7 @@ class GetAppointmentModel {
             $query = "
             SELECT 
                 a.id AS appointmentId,
+                a.userId,
                 a.time,
                 a.date,
                 a.userService,

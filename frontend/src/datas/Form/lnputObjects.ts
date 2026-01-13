@@ -5,6 +5,7 @@ export const loginInputs: InputFieldsType[] = [
 ];
 
 export const registerInputs: InputFieldsType[] = [
+    {type: 'text', name: 'full_name', defaultValue: '', placeholder: "Ime i prezime *", required: true},
     {type: 'text', name: 'username', defaultValue: '', placeholder: "Korisničko ime *", required: true}, 
     {type: 'text', name: 'password', defaultValue: '', placeholder: "Lozinka *", required: true},
     {type: 'text', name: 'role', defaultValue: '', placeholder: "Uloga *", required: true},

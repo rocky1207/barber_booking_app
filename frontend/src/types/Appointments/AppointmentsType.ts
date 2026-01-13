@@ -36,6 +36,7 @@ export interface AppointmentsSliceType  {
 };
 export interface BarberAppointmentsType extends ClientAppointmentsType {
     appointmentId: number;
+    userId: number;
     date: string;
     price: string;
     time: string;

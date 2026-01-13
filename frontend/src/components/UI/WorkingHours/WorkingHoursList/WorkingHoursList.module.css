@@ -136,8 +136,15 @@
         justify-content: center;
     }
 }
-
-
-
+@media (min-width: 1441px) {
+.dateRange {
+    font-size: var(--font-base);
+}
+.timeRange {
+   /* color: #666;*/
+   /*font-size: 0.9rem;*/
+   font-size: var(--font-sm);
+}
+}
 
 

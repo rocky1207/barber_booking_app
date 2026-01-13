@@ -8,6 +8,8 @@ import ConfirmModal from "@/components/UI/Modals/ConfirmModal/ConfirmModal";
 import { deleteBtn } from "@/datas/ButttonObjects";
 import { deleteItemsById } from "@/lib/api/deleteItemsById";
 import { BasicBarberType } from "@/types/Barbers/BarbersType";
+import { appointmentActions } from "@/store/slices/appointmentSlice";
+import styles from './Home.module.css';
 
 
 const Home: React.FC<{barbers: BasicBarberType[], actionBarberId: number | undefined}> = ({barbers, actionBarberId}) => {
@@ -17,6 +19,7 @@ const Home: React.FC<{barbers: BasicBarberType[], actionBarberId: number | undef
   
   useEffect(() => {
     setIsLoadingState(false, dispatch);
+    dispatch(appointmentActions.setSelectedTerm({date: '',time: ''}));
   }, []);
   
   const updatedDeleteBtn = {
@@ -30,7 +33,7 @@ const Home: React.FC<{barbers: BasicBarberType[], actionBarberId: number | undef
     <>
     <ConfirmModal ref={dialog} {...updatedDeleteBtn}  />
     <section>
-      <ul>
+      <ul className={styles.homeUl}>
         {barbers?.map((barber, index) => {
           return (
             <BarberItem  key={barber.id} {...barber} index={index}>

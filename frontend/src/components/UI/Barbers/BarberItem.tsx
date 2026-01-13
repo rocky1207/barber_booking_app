@@ -43,11 +43,10 @@ const BarberItem:React.FC<ExtendedBarberType> = ({id, full_name, role, file, ind
     const showButton = pathName === '/' ? true : false;
     const defaultAvatar = "/images/avatar.png"; ;
     const src = file && file.trim() !== '' ? `${imageUrl}${file}` : defaultAvatar;
-    
-    return (
-        <li key={id} className={`${styles.barberItem} barberMarginBottom`}
+     return (
+        <li key={id} className={`${styles.barberItem} barberMarginBottom ${!showButton ? styles.marginBottom : ''}`}
         style={{ animationDelay: `${index * 0.2}s` }} >
-            <div className={`${showButton ? 'card' : 'cardDashboard'}`}>
+            <div className={`${showButton ? 'card' : 'cardDashboard'}  barberMarginBottom ${!showButton ? styles.marginBottom : ''}`}>
             <div className={styles.customerView}>
                 <div className='profileImageDiv'>
                     <img src={src} alt="Barber image" />

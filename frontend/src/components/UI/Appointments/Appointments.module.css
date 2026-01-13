@@ -30,7 +30,7 @@
     border-radius: var(--space-2);
     text-align: center; 
     transition: transform .25s ease, background .25s ease;
-    max-height: 68px;
+   /* max-height: 68px;*/
     
 }
 .appointmentsUl li:hover,
@@ -221,8 +221,8 @@
   border-radius: 20px;
   */
 /*  padding: var(--space-2);*/
- /* margin-bottom: var(--space-4);*/
-  max-height: 68px;
+ margin-bottom: var(--space-4);
+ /* max-height: 68px;*/
 }
 .info {
  /* margin: var(--space-2) 0 var(--space-2) 0;*/
@@ -271,6 +271,10 @@
     margin-top: 25px;
     padding: var(--space-3);
   }
+
+  .clientAppointment li {
+     margin-bottom: var(--space-6);
+  }
 }
 
 @media (min-width: 450px) and (max-width: 1023px) {
@@ -310,6 +314,11 @@
     max-width: 100%;
     width: 100%;
   }
+  .clientAppointment ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+  }
   .appointmentsUl {
       margin: 0;
       display: grid;
@@ -335,5 +344,8 @@
       
     grid-template-columns: 1fr 1fr 1fr;
     
+  }
+  .clientAppointment ul {
+      grid-template-columns: 1fr 1fr 1fr;
   }
 }
