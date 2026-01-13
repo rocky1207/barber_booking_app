@@ -17,7 +17,6 @@ const BarberAppointment = forwardRef<HTMLDialogElement, {appointment: BarberAppo
     const {deleteItemErrorMessage} = useAppSelector((state: RootState) => state?.ui);
     const {appointmentId, name, surname, phone, userService, time} = appointment;
     const updatedPrice = formatPrice(appointment.price);
-    console.log(appointment);
     const dispatch = useAppDispatch();
     useEffect(() => {
         if(deleteItemErrorMessage.delete_barber_appointment !== '') {

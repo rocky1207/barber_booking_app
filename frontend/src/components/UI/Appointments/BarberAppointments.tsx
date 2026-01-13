@@ -10,6 +10,7 @@ import styles from './Appointments.module.css';
 
 const BarberAppointments: React.FC<{appointments: BarberAppointmentsType[]}> = ({appointments}) => {
     const {actionAppointmentId} = useAppSelector((state: RootState) => state?.appointment);
+    
     const dialog = useRef<HTMLDialogElement | null>(null);
     const deleteAppointmentBtn = {
         ...deleteBtn,
@@ -17,6 +18,7 @@ const BarberAppointments: React.FC<{appointments: BarberAppointmentsType[]}> = (
         action: 'DELETE_BARBER_APPOINTMENT',
         onAction: deleteItemsById
     }
+    
     return (
         <>
         <ConfirmModal ref={dialog} {...deleteAppointmentBtn} />

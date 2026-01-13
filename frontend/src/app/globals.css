@@ -487,7 +487,10 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
 
   
 }
-@media (min-width: 1023px) {
+@media (min-width: 1024px) {
+  html {
+    scrollbar-gutter: auto;
+  }
   .logoDiv-1 {
     display: none;
   }
@@ -503,6 +506,9 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   }
   .wrappMargin {
     margin: 150px auto 0 auto;
+  }
+  .marginTop {
+    margin-top: 0;
   }
   /*
   .cardMargin {
@@ -522,8 +528,13 @@ Onda idi naviše: tablet (768px), laptop (1024px), desktop (1440px+).
   .card {
      margin-bottom: 0;
   }
+  /*
   .wrappMargin {
     margin: 350px auto 0 auto;
+  }
+    */
+  .wrappMargin {
+    margin: 200px auto 0 auto;
   }
   .logo-1 {
     max-width: 90px;

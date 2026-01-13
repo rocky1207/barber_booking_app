@@ -6,9 +6,7 @@ import Spinner from '../LoadingOverlay/Spinner';
 import styles from './Header.module.css';
 
 const DesktopHeader: React.FC<{children: ReactNode}> = ({/*...navigation*/children}) => {
-  console.log(children);
-  
-  return (
+   return (
     <div className={`${styles.headerDesktop} ${styles.menuOverlay}`}>
       <div className={`flexed ${styles.container}`}>
         <Spinner />

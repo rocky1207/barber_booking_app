@@ -14,7 +14,7 @@ const RegisterPage: React.FC = () => {
         <Header>
             <ClientNavigation {...appointmentsNav} />
         </Header>
-        <main className="wrapp center">
+        <main className="wrapp center marginTop">
             <h1 className="margin-bottom">UNESITE KORISNIKA</h1>
             <Register/>
         </main>

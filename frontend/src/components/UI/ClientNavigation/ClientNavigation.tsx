@@ -14,9 +14,11 @@ const ClientNavigation: React.FC<NavigationPropsType> = ({...navigationData}) =>
     const dispatch = useAppDispatch();
 
     const handleClick = (link: string) => {
+        console.log(link);
         router.push(link);
         if(pathName !== '/' && link === '/') setIsLoadingState(true, dispatch);
         if(link === 'appointments/client') setIsLoadingState(true, dispatch);
+        if(link === '/login/dashboard') setIsLoadingState(true, dispatch);
     }
     return (
         <nav className={navClass && styles[navClass]}>

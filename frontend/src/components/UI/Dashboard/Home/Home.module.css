@@ -1,0 +1,18 @@
+.marginTop {
+    margin-top: 0;
+}
+@media screen and (min-width: 1023px) {
+    .homeUl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    .marginTop {
+        margin-top: 150px;
+    }
+}
+@media screen and (min-width: 1441px) {
+    .marginTop {
+        margin-top: 180px;
+    }
+}

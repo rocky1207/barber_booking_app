@@ -46,12 +46,12 @@ const UserNavigation: React.FC<{setErrorMessage: React.Dispatch<SetStateAction<s
     }
     return (
         <nav className={styles.clientHeaderNav}>
-        <ul className={styles.userNavigation}>
-            <li className={styles.clientHeaderLi}><button onClick={toHomeClick}>POČETNA</button></li>
-            {showLink && <li className={styles.clientHeaderLi}><button onClick={toUserClick}>NOVI KORISNIK</button></li>}
-            <li className={styles.clientHeaderLi}><button onClick={hoursHandler}>RADNO VREME</button></li>
-            <li className={styles.separateLi}><button onClick={logOutHandler}>LOG OUT</button></li>
-        </ul>
+            <ul className={styles.userNavigation}>
+                <li className={styles.clientHeaderLi}><button onClick={toHomeClick}>POČETNA</button></li>
+                {showLink && <li className={styles.clientHeaderLi}><button onClick={toUserClick}>NOVI KORISNIK</button></li>}
+                <li className={styles.clientHeaderLi}><button onClick={hoursHandler}>RADNO VREME</button></li>
+                <li className={styles.separateLi}><button onClick={logOutHandler}>LOG OUT</button></li>
+            </ul>
         </nav>
     );
 };

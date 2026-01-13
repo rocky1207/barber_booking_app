@@ -11,6 +11,7 @@ import { deleteBtn } from "@/datas/ButttonObjects";
 import { deleteItemsById } from "@/lib/api/deleteItemsById";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import ClientNavigation from "@/components/UI/ClientNavigation/ClientNavigation";
+import styles from '@/components/UI/Services/Services.module.css';
 
 const ServicePage: React.FC = () => {
     const {services, serviceActionId } = useAppSelector((state: RootState) => state?.service);
@@ -22,13 +23,13 @@ const ServicePage: React.FC = () => {
     const userServices = services.filter(service => service.userId === /*barberId*/actionBarberId);
     const barber = /*barberId !== null &&*/ barbers?.find((barber) => barber.id === /*barberId*/actionBarberId);
     const dialog = useRef<HTMLDialogElement | null>(null);
-    const barberUsername: string = barber ? barber.username.toUpperCase() : 'NULL';
+    const barberFullName: string = barber ? barber.full_name.toUpperCase() : 'NULL';
     
     let showResult;
     if(/*!barberId*/actionBarberId) showResult = <p className="textCenter">Nije prosleđen pravilan ID frizera.</p>;
     if(userServices.length > 0) {
         showResult = <nav aria-label="Choose service navigation">
-                <ul>
+                <ul className={styles.serviceUl}>
                     {userServices.map((service: SingleServiceType, index: number) => {
                         return <ServiceItem key={service.id} service={service} index={index} showBtns={true} ref={dialog} />
                     })}
@@ -58,8 +59,8 @@ const ServicePage: React.FC = () => {
         <Header>
             <ClientNavigation {...servicePageNav} />
         </Header>
-        <main className="wrapp">
-            <h1 className="marginBottom">USLUGE: <span>{barberUsername}</span></h1>
+        <main className="wrapp wrappMargin">
+            <h1 className="marginBottom">USLUGE: <span>{barberFullName}</span></h1>
             {showResult}
         </main>
         </>

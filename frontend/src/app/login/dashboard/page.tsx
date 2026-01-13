@@ -5,6 +5,7 @@ import { useAppSelector } from "@/store/hooks/typizedHooks";
 import { RootState } from "@/store/store";
 import Header from "@/components/UI/Header/Header";
 import UserNavigation from "@/components/UI/Dashboard/UserNavigation/UserNavigation";
+import styles from '@/components/UI/Dashboard/Home/Home.module.css';
 
 const DashboardPage: React.FC = () => {
     const {barbers, actionBarberId, loggedBarber} = useAppSelector((state: RootState) => state?.barber);
@@ -22,7 +23,7 @@ const DashboardPage: React.FC = () => {
             <UserNavigation setErrorMessage={setErrorMessage} />
         </Header>
         {!errorMessage ?
-        <main className="wrapp">
+        <main className={`wrapp ${styles.marginTop}`}>
             <h1 className="marginBottom">MENADŽERSKA TABLA</h1>
             <Home {...barberData} />
         </main> : 

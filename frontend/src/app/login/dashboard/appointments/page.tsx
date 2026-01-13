@@ -14,6 +14,7 @@ import { setIsLoadingState } from "@/lib/utils/setIsLoadingState";
 import { clientsHeaderNav } from "@/datas/NavigationObjects";
 import styles from '@/components/UI/Appointments/Appointments.module.css';
 import 'react-day-picker/dist/style.css';
+import { BarberAppointmentsType } from "@/types/Appointments/AppointmentsType";
 
 
 const AppointmentsPage: React.FC =  () => {
@@ -22,6 +23,7 @@ const AppointmentsPage: React.FC =  () => {
     const {actionBarberId, barbers} = useAppSelector((state: RootState) => state?.barber);
     const dispatch = useAppDispatch();
     const selectedBarber = barbers?.filter(barber => barber.id === actionBarberId);
+    console.log(selectedTerm);
     useEffect(() => {
         if (!selectedTerm?.date) return;
         if (!actionBarberId) return;
@@ -61,17 +63,17 @@ const AppointmentsPage: React.FC =  () => {
         <Header>
             <ClientNavigation {...appointmentsPageNav} />
         </Header>
-        <main className="wrapp">
+        <main className="wrapp wrappMargin">
             <h1 className={`margin-bottom ${styles.elH1}`}>ZAKAZANI TERMINI</h1>
             <section className="middle">
-                <CalendarBarber />
-            </section>
-            <div className={styles.barberAppointmentsHeadDiv}>
-                <h3>Frizer: <span>{selectedBarber[0].username}</span></h3>
-                <h4>Datum: {selectedTerm.date}</h4>
-            </div>
-            <BarberAppointments appointments={barberTerms} />
-            <p className='middle'>{message}</p>
+                    <CalendarBarber />
+                </section>
+                <div className={styles.barberAppointmentsHeadDiv}>
+                    <h3>Frizer: <span>{selectedBarber[0].full_name}</span></h3>
+                    <h4>Datum: {selectedTerm.date}</h4>
+                </div>
+                {barberTerms && barberTerms[0]?.userId === actionBarberId && <BarberAppointments appointments={barberTerms} />}
+                <p className='middle'>{message}</p>
         </main>
         </>
     );

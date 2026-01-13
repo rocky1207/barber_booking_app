@@ -20,7 +20,7 @@ const WorkingHoursManager: React.FC = () => {
     };
 
     return (
-        <div className={`wrapp`}>
+        <main className={`wrapp ${styles.marginTop}`}>
             <div className={styles.header}>
                 <h2>Upravljanje radnim satima</h2>
                 <button 
@@ -44,7 +44,7 @@ const WorkingHoursManager: React.FC = () => {
                     loggedBarberId={loggedBarberId} 
                 />
             </div>
-        </div>
+        </main>
     );
 };
 
